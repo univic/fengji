@@ -1,17 +1,26 @@
 <template>
-<el-row>
-  <el-col>
+<el-row
+  type="flex"
+  align="middle"
+>
+  <el-col
+    :span="1"
+  >
     <span
       class="el-icon-plus"
       v-if="!newItemFocused"
     ></span>
-    <el-checkbox
+    <span
+      class="el-icon-circle-plus"
       v-else
-    ></el-checkbox>
+    ></span>
   </el-col>
-  <el-col>
+  <el-col
+    :span="4"
+  >
     <el-input
-        v-on:click="newItemFocused=!newItemFocused"
+      v-on:focus="newItemFocused=!newItemFocused"
+      v-on:blur="newItemFocused=!newItemFocused"
     >
     </el-input>
   </el-col>
@@ -25,7 +34,7 @@ export default {
   name: "ItemList",
   data () {
     return {
-      newItemFocused: true,
+      newItemFocused: false,
 
       exampleData: [{
           name: "A"
