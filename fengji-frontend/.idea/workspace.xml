@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b8f48be-6e68-43ea-b450-8fcf0e1739c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/fengji-frontend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fengji-frontend.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ItemList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ItemList.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +23,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -34,7 +30,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/node_modules/element-plus/es" />
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -50,20 +48,21 @@
       <workItem from="1609940103795" duration="144000" />
       <workItem from="1609940286851" duration="1121000" />
       <workItem from="1609941740125" duration="100000" />
+      <workItem from="1609944442415" duration="108000" />
+      <workItem from="1609944917495" duration="641000" />
+      <workItem from="1609945581870" duration="294000" />
+      <workItem from="1609945905988" duration="109000" />
+      <workItem from="1609946035247" duration="97000" />
+      <workItem from="1609946156954" duration="91000" />
+      <workItem from="1610025493955" duration="4080000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="531" y="236" key="FileChooserDialogImpl" timestamp="1609941205225">
-      <screen x="0" y="0" width="1500" height="960" />
-    </state>
-    <state x="531" y="236" key="FileChooserDialogImpl/0.0.1500.960@0.0.1500.960" timestamp="1609941205225" />
-    <state x="414" y="168" width="994" height="706" key="SettingsEditor" timestamp="1609941223360">
-      <screen x="0" y="0" width="1500" height="960" />
-    </state>
-    <state x="414" y="168" width="994" height="706" key="SettingsEditor/0.0.1500.960@0.0.1500.960" timestamp="1609941223360" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -1,11 +1,13 @@
 <template>
-  <el-row>
+  <el-row
+    v-for="item in recordItemList"
+  >
     <el-col
       :span="8"
     >
       <el-card>
           <div>
-            <span>待办事项</span>
+            <span>{{ item }}</span>
           </div>
       </el-card>
     </el-col>
@@ -33,6 +35,8 @@
           style="width: 10%"
         ></span>
         <el-input
+          v-model="newRecordItemText"
+          v-on:keypress.enter="addRecordItem"
           v-on:focus="newItemFocused=true"
           v-on:blur="newItemFocused=false"
           style="width: 80%"
@@ -56,8 +60,9 @@ export default {
     return {
       newItemHighLighted: false,
       newItemFocused: false,
+      newRecordItemText: null,
 
-      exampleData: [{
+      recordItemList: [{
           name: "A"
         },
         {
@@ -70,6 +75,10 @@ export default {
 
   },
   methods: {
+    addRecordItem: function () {
+      this.recordItemList.push(this.newRecordItemText)
+
+    }
   }
 }
 </script>
