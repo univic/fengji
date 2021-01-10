@@ -1,17 +1,7 @@
 <template>
-  <el-row
-    v-for="item in recordItemList"
-  >
-    <el-col
-      :span="8"
-    >
-      <el-card>
-          <div>
-            <span>{{ item }}</span>
-          </div>
-      </el-card>
-    </el-col>
-  </el-row>
+
+<BasicItem></BasicItem>
+
 <el-row
   type="flex"
   align="middle"
@@ -54,8 +44,11 @@
 </template>
 
 <script>
+  import BasicItem from "./BasicItem.vue"
+
 export default {
   name: "ItemList",
+  components: {BasicItem},
   data () {
     return {
       newItemHighLighted: false,
@@ -64,9 +57,6 @@ export default {
 
       recordItemList: [{
           name: "A"
-        },
-        {
-          name: "B"
         }
       ]
     }
