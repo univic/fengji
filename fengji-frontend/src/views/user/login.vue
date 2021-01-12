@@ -4,7 +4,7 @@
 
 <script>
 export default {
-name: "Index.vue"
+name: "login.vue"
 }
 </script>
 

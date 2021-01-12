@@ -1,12 +1,12 @@
 <template>
   <div>
-    login
+    index
   </div>
 </template>
 
 <script>
 export default {
-name: "login.vue"
+name: "Index.vue"
 }
 </script>
 

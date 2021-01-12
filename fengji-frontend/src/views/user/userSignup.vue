@@ -1,6 +1,8 @@
 <template>
   <div>
+    signup
     <el-container>
+
       <el-input>
 
       </el-input>
@@ -17,7 +19,7 @@
 
 <script>
 export default {
-name: "Signup"
+name: "userSignup"
 }
 </script>
 

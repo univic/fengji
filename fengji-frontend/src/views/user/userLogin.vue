@@ -1,12 +1,12 @@
 <template>
   <div>
-    login
+    Login
   </div>
 </template>
 
 <script>
 export default {
-name: "login.vue"
+name: "userLogin"
 }
 </script>
 

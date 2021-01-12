@@ -1,12 +1,12 @@
 <template>
   <div>
-    login
+    404
   </div>
 </template>
 
 <script>
 export default {
-name: "login.vue"
+name: "404.vue"
 }
 </script>
 

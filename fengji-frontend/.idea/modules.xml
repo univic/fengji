@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../WingtipVortex/WingtipVortex-frontend/.idea/WingtipVortex-frontend.iml" filepath="$PROJECT_DIR$/../../WingtipVortex/WingtipVortex-frontend/.idea/WingtipVortex-frontend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/fengji-frontend.iml" filepath="$PROJECT_DIR$/.idea/fengji-frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../fengji-frontend2/.idea/fengji-frontend2.iml" filepath="$PROJECT_DIR$/../fengji-frontend2/.idea/fengji-frontend2.iml" />
     </modules>
   </component>
 </project>
