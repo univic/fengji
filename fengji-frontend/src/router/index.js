@@ -3,13 +3,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import userRouter from "./userRouter"
 
 let routerOptions = [
-  { path: '/', component: 'module-index' },
-  { path: '/home', component: 'module-home' },
-  { path: '/login', component: 'login' },
+  { path: '/', component: 'index' },
+  { path: '/home', component: 'Home' },
   { path: '/:pathMatch(.*)', component: '404' },
 ]
 
-// routerOptions.splice(routerOptions.length - 1, 0, ...userRouter)
+routerOptions.splice(routerOptions.length - 1, 0, ...userRouter)
 
 /*
 将=>箭头函数map至routerOption数组的各个元素中，
