@@ -1,3 +1,4 @@
+
 <template>
     <div
         class="background_img"
@@ -35,7 +36,10 @@
         <el-checkbox
           v-model="obeyAgreement"
           style="display: block"
+          class="obey-agreement"
         >同意使用协议</el-checkbox>
+        <div class="h-captcha" data-sitekey="f1e8fd67-87db-4474-b654-ac89b61d9fe3"></div>
+
         <el-button
             type="primary"
             class="button"
@@ -61,6 +65,19 @@ export default {
       inputRetypePassword: null,
       inputEmail: null,
       obeyAgreement: null,
+    }
+  },
+  mounted: function (){
+    this.createCaptcha()
+  },
+  methods: {
+    createCaptcha() {
+      const captchaScript = document.createElement('script')
+      captchaScript.type = 'text/javascript'
+      captchaScript.src = 'https://hcaptcha.com/1/api.js'
+      captchaScript.async
+      captchaScript.defer
+      document.body.appendChild(captchaScript)
     }
   }
 }
@@ -94,8 +111,8 @@ export default {
     width: 100%;
   }
   .el-card{
-    background-color: rgba(255,255,255,0.4);
-    border: 0px;
+    background-color: rgba(0,0,0,0.5);
+    border: 0;
     margin-top: 20px;
     width: 50%;
     display: inline-flex;
@@ -107,11 +124,15 @@ export default {
   }
   .el-input__inner{
     color: white;
-    border-bottom: 3px white;
     background-color: transparent;
   }
   .el-input{
     margin-top: 20px;
+  }
+  .obey-agreement{
+    color: white;
+    margin-top: 20px;
+    font-size: 14px;
   }
 
 </style>
