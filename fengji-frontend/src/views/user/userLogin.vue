@@ -34,11 +34,6 @@
             ></el-input>
           </el-form-item>
 
-          <div
-            class="h-captcha"
-            data-sitekey="f1e8fd67-87db-4474-b654-ac89b61d9fe3"
-            data-theme="dark"
-          ></div>
           <el-form-item>
             <el-button
               type="primary"
@@ -61,6 +56,8 @@
 
 export default {
   name: "userSignup",
+  components: {
+  },
   data() {
 
     return {
