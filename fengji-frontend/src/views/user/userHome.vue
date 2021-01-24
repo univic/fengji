@@ -28,9 +28,9 @@
       </el-aside>
       <el-container>
         <el-main>
-          <el-card>
+
             <ItemList></ItemList>
-          </el-card>
+
         </el-main>
         <el-footer>
           <span>&copy; {{ new Date().getFullYear() }}</span>
