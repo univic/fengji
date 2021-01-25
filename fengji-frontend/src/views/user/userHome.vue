@@ -17,7 +17,7 @@
       <el-aside>
         <el-menu>
           <el-submenu index="1">
-            <template #title>
+            <template v-slot:title>
               <i class="el-icon-location"></i>
               <span>导航一</span>
             </template>
@@ -28,9 +28,8 @@
       </el-aside>
       <el-container>
         <el-main>
-
-            <ItemList></ItemList>
-
+            <ItemList
+            ></ItemList>
         </el-main>
         <el-footer>
           <span>&copy; {{ new Date().getFullYear() }}</span>

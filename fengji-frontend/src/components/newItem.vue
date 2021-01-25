@@ -15,8 +15,8 @@
           style="width: 10%"
       ></span>
       <el-input
-          v-model="newRecordItemText"
-          v-on:keypress.enter="$emit"
+          v-model="newItemText"
+          v-on:keypress.enter="addRecordItem"
           v-on:focus="newItemFocused=true"
           v-on:blur="newItemFocused=false"
           style="width: 80%"
@@ -29,14 +29,18 @@
 </template>
 
 <script>
+
 export default {
   name: "newItem",
-
+  props: [],
+  emits: [
+    'addItem'
+  ],
   data () {
     return {
       newItemHighLighted: false,
       newItemFocused: false,
-      newRecordItemText: null,
+      newItemText: null,
 
       recordItemList: [{
         name: "A"
@@ -49,8 +53,9 @@ export default {
   },
   methods: {
     addRecordItem: function () {
-      this.recordItemList.push(this.newRecordItemText)
-
+      this.$emit('addItem', this.newItemText)
+      this.recordItemList.push(this.newItemText)
+      this.newItemText = null
     }
   }
 }
