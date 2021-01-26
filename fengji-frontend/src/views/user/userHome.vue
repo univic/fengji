@@ -28,8 +28,7 @@
       </el-aside>
       <el-container>
         <el-main>
-            <ItemList
-            ></ItemList>
+          <record-item-list></record-item-list>
         </el-main>
         <el-footer>
           <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -45,12 +44,12 @@
 
 <script>
 
-import ItemList from "../../components/ItemList.vue";
+import recordItemList from "../../components/recordItemList.vue";
 
 export default {
   name: "userHome",
   components: {
-    ItemList,
+    recordItemList,
   }
 }
 </script>
