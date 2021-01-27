@@ -1,5 +1,5 @@
 <template>
-
+<!--    main input area-->
     <div
       v-on:mouseover="newItemHighLighted=true"
       v-on:mouseout="newItemHighLighted = newItemFocused ? true : false"
@@ -25,7 +25,10 @@
       >
       </el-input>
     </div>
-
+<!--  default tag-->
+    <div>
+      默认标签
+    </div>
 </template>
 
 <script>
