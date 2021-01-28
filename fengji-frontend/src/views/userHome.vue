@@ -15,20 +15,28 @@
     </el-header>
     <el-container>
       <el-aside>
-        <el-menu>
-          <el-submenu index="1">
-            <template v-slot:title>
-              <i class="el-icon-location"></i>
-              <span>导航一</span>
-            </template>
+        <el-menu
+          router
+        >
+          <el-menu-item
+              index="/user/guide"
+          >
+              <i class="el-icon-guide"></i>
+              <span>用户向导</span>
+          </el-menu-item>
+          <el-menu-item
+              index="/user/item_list"
 
-          </el-submenu>
+          >
+              <i class="el-icon-guide"></i>
+              <span>工作台</span>
+          </el-menu-item>
         </el-menu>
 
       </el-aside>
       <el-container>
         <el-main>
-          <record-item-list></record-item-list>
+          <router-view></router-view>
         </el-main>
         <el-footer>
           <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -44,7 +52,7 @@
 
 <script>
 
-import recordItemList from "../../components/recordItemList.vue";
+import recordItemList from "../components/recordItemList.vue";
 
 export default {
   name: "userHome",

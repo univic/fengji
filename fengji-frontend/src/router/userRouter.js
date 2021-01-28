@@ -1,8 +1,15 @@
 
 const userRouter = [
-  { path: '/user/login', component: 'user/userLogin' },
-  { path: '/user/signup', component: 'user/userSignup' },
-  { path: '/user/home', component: 'user/userHome' },
+  { path: '/login', component: () => import('../views/userLogin.vue') },
+  { path: '/signup', component: () => import('../views/userSignup.vue') },
+  { path: '/user',
+    component: () => import('../views/userHome.vue'),
+    children: [
+      { path: '/user/item_list', component: () => import('../components/recordItemList.vue') },
+      { path: '/user/guide', component: () => import('../components/user/userGuide.vue') },
+    ]
+  },
+
 ]
 
 export default userRouter

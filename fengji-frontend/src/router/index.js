@@ -3,9 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import userRouter from "./userRouter"
 
 let routerOptions = [
-  { path: '/', component: 'index' },
-  { path: '/home', component: 'Home' },
-  { path: '/:pathMatch(.*)', component: '404' },
+  { path: '/', component: () => import('../views/index.vue') },
+  { path: '/home', component: () => import('../views/Home.vue') },
+  { path: '/:pathMatch(.*)', component: () => import('../views/404.vue') },
 ]
 
 routerOptions.splice(routerOptions.length - 1, 0, ...userRouter)
@@ -16,21 +16,22 @@ routerOptions.splice(routerOptions.length - 1, 0, ...userRouter)
 通过import拿到对应模板，替换掉component
 */
 
+/*
 const routes = routerOptions.map(
   route => {
     return {
       ...route,
       component: () =>
-        import(`../views/${route.component}.vue`)
-
+        import(`../${route.component}.vue`)
     }
   }
 )
+*/
 
 
 const Router = createRouter({
   history: createWebHistory(),
-  routes      // short for routes: routes
+  routes: routerOptions      // short for routes: routes
 })
 
 
