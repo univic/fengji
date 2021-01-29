@@ -12,6 +12,10 @@
         </el-submenu>
         <el-menu-item index="3">个人中心</el-menu-item>
       </el-menu>
+<!--      avatar, username and user menu, etc-->
+      <div>
+        <div><el-avatar :size="50" src="/default_avatar.png"></el-avatar></div>
+      </div>
     </el-header>
     <el-container>
       <el-aside>
@@ -26,7 +30,6 @@
           </el-menu-item>
           <el-menu-item
               index="/user/item_list"
-
           >
               <i class="el-icon-guide"></i>
               <span>工作台</span>
