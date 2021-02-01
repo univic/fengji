@@ -8,6 +8,11 @@ class BaseConfig(object):
         'MAX_LOG_SIZE': 512,    # in KBytes
         'BACKUP_COUNT': 1
     }
+    # mongodb 配置
+    MONGODB_SETTINGS = {
+        'db': 'fengji',
+        'host': 'mongodb://localhost:27017/'
+    }
 
 
 def get_config():
@@ -17,3 +22,7 @@ def get_config():
     elif BaseConfig.USE_CONFIG == 'PRODUCTION':
         from app.config.production_config import ProductionConfig
         return ProductionConfig
+
+
+app_config = get_config()
+

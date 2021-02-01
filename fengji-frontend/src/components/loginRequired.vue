@@ -1,10 +1,13 @@
 <template>
-$END$
+  <div>
+    需要登陆
+  </div>
+
 </template>
 
 <script>
 export default {
-name: "loginRequired.vue"
+name: "loginRequired"
 }
 </script>
 
