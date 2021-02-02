@@ -11,7 +11,8 @@ class BaseConfig(object):
     # mongodb 配置
     MONGODB_SETTINGS = {
         'db': 'fengji',
-        'host': 'mongodb://localhost:27017/'
+        'host': 'mongodb://localhost:27017/',
+        'port': 27017
     }
 
 
