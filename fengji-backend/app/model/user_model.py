@@ -2,7 +2,8 @@
 # Author : univic
 # Date: 2021-01-31
 
-from mongoengine import StringField
+from mongoengine import StringField, ListField, ReferenceField
+from app.model.user_role import UserRole
 
 
 class User(object):
@@ -13,4 +14,4 @@ class User(object):
         self.user_status = None
         self.time_registered = None
         self.employee_id = None
-        self.user_role_set = [1]       # 1 for ordinary user, 2 for admin
+        self.user_role_set = ListField(ReferenceField(UserRole))

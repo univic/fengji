@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Author : univic
+# Date: 2021-02-03
 
 
 class BaseConfig(object):
@@ -14,6 +15,7 @@ class BaseConfig(object):
         'host': 'mongodb://localhost:27017/',
         'port': 27017
     }
+
 
 
 def get_config():
