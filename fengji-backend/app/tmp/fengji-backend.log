@@ -20,3 +20,120 @@
 2021-02-01 22:59:55,725 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 2021-02-02 00:19:10,938 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\user.py', reloading
 2021-02-02 00:19:11,033 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 19:28:03,721 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 19:28:04,772 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 19:28:04,781 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 19:28:04,790 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 19:28:35,694 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 19:28:35] "[33mGET /user/csrf_token HTTP/1.1[0m" 404 -
+2021-02-04 19:29:03,323 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 19:29:03] "[37mGET /api/user/csrf_token HTTP/1.1[0m" 200 -
+2021-02-04 19:44:17,321 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\config\\__init__.py', reloading
+2021-02-04 19:44:17,877 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 19:44:18,915 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 19:44:18,923 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 19:44:18,929 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 19:44:25,401 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 19:44:25] "[37mGET /api/user/csrf_token HTTP/1.1[0m" 200 -
+2021-02-04 23:13:11,292 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:13:12,325 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:13:12,333 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:13:12,339 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:14:17,726 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:14:17] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:25:38,036 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\extensions.py', reloading
+2021-02-04 23:25:38,437 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:25:39,523 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:25:39,530 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:25:39,536 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:25:47,493 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:25:47] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:26:08,246 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:26:08] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:29:02,083 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:29:02] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:29:56,407 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:29:57,458 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:29:57,465 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:29:57,471 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:30:02,365 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:30:02] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:30:17,247 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:30:17] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:34:11,435 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\__init__.py', reloading
+2021-02-04 23:34:11,787 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:34:12,889 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:34:12,896 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:34:12,902 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:34:18,052 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:34:18] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:38:51,099 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\extensions.py', reloading
+2021-02-04 23:38:51,477 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:38:52,556 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:38:52,563 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:38:52,570 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:38:58,209 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:38:58] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:39:04,713 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:39:04] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:39:10,191 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:39:10] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:40:22,275 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\user.py', reloading
+2021-02-04 23:40:22,722 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:40:23,826 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:40:23,834 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:40:23,840 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:40:27,272 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:40:27] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:41:32,649 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\extensions.py', reloading
+2021-02-04 23:41:32,964 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:41:34,033 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:41:34,040 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:41:34,047 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:41:42,217 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:41:42] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:41:47,432 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:41:47] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:44:48,439 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\extensions.py', reloading
+2021-02-04 23:44:48,799 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:44:49,857 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:44:49,864 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:44:49,871 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:44:55,451 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:44:55] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:49:38,612 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\extensions.py', reloading
+2021-02-04 23:49:38,954 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:49:40,030 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:49:40,038 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:49:40,043 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:50:01,042 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:50:01] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:50:04,866 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:50:04] "[32mOPTIONS /api/user HTTP/1.1[0m" 308 -
+2021-02-04 23:50:36,102 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\user.py', reloading
+2021-02-04 23:50:36,652 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:50:37,759 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:50:37,767 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:50:37,773 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:50:56,963 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:50:56] "[37mOPTIONS /api/user/signup HTTP/1.1[0m" 200 -
+2021-02-04 23:50:57,214 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:50:57] "[31m[1mPOST /api/user/signup HTTP/1.1[0m" 405 -
+2021-02-04 23:53:19,609 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\user.py', reloading
+2021-02-04 23:53:19,989 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:53:21,054 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:53:21,062 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:53:21,068 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:53:28,942 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:53:28] "[37mOPTIONS /api/user/signup HTTP/1.1[0m" 200 -
+2021-02-04 23:53:29,234 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:53:29] "[35m[1mPOST /api/user/signup HTTP/1.1[0m" 500 -
+2021-02-04 23:54:01,897 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\extensions.py', reloading
+2021-02-04 23:54:02,175 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:54:03,244 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:54:03,251 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:54:03,258 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:54:06,578 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:54:06] "[37mOPTIONS /api/user/signup HTTP/1.1[0m" 200 -
+2021-02-04 23:54:06,846 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Feb/2021 23:54:06] "[35m[1mPOST /api/user/signup HTTP/1.1[0m" 500 -
+2021-02-04 23:58:12,047 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\config\\__init__.py', reloading
+2021-02-04 23:58:12,578 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-04 23:58:13,638 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-04 23:58:13,646 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-04 23:58:13,652 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-04 23:59:59,559 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\config\\__init__.py', reloading
+2021-02-04 23:59:59,821 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-05 00:00:00,937 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-05 00:00:00,945 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-05 00:00:00,951 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-05 00:01:32,828 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\config\\__init__.py', reloading
+2021-02-05 00:01:33,118 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-05 00:01:34,203 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-05 00:01:34,210 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-05 00:01:34,217 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-05 00:02:19,597 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\config\\__init__.py', reloading
+2021-02-05 00:02:19,812 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-05 00:02:20,888 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-05 00:02:20,896 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-05 00:02:20,902 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-05 00:02:35,136 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Feb/2021 00:02:35] "[37mOPTIONS /api/user/signup HTTP/1.1[0m" 200 -
+2021-02-05 00:02:35,388 - flask_wtf.csrf:258 - INFO - The CSRF token is missing.
+2021-02-05 00:02:35,388 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Feb/2021 00:02:35] "[31m[1mPOST /api/user/signup HTTP/1.1[0m" 400 -
+2021-02-05 00:03:11,468 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Feb/2021 00:03:11] "[37mGET /api/user/csrf_token HTTP/1.1[0m" 200 -
+2021-02-05 00:03:43,459 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\config\\__init__.py', reloading

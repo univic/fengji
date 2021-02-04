@@ -55,15 +55,16 @@
               class="obey-agreement"
             >同意使用协议</el-checkbox>
           </el-form-item>
-          <div
+<!--          <div
             class="h-captcha"
             data-sitekey="f1e8fd67-87db-4474-b654-ac89b61d9fe3"
             data-theme="dark"
-          ></div>
+          ></div>-->
           <el-form-item>
             <el-button
               type="primary"
               class="button"
+              v-on:click="handleSubmit"
             >提交
             </el-button>
             <el-button
@@ -154,7 +155,21 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
-    }
+    },
+    handleSubmit() {
+      axios.post('http://localhost:5000/api/user/signup',{
+        form_data: this.signupForm
+      }).then(
+        function (response){
+          console.log(response)
+        }
+      )
+      .catch(
+          function (error){
+            console.log(error)
+          }
+      )
+    },
   }
 }
 </script>

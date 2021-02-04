@@ -3,6 +3,7 @@
 # Date: 2021-02-03
 
 from flask import Blueprint, request
+from flask_cors import cross_origin
 from app.lib.database import db
 from app.model.user_model import User
 
@@ -28,6 +29,13 @@ def login():
     return 'user/login'
 
 
-@bp.route('/signup')
+@bp.route('/signup', methods={'POST'})
 def signup():
-    pass
+    if request.method == 'POST':
+        print('Ouch')
+
+
+@bp.route('/csrf_token')
+def get_csrf_token():
+    if request.method == "GET":
+        return "Ouch"

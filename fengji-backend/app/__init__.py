@@ -16,7 +16,8 @@ def create_app():
     app = Flask(__name__)
     app.debug = True
     app.config.from_object(app_config)
+    config_extensions(app)
     register_blueprint(app)
     db_init(app)
-    config_extensions()
+
     return app
