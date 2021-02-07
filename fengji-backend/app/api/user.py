@@ -7,6 +7,7 @@ from flask_cors import cross_origin
 from app.lib.database import db
 from app.model.user_model import User
 
+
 bp = Blueprint('user', __name__, url_prefix='/api/user')
 
 
@@ -32,7 +33,8 @@ def login():
 @bp.route('/signup', methods={'POST'})
 def signup():
     if request.method == 'POST':
-        print('Ouch')
+        print(request.data)
+        return "Ouch"
 
 
 @bp.route('/csrf_token')

@@ -3,13 +3,12 @@
 # Date: 2021-01-31
 
 from mongoengine import StringField, ListField, ReferenceField, EmailField, BooleanField, DateTimeField
-from flask_security import UserMixin
 from app.model.user_role import UserRole
 from app.lib.database import db
 
 
-class User(db.Document, UserMixin):
-    def __init__(self):
+class User(db.Document):
+    def __init__(self, signup_form):
         self.uid = None
         self.username = StringField(required=True)
         self.email = EmailField()
@@ -20,4 +19,10 @@ class User(db.Document, UserMixin):
         self.confirmed_at = DateTimeField(null=True)
         self.employee_id = None
         self.user_role_set = ListField(ReferenceField(UserRole))
-        self.fs_uniquifier = StringField()
+
+        # Login tracking info
+        self.last_login_at = None
+        self.last_login_ip = None
+        self.current_login_at = None
+        self.current_login_ip = None
+        self.login_count = 0

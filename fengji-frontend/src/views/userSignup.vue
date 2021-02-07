@@ -113,7 +113,7 @@ export default {
         password: null,
         confirmPassword: null,
         email: null,
-        obeyAgreement: null,
+        obeyAgreement: false,
       },
       rules: {
         username: [

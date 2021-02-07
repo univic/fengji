@@ -25,7 +25,7 @@ def get_config():
     elif BaseConfig.USE_CONFIG == 'PRODUCTION':
         from app.config.production_config import ProductionConfig
         return ProductionConfig
-    import app.config.flask_security_config
+    # import app.config.flask_security_config
 
 
 app_config = get_config()
