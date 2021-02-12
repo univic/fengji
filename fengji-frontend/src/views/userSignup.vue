@@ -33,9 +33,9 @@
               show-password
             ></el-input>
           </el-form-item>
-          <el-form-item label="确认密码" prop="confirmPassword">
+          <el-form-item label="确认密码" prop="confirm_password">
             <el-input
-              v-model="signupForm.confirmPassword"
+              v-model="signupForm.confirm_password"
               prefix-icon="el-icon-key"
               placeholder="请重复一次密码"
               show-password
@@ -48,9 +48,9 @@
               placeholder="请输入联系邮箱"
             ></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="accept_agreement">
             <el-checkbox
-              v-model="signupForm.obeyAgreement"
+              v-model="signupForm.accept_agreement"
               style="display: block"
               class="obey-agreement"
             >同意使用协议</el-checkbox>
@@ -84,6 +84,7 @@
 
 <script>
 
+import qs from 'qs';
 import axios from "axios";
 
 export default {
@@ -104,6 +105,13 @@ export default {
         } else {
           callback(new Error('不是有效的电子邮件地址'))
         }
+      },
+      validateAcceptAgreement: (rule, value, callback) => {
+        if (value) {
+          callback()
+        } else {
+          callback(new Error('需要同意用户协议'))
+        }
       }
     }
 
@@ -111,27 +119,29 @@ export default {
       signupForm: {
         username: null,
         password: null,
-        confirmPassword: null,
+        confirm_password: null,
         email: null,
-        obeyAgreement: false,
+        accept_agreement: false,
       },
       rules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min:3, max: 30, message: '用户名的长度应为3~30个字符', trigger: 'blur' },
+          { min:3, max: 30, message: '用户名的长度应为3~25个字符', trigger: 'blur' },
         ],
         password: [
           { required:true, message: '请输入密码', trigger: 'blur' },
-          { min:6, max: 32, message: '密码长度应为6~30位字符', trigger: 'blur' },
+          { min:6, max: 32, message: '密码长度应为8~32位字符', trigger: 'blur' },
         ],
-        confirmPassword: [
+        confirm_password: [
           { required:true, message: '请再输入一次密码', trigger: 'blur' },
           { validator: validators.validateConfirmPassword, trigger: 'blur'}
         ],
         email: [
           { required:true, message: '请输入邮件地址', trigger: 'blur' },
           { validator: validators.validateEmail, trigger: 'blur'},
-
+        ],
+        accept_agreement: [
+          {validator: validators.validateAcceptAgreement, trigger: 'blur'}
         ]
       },
 
@@ -151,24 +161,33 @@ export default {
       document.body.appendChild(captchaScript)
     },
     submitForm() {
-
+      let dataObj = qs.stringify(this.signupForm)
+      axios.post(
+        'http://localhost:5000/api/user/signup', dataObj,{
+          headers: {
+            'Content-Type':'application/x-www-form-urlencoded',
+          }
+        }).then(
+        function (response){
+          console.log(response)
+        }
+      ).catch(
+            function (error){
+              console.log(error)
+            }
+        )
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
     },
     handleSubmit() {
-      axios.post('http://localhost:5000/api/user/signup',{
-        form_data: this.signupForm
-      }).then(
-        function (response){
-          console.log(response)
+      this.$refs.signupForm.validate((valid) => {
+        if (valid) {
+          this.submitForm()
+        } else {
+          this.submitForm()
         }
-      )
-      .catch(
-          function (error){
-            console.log(error)
-          }
-      )
+      })
     },
   }
 }

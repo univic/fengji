@@ -5,7 +5,7 @@
 from app import app_config
 import flask_wtf
 from flask_cors import CORS
-from app.lib.flask_security import init_flask_security
+# from app.lib.flask_security import init_flask_security
 
 
 def config_extensions(app):

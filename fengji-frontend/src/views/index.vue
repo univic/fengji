@@ -17,7 +17,7 @@
         >
 
         </div>
-        <router-link to="/user/login">
+        <router-link to="/login">
           <el-button
             style="position: relative; z-index: 1; display: inline"
           >
@@ -26,7 +26,7 @@
         </router-link>
 
 
-        <router-link to="/user/signup">
+        <router-link to="/signup">
           <el-button
             style="position: relative; z-index: 1; display: inline"
           >

@@ -16,6 +16,13 @@ class BaseConfig(object):
         'host': 'mongodb://localhost:27017/',
         'port': 27017
     }
+    # user config
+    USER_SETTINGS = {
+        'MIN_USERNAME_LENGTH': 3,
+        'MAX_USERNAME_LENGTH': 25,
+        'MIN_PWD_LENGTH': 8,
+        'MAX_PWD_LENGTH': 32,
+    }
 
 
 def get_config():
