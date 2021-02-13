@@ -86,12 +86,13 @@
 
 import qs from 'qs';
 import axios from "axios";
+import { ElMessage } from 'element-plus';
 
 export default {
   name: "userSignup",
   data() {
     let validators = {
-      validateConfirmPassword : (rule, value, callback) => {
+      validateConfirmPassword: (rule, value, callback) => {
         if (value !== this.signupForm.password) {
           callback(new Error('密码不一致'))
         } else {
@@ -125,20 +126,20 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min:3, max: 30, message: '用户名的长度应为3~25个字符', trigger: 'blur' },
+          {required: true, message: '请输入用户名', trigger: 'blur'},
+          {min: 3, max: 30, message: '用户名的长度应为3~25个字符', trigger: 'blur'},
         ],
         password: [
-          { required:true, message: '请输入密码', trigger: 'blur' },
-          { min:6, max: 32, message: '密码长度应为8~32位字符', trigger: 'blur' },
+          {required: true, message: '请输入密码', trigger: 'blur'},
+          {min: 6, max: 32, message: '密码长度应为8~32位字符', trigger: 'blur'},
         ],
         confirm_password: [
-          { required:true, message: '请再输入一次密码', trigger: 'blur' },
-          { validator: validators.validateConfirmPassword, trigger: 'blur'}
+          {required: true, message: '请再输入一次密码', trigger: 'blur'},
+          {validator: validators.validateConfirmPassword, trigger: 'blur'}
         ],
         email: [
-          { required:true, message: '请输入邮件地址', trigger: 'blur' },
-          { validator: validators.validateEmail, trigger: 'blur'},
+          {required: true, message: '请输入邮件地址', trigger: 'blur'},
+          {validator: validators.validateEmail, trigger: 'blur'},
         ],
         accept_agreement: [
           {validator: validators.validateAcceptAgreement, trigger: 'blur'}
@@ -148,7 +149,7 @@ export default {
     }
   },
 
-  mounted: function (){
+  mounted: function () {
     this.createCaptcha()
   },
   methods: {
@@ -163,19 +164,30 @@ export default {
     submitForm() {
       let dataObj = qs.stringify(this.signupForm)
       axios.post(
-        'http://localhost:5000/api/user/signup', dataObj,{
-          headers: {
-            'Content-Type':'application/x-www-form-urlencoded',
-          }
-        }).then(
-        function (response){
-          console.log(response)
-        }
-      ).catch(
-            function (error){
-              console.log(error)
+          'http://localhost:5000/api/user/signup', dataObj, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
             }
-        )
+          }).then(
+          function (response) {
+            console.log(response)
+            if (response.data.status === 'success') {
+              ElMessage({
+                message: '注册成功~',
+                type: 'success'
+              })
+            } else {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.errors[0],
+                type: 'error'
+              })
+            }
+          }
+      ).catch(
+          function (error) {
+            console.log(error)
+          }
+      )
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
@@ -184,11 +196,9 @@ export default {
       this.$refs.signupForm.validate((valid) => {
         if (valid) {
           this.submitForm()
-        } else {
-          this.submitForm()
         }
       })
-    },
+    }
   }
 }
 </script>

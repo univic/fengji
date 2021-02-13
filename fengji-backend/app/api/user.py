@@ -38,23 +38,29 @@ def login():
 def signup():
     # instantiate the RegistrationForm, the form and the actual user ORM object is loose coupled
     signup_form = RegistrationForm(request.form, meta={'csrf': False})
-    if signup_form.validate():       # if the form is validated, continue to create a new user
+
+    # if the form is validated, continue to create a new user
+    if signup_form.validate():
         user = User()
         user.username = signup_form.username.data
         user.email = signup_form.email.data
         user.password_hash = generate_password_hash(signup_form.password.data)     # turn the password into hash
-        # user.save()
+        user.save()
+
+        # construct the return data
         ret = {
             'status': 'success',
             'msg': '注册成功'
         }
-    else:                      # if the form can not be validated, return error msg
 
+    # if the form can not be validated, return error msg
+    else:
         # get error messages from the form.errors dict
         error_status = list(signup_form.errors.values())
         for i, item in enumerate(error_status):
             error_status[i] = item[0]
 
+        # construct the return data
         ret = {
             'status': 'error',
             'errors': error_status

@@ -10,23 +10,23 @@ from app.lib.database import db
 class User(db.Document):
     """
     user_status:
-    00 - registered, await for activation
-    10 - activated
-    20 - password reset
+    00 - await for activation
+    10 - await for supplemental information
+    20 - active
+    98 - await for password reset
     99 - locked
     user_role:
     USER - Ordinary User
     ADM - Admin
     """
-    uid = None
-    username = StringField(required=True, min_length=3)
+    username = StringField(required=True, unique=True)
     email = EmailField(required=True)
     password_hash = StringField(required=True)
-    user_status = ListField(StringField(default='00'))
+    user_status = ListField(StringField(), default=['00'])
     time_registered = DateTimeField(default=datetime.datetime.now())
     confirmed_at = DateTimeField()
     employee_id = StringField()
-    user_role = ListField(StringField(default='USER'))
+    user_role = ListField(StringField(),default=['USER'])
 
     # Login tracking info
     last_login_at = DateTimeField()
