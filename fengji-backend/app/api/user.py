@@ -3,6 +3,7 @@
 # Date: 2021-02-03
 
 import datetime
+from mongoengine.errors import NotUniqueError
 from flask import Blueprint, request, jsonify
 from flask_mongoengine.wtf import model_form
 from werkzeug.security import generate_password_hash
@@ -45,13 +46,18 @@ def signup():
         user.username = signup_form.username.data
         user.email = signup_form.email.data
         user.password_hash = generate_password_hash(signup_form.password.data)     # turn the password into hash
-        user.save()
-
+        try:
+            user.save()
+            ret = {
+                'status': 'success',
+                'msg': '注册成功'
+            }
+        except NotUniqueError:
+            ret = {
+                'status': 'error',
+                'errors': ['重复的用户名']
+            }
         # construct the return data
-        ret = {
-            'status': 'success',
-            'msg': '注册成功'
-        }
 
     # if the form can not be validated, return error msg
     else:
@@ -68,6 +74,11 @@ def signup():
         print(ret)
 
     return jsonify(ret)
+
+
+@bp.route('/check_user_existence', methods={'GET'})
+def check_user_existence():
+    user = User().objects(username='')
 
 
 @bp.route('/csrf_token')

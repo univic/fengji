@@ -668,3 +668,21 @@
 2021-02-13 23:43:06,162 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 2021-02-13 23:43:40,529 - werkzeug:113 - INFO - 127.0.0.1 - - [13/Feb/2021 23:43:40] "[37mPOST /api/user/signup HTTP/1.1[0m" 200 -
 2021-02-14 00:00:30,126 - werkzeug:113 - INFO - 127.0.0.1 - - [14/Feb/2021 00:00:30] "[35m[1mPOST /api/user/signup HTTP/1.1[0m" 500 -
+2021-02-14 23:24:09,430 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\api\\user.py', reloading
+2021-02-14 23:24:10,393 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-14 23:27:02,707 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-14 23:27:04,409 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-14 23:27:04,442 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-02-14 23:27:04,458 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-14 23:27:09,686 - werkzeug:113 - INFO - 127.0.0.1 - - [14/Feb/2021 23:27:09] "[37mPOST /api/user/signup HTTP/1.1[0m" 200 -
+2021-02-14 23:33:09,572 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\api\\user.py', reloading
+2021-02-14 23:33:10,053 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-14 23:33:11,654 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-14 23:33:11,679 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-02-14 23:33:11,702 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-14 23:33:34,903 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\api\\user.py', reloading
+2021-02-14 23:33:35,341 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-14 23:33:37,871 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-14 23:33:37,914 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-02-14 23:33:37,931 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-14 23:34:13,593 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\api\\user.py', reloading
