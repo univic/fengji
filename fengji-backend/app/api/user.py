@@ -6,10 +6,10 @@ import datetime
 from mongoengine.errors import NotUniqueError
 from flask import Blueprint, request, jsonify
 from flask_mongoengine.wtf import model_form
-from werkzeug.security import generate_password_hash
-from app.lib.database import db
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from app.model.user_model import User
-from app.model.post_forms import RegistrationForm
+from app.model.post_forms import RegistrationForm, LoginForm
 
 
 bp = Blueprint('user', __name__, url_prefix='/api/user')
@@ -28,11 +28,25 @@ def user_api():
         pass
 
 
-@bp.route('/login')
+@bp.route('/login', methods={'POST'})
 def login():
-    if request.method == 'POST':
-        pass
-    return 'user/login'
+    login_form = LoginForm(request.form, meta={'csrf': False})
+    ret = {
+        'status': 'error',
+        'messages': ['无效的登陆信息']
+    }
+    if login_form.validate():
+        user = User.objects(username=login_form.username.data).first()
+        print(user)
+        if user and check_password_hash(user.password_hash, login_form.password.data):
+            access_token = create_access_token(identity=user.username)
+            ret = {
+                'status': 'success',
+                'messages': ['登陆成功'],
+                'access_token': access_token
+            }
+
+    return ret
 
 
 @bp.route('/signup', methods={'POST'})
@@ -50,12 +64,14 @@ def signup():
             user.save()
             ret = {
                 'status': 'success',
-                'msg': '注册成功'
+                'messages': ['用户名可用']
             }
+
+        # if the username is not unique, let the frontend know
         except NotUniqueError:
             ret = {
                 'status': 'error',
-                'errors': ['重复的用户名']
+                'messages': ['重复的用户名']
             }
         # construct the return data
 
@@ -69,19 +85,36 @@ def signup():
         # construct the return data
         ret = {
             'status': 'error',
-            'errors': error_status
+            'messages': error_status
         }
-        print(ret)
 
     return jsonify(ret)
 
 
-@bp.route('/check_user_existence', methods={'GET'})
+@bp.route('/check_username_unique', methods=['GET'])
 def check_user_existence():
-    user = User().objects(username='')
+    user = User.objects(username=request.args["username"])
+    if not user:
+        ret = {
+            'status': 'success',
+            'messages': ['注册成功~']
+        }
+    else:
+        ret = {
+            'status': 'error',
+            'messages': ['这一用户名已被注册']
+        }
+    return jsonify(ret)
 
 
 @bp.route('/csrf_token')
 def get_csrf_token():
     if request.method == "GET":
         return "Ouch"
+
+
+@jwt_required
+@bp.route('/protected', methods=['GET'])
+def protected():
+    current_user = get_jwt_identity()
+    return f"current user is {current_user}"

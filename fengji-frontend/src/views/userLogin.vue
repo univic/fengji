@@ -11,23 +11,23 @@
           shadow="always"
       >
         <el-form
-          :model="signupForm"
+          :model="loginForm"
           status-icon
           :rules="rules"
-          ref="signupForm"
+          ref="loginForm"
           label-width="80px"
         >
           <el-form-item label="用户名" prop="username">
             <el-input
               prefix-icon="el-icon-user"
-              v-model="signupForm.username"
+              v-model="loginForm.username"
               placeholder="请输入用户名"
 
             ></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
             <el-input
-              v-model="signupForm.password"
+              v-model="loginForm.password"
               prefix-icon="el-icon-key"
               placeholder="请输入密码"
               show-password
@@ -38,6 +38,7 @@
             <el-button
               type="primary"
               class="button"
+              v-on:click="handleSubmit"
             >登陆
             </el-button>
           </el-form-item>
@@ -54,14 +55,18 @@
 
 <script>
 
+import qs from 'qs'
+import axios from "axios"
+import {ElMessage} from "element-plus"
+
 export default {
-  name: "userSignup",
+  name: "userLogin",
   components: {
   },
   data() {
 
     return {
-      signupForm: {
+      loginForm: {
         username: null,
         password: null,
       },
@@ -90,10 +95,52 @@ export default {
       document.body.appendChild(captchaScript)
     },
     submitForm() {
+      let dataObj = qs.stringify(this.loginForm)
+      axios.post(
+        'http://localhost:5000/api/user/login',
+        dataObj,
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        }).then(
+          function (response) {
+            if (response.data.status === 'success') {
 
+            } else if (response.data.status === 'error'){
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+                type: 'error'
+              })
+            } else {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+                type: 'error'
+              })
+            }
+
+          }
+      ).catch(
+        function (error) {
+          ElMessage({
+            message: '出现了问题（*゜ー゜*）' + error.message,
+            type: 'error'
+          })
+        }
+      )
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
+    },
+    handleSubmit() {
+      this.$refs.loginForm.validate(
+        (valid) => {
+          if (valid) {
+            this.submitForm()
+          }
+        }
+      )
+
     }
   }
 }
@@ -150,11 +197,6 @@ export default {
   }
   .el-form-item__label{
     color: white;
-  }
-  .obey-agreement{
-    color: white;
-    margin-top: 20px;
-    font-size: 14px;
   }
 
 </style>

@@ -31,3 +31,10 @@ class RegistrationForm(Form):
     def validate_accept_agreement(form, field):
         if not field.data:
             raise ValidationError(message='未勾选接受用户协议')
+
+
+class LoginForm(Form):
+    username = StringField('username',
+                           [validators.InputRequired('未填写用户名')])
+    password = StringField('password',
+                           [validators.InputRequired('未填写密码')])

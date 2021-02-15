@@ -92,6 +92,34 @@ export default {
   name: "userSignup",
   data() {
     let validators = {
+      validateUsernameUnique: (rule, value, callback) => {
+        axios.get('http://localhost:5000/api/user/check_username_unique', {
+          params: {
+            'username': value
+          }
+        }).then(
+            function (response) {
+              if (response.data.status === 'success') {
+                callback()
+              } else if (response.data.status === 'error') {
+                callback(new Error(response.data.messages[0]))
+              }
+              else {
+                ElMessage({
+                  message: '出现了问题（*゜ー゜*） 无法查询到用户名是否可用',
+                  type: 'error'
+                })
+              }
+            }
+        ).catch(
+            function (error) {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + error.message,
+                type: 'error'
+              })
+            }
+        )
+      },
       validateConfirmPassword: (rule, value, callback) => {
         if (value !== this.signupForm.password) {
           callback(new Error('密码不一致'))
@@ -128,6 +156,7 @@ export default {
         username: [
           {required: true, message: '请输入用户名', trigger: 'blur'},
           {min: 3, max: 30, message: '用户名的长度应为3~25个字符', trigger: 'blur'},
+          {validator: validators.validateUsernameUnique, trigger: 'blur'}
         ],
         password: [
           {required: true, message: '请输入密码', trigger: 'blur'},
@@ -170,15 +199,14 @@ export default {
             }
           }).then(
           function (response) {
-            console.log(response)
             if (response.data.status === 'success') {
               ElMessage({
-                message: '注册成功~',
+                message: response.data.messages[0],
                 type: 'success'
               })
             } else {
               ElMessage({
-                message: '出现了问题（*゜ー゜*）' + response.data.errors[0],
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
                 type: 'error'
               })
             }
@@ -196,6 +224,8 @@ export default {
       this.$refs.signupForm.validate((valid) => {
         if (valid) {
           this.submitForm()
+        } else {
+
         }
       })
     }
@@ -209,7 +239,7 @@ export default {
     height: 100%;
     background-image: url("/bg1.jpg");
     background-size: cover;
-    background-position: 0px 0px;
+    background-position: 0 0;
     margin: 0;
     background-repeat: no-repeat;
     z-index: -1;
