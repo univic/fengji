@@ -10,6 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from app.model.user_model import User
 from app.model.post_forms import RegistrationForm, LoginForm
+from app.lib.flask_jwt_extended import jwt
 
 
 bp = Blueprint('user', __name__, url_prefix='/api/user')

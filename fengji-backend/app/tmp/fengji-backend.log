@@ -875,3 +875,38 @@
 2021-02-16 00:01:49,209 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
 2021-02-16 00:01:49,241 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 2021-02-16 00:01:51,328 - werkzeug:113 - INFO - 127.0.0.1 - - [16/Feb/2021 00:01:51] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-02-16 00:12:45,401 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\extensions.py', reloading
+2021-02-16 00:12:45,993 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-16 00:12:51,835 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-16 00:12:51,931 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-02-16 00:12:52,005 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-16 00:13:42,635 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\api\\user.py', reloading
+2021-02-16 00:13:43,300 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-16 00:13:50,433 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-16 00:13:50,495 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-02-16 00:13:50,546 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-16 00:14:28,410 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\lib\\flask_jwt_extended.py', reloading
+2021-02-16 00:14:28,968 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-16 00:14:34,416 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-16 00:14:34,500 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-02-16 00:14:34,538 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-16 00:15:10,247 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\lib\\flask_jwt_extended.py', reloading
+2021-02-16 00:15:10,689 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-16 00:15:16,303 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-16 00:15:16,389 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-02-16 00:15:16,455 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-16 00:15:33,412 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\lib\\flask_jwt_extended.py', reloading
+2021-02-16 00:15:33,654 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-16 00:15:39,155 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-16 00:15:39,234 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-02-16 00:15:39,267 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-16 00:16:10,327 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\lib\\flask_jwt_extended.py', reloading
+2021-02-16 00:16:11,091 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-16 00:16:16,852 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-16 00:16:16,905 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-02-16 00:16:16,928 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-16 08:46:33,809 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\lib\\flask_jwt_extended.py', reloading
+2021-02-16 08:46:34,495 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-16 08:46:41,514 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-16 08:46:41,579 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-02-16 08:46:41,608 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
