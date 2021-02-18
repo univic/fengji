@@ -7,7 +7,7 @@ from mongoengine.errors import NotUniqueError
 from flask import Blueprint, request, jsonify
 from flask_mongoengine.wtf import model_form
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, set_access_cookies
 from app.model.user_model import User
 from app.model.post_forms import RegistrationForm, LoginForm
 from app.lib.flask_jwt_extended import jwt
@@ -32,22 +32,27 @@ def user_api():
 @bp.route('/login', methods={'POST'})
 def login():
     login_form = LoginForm(request.form, meta={'csrf': False})
-    ret = {
+    response = jsonify({
         'status': 'error',
         'messages': ['无效的登陆信息']
-    }
+    })
     if login_form.validate():
         user = User.objects(username=login_form.username.data).first()
-        print(user)
+        print(user.id)
         if user and check_password_hash(user.password_hash, login_form.password.data):
-            access_token = create_access_token(identity=user.username)
-            ret = {
+            access_token = create_access_token(identity=user)
+            response = jsonify({
                 'status': 'success',
                 'messages': ['登陆成功'],
-                'access_token': access_token
-            }
+                'access_token': access_token,
+                'user_id': str(user.id),
+                'user_name': user.username,
+                'user_role': user.user_role,
+                'user_status': user.user_status
+            })
+            set_access_cookies(response, access_token)
 
-    return ret
+    return response
 
 
 @bp.route('/signup', methods={'POST'})
@@ -118,4 +123,5 @@ def get_csrf_token():
 @bp.route('/protected', methods=['GET'])
 def protected():
     current_user = get_jwt_identity()
+    print(current_user.to_pymongo())
     return f"current user is {current_user}"

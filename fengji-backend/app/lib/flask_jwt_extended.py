@@ -7,7 +7,7 @@ jwt = JWTManager()
 @jwt.user_identity_loader
 def user_identity_loader(user):
     user_identity = {
-        "id": user.id,
+        "id": str(user.id),
         "username": user.username,
         "user_status": user.user_status,
         "user_role": user.user_role
