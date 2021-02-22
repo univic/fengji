@@ -57,6 +57,7 @@
 
 import qs from 'qs'
 import axios from "axios"
+import jwtDecode from 'jwt-decode'
 import {ElMessage} from "element-plus"
 
 export default {
@@ -106,7 +107,10 @@ export default {
         }).then(
           function (response) {
             if (response.data.status === 'success') {
-
+              window.localStorage.setItem('access_token', response.data.access_token)
+              let decodedJWT = jwtDecode(response.data.access_token)
+              console.log(decodedJWT)
+              this.$store.
             } else if (response.data.status === 'error'){
               ElMessage({
                 message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
