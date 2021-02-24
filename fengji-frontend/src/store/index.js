@@ -6,7 +6,9 @@ import user from "./modules/user"
 
 const store = createStore({
   state() {
-    return {}
+    return {
+      count: 5
+    }
   },
   getters,
   mutations,

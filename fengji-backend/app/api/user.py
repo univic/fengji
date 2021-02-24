@@ -38,7 +38,6 @@ def login():
     })
     if login_form.validate():
         user = User.objects(username=login_form.username.data).first()
-        print(user.id)
         if user and check_password_hash(user.password_hash, login_form.password.data):
             access_token = create_access_token(identity=user)
             response = jsonify({

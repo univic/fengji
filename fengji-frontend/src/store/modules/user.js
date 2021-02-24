@@ -1,7 +1,7 @@
 import types from "../types"
 
 const state = {
-  count: 5
+  userIdentity: '123',
 }
 
 let getters = {
@@ -11,11 +11,8 @@ let getters = {
 }
 
 const mutations = {
-  [types.INCREMENT](state) {
-    state.count++
-  },
-  [types.DECREMENT](state) {
-    state.count--
+  [types.SET_USER_IDENTITY](state, payload) {
+    state.userIdentity = payload
   }
 }
 
@@ -29,6 +26,7 @@ const actions = {
 }
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,

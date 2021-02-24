@@ -23,9 +23,8 @@
         <div style="width: 20%">
           <span><el-avatar :size="50" src="/default_avatar.png"></el-avatar></span>
           <router-link to="/login">
-            <span>登陆</span>
+            <span>{{ userIdentity }}</span>
           </router-link>
-
         </div>
       </div>
     </el-header>
@@ -79,6 +78,11 @@ export default {
   name: "userHome",
   components: {
     recordItemList,
+  },
+  computed: {
+    userIdentity() {
+      return this.$store.state.user.userIdentity.username
+    },
   }
 }
 </script>

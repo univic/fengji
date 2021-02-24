@@ -1,12 +1,15 @@
-from mongoengine import StringField, ReferenceField, ListField, EmbeddedDocumentListField
+import datetime
+from mongoengine import StringField, ReferenceField, ListField, EmbeddedDocumentListField, DateTimeField
 from app.model.user_model import User
+from app.lib.database import db
 
 
-class BasicItem(object):
+class ItemTag(db.Document):
+    pass
 
-    def __init__(self):
-        self.item_id = None
-        self.item_title = StringField(required=True)
-        self.tag_list = EmbeddedDocumentListField()
-        self.created_at = None
-        self.created_by = ReferenceField(User)
+
+class BasicItem(db.Document):
+    item_title = StringField(required=True)
+    # tag_list = EmbeddedDocumentListField(ItemTag)
+    created_at = DateTimeField(default=datetime.datetime.now())
+    created_by = ReferenceField(User)

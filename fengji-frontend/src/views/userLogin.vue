@@ -86,6 +86,9 @@ export default {
   mounted: function (){
     this.createCaptcha()
   },
+  computed: {
+
+  },
   methods: {
     createCaptcha() {
       const captchaScript = document.createElement('script')
@@ -105,13 +108,16 @@ export default {
             'Content-Type': 'application/x-www-form-urlencoded',
           }
         }).then(
-          function (response) {
+          (response) => {
             if (response.data.status === 'success') {
               window.localStorage.setItem('access_token', response.data.access_token)
               let decodedJWT = jwtDecode(response.data.access_token)
               console.log(decodedJWT)
-              this.$store.
-            } else if (response.data.status === 'error'){
+              console.log(this.$store.state.user.userIdentity)
+              this.$store.commit('user/SET_USER_IDENTITY', decodedJWT.sub)
+              console.log(this.$store.state.user.userIdentity)
+              this.$router.push('/user')
+            } else if (response.data.status === 'error') {
               ElMessage({
                 message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
                 type: 'error'
@@ -132,9 +138,6 @@ export default {
           })
         }
       )
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
     },
     handleSubmit() {
       this.$refs.loginForm.validate(

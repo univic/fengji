@@ -28,10 +28,13 @@
 </template>
 
 <script>
+  import axios from "axios";
   import basicItem from "./basicItem.vue"
   import newItem from "./newItem.vue"
   import uuid from '../utilities/uuid.js'
   import tagDetailedDialog from "./tagDetailedDialog.vue";
+  import { ElMessage } from "element-plus"
+  import api from "../api";
 
 export default {
   name: "recordItemList",
@@ -50,17 +53,47 @@ export default {
       selectedTagItem: null,
     }
   },
+  created() {
+    console.log(this.$store.state.user.userIdentity)
+  },
   computed: {
 
   },
   methods: {
     addItem(newItemText) {
-      this.recordItemList.push(
-          {
-            titleText: newItemText,
-            uuid: uuid()
+      let dataObj = newItemText
+      api.itemAPI.addRecordItem(
+          dataObj
+      ).then(
+          (response) => {
+            if (response.data.status === 'success') {
+              this.recordItemList.push(
+                  {
+                    titleText: newItemText,
+                    uuid: response.data.uuid
+                  }
+              )
+            } else if (response.data.status === 'error') {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+                type: 'error'
+              })
+            } else {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+                type: 'error'
+              })
+            }
+          }
+      ).catch(
+          function (error) {
+            ElMessage({
+              message: '出现了问题（*゜ー゜*）' + error.message,
+              type: 'error'
+            })
           }
       )
+
     },
     handleRemoveItem(itemUUID) {
       this.recordItemList.forEach(function (item, index, arr) {
@@ -72,6 +105,9 @@ export default {
     openDetailDialog(item) {
       this.showDetailDialog = true
       this.selectedTagItem = item
+    },
+    getRecordItems() {
+
     }
   }
 }
