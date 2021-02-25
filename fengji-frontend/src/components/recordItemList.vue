@@ -13,6 +13,7 @@
     ></basic-item>
 
     <new-item
+      ref="newItemInput"
       v-on:add-item="addItem"
     ></new-item>
   </el-card>
@@ -54,14 +55,17 @@ export default {
     }
   },
   created() {
-    console.log(this.$store.state.user.userIdentity)
+
   },
   computed: {
 
   },
   methods: {
     addItem(newItemText) {
-      let dataObj = newItemText
+      // a simple walk around to solve the "this" pointing problem inside axios
+      // binding the right "this" pointer to "that", to avoid "this" pointing all over the place
+      let that = this
+      let dataObj = {item_title: newItemText}
       api.itemAPI.addRecordItem(
           dataObj
       ).then(
@@ -70,7 +74,7 @@ export default {
               this.recordItemList.push(
                   {
                     titleText: newItemText,
-                    uuid: response.data.uuid
+                    uuid: response.data.item_uuid
                   }
               )
             } else if (response.data.status === 'error') {
@@ -78,11 +82,13 @@ export default {
                 message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
                 type: 'error'
               })
+              that.triggerRollback();
             } else {
               ElMessage({
                 message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
                 type: 'error'
               })
+              that.triggerRollback();
             }
           }
       ).catch(
@@ -91,9 +97,12 @@ export default {
               message: '出现了问题（*゜ー゜*）' + error.message,
               type: 'error'
             })
+            that.triggerRollback();
           }
       )
-
+    },
+    triggerRollback() {
+      this.$refs.newItemInput.rollBack();
     },
     handleRemoveItem(itemUUID) {
       this.recordItemList.forEach(function (item, index, arr) {

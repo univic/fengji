@@ -1,8 +1,10 @@
 import qs from 'qs';
 import axios from "axios";
+import Router from '../router';
+import { ElMessage } from 'element-plus';
 
 // create a customized axios instance
-let myAxios = axios.create()
+let myAxios = axios.create();
 
 // set base URL according to the NODE_ENV
 if (process.env.NODE_ENV === 'development') {
@@ -16,16 +18,27 @@ if (process.env.NODE_ENV === 'development') {
 // request interceptor
 myAxios.interceptors.request.use(
   (config) => {
-    const token = window.localStorage.getItem('access_token');
+    const token = 'Bearer ' + window.localStorage.getItem('access_token');
     // equal to a if statement that check the existence of the token, if token exists, then assign it to the header
-    token && (config.headers.access_token = token);
+    token && (config.headers.Authorization = token);
+    return config;
   }
 )
 
 myAxios.interceptors.response.use(
   (response) => {
-    if (response.status === 200) {
-      return response
+      return response;
+    },
+    (error) => {
+    // 402 for unauthorized, 422 for bad header or invalid token
+    if (error.response.status === 401 || 422) {
+      ElMessage({
+        message: '出现了问题（*゜ー゜*）登陆状态异常',
+        type: 'error'
+      });
+      Router.push({path: '/login'});
+    } else {
+      return error;
     }
   }
 )

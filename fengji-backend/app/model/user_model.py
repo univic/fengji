@@ -26,7 +26,7 @@ class User(db.Document):
     time_registered = DateTimeField(default=datetime.datetime.now())
     confirmed_at = DateTimeField()
     employee_id = StringField()
-    user_role = ListField(StringField(),default=['USER'])
+    user_role = ListField(StringField(), default=['USER'])
 
     # Login tracking info
     last_login_at = DateTimeField()

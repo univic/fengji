@@ -11,6 +11,5 @@ export default function uuid() {
   s[8] = s[13] = s[18] = s[23] = '-'
 
   uuidA = s.join('')
-  console.log(s.join(''), 's.join("")')
   return uuidA
 }

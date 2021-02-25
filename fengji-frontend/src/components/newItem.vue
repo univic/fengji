@@ -44,6 +44,7 @@ export default {
       newItemHighLighted: false,
       newItemFocused: false,
       newItemText: null,
+      rollBackText: null,
 
       recordItemList: [{
         name: "A"
@@ -56,9 +57,13 @@ export default {
   },
   methods: {
     addRecordItem: function () {
+      this.rollBackText = this.newItemText
       this.$emit('addItem', this.newItemText)
       this.recordItemList.push(this.newItemText)
       this.newItemText = null
+    },
+    rollBack: function () {
+      this.newItemText = this.rollBackText
     }
   }
 }

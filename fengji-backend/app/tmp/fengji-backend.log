@@ -72,3 +72,127 @@
 2021-02-24 23:56:39,662 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
 2021-02-24 23:56:39,669 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 2021-02-24 23:56:45,233 - werkzeug:113 - INFO - 127.0.0.1 - - [24/Feb/2021 23:56:45] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 22:53:36,233 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 22:53:36] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-02-25 22:53:45,940 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 22:53:45] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 22:53:46,244 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 22:53:46] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:04:30,254 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item.py', reloading
+2021-02-25 23:04:30,827 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-25 23:04:32,047 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-25 23:04:32,056 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-25 23:04:32,064 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-25 23:04:52,356 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:04:52] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:04:52,605 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:04:52] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:05:56,994 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:05:56] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:05:57,244 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:05:57] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:07:57,660 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:07:57] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:07:57,910 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:07:57] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:08:57,279 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:08:57] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:08:57,583 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:08:57] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:10:22,895 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:10:22] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-02-25 23:10:25,926 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:10:25] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:10:26,230 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:10:26] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:10:35,562 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:10:35] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:10:35,865 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:10:35] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:23:39,290 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:23:39] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:23:39,539 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:23:39] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:25:40,127 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:25:40] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:25:40,379 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:25:40] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:26:46,812 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:26:46] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:26:47,063 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:26:47] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:29:27,473 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\extensions.py', reloading
+2021-02-25 23:29:27,867 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-25 23:29:28,792 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-25 23:29:28,799 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-25 23:29:28,805 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-25 23:31:04,507 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\__init__.py', reloading
+2021-02-25 23:31:04,921 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-25 23:31:05,874 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-25 23:31:05,884 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-25 23:31:05,894 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-25 23:31:10,701 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-25 23:31:11,630 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-25 23:31:11,637 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-25 23:31:11,644 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-25 23:31:18,730 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:31:18] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:31:18,982 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:31:18] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:31:28,566 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:31:28] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:31:28,869 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:31:28] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:32:10,525 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item.py', reloading
+2021-02-25 23:32:10,722 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-25 23:32:11,664 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-25 23:32:11,672 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-25 23:32:11,683 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-25 23:32:19,556 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:32:19] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:32:19,807 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:32:19] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:32:30,347 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:32:30] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:32:30,653 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:32:30] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:33:07,974 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:33:07] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:33:08,280 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:33:08] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:37:09,180 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:37:09] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:37:09,432 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:37:09] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:37:18,687 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:37:18] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:37:18,990 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:37:18] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:39:04,195 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:39:04] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:39:04,447 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:39:04] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:40:42,545 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:40:42] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:40:42,798 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:40:42] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:49:10,798 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:49:10] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:49:11,050 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:49:11] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:49:13,786 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:49:13] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-02-25 23:50:31,074 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:50:31] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:50:31,326 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:50:31] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:51:18,778 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:51:18] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-02-25 23:51:23,943 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:51:23] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:51:24,194 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:51:24] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:51:55,743 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:51:55] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-02-25 23:51:58,730 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:51:58] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:51:58,980 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:51:58] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:54:29,520 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:54:29] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-02-25 23:54:31,873 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:54:31] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:54:32,176 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:54:32] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 401 -
+2021-02-25 23:55:21,307 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:55:21] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-02-25 23:55:25,899 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:55:25] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-25 23:55:26,151 - werkzeug:113 - INFO - 127.0.0.1 - - [25/Feb/2021 23:55:26] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 422 -
+2021-02-26 00:00:20,787 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:00:20] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:00:21,040 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:00:21] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 422 -
+2021-02-26 00:00:36,991 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:00:36] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-02-26 00:04:18,526 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:04:18] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:04:18,778 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:04:18] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:05:03,241 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:05:03] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:05:03,546 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:05:03] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:05:37,404 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:05:37] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:05:37,709 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:05:37] "[31m[1mPOST /api/item/ HTTP/1.1[0m" 422 -
+2021-02-26 00:06:30,717 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:06:30] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-02-26 00:06:36,579 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:06:36] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:06:36,833 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:06:36] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:07:02,328 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item.py', reloading
+2021-02-26 00:07:02,869 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-26 00:07:03,779 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-26 00:07:03,786 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-26 00:07:03,797 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-26 00:07:09,218 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:07:09] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:07:09,475 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:07:09] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:08:45,335 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item.py', reloading
+2021-02-26 00:08:45,840 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-26 00:08:46,843 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-26 00:08:46,851 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-26 00:08:46,857 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-26 00:08:50,432 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:08:50] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:08:50,687 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:08:50] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:13:35,078 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\model\\user_model.py', reloading
+2021-02-26 00:13:35,635 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-26 00:16:20,902 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-26 00:16:21,819 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-26 00:16:21,826 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-26 00:16:21,832 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-26 00:16:31,811 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:16:31] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:16:32,120 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:16:32] "[35m[1mPOST /api/item/ HTTP/1.1[0m" 500 -
+2021-02-26 00:17:19,592 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item.py', reloading
+2021-02-26 00:17:19,919 - werkzeug:113 - INFO -  * Restarting with stat
+2021-02-26 00:17:20,910 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-02-26 00:17:20,917 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-02-26 00:17:20,927 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-02-26 00:17:22,483 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:17:22] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:17:22,771 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:17:22] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:19:52,240 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:19:52] "[37mOPTIONS /api/item/ HTTP/1.1[0m" 200 -
+2021-02-26 00:19:52,494 - werkzeug:113 - INFO - 127.0.0.1 - - [26/Feb/2021 00:19:52] "[37mPOST /api/item/ HTTP/1.1[0m" 200 -

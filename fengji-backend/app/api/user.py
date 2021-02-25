@@ -69,7 +69,7 @@ def signup():
             user.save()
             ret = {
                 'status': 'success',
-                'messages': ['用户名可用']
+                'messages': ['注册成功~']
             }
 
         # if the username is not unique, let the frontend know
@@ -102,7 +102,7 @@ def check_user_existence():
     if not user:
         ret = {
             'status': 'success',
-            'messages': ['注册成功~']
+            'messages': ['用户名可用']
         }
     else:
         ret = {
