@@ -42,8 +42,14 @@
           <el-menu-item
               index="/user/item_list"
           >
-              <i class="el-icon-guide"></i>
+              <i class="el-icon-notebook-2"></i>
               <span>工作台</span>
+          </el-menu-item>
+          <el-menu-item
+              index="/user/edit_tags"
+          >
+            <i class="el-icon-collection-tag"></i>
+            <span>标签管理</span>
           </el-menu-item>
           <el-menu-item
               index="/user/item_list"

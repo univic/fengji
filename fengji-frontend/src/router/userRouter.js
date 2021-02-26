@@ -8,6 +8,7 @@ const userRouter = [
     children: [
       { path: '/user/item_list', name: 'userItemList', component: () => import('../components/recordItemList.vue') },
       { path: '/user/guide', name: 'userGuide', component: () => import('../components/user/userGuide.vue') },
+      { path: '/user/edit_tags', name: 'editTags', component: () => import('../components/user/editTags.vue') },
     ],
     beforeEnter: (to, from, next) => {
       if (to.path === '/login') next({ path: '/login' })

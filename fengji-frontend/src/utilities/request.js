@@ -19,7 +19,8 @@ if (process.env.NODE_ENV === 'development') {
 myAxios.interceptors.request.use(
   (config) => {
     const token = 'Bearer ' + window.localStorage.getItem('access_token');
-    // equal to a if statement that check the existence of the token, if token exists, then assign it to the header
+    // equal to a if statement that checks the existence of the token, if token exists, then assign it to the header
+    // the jwt token's header name(Authorization) and format(Bearer) can both be configured in flask-jwt-extended
     token && (config.headers.Authorization = token);
     return config;
   }
