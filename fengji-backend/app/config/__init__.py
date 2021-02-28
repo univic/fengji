@@ -23,6 +23,12 @@ class BaseConfig(object):
         'MIN_PWD_LENGTH': 8,
         'MAX_PWD_LENGTH': 32,
     }
+    # tag config
+    TAG_SETTINGS = {
+        'MIN_TAG_NAME_LENGTH': 2,
+        'MAX_TAG_NAME_LENGTH': 10,
+        'ALLOWED_TAG_TYPES': ['simple', 'select', 'text', 'number']
+    }
 
 
 def get_config():

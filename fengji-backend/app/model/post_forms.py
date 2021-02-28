@@ -21,8 +21,7 @@ class RegistrationForm(Form):
                                                       f"{app_config.USER_SETTINGS['MAX_PWD_LENGTH']}位")])
     confirm_password = StringField('confirm_password',
                                    [validators.InputRequired('未填写确认密码'),
-                                    validators.EqualTo('password', message='两次输入的密码不一致'),
-                                    ])
+                                    validators.EqualTo('password', message='两次输入的密码不一致')])
     email = StringField('email', [validators.InputRequired(message='未填写邮箱地址'),
                                   validators.email(message='邮箱地址无效')])
     accept_agreement = BooleanField('accept_agreement')
@@ -38,3 +37,18 @@ class LoginForm(Form):
                            [validators.InputRequired('未填写用户名')])
     password = StringField('password',
                            [validators.InputRequired('未填写密码')])
+
+
+class NewTagForm(Form):
+    tagName = StringField('tagName',
+                           [validators.input_required('未填写标签名'),
+                            validators.Length(min=app_config.TAG_SETTINGS['MIN_TAG_NAME_LENGTH'],
+                                              max=app_config.TAG_SETTINGS['MAX_TAG_NAME_LENGTH'],
+                                              message=f"用户名长度需为{app_config.TAG_SETTINGS['MIN_TAG_NAME_LENGTH']}~"
+                                                      f"{app_config.TAG_SETTINGS['MAX_TAG_NAME_LENGTH']}位")])
+    tagFieldType = StringField('tagFieldType',
+                           [validators.input_required('未选择标签类型'),
+                            validators.any_of(app_config.TAG_SETTINGS['ALLOWED_TAG_TYPES'], '不允许的标签类型')])
+    tagDefaultValue = StringField('tagDefaultValue')
+    tagPreview = BooleanField('tagPreview')
+    tagColor = StringField('tagColor')

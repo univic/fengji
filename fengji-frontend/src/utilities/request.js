@@ -8,7 +8,7 @@ let myAxios = axios.create();
 
 // set base URL according to the NODE_ENV
 if (process.env.NODE_ENV === 'development') {
-  myAxios.defaults.baseURL = 'http://localhost:3000';
+  myAxios.defaults.baseURL = 'http://localhost:5000';
 } else if (process.env.NODE_ENV === 'production') {
   myAxios.defaults.baseURL = 'http://localhost:3000';
 } else {
@@ -34,10 +34,11 @@ myAxios.interceptors.response.use(
     // 402 for unauthorized, 422 for bad header or invalid token
     if (error.response.status === 401 || 422) {
       ElMessage({
-        message: '出现了问题（*゜ー゜*）登陆状态异常',
+        dangerouslyUseHTMLString: true,
+        message: '登陆状态异常（*゜ー゜*）<a href="/login">点此重新登陆</a>',
         type: 'error'
       });
-      Router.push({path: '/login'});
+      // Router.push({path: '/login'});
     } else {
       return error;
     }

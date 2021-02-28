@@ -107,7 +107,7 @@ export default {
               else {
                 ElMessage({
                   message: '出现了问题（*゜ー゜*） 无法查询到用户名是否可用',
-                  type: 'error'
+                  type: 'error',
                 })
               }
             }
@@ -191,7 +191,7 @@ export default {
       document.body.appendChild(captchaScript)
     },
     submitForm() {
-      let dataObj = qs.stringify(this.signupForm)
+      let dataObj = qs.stringify(this.signupForm);
       axios.post(
           'http://localhost:5000/api/user/signup', dataObj, {
             headers: {
@@ -203,17 +203,20 @@ export default {
               ElMessage({
                 message: response.data.messages[0],
                 type: 'success'
-              })
+              });
             } else {
               ElMessage({
                 message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
                 type: 'error'
-              })
+              });
             }
           }
       ).catch(
           function (error) {
-            console.log(error)
+            ElMessage({
+              message: '出现了问题（*゜ー゜*）' + error,
+              type: 'error'
+            });
           }
       )
     },

@@ -125,7 +125,6 @@ export default {
                 type: 'error'
               })
             }
-
           }
       ).catch(
         function (error) {

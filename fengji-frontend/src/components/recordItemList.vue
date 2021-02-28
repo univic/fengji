@@ -30,11 +30,11 @@
 
 <script>
   import axios from "axios";
-  import basicItem from "./basicItem.vue"
-  import newItem from "./newItem.vue"
-  import uuid from '../utilities/uuid.js'
+  import basicItem from "./basicItem.vue";
+  import newItem from "./newItem.vue";
+  import uuid from '../utilities/uuid.js';
   import tagDetailedDialog from "./tagDetailedDialog.vue";
-  import { ElMessage } from "element-plus"
+  import { ElMessage } from "element-plus";
   import api from "../api";
 
 export default {
@@ -48,11 +48,11 @@ export default {
     return {
       recordItemList: [{
         titleText: "A",
-        uuid: uuid()
+        uuid: uuid(),
         }],
       showDetailDialog: false,
       selectedTagItem: null,
-    }
+    };
   },
   created() {
 

@@ -2,7 +2,7 @@
 # Author : univic
 # Date: 2021-02-03
 
-import datetime
+
 from mongoengine.errors import NotUniqueError
 from flask import Blueprint, request, jsonify
 from flask_mongoengine.wtf import model_form
@@ -10,11 +10,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, set_access_cookies
 from app.model.user_model import User
 from app.model.post_forms import RegistrationForm, LoginForm
-from app.lib.flask_jwt_extended import jwt
 
 
 bp = Blueprint('user', __name__, url_prefix='/api/user')
-SignupForm = model_form(User)
+# SignupForm = model_form(User)
 
 
 @bp.route('/')
