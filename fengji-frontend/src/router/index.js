@@ -1,6 +1,8 @@
 import { defineAsyncComponent } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import userRouter from "./userRouter"
+import store from '../store';
+import jwtDecode from 'jwt-decode';
 
 let routerOptions = [
   { path: '/', component: () => import('../views/index.vue') },
@@ -10,29 +12,25 @@ let routerOptions = [
 
 routerOptions.splice(routerOptions.length - 1, 0, ...userRouter)
 
-/*
-将=>箭头函数map至routerOption数组的各个元素中，
-箭头函数接收routerOption数组元素，通过spread运算符（三个点）拿到其中内容
-通过import拿到对应模板，替换掉component
-*/
-
-/*
-const routes = routerOptions.map(
-  route => {
-    return {
-      ...route,
-      component: () =>
-        import(`../${route.component}.vue`)
-    }
-  }
-)
-*/
-
-
 const Router = createRouter({
   history: createWebHistory(),
   routes: routerOptions      // short for routes: routes
 })
 
+// before each routing, check if there is a valid access token
+Router.beforeEach((to, from) => {
+  let accessToken = window.localStorage.getItem('access_token');
+  if (accessToken === null) {
+    if (to.path === '/login' || to.path === '/signup') {
+      return true;
+    } else {
+      return '/login';
+    }
+  } else {
+    let decodedJWT = jwtDecode(accessToken);
+    store.commit('user/SET_USER_IDENTITY', decodedJWT.sub);
+    return true;
+  }
+})
 
 export default Router

@@ -4,7 +4,7 @@
 
 from app import app_config
 from flask_cors import CORS
-from app.lib.flask_jwt_extended import jwt
+from app.lib.jwt_extended import jwt
 
 
 def config_extensions(app):

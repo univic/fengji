@@ -110,20 +110,20 @@ export default {
         }).then(
           (response) => {
             if (response.data.status === 'success') {
-              window.localStorage.setItem('access_token', response.data.access_token)
-              let decodedJWT = jwtDecode(response.data.access_token)
-              this.$store.commit('user/SET_USER_IDENTITY', decodedJWT.sub)
-              this.$router.push('/user')
+              window.localStorage.setItem('access_token', response.data.access_token);
+              let decodedJWT = jwtDecode(response.data.access_token);
+              this.$store.commit('user/SET_USER_IDENTITY', decodedJWT.sub);
+              this.$router.push('/user');
             } else if (response.data.status === 'error') {
               ElMessage({
                 message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
                 type: 'error'
-              })
+              });
             } else {
               ElMessage({
                 message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
                 type: 'error'
-              })
+              });
             }
           }
       ).catch(

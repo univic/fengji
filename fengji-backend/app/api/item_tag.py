@@ -6,7 +6,7 @@
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from app.model.item_tag import TagTemplate
-from flask_jwt_extended import get_jwt_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
 from app.model.post_forms import NewTagForm
 
 bp = Blueprint('item_tag', __name__, url_prefix='/api/item_tag')
@@ -19,11 +19,13 @@ def add_new_tag():
     new_tag_form = NewTagForm(request.form, meta={'csrf': False})
     if new_tag_form.validate():
         new_tag = TagTemplate()
+        tag_creator = get_current_user()
         new_tag.tag_name = new_tag_form.tagName.data
         new_tag.tag_field_type = new_tag_form.tagFieldType.data
         new_tag.tag_field_default_value = new_tag_form.tagDefaultValue.data
         new_tag.tag_preview = new_tag_form.tagPreview.data
         new_tag.tag_color = new_tag_form.tagColor.data
+        new_tag.tag_created_by = tag_creator
         try:
             new_tag.save()
             response = {

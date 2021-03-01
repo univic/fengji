@@ -1,12 +1,12 @@
 <template>
-<!--  title here-->
-  <div>标签管理</div>
+
 <!--  quick nav buttons-->
   <div>
-    <el-button
-      v-on:click="dialogFormVisible = true"
-    >添加标签</el-button>
-    <el-dialog title="添加标签" v-model="dialogFormVisible">
+    <el-dialog
+        title="添加标签"
+        v-model="dialogFormVisible"
+        :before-close="handleClose"
+    >
       <el-form
         :model="newTagForm"
         status-icon
@@ -66,7 +66,13 @@ import myAxios from '../../utilities/request';
 import { ElMessage } from 'element-plus';
 
 export default {
-  name: "userGuide",
+  name: "editTagPanel",
+  props: [
+    'dialogFormVisible',
+  ],
+  emits: [
+      'closeDialog'
+  ],
   data () {
     let validators = {
       validateTagNameUnique: (rule, value, callback) => {
@@ -74,41 +80,46 @@ export default {
         function getTagName(tagItem) {
           return tagItem.tagName === value;
         }
+
         let searchResult = this.tagList.find(getTagName)
-        if (typeof(searchResult) === 'undefined') {
+        if (typeof (searchResult) === 'undefined') {
           callback();
         } else {
           callback(new Error('标签名已存在'));
         }
-    },
+      },
       // apply different validation rule according to the selected tagFieldType
       validateDefaultValue: (rule, value, callback) => {
-        switch (this.newTagForm.tagFieldType) {
-          case 'select':
-            let singleSelectReg = new RegExp("^(.+)(;.+)");
-            if (singleSelectReg.test(value)) {
+        console.log(value)
+        if (value !== null) {
+          switch (this.newTagForm.tagFieldType) {
+            case 'select':
+              let singleSelectReg = new RegExp("^(.+)(;.+)");
+              if (singleSelectReg.test(value)) {
+                callback();
+              } else {
+                callback(new Error('请使用英文分号(;)分隔各选项'));
+              }
+              break;
+            case 'number':
+              let numReg = new RegExp("^([0-9]+)(.[0-9]+)?$")
+              if (numReg.test(value)) {
+                callback();
+              } else {
+                callback(new Error('不是有效的数字'));
+              }
+              break;
+            default:
               callback();
-            } else {
-              callback(new Error('请使用英文分号(;)分隔各选项'));
-            }
-            break;
-          case 'number':
-            let numReg = new RegExp("^([0-9]+)(.[0-9]+)?$")
-            if (numReg.test(value)) {
-              callback();
-            } else {
-              callback(new Error('不是有效的数字'));
-            }
-            break;
-          default:
-            callback();
-            break;
+              break;
+          }
+        } else {
+          callback()
         }
       },
     }
     return {
       loadingAnimation: false,
-      dialogFormVisible: false,
       newTagForm: {
         tagName: null,
         tagFieldType: 'simple',
@@ -154,6 +165,9 @@ export default {
 
   },
   methods: {
+    handleClose() {
+      this.$emit('closeDialog')
+    },
     handleSubmit() {
       this.$refs.newTagForm.validate((valid) => {
         if (valid) {
