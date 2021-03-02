@@ -36,7 +36,8 @@ myAxios.interceptors.response.use(
       ElMessage({
         dangerouslyUseHTMLString: true,
         message: '登陆状态异常（*゜ー゜*）<a href="/login">点此重新登陆</a>',
-        type: 'error'
+        type: 'error',
+        duration: 0,
       });
       // Router.push({path: '/login'});
     } else {

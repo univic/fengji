@@ -14,17 +14,59 @@
 
 <script>
 import editTagPanel from './editTagPanel.vue';
+import myAxios from '../../utilities/request';
+import {ElMessage} from 'element-plus';
 
 export default {
   name: "showTags",
   data () {
     return {
-      dialogFormVisible: false
+      dialogFormVisible: false,
+      tagList: [],
     }
   },
   components: {
-    'editTagPanel': editTagPanel
+    'editTagPanel': editTagPanel,
   },
+  created() {
+    this.getTagList();
+  },
+  mounted() {
+  },
+  methods: {
+    getTagList () {
+      myAxios.get(
+          '/api/item_tag/',
+          {
+            params: {
+              'user': ''
+            }
+          }
+      ).then(
+          function (response) {
+            console.log(response.data)
+            if (response.data.status === 'success') {
+              ElMessage({
+                message: response.data.messages[0],
+                type: 'success'
+              });
+            } else {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+                type: 'error'
+              });
+            }
+          }
+      ).catch(
+          function (error) {
+            ElMessage({
+              message: '出现了问题（*゜ー゜*）' + error,
+              type: 'error'
+            });
+          }
+      )
+    }
+  }
 }
 </script>
 

@@ -2,7 +2,7 @@
 # Author : univic
 # Date: 2021-02-28
 
-
+import json
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from app.model.item_tag import TagTemplate
@@ -12,10 +12,33 @@ from app.model.post_forms import NewTagForm
 bp = Blueprint('item_tag', __name__, url_prefix='/api/item_tag')
 
 
+@bp.route('/', methods={'GET'})
+@jwt_required()
+def get_tag_templates():
+    try:
+        tag_template_list = []
+        tag_templates = TagTemplate.objects()
+        for item in tag_templates:
+            # convert the mongodb query obj to json
+            # make id, date and user more readable
+            tag_template_list.append(json.loads(item.to_json()))
+        response = {
+            'status': 'success',
+            'messages': [''],
+            'data': tag_template_list
+            }
+    except Exception as e:
+        print(e)
+        response = {
+                'status': 'error',
+                'messages': [e.args[0]]
+            }
+    return response
+
+
 @bp.route('/', methods={'POST'})
 @jwt_required()
 def add_new_tag():
-    print(request.form)
     new_tag_form = NewTagForm(request.form, meta={'csrf': False})
     if new_tag_form.validate():
         new_tag = TagTemplate()
