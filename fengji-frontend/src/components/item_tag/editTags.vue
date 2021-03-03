@@ -10,6 +10,19 @@
     :dialogFormVisible = "dialogFormVisible"
     v-on:closeDialog="dialogFormVisible = false"
   ></edit-tag-panel>
+  <el-table
+    stripe
+  >
+    <el-table-column label="标签名"></el-table-column>
+    <el-table-column label="类型"></el-table-column>
+    <el-table-column label="默认值"></el-table-column>
+    <el-table-column label="操作">
+      <template #default>
+        <el-button type="text" size="small">编辑</el-button>
+        <el-button type="text" size="small">删除</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>
