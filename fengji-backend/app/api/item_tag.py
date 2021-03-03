@@ -2,9 +2,10 @@
 # Author : univic
 # Date: 2021-02-28
 
-import json
+import json, time, datetime
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
+from app.model.user_model import User
 from app.model.item_tag import TagTemplate
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
 from app.model.post_forms import NewTagForm
@@ -19,9 +20,22 @@ def get_tag_templates():
         tag_template_list = []
         tag_templates = TagTemplate.objects()
         for item in tag_templates:
-            # convert the mongodb query obj to json
-            # make id, date and user more readable
-            tag_template_list.append(json.loads(item.to_json()))
+            # convert the mongodb query obj to json, then load it into dict
+            # make id, date and user more readable before return it
+            item_dict = json.loads(item.to_json())
+            # turn id into str format, turn datetime obj into timestamp
+            item_dict["id"] = str(item.id)
+            item_dict["tag_created_at"] = int(item.tag_created_at.timestamp())
+            item_dict.pop("_id")
+            # get tag_item_creator info
+            tag_item_creator = item.tag_created_by
+            tag_item_creator_dict = {
+                'id': str(tag_item_creator.id),
+                'username': tag_item_creator.username
+            }
+            item_dict["tag_created_by"] = tag_item_creator_dict
+            tag_template_list.append(item_dict)
+            print(item_dict)
         response = {
             'status': 'success',
             'messages': [''],

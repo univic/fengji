@@ -50,5 +50,6 @@ class NewTagForm(Form):
                            [validators.input_required('未选择标签类型'),
                             validators.any_of(app_config.TAG_SETTINGS['ALLOWED_TAG_TYPES'], '不允许的标签类型')])
     tagDefaultValue = StringField('tagDefaultValue')
+    tagRequired = BooleanField('tagRequired')
     tagPreview = BooleanField('tagPreview')
     tagColor = StringField('tagColor')

@@ -105,3 +105,269 @@
 2021-03-03 00:07:49,024 - werkzeug:113 - WARNING -  * Debugger is active!
 2021-03-03 00:07:49,035 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
 2021-03-03 00:07:49,045 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 08:58:17,903 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 08:58:17] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-03-03 08:58:19,318 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 08:58:19] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 08:58:25,068 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 08:58:25] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 08:58:41,854 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 08:58:41] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 08:58:46,790 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 08:58:46] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 08:58:46,793 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 08:58:46] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 08:58:46,796 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 08:58:46] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 08:58:46,799 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 08:58:46] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 20:25:08,808 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 20:25:08] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 20:25:08,995 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 20:25:08] "[31m[1mGET /api/item_tag/?user= HTTP/1.1[0m" 401 -
+2021-03-03 21:03:30,441 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:03:30] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-03-03 21:03:34,806 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:03:34] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:03:35,123 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:03:35] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:03:53,593 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:03:53] "[37mGET /api/user/check_username_unique?username=univic HTTP/1.1[0m" 200 -
+2021-03-03 21:10:49,955 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:10:49] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-03-03 21:11:31,603 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:11:31] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:11:31,917 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:11:31] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:11:33,354 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:11:33] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:12:55,279 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:12:55] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:12:55,537 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:12:55] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:17:22,403 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:17:22] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:17:22,663 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:17:22] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:17:35,257 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:17:35] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:17:35,573 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:17:35] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:21:28,759 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:21:28] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:21:29,019 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:21:29] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:31:10,197 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 21:31:10,632 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 21:31:16,712 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 21:31:16,724 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 21:31:16,734 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 21:31:21,303 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:31:21] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:31:21,554 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:31:21] "[31m[1mGET /api/item_tag/?user= HTTP/1.1[0m" 401 -
+2021-03-03 21:31:27,957 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:31:27] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-03-03 21:31:31,460 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:31:31] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:31:31,721 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:31:31] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:32:38,545 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 21:32:38,841 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 21:32:41,041 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 21:32:41,053 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 21:32:41,062 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 21:32:44,966 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:32:44] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:32:45,238 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:32:45] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:35:04,444 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 21:35:04,754 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 21:35:06,988 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 21:35:06,999 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 21:35:07,010 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 21:35:13,272 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:35:13] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:35:13,536 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:35:13] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:35:54,530 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 21:35:55,099 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 21:35:57,267 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 21:35:57,278 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 21:35:57,288 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 21:36:08,354 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:36:08] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:36:08,617 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:36:08] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:36:44,961 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 21:36:45,371 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 21:59:02,585 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 21:59:03,612 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 21:59:03,620 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 21:59:03,627 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 21:59:08,621 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:59:08] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:59:08,873 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:59:08] "[31m[1mGET /api/item_tag/?user= HTTP/1.1[0m" 401 -
+2021-03-03 21:59:38,579 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:59:38] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-03-03 21:59:40,737 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:59:40] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 21:59:40,991 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 21:59:40] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:00:01,280 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:00:01,712 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:00:02,785 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:00:02,792 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:00:02,799 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:00:03,705 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:00:03] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:00:03,962 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:00:03] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:00:26,038 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:00:26] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:00:26,346 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:00:26] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:00:36,906 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:00:39,099 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:00:39,115 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:00:39,126 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:00:40,699 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:00:40] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:00:40,960 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:00:40] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:00:54,979 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:00:54] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:00:55,296 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:00:55] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:01:27,900 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:01:28,192 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:01:30,378 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:01:30,390 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:01:30,400 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:01:32,877 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:01:32] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:03:07,629 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:03:08,035 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:03:10,275 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:03:10,290 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:03:10,299 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:03:14,922 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:03:14] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:04:10,928 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:04:11,409 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:04:13,555 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:04:13,570 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:04:13,580 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:04:39,977 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:04:39] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:05:05,947 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:05:06,183 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:05:08,352 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:05:08,363 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:05:08,373 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:06:18,356 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:06:18,918 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:06:21,165 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:06:21,178 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:06:21,188 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:06:21,801 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:06:21] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:25:23,106 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:25:23,316 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:25:25,510 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:25:25,521 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:25:25,531 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:25:44,326 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:25:44] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:25:44,575 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:25:44] "[31m[1mGET /api/item_tag/?user= HTTP/1.1[0m" 401 -
+2021-03-03 22:25:49,046 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:25:49] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-03-03 22:25:50,774 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:25:50] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:25:51,032 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:25:51] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:26:36,698 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:26:37,140 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:26:39,352 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:26:39,366 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:26:39,376 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:27:26,935 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:27:26] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:27:27,200 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:27:27] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:28:25,727 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:28:25] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:28:26,039 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:28:26] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:29:57,105 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:29:57] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:29:57,361 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:29:57] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:30:08,722 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:30:08] "[37mOPTIONS /api/item_tag/ HTTP/1.1[0m" 200 -
+2021-03-03 22:30:09,039 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:30:09] "[37mPOST /api/item_tag/ HTTP/1.1[0m" 200 -
+2021-03-03 22:30:47,768 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:30:47] "[37mOPTIONS /api/item_tag/ HTTP/1.1[0m" 200 -
+2021-03-03 22:30:48,082 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:30:48] "[37mPOST /api/item_tag/ HTTP/1.1[0m" 200 -
+2021-03-03 22:31:07,790 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:31:07] "[37mOPTIONS /api/item_tag/ HTTP/1.1[0m" 200 -
+2021-03-03 22:31:08,106 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:31:08] "[37mPOST /api/item_tag/ HTTP/1.1[0m" 200 -
+2021-03-03 22:31:59,357 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:31:59] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:32:09,681 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:32:09] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:33:48,838 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:33:49,321 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:33:51,510 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:33:51,523 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:33:51,533 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:34:24,818 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:34:25,104 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:34:27,270 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:34:27,282 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:34:27,291 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:34:48,790 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:34:49,354 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:34:51,520 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:34:51,534 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:34:51,544 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:35:00,046 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:35:00,589 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:35:02,795 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:35:02,807 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:35:02,817 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:35:14,811 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:35:14] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:35:15,078 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:35:15] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:35:20,873 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:35:20] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:35:21,188 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:35:21] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:38:48,699 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:38:49,066 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:38:51,229 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:38:51,243 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:38:51,253 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:38:55,938 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:38:55] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:38:56,202 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:38:56] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:39:09,209 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:39:09,310 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:39:11,497 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:39:11,509 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:39:11,518 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:39:39,870 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:39:39] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:39:40,140 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:39:40] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:45:53,541 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:45:54,091 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:45:56,355 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:45:56,367 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:45:56,377 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:45:58,343 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:45:58] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:45:58,594 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:45:58] "[31m[1mGET /api/item_tag/?user= HTTP/1.1[0m" 401 -
+2021-03-03 22:46:04,748 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:46:04] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-03-03 22:46:07,401 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:46:07] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:50:31,061 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:50:31,457 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:50:33,704 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:50:33,715 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:50:33,725 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:51:36,751 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:51:36] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:52:49,965 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:52:50,392 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:52:52,587 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:52:52,599 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:52:52,610 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:52:56,660 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:52:56] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:52:56,927 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:52:56] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:53:14,145 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:53:14,676 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:53:16,883 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:53:16,896 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:53:16,906 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:53:18,829 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:53:18] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:53:19,095 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:53:19] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:54:08,079 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:54:08,496 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:54:10,693 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:54:10,704 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:54:10,714 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:54:15,305 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:54:15] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:54:15,574 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:54:15] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:55:42,513 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:55:42] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:55:42,771 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:55:42] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:55:53,814 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:55:54,368 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:55:56,707 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:55:56,722 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:55:56,734 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:55:57,394 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:55:57] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:58:36,614 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:58:36,929 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:58:39,147 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:58:39,158 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:58:39,168 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:58:43,081 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:58:43] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:58:43,354 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:58:43] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 22:58:59,512 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 22:58:59,739 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 22:59:02,193 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 22:59:02,206 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 22:59:02,216 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 22:59:02,470 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 22:59:02] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 23:03:35,434 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 23:03:36,006 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 23:03:38,245 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 23:03:38,256 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 23:03:38,266 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 23:03:40,930 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 23:03:40] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 23:03:41,181 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 23:03:41] "[31m[1mGET /api/item_tag/?user= HTTP/1.1[0m" 401 -
+2021-03-03 23:03:45,876 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 23:03:45] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-03-03 23:03:48,724 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 23:03:48] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 23:03:48,984 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 23:03:48] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 23:07:19,651 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 23:07:20,005 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 23:07:22,294 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 23:07:22,305 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 23:07:22,316 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 23:07:24,836 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 23:07:24] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 23:07:25,101 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 23:07:25] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 23:07:34,329 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 23:07:34,867 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 23:07:37,054 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 23:07:37,068 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 23:07:37,078 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-03 23:07:39,467 - werkzeug:113 - INFO - 127.0.0.1 - - [03/Mar/2021 23:07:39] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-03 23:10:11,233 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-03 23:10:11,769 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-03 23:10:13,992 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-03 23:10:14,005 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
+2021-03-03 23:10:14,016 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)

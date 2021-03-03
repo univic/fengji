@@ -59,6 +59,7 @@ export default {
           function (response) {
             console.log(response.data)
             if (response.data.status === 'success') {
+              // this.tagList = response.data
               ElMessage({
                 message: response.data.messages[0],
                 type: 'success'

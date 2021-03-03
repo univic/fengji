@@ -46,6 +46,12 @@
             <el-radio-button label="false">无预览</el-radio-button>
           </el-radio-group>
         </el-form-item>
+        <el-form-item label="必选标签"  prop="tagRequired">
+          <el-radio-group v-model="newTagForm.tagRequired">
+            <el-radio-button label="true">是</el-radio-button>
+            <el-radio-button label="false">否</el-radio-button>
+          </el-radio-group>
+        </el-form-item>
         <el-form-item label="标签颜色"  prop="tagColor">
           <el-color-picker v-model="newTagForm.tagColor"></el-color-picker>
         </el-form-item>
@@ -124,6 +130,7 @@ export default {
         tagName: null,
         tagFieldType: 'simple',
         tagDefaultValue: null,
+        tagRequired: false,
         tagPreview: false,
         tagPriority: null,
         tagColor: '#FFFFFF',
@@ -156,9 +163,6 @@ export default {
         ],
         tagDefaultValue: [{validator: validators.validateDefaultValue, trigger: 'blur'}]
       },
-      tagList: [
-        {tagName: '123'}
-      ],
     };
   },
   computed: {

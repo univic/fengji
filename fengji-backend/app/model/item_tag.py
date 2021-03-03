@@ -9,6 +9,7 @@ class TagTemplate(db.Document):
     tag_field_type = StringField(required=True)
     tag_field_default_value = StringField()
     tag_preview = BooleanField(default=False)
+    tag_required = BooleanField(default=False)
     tag_priority = IntField(default=1)
     tag_color = StringField()
     tag_created_at = DateTimeField(default=datetime.datetime.now())

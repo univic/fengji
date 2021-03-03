@@ -78,7 +78,7 @@
 
 <script>
 
-import recordItemList from "../components/recordItemList.vue";
+import recordItemList from "../components/user/recordItemList.vue";
 
 export default {
   name: "userHome",
