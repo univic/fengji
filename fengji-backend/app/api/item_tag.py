@@ -5,7 +5,6 @@
 import json, time, datetime
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
-from app.model.user_model import User
 from app.model.item_tag import TagTemplate
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
 from app.model.post_forms import NewTagForm
@@ -16,36 +15,50 @@ bp = Blueprint('item_tag', __name__, url_prefix='/api/item_tag')
 @bp.route('/', methods={'GET'})
 @jwt_required()
 def get_tag_templates():
-    try:
-        tag_template_list = []
-        tag_templates = TagTemplate.objects()
-        for item in tag_templates:
-            # convert the mongodb query obj to json, then load it into dict
-            # make id, date and user more readable before return it
-            item_dict = json.loads(item.to_json())
-            # turn id into str format, turn datetime obj into timestamp
-            item_dict["id"] = str(item.id)
-            item_dict["tag_created_at"] = int(item.tag_created_at.timestamp())
-            item_dict.pop("_id")
-            # get tag_item_creator info
-            tag_item_creator = item.tag_created_by
-            tag_item_creator_dict = {
-                'id': str(tag_item_creator.id),
-                'username': tag_item_creator.username
-            }
-            item_dict["tag_created_by"] = tag_item_creator_dict
-            tag_template_list.append(item_dict)
+
+    if request.args['type'] == 'all':
+        # return detailed info of all tags
+        try:
+            tag_template_list = []
+            tag_templates = TagTemplate.objects()
+            for item in tag_templates:
+                # convert the mongodb query obj to json, then load it into dict
+                # make id, date and user more readable before return it
+                item_dict = json.loads(item.to_json())
+                # turn id into str format, turn datetime obj into timestamp
+                item_dict["id"] = str(item.id)
+                item_dict["tag_created_at"] = int(item.tag_created_at.timestamp())
+                item_dict.pop("_id")
+                # get tag_item_creator info
+                tag_item_creator = item.tag_created_by
+                tag_item_creator_dict = {
+                    'id': str(tag_item_creator.id),
+                    'username': tag_item_creator.username
+                }
+                item_dict["tag_created_by"] = tag_item_creator_dict
+                tag_template_list.append(item_dict)
+            response = {
+                'status': 'success',
+                'messages': [''],
+                'data': tag_template_list
+                }
+        except Exception as e:
+            print(e)
+            response = {
+                    'status': 'error',
+                    'messages': [e.args[0]]
+                }
+    elif request.args['type'] == 'check_existence':
+        tag_template = TagTemplate.objects(tag_name=request.args['tag_name'])
+        if not tag_template:
+            pass
+        response = {}
+    else:
         response = {
-            'status': 'success',
-            'messages': [''],
-            'data': tag_template_list
-            }
-    except Exception as e:
-        print(e)
-        response = {
-                'status': 'error',
-                'messages': [e.args[0]]
-            }
+            'status': 'error',
+            'message': '错误的请求参数',
+        }
+        return response, 400
     return response
 
 

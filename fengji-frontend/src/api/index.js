@@ -1,8 +1,9 @@
 import itemAPI from "./item";
+import tag from './tag';
 
-const baseURL = {};
 const api = {
   itemAPI,
+  tag,
 }
 
 export default api;

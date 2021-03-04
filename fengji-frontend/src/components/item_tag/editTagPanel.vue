@@ -68,7 +68,7 @@
 
 <script>
 import qs from 'qs';
-import myAxios from '../../utilities/request';
+import api from '../../api';
 import { ElMessage } from 'element-plus';
 
 export default {
@@ -183,27 +183,20 @@ export default {
     },
     submitNewTag() {
       let dataObj = qs.stringify(this.newTagForm);
-      myAxios.post(
-          '/api/item_tag/',
-          dataObj,
-          {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            }
-          }).then(
-              function (response) {
-                if (response.data.status === 'success') {
-                  ElMessage({
-                    message: response.data.messages[0],
-                    type: 'success'
-                  });
-                } else {
-                  ElMessage({
-                    message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-                    type: 'error'
-                  });
-                }
-              }
+      api.tag.submitNewTag(dataObj).then(
+        function (response) {
+          if (response.data.status === 'success') {
+            ElMessage({
+              message: response.data.messages[0],
+              type: 'success'
+            });
+          } else {
+            ElMessage({
+              message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+              type: 'error'
+            });
+          }
+        }
           ).catch(
               function (error) {
                 ElMessage({

@@ -12,7 +12,6 @@
   ></edit-tag-panel>
   <el-table
     stripe
-    :data="tagList"
   >
     <el-table-column label="标签名" prop="tag_name"></el-table-column>
     <el-table-column label="类型" prop="tag_type"></el-table-column>
@@ -30,8 +29,8 @@
 
 <script>
 import editTagPanel from './editTagPanel.vue';
-import myAxios from '../../utilities/request';
-import {ElMessage} from 'element-plus';
+import api from '../../api';
+import { ElMessage } from 'element-plus';
 
 export default {
   name: "showTags",
@@ -50,39 +49,34 @@ export default {
   mounted() {
   },
   methods: {
-    getTagList () {
-      myAxios.get(
-          '/api/item_tag/',
-          {
-            params: {
-              'user': ''
-            }
-          }
-      ).then(
-          (response) => {
-            if (response.data.status === 'success') {
-              console.log(response.data)
-              this.tagList = response.data
-              ElMessage({
-                message: response.data.messages[0],
-                type: 'success'
-              });
-            } else {
-              ElMessage({
-                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-                type: 'error'
-              });
-            }
-          }
-      ).catch(
-          function (error) {
+    getTagList() {
+      api.tag.getTagList().then(
+        (response) => {
+          if (response.data.status === 'success') {
+            console.log(response.data)
+            this.tagList = response.data
             ElMessage({
-              message: '出现了问题（*゜ー゜*）' + error,
+              message: response.data.messages[0],
+              type: 'success'
+            });
+          } else {
+            ElMessage({
+              message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
               type: 'error'
             });
           }
+        }
+      ).catch(
+        function (error) {
+          ElMessage({
+            message: '出现了问题（*゜ー゜*）' + error,
+            type: 'error'
+          });
+        }
       )
     }
+
+
   }
 }
 </script>
