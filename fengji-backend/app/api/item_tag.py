@@ -35,7 +35,6 @@ def get_tag_templates():
             }
             item_dict["tag_created_by"] = tag_item_creator_dict
             tag_template_list.append(item_dict)
-            print(item_dict)
         response = {
             'status': 'success',
             'messages': [''],

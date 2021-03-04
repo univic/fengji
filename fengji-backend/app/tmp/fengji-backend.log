@@ -371,3 +371,16 @@
 2021-03-03 23:10:13,992 - werkzeug:113 - WARNING -  * Debugger is active!
 2021-03-03 23:10:14,005 - werkzeug:113 - INFO -  * Debugger PIN: 261-556-397
 2021-03-03 23:10:14,016 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-04 11:23:15,855 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-04 11:23:17,359 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-04 11:23:17,385 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-03-04 11:23:17,396 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-04 11:23:36,234 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Mar/2021 11:23:36] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-03-04 11:23:40,568 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Mar/2021 11:23:40] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-04 11:23:40,947 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Mar/2021 11:23:40] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-04 11:23:50,280 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Mar/2021 11:23:50] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-04 11:23:50,593 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Mar/2021 11:23:50] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-04 11:26:12,802 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Mar/2021 11:26:12] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-04 11:26:13,054 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Mar/2021 11:26:13] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-04 11:28:30,212 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Mar/2021 11:28:30] "[37mOPTIONS /api/item_tag/?user= HTTP/1.1[0m" 200 -
+2021-03-04 11:28:30,468 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Mar/2021 11:28:30] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -

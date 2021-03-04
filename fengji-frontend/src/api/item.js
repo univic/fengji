@@ -1,4 +1,4 @@
-import baseURL from './index';
+
 import myAxios from "../utilities/request";
 
 const itemAPI = {

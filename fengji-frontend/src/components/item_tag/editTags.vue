@@ -12,10 +12,13 @@
   ></edit-tag-panel>
   <el-table
     stripe
+    :data="tagList"
   >
-    <el-table-column label="标签名"></el-table-column>
-    <el-table-column label="类型"></el-table-column>
-    <el-table-column label="默认值"></el-table-column>
+    <el-table-column label="标签名" prop="tag_name"></el-table-column>
+    <el-table-column label="类型" prop="tag_type"></el-table-column>
+    <el-table-column label="默认值" prop="tag_default_value"></el-table-column>
+    <el-table-column label="必选标签" prop="tag_required"></el-table-column>
+    <el-table-column label="标签预览" prop="tag_preview"></el-table-column>
     <el-table-column label="操作">
       <template #default>
         <el-button type="text" size="small">编辑</el-button>
@@ -56,10 +59,10 @@ export default {
             }
           }
       ).then(
-          function (response) {
-            console.log(response.data)
+          (response) => {
             if (response.data.status === 'success') {
-              // this.tagList = response.data
+              console.log(response.data)
+              this.tagList = response.data
               ElMessage({
                 message: response.data.messages[0],
                 type: 'success'
