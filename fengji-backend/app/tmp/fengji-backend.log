@@ -397,3 +397,34 @@
 2021-03-04 20:18:43,094 - werkzeug:113 - INFO - 127.0.0.1 - - [04/Mar/2021 20:18:43] "[37mGET /api/item_tag/?user= HTTP/1.1[0m" 200 -
 2021-03-04 20:25:00,604 - werkzeug:113 - INFO -  * Detected change in 'D:\\DEV\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
 2021-03-04 20:25:00,889 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-05 19:51:54,234 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-05 19:51:56,532 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-05 19:51:56,612 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-03-05 19:51:56,707 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-05 19:52:00,666 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:52:00] "[37mPOST /api/user/login HTTP/1.1[0m" 200 -
+2021-03-05 19:52:02,867 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:52:02] "[37mOPTIONS /api/item_tag/?type=all HTTP/1.1[0m" 200 -
+2021-03-05 19:52:03,195 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:52:03] "[37mGET /api/item_tag/?type=all HTTP/1.1[0m" 200 -
+2021-03-05 19:52:53,042 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:52:53] "[37mOPTIONS /api/item_tag/?type=all HTTP/1.1[0m" 200 -
+2021-03-05 19:52:53,310 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:52:53] "[37mGET /api/item_tag/?type=all HTTP/1.1[0m" 200 -
+2021-03-05 19:52:56,368 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:52:56] "[37mGET /api/item_tag/?type=all HTTP/1.1[0m" 200 -
+2021-03-05 19:53:42,058 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:53:42] "[37mOPTIONS /api/item_tag/?type=all HTTP/1.1[0m" 200 -
+2021-03-05 19:53:42,315 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:53:42] "[37mGET /api/item_tag/?type=all HTTP/1.1[0m" 200 -
+2021-03-05 19:56:25,205 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-05 19:56:26,765 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-05 19:56:26,791 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-03-05 19:56:26,801 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-05 19:56:34,391 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:56:34] "[37mOPTIONS /api/item_tag/?type=check_existence&tag_name=¹¤Ê±£¨Ð¡Ê±£© HTTP/1.1[0m" 200 -
+2021-03-05 19:56:34,669 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:56:34] "[37mGET /api/item_tag/?type=check_existence&tag_name=¹¤Ê±£¨Ð¡Ê±£© HTTP/1.1[0m" 200 -
+2021-03-05 19:56:43,572 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:56:43] "[37mOPTIONS /api/item_tag/?type=check_existence&tag_name=¹¤Ê±£¨Ð¡Ê±£© HTTP/1.1[0m" 200 -
+2021-03-05 19:56:43,896 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:56:43] "[37mGET /api/item_tag/?type=check_existence&tag_name=¹¤Ê±£¨Ð¡Ê±£© HTTP/1.1[0m" 200 -
+2021-03-05 19:56:44,144 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:56:44] "[37mOPTIONS /api/item_tag/ HTTP/1.1[0m" 200 -
+2021-03-05 19:56:44,219 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:56:44] "[37mPOST /api/item_tag/ HTTP/1.1[0m" 200 -
+2021-03-05 19:56:53,871 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:56:53] "[37mOPTIONS /api/item_tag/?type=all HTTP/1.1[0m" 200 -
+2021-03-05 19:56:54,193 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 19:56:54] "[37mGET /api/item_tag/?type=all HTTP/1.1[0m" 200 -
+2021-03-05 19:59:07,772 - werkzeug:113 - INFO -  * Detected change in 'D:\\dev\\fengji\\fengji-backend\\app\\api\\item_tag.py', reloading
+2021-03-05 19:59:08,333 - werkzeug:113 - INFO -  * Restarting with stat
+2021-03-05 19:59:09,945 - werkzeug:113 - WARNING -  * Debugger is active!
+2021-03-05 19:59:09,971 - werkzeug:113 - INFO -  * Debugger PIN: 276-023-793
+2021-03-05 19:59:09,983 - werkzeug:113 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-03-05 20:00:32,012 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 20:00:32] "[37mOPTIONS /api/item_tag/?type=all HTTP/1.1[0m" 200 -
+2021-03-05 20:00:32,283 - werkzeug:113 - INFO - 127.0.0.1 - - [05/Mar/2021 20:00:32] "[37mGET /api/item_tag/?type=all HTTP/1.1[0m" 200 -

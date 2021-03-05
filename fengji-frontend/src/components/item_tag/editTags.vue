@@ -12,6 +12,7 @@
   ></edit-tag-panel>
   <el-table
     stripe
+    :data="tagList"
   >
     <el-table-column label="标签名" prop="tag_name"></el-table-column>
     <el-table-column label="类型" prop="tag_type"></el-table-column>
@@ -55,8 +56,8 @@ export default {
       }).then(
         (response) => {
           if (response.data.status === 'success') {
-            console.log(response.data)
-            this.tagList = response.data
+            this.tagList = response.data.tag_template_list
+            console.log(this.tagList)
             ElMessage({
               message: response.data.messages[0],
               type: 'success'

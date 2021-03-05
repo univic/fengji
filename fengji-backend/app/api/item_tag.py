@@ -40,7 +40,7 @@ def get_tag_templates():
             response = {
                 'status': 'success',
                 'messages': [''],
-                'data': tag_template_list
+                'tag_template_list': tag_template_list
                 }
         except Exception as e:
             print(e)
