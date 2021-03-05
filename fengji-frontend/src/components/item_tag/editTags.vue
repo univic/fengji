@@ -15,8 +15,8 @@
     :data="tagList"
   >
     <el-table-column label="标签名" prop="tag_name"></el-table-column>
-    <el-table-column label="类型" prop="tag_type"></el-table-column>
-    <el-table-column label="默认值" prop="tag_default_value"></el-table-column>
+    <el-table-column label="类型" prop="tag_field_type"></el-table-column>
+    <el-table-column label="默认值" prop="tag_field_default_value"></el-table-column>
     <el-table-column label="必选标签" prop="tag_required"></el-table-column>
     <el-table-column label="标签预览" prop="tag_preview"></el-table-column>
     <el-table-column label="操作">
