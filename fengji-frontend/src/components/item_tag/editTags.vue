@@ -50,7 +50,9 @@ export default {
   },
   methods: {
     getTagList() {
-      api.tag.getTagList().then(
+      api.tag.getTagList({
+        type: 'all',
+      }).then(
         (response) => {
           if (response.data.status === 'success') {
             console.log(response.data)

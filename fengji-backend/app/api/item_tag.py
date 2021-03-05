@@ -51,8 +51,15 @@ def get_tag_templates():
     elif request.args['type'] == 'check_existence':
         tag_template = TagTemplate.objects(tag_name=request.args['tag_name'])
         if not tag_template:
-            pass
-        response = {}
+            response = {
+                'status': 'success',
+                'messages': ['标签名可用'],
+            }
+        else:
+            response = {
+                'status': 'error',
+                'messages': ['标签名已存在'],
+            }
     else:
         response = {
             'status': 'error',

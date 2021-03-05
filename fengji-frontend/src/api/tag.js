@@ -1,14 +1,11 @@
 import myAxios from "../utilities/request"
-import {ElMessage} from 'element-plus';
 
 let tag = {
-  getTagList() {
+  getTagList(params) {
     return myAxios.get(
       '/api/item_tag/',
       {
-        params: {
-          'user': ''
-        }
+        params: params
       }
     )
   },

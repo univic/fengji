@@ -60,6 +60,9 @@
             type="primary"
             v-on:click="handleSubmit"
           >创建标签</el-button>
+          <el-button
+              v-on:click="resetForm('newTagForm')"
+          >重置</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -83,16 +86,32 @@ export default {
     let validators = {
       validateTagNameUnique: (rule, value, callback) => {
         // use a customized find function to see if the tag name has already existed
-        function getTagName(tagItem) {
-          return tagItem.tagName === value;
-        }
+        api.tag.getTagList({
+          type: 'check_existence',
+          tag_name: value,
+        }).then(
+            function (response) {
+              if (response.data.status === 'success') {
+                callback()
 
-        let searchResult = this.tagList.find(getTagName)
-        if (typeof (searchResult) === 'undefined') {
-          callback();
-        } else {
-          callback(new Error('标签名已存在'));
-        }
+              } else if (response.data.status === 'error') {
+                callback(new Error(response.data.messages[0]))
+              }
+              else {
+                ElMessage({
+                  message: '出现了问题（*゜ー゜*）',
+                  type: 'error',
+                })
+              }
+            }
+        ).catch(
+            function (error) {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + error.message,
+                type: 'error'
+              })
+            }
+          )
       },
       // apply different validation rule according to the selected tagFieldType
       validateDefaultValue: (rule, value, callback) => {
@@ -183,9 +202,10 @@ export default {
     },
     submitNewTag() {
       let dataObj = qs.stringify(this.newTagForm);
-      api.tag.submitNewTag(dataObj).then(
-        function (response) {
+      api.tag.submitNewTag(dataObj).then((response) => {
           if (response.data.status === 'success') {
+            this.handleClose()
+            this.resetForm('newTagForm')
             ElMessage({
               message: response.data.messages[0],
               type: 'success'
@@ -197,15 +217,18 @@ export default {
             });
           }
         }
-          ).catch(
-              function (error) {
-                ElMessage({
-                  message: '出现了问题（*゜ー゜*）' + error,
-                  type: 'error'
-                });
-              }
+      ).catch(
+          function (error) {
+            ElMessage({
+              message: '出现了问题（*゜ー゜*）' + error,
+              type: 'error'
+            });
+          }
       )
     },
+    resetForm(formName) {
+      this.$refs[formName].resetFields()
+    }
   }
 }
 </script>
