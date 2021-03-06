@@ -1,9 +1,9 @@
 import myAxios from "../utilities/request"
 
 let tag = {
-  getTagList(params) {
+  getTagTemplate(params) {
     return myAxios.get(
-      '/api/item_tag/',
+      '/api/tag_template/',
       {
         params: params
       }
@@ -11,7 +11,7 @@ let tag = {
   },
   submitNewTag(dataObj) {
     return myAxios.post(
-      '/api/item_tag/',
+      '/api/tag_template/',
       dataObj,
       {
         headers: {
@@ -19,6 +19,14 @@ let tag = {
         }
     })
   },
+  deleteTagTemplate(params) {
+    return myAxios.delete(
+      'api/tag_template/',
+      {
+        params: params
+      }
+    )
+  }
 }
 
 export default tag

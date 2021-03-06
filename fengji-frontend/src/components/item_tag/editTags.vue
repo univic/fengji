@@ -3,7 +3,7 @@
   <div>标签管理</div>
   <div>
     <el-button
-        v-on:click="dialogFormVisible = true"
+      v-on:click="dialogFormVisible = true"
     >添加标签</el-button>
   </div>
   <edit-tag-panel
@@ -20,9 +20,17 @@
     <el-table-column label="必选标签" prop="tag_required"></el-table-column>
     <el-table-column label="标签预览" prop="tag_preview"></el-table-column>
     <el-table-column label="操作">
-      <template #default>
-        <el-button type="text" size="small">编辑</el-button>
-        <el-button type="text" size="small">删除</el-button>
+      <template #default="scope">
+        <el-button
+          type="text"
+          size="small"
+          v-on:click="handleEdit(scope.$index, scope.row)"
+        >编辑</el-button>
+        <el-button
+          type="text"
+          size="small"
+          v-on:click="handleDelete(scope.$index, scope.row)"
+        >删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -51,7 +59,7 @@ export default {
   },
   methods: {
     getTagList() {
-      api.tag.getTagList({
+      api.tag.getTagTemplate({
         type: 'all',
       }).then(
         (response) => {
@@ -77,6 +85,53 @@ export default {
           });
         }
       )
+    },
+    handleDelete(index, row) {
+      this.$confirm(
+        '将永久删除该标签，是否继续', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.deleteTagTemplate(index, row)
+        }).catch(()=> {
+          this.$message({
+          message: '已取消删除',
+          type: 'info'
+        })
+      })
+    },
+    deleteTagTemplate(index, row) {
+      api.tag.deleteTagTemplate({
+        id: row.id
+      }).then(
+          (response) => {
+            if (response.data.status === 'success') {
+              this.tagList.splice(index, 1)
+              console.log(this.tagList)
+              ElMessage({
+                message: response.data.messages[0],
+                type: 'success'
+              });
+            } else {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+                type: 'error'
+              });
+            }
+          }
+      ).catch(
+          function (error) {
+            ElMessage({
+              message: '出现了问题（*゜ー゜*）' + error,
+              type: 'error'
+            });
+          }
+      )
+    },
+    handleEdit(index, row) {
+      console.log(row)
+      // this.$refs.editTagPanel.handleEdit(row)
     }
 
 

@@ -8,21 +8,21 @@
         :before-close="handleClose"
     >
       <el-form
-        :model="newTagForm"
+        :model="tagForm"
         status-icon
         :rules="tagFormRules"
-        ref="newTagForm"
+        ref="tagForm"
       >
         <el-form-item label="标签名称" prop="tagName">
           <el-input
-            v-model="newTagForm.tagName"
+            v-model="tagForm.tagName"
             maxlength="10"
             show-word-limit
           ></el-input>
         </el-form-item>
         <el-form-item label="标签类型" prop="tagFieldType">
           <el-select
-            v-model="newTagForm.tagFieldType"
+            v-model="tagForm.tagFieldType"
             placeholder="请选择标签类型"
           >
             <el-option
@@ -35,25 +35,25 @@
         </el-form-item>
         <el-form-item
           label="标签默认值"
-          v-if="newTagForm.tagFieldType !== 'simple'"
+          v-if="tagForm.tagFieldType !== 'simple'"
           prop="tagDefaultValue"
         >
-          <el-input v-model="newTagForm.tagDefaultValue"></el-input>
+          <el-input v-model="tagForm.tagDefaultValue"></el-input>
         </el-form-item>
         <el-form-item label="标签预览"  prop="tagPreview">
-          <el-radio-group v-model="newTagForm.tagPreview">
+          <el-radio-group v-model="tagForm.tagPreview">
             <el-radio-button label="true">可预览</el-radio-button>
             <el-radio-button label="false">无预览</el-radio-button>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="必选标签"  prop="tagRequired">
-          <el-radio-group v-model="newTagForm.tagRequired">
+          <el-radio-group v-model="tagForm.tagRequired">
             <el-radio-button label="true">是</el-radio-button>
             <el-radio-button label="false">否</el-radio-button>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="标签颜色"  prop="tagColor">
-          <el-color-picker v-model="newTagForm.tagColor"></el-color-picker>
+          <el-color-picker v-model="tagForm.tagColor"></el-color-picker>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -61,7 +61,7 @@
             v-on:click="handleSubmit"
           >创建标签</el-button>
           <el-button
-              v-on:click="resetForm('newTagForm')"
+              v-on:click="resetForm('tagForm')"
           >重置</el-button>
         </el-form-item>
       </el-form>
@@ -117,7 +117,7 @@ export default {
       validateDefaultValue: (rule, value, callback) => {
         console.log(value)
         if (value !== null) {
-          switch (this.newTagForm.tagFieldType) {
+          switch (this.tagForm.tagFieldType) {
             case 'select':
               let singleSelectReg = new RegExp("^(.+)(;.+)");
               if (singleSelectReg.test(value)) {
@@ -145,7 +145,7 @@ export default {
     }
     return {
       loadingAnimation: false,
-      newTagForm: {
+      tagForm: {
         tagName: null,
         tagFieldType: 'simple',
         tagDefaultValue: null,
@@ -184,15 +184,12 @@ export default {
       },
     };
   },
-  computed: {
-
-  },
   methods: {
     handleClose() {
       this.$emit('closeDialog')
     },
     handleSubmit() {
-      this.$refs.newTagForm.validate((valid) => {
+      this.$refs.tagForm.validate((valid) => {
         if (valid) {
           this.submitNewTag()
         } else {
@@ -201,11 +198,11 @@ export default {
       })
     },
     submitNewTag() {
-      let dataObj = qs.stringify(this.newTagForm);
+      let dataObj = qs.stringify(this.tagForm);
       api.tag.submitNewTag(dataObj).then((response) => {
           if (response.data.status === 'success') {
             this.handleClose()
-            this.resetForm('newTagForm')
+            this.resetForm('tagForm')
             ElMessage({
               message: response.data.messages[0],
               type: 'success'
@@ -228,7 +225,14 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
-    }
+    },
+    // handleEdit(tagEditForm) {
+    //   for (let k in tagEditForm) {
+    //     if (tagEditForm.hasOwnProperty(k)) {
+    //       this.tagForm[k] = tagEditForm[k]
+    //     }
+    //   }
+    // }
   }
 }
 </script>

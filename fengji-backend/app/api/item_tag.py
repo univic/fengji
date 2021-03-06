@@ -2,14 +2,14 @@
 # Author : univic
 # Date: 2021-02-28
 
-import json, time, datetime
+import json
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from app.model.item_tag import TagTemplate
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
 from app.model.post_forms import NewTagForm
 
-bp = Blueprint('item_tag', __name__, url_prefix='/api/item_tag')
+bp = Blueprint('tag_template', __name__, url_prefix='/api/tag_template')
 
 
 @bp.route('/', methods={'GET'})
@@ -113,3 +113,20 @@ def add_new_tag():
             'messages': error_status
         }
     return jsonify(response)
+
+
+@bp.route('/', methods={'DELETE'})
+def delete_tag_template():
+    tag_template = TagTemplate.objects(id=request.args['id'])
+    try:
+        tag_template.delete()
+        response = {
+            'status': 'success',
+            'messages': ['标签已删除']
+        }
+    except Exception as e:
+        response = {
+            'status': 'error',
+            'messages': [e]
+        }
+    return response
