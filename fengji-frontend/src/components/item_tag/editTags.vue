@@ -1,6 +1,6 @@
 <template>
   <!--  title here-->
-  <div>标签管理</div>
+  <el-page-header content="标签管理"></el-page-header>
   <div>
     <el-button
       v-on:click="handleTagCreate"

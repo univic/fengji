@@ -34,4 +34,3 @@ class User(db.Document):
     current_login_at = DateTimeField()
     current_login_ip = StringField()
     login_count = IntField(default=0)
-

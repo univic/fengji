@@ -1,4 +1,4 @@
-import myAxios from "../utilities/request"
+import myAxios from "../utilities/request";
 
 let tag = {
   getTagTemplate(params) {

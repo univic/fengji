@@ -52,6 +52,18 @@
             <span>标签管理</span>
           </el-menu-item>
           <el-menu-item
+              index="/user/create_report_group"
+          >
+            <i class="el-icon-document-add"></i>
+            <span>创建报告组</span>
+          </el-menu-item>
+          <el-menu-item
+              index="/user/edit_tags"
+          >
+            <i class="el-icon-edit"></i>
+            <span>报告组管理</span>
+          </el-menu-item>
+          <el-menu-item
               index="/user/item_list"
           >
             <i class="el-icon-info"></i>

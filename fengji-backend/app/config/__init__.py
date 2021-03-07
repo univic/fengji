@@ -29,6 +29,11 @@ class BaseConfig(object):
         'MAX_TAG_NAME_LENGTH': 10,
         'ALLOWED_TAG_TYPES': ['simple', 'select', 'text', 'number']
     }
+    # report group config
+    REPORT_GROUP_SETTINGS = {
+        'MIN_NAME_LENGTH': 3,
+        'MAX_NAME_LENGTH': 50
+    }
 
 
 def get_config():

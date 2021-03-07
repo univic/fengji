@@ -54,3 +54,14 @@ class TagTemplateForm(Form):
     tag_required = BooleanField('tag_required')
     tag_preview = BooleanField('tag_preview')
     tag_color = StringField('tag_color')
+
+
+class ReportGroupForm(Form):
+    group_name = StringField('group_name',
+                             [validators.input_required('未填写报告组名'),
+                              validators.Length(min=app_config.REPORT_GROUP_SETTINGS['MIN_NAME_LENGTH'],
+                                                max=app_config.REPORT_GROUP_SETTINGS['MAX_NAME_LENGTH'],
+                                                message=f"用户名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_NAME_LENGTH']}~"
+                                                        f"{app_config.REPORT_GROUP_SETTINGS['MAX_NAME_LENGTH']}位")])
+    is_project = BooleanField('is_project')
+    group_color = StringField('group_color')
