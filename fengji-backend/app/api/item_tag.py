@@ -7,7 +7,7 @@ from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from app.model.item_tag import TagTemplate
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
-from app.model.post_forms import NewTagForm
+from app.model.post_forms import TagTemplateForm
 
 bp = Blueprint('tag_template', __name__, url_prefix='/api/tag_template')
 
@@ -72,15 +72,15 @@ def get_tag_templates():
 @bp.route('/', methods={'POST'})
 @jwt_required()
 def add_new_tag():
-    new_tag_form = NewTagForm(request.form, meta={'csrf': False})
+    new_tag_form = TagTemplateForm(request.form, meta={'csrf': False})
     if new_tag_form.validate():
         new_tag = TagTemplate()
         tag_creator = get_current_user()
-        new_tag.tag_name = new_tag_form.tagName.data
-        new_tag.tag_field_type = new_tag_form.tagFieldType.data
-        new_tag.tag_field_default_value = new_tag_form.tagDefaultValue.data
-        new_tag.tag_preview = new_tag_form.tagPreview.data
-        new_tag.tag_color = new_tag_form.tagColor.data
+        new_tag.tag_name = new_tag_form.tag_name.data
+        new_tag.tag_field_type = new_tag_form.tag_field_type.data
+        new_tag.tag_default_value = new_tag_form.tag_default_value.data
+        new_tag.tag_preview = new_tag_form.tag_preview.data
+        new_tag.tag_color = new_tag_form.tag_color.data
         new_tag.tag_created_by = tag_creator
         try:
             new_tag.save()
@@ -116,6 +116,7 @@ def add_new_tag():
 
 
 @bp.route('/', methods={'DELETE'})
+@jwt_required()
 def delete_tag_template():
     tag_template = TagTemplate.objects(id=request.args['id'])
     try:
@@ -130,3 +131,42 @@ def delete_tag_template():
             'messages': [e]
         }
     return response
+
+
+@bp.route('/', methods={'PUT'})
+@jwt_required()
+def modify_tag_template():
+    tag_edit_form = TagTemplateForm(request.form, meta={'csrf': False})
+    if tag_edit_form.validate():
+        tag_template = TagTemplate.objects(id=tag_edit_form.id.data).first()
+        tag_template.tag_name = tag_edit_form.tag_name.data
+        tag_template.tag_field_type = tag_edit_form.tag_field_type.data
+        tag_template.tag_default_value = tag_edit_form.tag_default_value.data
+        tag_template.tag_preview = tag_edit_form.tag_preview.data
+        tag_template.tag_required = tag_edit_form.tag_required.data
+        tag_template.tag_color = tag_edit_form.tag_color.data
+        try:
+            tag_template.save()
+            response = {
+                'status': 'success',
+                'messages': ['标签修改成功~']
+            }
+        except ValidationError as e:
+            response = {
+                'status': 'error',
+                'messages': [e.message]
+            }
+    else:
+        """
+        when validate, WTForms will generate a form.errors dict, which contains all the error messages
+        for each form fields, here we get error messages from the form.errors dict, and generate an error info list
+        """
+        error_status = list(tag_edit_form.errors.values())
+        for i, item in enumerate(error_status):
+            error_status[i] = item[0]
+        # construct the return data
+        response = {
+            'status': 'error',
+            'messages': error_status
+        }
+    return jsonify(response)

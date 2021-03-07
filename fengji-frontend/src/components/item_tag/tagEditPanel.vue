@@ -3,7 +3,7 @@
 <!--  quick nav buttons-->
   <div>
     <el-dialog
-        title="添加标签"
+        :title="dialogTitle"
         v-model="dialogFormVisible"
         :before-close="handleClose"
     >
@@ -13,16 +13,16 @@
         :rules="tagFormRules"
         ref="tagForm"
       >
-        <el-form-item label="标签名称" prop="tagName">
+        <el-form-item label="标签名称" prop="tag_name">
           <el-input
-            v-model="tagForm.tagName"
+            v-model="tagForm.tag_name"
             maxlength="10"
             show-word-limit
           ></el-input>
         </el-form-item>
-        <el-form-item label="标签类型" prop="tagFieldType">
+        <el-form-item label="标签类型" prop="tag_field_type">
           <el-select
-            v-model="tagForm.tagFieldType"
+            v-model="tagForm.tag_field_type"
             placeholder="请选择标签类型"
           >
             <el-option
@@ -35,31 +35,31 @@
         </el-form-item>
         <el-form-item
           label="标签默认值"
-          v-if="tagForm.tagFieldType !== 'simple'"
-          prop="tagDefaultValue"
+          v-if="tagForm.tag_field_type !== 'simple'"
+          prop="tag_default_value"
         >
-          <el-input v-model="tagForm.tagDefaultValue"></el-input>
+          <el-input v-model="tagForm.tag_default_value"></el-input>
         </el-form-item>
-        <el-form-item label="标签预览"  prop="tagPreview">
-          <el-radio-group v-model="tagForm.tagPreview">
+        <el-form-item label="标签预览"  prop="tag_preview">
+          <el-radio-group v-model="tagForm.tag_preview">
             <el-radio-button label="true">可预览</el-radio-button>
             <el-radio-button label="false">无预览</el-radio-button>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="必选标签"  prop="tagRequired">
-          <el-radio-group v-model="tagForm.tagRequired">
+        <el-form-item label="必选标签"  prop="tag_required">
+          <el-radio-group v-model="tagForm.tag_required">
             <el-radio-button label="true">是</el-radio-button>
             <el-radio-button label="false">否</el-radio-button>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="标签颜色"  prop="tagColor">
-          <el-color-picker v-model="tagForm.tagColor"></el-color-picker>
+        <el-form-item label="标签颜色"  prop="tag_color">
+          <el-color-picker v-model="tagForm.tag_color"></el-color-picker>
         </el-form-item>
         <el-form-item>
           <el-button
             type="primary"
             v-on:click="handleSubmit"
-          >创建标签</el-button>
+          >提交</el-button>
           <el-button
               v-on:click="resetForm('tagForm')"
           >重置</el-button>
@@ -75,49 +75,53 @@ import api from '../../api';
 import { ElMessage } from 'element-plus';
 
 export default {
-  name: "editTagPanel",
+  name: "tagEditPanel",
   props: [
     'dialogFormVisible',
   ],
   emits: [
-      'closeDialog'
+      'closeDialog',
+      'refreshTagList'
   ],
   data () {
     let validators = {
       validateTagNameUnique: (rule, value, callback) => {
         // use a customized find function to see if the tag name has already existed
-        api.tag.getTagList({
-          type: 'check_existence',
-          tag_name: value,
-        }).then(
-            function (response) {
-              if (response.data.status === 'success') {
-                callback()
-
-              } else if (response.data.status === 'error') {
-                callback(new Error(response.data.messages[0]))
+        // only do the unique check if dialogMode is not 'modify'
+        if (this.dialogMode !== 'modify') {
+          api.tag.getTagTemplate({
+            type: 'check_existence',
+            tag_name: value,
+          }).then(
+              function (response) {
+                if (response.data.status === 'success') {
+                  callback()
+                } else if (response.data.status === 'error') {
+                  callback(new Error(response.data.messages[0]))
+                } else {
+                  ElMessage({
+                    message: '出现了问题（*゜ー゜*）',
+                    type: 'error',
+                  })
+                }
               }
-              else {
+          ).catch(
+              function (error) {
                 ElMessage({
-                  message: '出现了问题（*゜ー゜*）',
-                  type: 'error',
+                  message: '出现了问题（*゜ー゜*）' + error.message,
+                  type: 'error'
                 })
               }
-            }
-        ).catch(
-            function (error) {
-              ElMessage({
-                message: '出现了问题（*゜ー゜*）' + error.message,
-                type: 'error'
-              })
-            }
           )
+        } else {
+          callback()
+        }
+
       },
-      // apply different validation rule according to the selected tagFieldType
+      // apply different validation rule according to the selected tag_field_type
       validateDefaultValue: (rule, value, callback) => {
-        console.log(value)
         if (value !== null) {
-          switch (this.tagForm.tagFieldType) {
+          switch (this.tagForm.tag_field_type) {
             case 'select':
               let singleSelectReg = new RegExp("^(.+)(;.+)");
               if (singleSelectReg.test(value)) {
@@ -144,15 +148,18 @@ export default {
       },
     }
     return {
+      dialogTitle: '创建标签',
+      dialogMode: null,
       loadingAnimation: false,
       tagForm: {
-        tagName: null,
-        tagFieldType: 'simple',
-        tagDefaultValue: null,
-        tagRequired: false,
-        tagPreview: false,
-        tagPriority: null,
-        tagColor: '#FFFFFF',
+        id: null,
+        tag_name: null,
+        tag_field_type: 'simple',
+        tag_default_value: null,
+        tag_required: false,
+        tag_preview: false,
+        tag_priority: null,
+        tag_color: '#FFFFFF',
       },
       tagTypeOptions:[
         { value: 'simple',
@@ -172,17 +179,19 @@ export default {
         // },
       ],
       tagFormRules: {
-        tagName: [
+        tag_name: [
           {required: true, message: '请输入标签名', trigger: 'blur'},
           {min: 2, max: 10, message: '标签名的长度应为2~10个字符', trigger: 'blur'},
           {validator: validators.validateTagNameUnique, trigger: 'blur'}
         ],
-        tagFieldType: [
+        tag_field_type: [
           {required: true, message: '必须选择一个标签类型', trigger: 'blur'}
         ],
-        tagDefaultValue: [{validator: validators.validateDefaultValue, trigger: 'blur'}]
+        tag_default_value: [{validator: validators.validateDefaultValue, trigger: 'blur'}]
       },
     };
+  },
+  computed: {
   },
   methods: {
     handleClose() {
@@ -192,22 +201,24 @@ export default {
       this.$refs.tagForm.validate((valid) => {
         if (valid) {
           this.submitNewTag()
-        } else {
-
-          
         }
       })
     },
     submitNewTag() {
       let dataObj = qs.stringify(this.tagForm);
-      api.tag.submitNewTag(dataObj).then((response) => {
+      let cAPI = api.tag.submitNewTag;
+      if (this.dialogMode === 'modify') {
+        cAPI = api.tag.editTagTemplate
+      }
+      cAPI(dataObj).then((response) => {
           if (response.data.status === 'success') {
-            this.handleClose()
-            this.resetForm('tagForm')
+            this.handleClose();
+            this.resetForm('tagForm');
             ElMessage({
               message: response.data.messages[0],
               type: 'success'
             });
+            this.$emit('refreshTagList')
           } else {
             ElMessage({
               message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
@@ -227,13 +238,21 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields()
     },
-    // handleEdit(tagEditForm) {
-    //   for (let k in tagEditForm) {
-    //     if (tagEditForm.hasOwnProperty(k)) {
-    //       this.tagForm[k] = tagEditForm[k]
-    //     }
-    //   }
-    // }
+    handleEdit(row) {
+      // update the tagForm, so each fields will have corresponding default value
+      for (let k in row) {
+        if (row.hasOwnProperty(k)) {
+          this.tagForm[k] = row[k]
+        }
+      }
+      this.dialogTitle = "编辑标签 - " + this.tagForm.tag_name
+      this.dialogMode = 'modify'
+    },
+    handleCreate() {
+      // handle the create call, prepare the dialog title
+      this.dialogTitle = "创建标签"
+      this.dialogMode = 'create'
+    }
   }
 }
 </script>

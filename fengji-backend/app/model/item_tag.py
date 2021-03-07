@@ -7,7 +7,7 @@ from mongoengine import StringField, BooleanField, IntField, EmbeddedDocument, D
 class TagTemplate(db.Document):
     tag_name = StringField(required=True, unique=True)
     tag_field_type = StringField(required=True)
-    tag_field_default_value = StringField()
+    tag_default_value = StringField()
     tag_preview = BooleanField(default=False)
     tag_required = BooleanField(default=False)
     tag_priority = IntField(default=1)
@@ -20,7 +20,7 @@ class ItemTag(EmbeddedDocument):
     tag_field_value = StringField()
     tag_name = StringField(required=True)
     tag_field_type = StringField(required=True)
-    tag_field_default_value = StringField()
+    tag_default_value = StringField()
     tag_for_preview = BooleanField(default=False)
     tag_priority = IntField(default=1)
     tag_color = StringField()

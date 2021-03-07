@@ -26,6 +26,17 @@ let tag = {
         params: params
       }
     )
+  },
+  editTagTemplate(dataObj) {
+    return myAxios.put(
+      'api/tag_template/',
+      dataObj,
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      }
+    )
   }
 }
 
