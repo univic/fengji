@@ -64,7 +64,7 @@ export default {
     },
     submitNewTag() {
       let dataObj = qs.stringify(this.reportGroupForm);
-      api.reportGroup.addNewTag(dataObj).then((response) => {
+      api.reportGroup.addNewGroup(dataObj).then((response) => {
         if (response.data.status === 'success') {
           this.$refs.reportGroupForm.resetFields()
           ElMessage({

@@ -26,10 +26,3 @@ class ItemTag(EmbeddedDocument):
     tag_color = StringField()
     tag_created_at = DateTimeField(default=datetime.datetime.now())
     tag_created_by = ReferenceField(User, required=True)
-
-
-class ReportGroupTag(EmbeddedDocument):
-    tag_name = StringField(required=True)
-    tag_color = StringField()
-    tag_created_at = DateTimeField(default=datetime.datetime.now())
-    tag_created_by = ReferenceField(User, required=True)

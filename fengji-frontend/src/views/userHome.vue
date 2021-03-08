@@ -58,7 +58,7 @@
             <span>创建报告组</span>
           </el-menu-item>
           <el-menu-item
-              index="/user/edit_tags"
+              index="/user/manage_report_group"
           >
             <i class="el-icon-edit"></i>
             <span>报告组管理</span>
