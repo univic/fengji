@@ -8,6 +8,7 @@
       :model="reportGroupForm"
       status-icon
       ref="reportGroupForm"
+      :rules="formRules"
   >
     <el-form-item label="报告组名称" prop="group_name">
       <el-input v-model="reportGroupForm.group_name"></el-input>
@@ -39,6 +40,27 @@ import { ElMessage } from 'element-plus';
 export default {
   name: "editReportGroup.vue",
   data () {
+    let validators = {
+      validateGroupName: (rule, value, callback) => {
+        api.reportGroup.getReportGroup({
+          type: 'check_existence',
+          group_name: value,
+        }).then(
+            function (response) {
+              if (response.data.status === 'success') {
+                callback()
+              } else if (response.data.status === 'error') {
+                callback(new Error(response.data.messages[0]))
+              } else {
+                ElMessage({
+                  message: '出现了问题（*゜ー゜*）',
+                  type: 'error',
+                })
+              }
+            }
+        )
+      },
+    }
     return {
       reportGroupForm: {
         id: null,
@@ -50,6 +72,7 @@ export default {
         group_name: [
           {required: true, message: '请输入标签名', trigger: 'blur'},
           {min: 3, max: 50, message: '标签名的长度应为3~50个字符', trigger: 'blur'},
+          {validator: validators.validateGroupName, trigger: 'blur'}
         ],
       }
     }
@@ -77,14 +100,7 @@ export default {
             type: 'error'
           });
         }
-      }).catch(
-        function (error) {
-          ElMessage({
-            message: '出现了问题（*゜ー゜*）' + error,
-            type: 'error'
-          });
-        }
-      )
+      })
     }
   }
 }

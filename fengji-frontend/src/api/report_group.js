@@ -1,4 +1,5 @@
 import myAxios from "../utilities/request";
+import {ElMessage} from 'element-plus';
 
 let reportGroup = {
   addNewGroup(dataObj) {
@@ -16,6 +17,13 @@ let reportGroup = {
       '/api/report_group/',
       {
         params: params
+      }
+    ).catch(
+      function (error) {
+        ElMessage({
+          message: '出现了问题（*゜ー゜*）' + error.message,
+          type: 'error'
+        })
       }
     )
   },

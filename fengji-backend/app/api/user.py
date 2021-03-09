@@ -16,16 +16,66 @@ bp = Blueprint('user', __name__, url_prefix='/api/user')
 # SignupForm = model_form(User)
 
 
-@bp.route('/')
-def user_api():
-    if request.method == "POST":
-        pass
-    elif request.method == "GET":
-        pass
-    elif request.method == "PUT":
-        pass
-    elif request.method == "PATCH":
-        pass
+@bp.route('/', methods={'POST'})
+@jwt_required()
+def add_user():
+    """
+    add user API for sys admin
+    :return:
+    """
+    add_user_form = RegistrationForm(request.form, meta={'csrf': False})
+    if add_user_form.validate():
+        user = User()
+        user.username = add_user_form.username.data
+        user.email = add_user_form.email.data
+        user.password_hash = generate_password_hash(add_user_form.password.data)     # turn the password into hash
+        try:
+            user.save()
+            response = {
+                'status': 'success',
+                'messages': ['用户添加成功~']
+            }
+
+        # if the username is not unique, let the frontend know
+        except NotUniqueError:
+            response = {
+                'status': 'error',
+                'messages': ['重复的用户名']
+            }
+        # construct the return data
+
+    # if the form can not be validated, return error msg
+    else:
+        # get error messages from the form.errors dict
+        error_status = list(add_user_form.errors.values())
+        for i, item in enumerate(error_status):
+            error_status[i] = item[0]
+
+        # construct the return data
+        response = {
+            'status': 'error',
+            'messages': error_status
+        }
+
+    return jsonify(response)
+
+
+@bp.route('/', methods={'DELETE'})
+@jwt_required()
+def delete_report_group():
+    user = User.objects(id=request.args['id'])
+    try:
+        user.delete()
+        response = {
+            'status': 'success',
+            'messages': ['用户已删除']
+        }
+    except Exception as e:
+        response = {
+            'status': 'error',
+            'messages': [e]
+        }
+    return response
 
 
 @bp.route('/login', methods={'POST'})
@@ -66,14 +116,14 @@ def signup():
         user.password_hash = generate_password_hash(signup_form.password.data)     # turn the password into hash
         try:
             user.save()
-            ret = {
+            response = {
                 'status': 'success',
                 'messages': ['注册成功~']
             }
 
         # if the username is not unique, let the frontend know
         except NotUniqueError:
-            ret = {
+            response = {
                 'status': 'error',
                 'messages': ['重复的用户名']
             }
@@ -87,12 +137,12 @@ def signup():
             error_status[i] = item[0]
 
         # construct the return data
-        ret = {
+        response = {
             'status': 'error',
             'messages': error_status
         }
 
-    return jsonify(ret)
+    return jsonify(response)
 
 
 @bp.route('/check_username_unique', methods=['GET'])
@@ -109,17 +159,3 @@ def check_user_existence():
             'messages': ['这一用户名已被注册']
         }
     return jsonify(ret)
-
-
-@bp.route('/csrf_token')
-def get_csrf_token():
-    if request.method == "GET":
-        return "Ouch"
-
-
-@jwt_required
-@bp.route('/protected', methods=['GET'])
-def protected():
-    current_user = get_jwt_identity()
-    print(current_user.to_pymongo())
-    return f"current user is {current_user}"

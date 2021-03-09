@@ -3,6 +3,7 @@ import axios from "axios"
 
 const user = {
   addUser(dataObj) {
+    // use axios for now, as the frontend is not complete for now
     return axios.post(
       'api/user/signup', dataObj, {
         headers: {

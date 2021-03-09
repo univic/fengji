@@ -31,7 +31,7 @@
 <script>
   import axios from "axios";
   import basicItem from "./basicItem.vue";
-  import newItem from "../newItem.vue";
+  import newItem from "./newItem.vue";
   import uuid from '../../utilities/uuid.js';
   import tagDetailedDialog from "../tagDetailedDialog.vue";
   import { ElMessage } from "element-plus";

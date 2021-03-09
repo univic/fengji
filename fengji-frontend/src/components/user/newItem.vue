@@ -1,4 +1,15 @@
 <template>
+
+  <!--  default tag-->
+  <div>
+    默认/必选标签
+    <el-tag
+      v-for="tag in requiredTagList"
+      :key="tag.tag_name"
+    >
+      {{ tag.tag_name }}
+    </el-tag>
+  </div>
 <!--    main input area-->
     <div
       v-on:mouseover="newItemHighLighted=true"
@@ -25,10 +36,7 @@
       >
       </el-input>
     </div>
-<!--  default tag-->
-    <div>
-      默认标签
-    </div>
+
 </template>
 
 <script>
@@ -45,11 +53,12 @@ export default {
       newItemFocused: false,
       newItemText: null,
       rollBackText: null,
-
       recordItemList: [{
         name: "A"
-      }
-      ]
+      }],
+      requiredTagList: [{
+        tag_name: 'tag1',
+      }]
     }
   },
   computed: {
