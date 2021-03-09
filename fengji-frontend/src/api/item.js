@@ -2,13 +2,38 @@
 import myAxios from "../utilities/request";
 
 const itemAPI = {
-  getRecordItems() {
-  },
   addRecordItem(dataObj) {
     return myAxios.post(
-      'http://localhost:5000/api/item/',
+      'api/item/',
       dataObj
     );
+  },
+  deleteRecordItem(params) {
+    return myAxios.delete(
+      'api/item/',
+      {
+        params: params
+      }
+    )
+  },
+  editRecordItem(dataObj) {
+    return myAxios.put(
+      'api/item/',
+      dataObj,
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      }
+    )
+  },
+  getRecordItem(params) {
+    return myAxios.get(
+      '/api/item/',
+      {
+        params: params
+      }
+    )
   },
 }
 

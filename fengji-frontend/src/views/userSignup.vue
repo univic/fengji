@@ -85,7 +85,7 @@
 <script>
 
 import qs from 'qs';
-import axios from "axios";
+import api from "../api"
 import { ElMessage } from 'element-plus';
 
 export default {
@@ -192,12 +192,7 @@ export default {
     },
     submitForm() {
       let dataObj = qs.stringify(this.signupForm);
-      axios.post(
-          'http://localhost:5000/api/user/signup', dataObj, {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            }
-          }).then(
+      api.user.addUser(dataObj).then(
           function (response) {
             if (response.data.status === 'success') {
               ElMessage({
