@@ -3,7 +3,7 @@
   <el-card
     style="width: 50%"
   >
-    <template #header>工作记录</template>
+    <template #header><slot></slot></template>
     <basic-item
       v-for="item in recordItemList"
       :key="item.titleText"
@@ -29,16 +29,23 @@
 </template>
 
 <script>
-  import axios from "axios";
   import basicItem from "./basicItem.vue";
   import newItem from "./newItem.vue";
-  import uuid from '../../utilities/uuid.js';
   import tagDetailedDialog from "../tagDetailedDialog.vue";
   import { ElMessage } from "element-plus";
   import api from "../../api";
 
 export default {
   name: "recordItemList",
+  props: [
+    'listType',
+    'requiredTags',
+    'tagTemplates',
+
+  ],
+  emits: [
+
+  ],
   components: {
     newItem,
     basicItem,
@@ -48,7 +55,6 @@ export default {
     return {
       recordItemList: [{
         titleText: "A",
-        uuid: uuid(),
         }],
       showDetailDialog: false,
       selectedTagItem: null,

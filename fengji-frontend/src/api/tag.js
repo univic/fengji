@@ -1,4 +1,5 @@
 import myAxios from "../utilities/request";
+import {ElMessage} from 'element-plus';
 
 let tag = {
   getTagTemplate(params) {
@@ -6,6 +7,13 @@ let tag = {
       '/api/tag_template/',
       {
         params: params
+      }
+    ).catch(
+      function (error) {
+        ElMessage({
+          message: '出现了问题（*゜ー゜*）' + error,
+          type: 'error'
+        });
       }
     )
   },

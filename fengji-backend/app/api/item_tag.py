@@ -15,11 +15,10 @@ bp = Blueprint('tag_template', __name__, url_prefix='/api/tag_template')
 @bp.route('/', methods={'GET'})
 @jwt_required()
 def get_tag_templates():
-
+    tag_template_list = []
     if request.args['type'] == 'all':
         # return detailed info of all tags
         try:
-            tag_template_list = []
             tag_templates = TagTemplate.objects()
             for item in tag_templates:
                 # convert the mongodb query obj to json, then load it into dict

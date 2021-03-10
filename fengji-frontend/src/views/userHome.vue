@@ -40,7 +40,7 @@
               <span>用户向导</span>
           </el-menu-item>
           <el-menu-item
-              index="/user/item_list"
+              index="/user/workbench"
           >
               <i class="el-icon-notebook-2"></i>
               <span>工作台</span>
@@ -90,10 +90,15 @@
 
 <script>
 
-import recordItemList from "../components/user/recordItemList.vue";
+import recordItemList from "../components/user/itemList.vue";
 
 export default {
   name: "userHome",
+  data () {
+    return {
+      tagTemplateList: null,
+    }
+  },
   components: {
     recordItemList,
   },
