@@ -20,24 +20,14 @@ export default {
   },
   data () {
     return {
-      tagTemplateList: {
-
-      },
+      tagTemplateList: null,
+      requiredTags: [],
     }
   },
   created() {
-    this.getTagTemplate()
+    this.getTagTemplate();
   },
   computed: {
-    requiredTags() {
-      let requiredTagList = []
-      this.tagTemplateList.forEach((item) => {
-        if (item.is_required === true) {
-          requiredTagList.push(item)
-        }
-      })
-      return requiredTagList
-    }
   },
   methods: {
     getTagTemplate() {
@@ -47,6 +37,9 @@ export default {
           (response) => {
             if (response.data.status === 'success') {
               this.tagTemplateList = response.data.tag_template_list;
+              console.log(this.tagTemplateList)
+              this.setRequiredTags()
+              console.log(this.requiredTags)
             } else {
               ElMessage({
                 message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
@@ -55,6 +48,14 @@ export default {
             }
           }
       )
+    },
+    setRequiredTags() {
+      this.tagTemplateList.forEach((item) => {
+        if (item.tag_required === true) {
+          this.requiredTags = []
+          this.requiredTags.push(item);
+        }
+      })
     }
   },
 
