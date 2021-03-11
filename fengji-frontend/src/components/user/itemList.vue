@@ -15,6 +15,7 @@
     <new-item
       ref="newItemInput"
       v-on:add-item="addItem"
+      :required-tags="requiredTags"
     ></new-item>
   </el-card>
   <el-dialog
@@ -38,10 +39,9 @@
 export default {
   name: "recordItemList",
   props: [
-    'listType',
+    'workMode',
     'requiredTags',
     'tagTemplates',
-
   ],
   emits: [
 

@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "element-plus": "^1.0.2-beta.32",
+    "element-plus": "^1.0.2-beta.33",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "qs": "^6.9.6",

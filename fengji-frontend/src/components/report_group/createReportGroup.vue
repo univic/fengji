@@ -19,6 +19,12 @@
         <el-radio-button label="false">不是项目</el-radio-button>
       </el-radio-group>
     </el-form-item>
+    <el-form-item label="加入方式" prop="is_project">
+      <el-radio-group v-model="reportGroupForm.is_open">
+        <el-radio-button label="true">开放加入</el-radio-button>
+        <el-radio-button label="false">邀请加入</el-radio-button>
+      </el-radio-group>
+    </el-form-item>
     <el-form-item label="报告组颜色"  prop="group_color">
       <el-color-picker v-model="reportGroupForm.group_color"></el-color-picker>
     </el-form-item>
@@ -66,6 +72,7 @@ export default {
         id: null,
         group_name: null,
         is_project: false,
+        is_open: false,
         group_color: '#FFFFFF',
       },
       formRules: {

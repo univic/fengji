@@ -3,12 +3,12 @@
   <!--  default tag-->
   <div>
     默认/必选标签
-    <el-tag
-      v-for="tag in requiredTagList"
+    <basic-tag
+      v-for="tag in requiredTags"
       :key="tag.tag_name"
     >
       {{ tag.tag_name }}
-    </el-tag>
+    </basic-tag>
   </div>
 <!--    main input area-->
     <div
@@ -40,10 +40,16 @@
 </template>
 
 <script>
+import basicTag from '../item_tag/basicTag.vue';
 
 export default {
   name: "newItem",
-  props: [],
+  props: [
+    'requiredTags'
+  ],
+  components: {
+    basicTag
+  },
   emits: [
     'addItem'
   ],
@@ -53,12 +59,6 @@ export default {
       newItemFocused: false,
       newItemText: null,
       rollBackText: null,
-      recordItemList: [{
-        name: "A"
-      }],
-      requiredTagList: [{
-        tag_name: 'tag1',
-      }]
     }
   },
   computed: {

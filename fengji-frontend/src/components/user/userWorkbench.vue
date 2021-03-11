@@ -1,11 +1,18 @@
 <template>
-
-  <item-list>
-    工作记录
-  </item-list>
-  <item-list>
+  <item-list
+      work-mode="Plan"
+      :required-tags="requiredTags"
+  >
     待办事项
   </item-list>
+  <item-list
+    work-mode="Record"
+    :required-tags="requiredTags"
+  >
+    工作记录
+  </item-list>
+
+
 </template>
 
 <script>
@@ -37,9 +44,7 @@ export default {
           (response) => {
             if (response.data.status === 'success') {
               this.tagTemplateList = response.data.tag_template_list;
-              console.log(this.tagTemplateList)
               this.setRequiredTags()
-              console.log(this.requiredTags)
             } else {
               ElMessage({
                 message: '出现了问题（*゜ー゜*）' + response.data.messages[0],

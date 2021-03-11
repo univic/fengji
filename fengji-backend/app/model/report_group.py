@@ -2,6 +2,7 @@ import datetime
 from app.lib.database import db
 from app.model.user_model import User
 from mongoengine import StringField, EmbeddedDocumentListField, DateTimeField, ReferenceField, ListField, EmbeddedDocument
+from mongoengine import BooleanField
 
 
 class MemberRole(db.Document):
@@ -31,6 +32,7 @@ class ReportGroup(db.Document):
     group_color = StringField()
     group_created_at = DateTimeField(default=datetime.datetime.now())
     group_creator = ReferenceField(User, required=True)
+    is_open = BooleanField(default=False)
     group_members = EmbeddedDocumentListField(ReportGroupMember)
     group_status = ListField(StringField())
     sub_group = None

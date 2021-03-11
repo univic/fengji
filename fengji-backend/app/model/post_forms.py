@@ -64,4 +64,5 @@ class ReportGroupForm(Form):
                                                 message=f"用户名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_NAME_LENGTH']}~"
                                                         f"{app_config.REPORT_GROUP_SETTINGS['MAX_NAME_LENGTH']}位")])
     is_project = BooleanField('is_project')
+    is_open = BooleanField('is_open')
     group_color = StringField('group_color')

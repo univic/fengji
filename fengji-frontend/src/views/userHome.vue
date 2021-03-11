@@ -64,6 +64,12 @@
             <span>报告组管理</span>
           </el-menu-item>
           <el-menu-item
+              index="/user/my_report_group"
+          >
+            <i class="el-icon-files"></i>
+            <span>我的报告组</span>
+          </el-menu-item>
+          <el-menu-item
               index="/user/item_list"
           >
             <i class="el-icon-info"></i>
