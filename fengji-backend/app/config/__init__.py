@@ -31,9 +31,13 @@ class BaseConfig(object):
     }
     # report group config
     REPORT_GROUP_SETTINGS = {
-        'MIN_NAME_LENGTH': 3,
-        'MAX_NAME_LENGTH': 50
+        'MIN_GROUP_NAME_LENGTH': 3,
+        'MAX_GROUP_NAME_LENGTH': 50,
+        'MIN_ROLE_NAME_LENGTH': 2,
+        'MAX_ROLE_NAME_LENGTH': 8,
+        'MAX_DESC_LENGTH': 20,
     }
+
 
 
 def get_config():

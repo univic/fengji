@@ -59,10 +59,25 @@ class TagTemplateForm(Form):
 class ReportGroupForm(Form):
     group_name = StringField('group_name',
                              [validators.input_required('未填写报告组名'),
-                              validators.Length(min=app_config.REPORT_GROUP_SETTINGS['MIN_NAME_LENGTH'],
-                                                max=app_config.REPORT_GROUP_SETTINGS['MAX_NAME_LENGTH'],
-                                                message=f"用户名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_NAME_LENGTH']}~"
-                                                        f"{app_config.REPORT_GROUP_SETTINGS['MAX_NAME_LENGTH']}位")])
+                              validators.Length(min=app_config.REPORT_GROUP_SETTINGS['MIN_GROUP_NAME_LENGTH'],
+                                                max=app_config.REPORT_GROUP_SETTINGS['MAX_GROUP_NAME_LENGTH'],
+                                                message=f"用户名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_GROUP_NAME_LENGTH']}~"
+                                                        f"{app_config.REPORT_GROUP_SETTINGS['MAX_GROUP_NAME_LENGTH']}位")])
     is_project = BooleanField('is_project')
     is_open = BooleanField('is_open')
     group_color = StringField('group_color')
+
+
+class GroupRoleForm(Form):
+    role_name = StringField('role_name',
+                            [validators.input_required('未填写角色名'),
+                             validators.Length(min=app_config.REPORT_GROUP_SETTINGS['MIN_ROLE_NAME_LENGTH'],
+                                               max=app_config.REPORT_GROUP_SETTINGS['MAX_ROLE_NAME_LENGTH'],
+                                               message=f"用户名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_ROLE_NAME_LENGTH']}~"
+                                                       f"{app_config.REPORT_GROUP_SETTINGS['MAX_ROLE_NAME_LENGTH']}位")])
+    role_description = StringField('role_description',
+                                   [validators.input_required('未填写角色描述'),
+                                    validators.length(max=app_config.REPORT_GROUP_SETTINGS['MAX_DESC_LENGTH'],
+                                                      message=f"描述不能多于{app_config.REPORT_GROUP_SETTINGS['MAX_DESC_LENGTH']}个字")
+                                   ])
+    role_color = StringField('role_color')

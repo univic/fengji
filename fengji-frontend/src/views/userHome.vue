@@ -70,6 +70,12 @@
             <span>我的报告组</span>
           </el-menu-item>
           <el-menu-item
+              index="/user/manage_group_role"
+          >
+            <i class="el-icon-s-custom"></i>
+            <span>管理报告组角色</span>
+          </el-menu-item>
+          <el-menu-item
               index="/user/item_list"
           >
             <i class="el-icon-info"></i>

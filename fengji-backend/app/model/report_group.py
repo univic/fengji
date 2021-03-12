@@ -5,15 +5,18 @@ from mongoengine import StringField, EmbeddedDocumentListField, DateTimeField, R
 from mongoengine import BooleanField
 
 
-class MemberRole(db.Document):
+class GroupMemberRole(db.Document):
     role_code = StringField(required=True)
     role_name = StringField(required=True, unique=True)
     role_description = StringField()
+    role_creator = ReferenceField(User, required=True)
+    role_created_at = DateTimeField(default=datetime.datetime.now())
+    role_color = StringField()
 
 
 class ReportGroupMember(EmbeddedDocument):
     user = ReferenceField(User)
-    role = ListField(ReferenceField(MemberRole))
+    role = ListField(ReferenceField(GroupMemberRole))
 
 
 class ReportGroupTag(EmbeddedDocument):

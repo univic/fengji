@@ -1,27 +1,29 @@
+# -*- coding: utf-8 -*-
+# Author : univic
+# Date: 2021-03-12
+
 import json
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
-from app.model.report_group import ReportGroup
-from app.model.post_forms import ReportGroupForm
+from app.model.report_group import GroupMemberRole
+from app.model.post_forms import GroupRoleForm
 
-
-bp = Blueprint('report_group', __name__, url_prefix='/api/report_group')
+bp = Blueprint('group_role', __name__, url_prefix='/api/group_member_role')
 
 
 @bp.route('/', methods={'POST'})
 @jwt_required()
-def add_report_group():
-    report_group_form = ReportGroupForm(request.form, meta={'csrf': False})
-    if report_group_form.validate():
-        new_group = ReportGroup()
-        group_creator = get_current_user()
-        new_group.group_name = report_group_form.group_name.data
-        new_group.is_project = report_group_form.is_project.data
-        new_group.group_color = report_group_form.group_color.data
-        new_group.group_creator = group_creator
+def add_group_member_role():
+    group_role_form = GroupRoleForm(request.form, meta={'csrf': False})
+    if group_role_form.validate():
+        new_group_role = GroupMemberRole()
+        new_group_role.role_name = group_role_form.role_name.data
+        new_group_role.role_description = group_role_form.role_description.data
+        new_group_role.role_color = group_role_form.role_color.data
+        new_group_role.role_creator = get_current_user()
         try:
-            new_group.save()
+            new_group_role.save()
             response = {
                 'status': 'success',
                 'messages': ['报告组添加成功~']
@@ -42,7 +44,7 @@ def add_report_group():
         when validate, WTForms will generate a form.errors dict, which contains all the error messages
         for each form fields, here we get error messages from the form.errors dict, and generate an error info list
         """
-        error_status = list(report_group_form.errors.values())
+        error_status = list(group_role_form.errors.values())
         for i, item in enumerate(error_status):
             error_status[i] = item[0]
         # construct the return data
@@ -55,32 +57,32 @@ def add_report_group():
 
 @bp.route('/', methods={'GET'})
 @jwt_required()
-def get_report_group():
+def get_group_member_role():
     if request.args['type'] == 'all':
         # return detailed info of all groups
         try:
-            report_group_list = []
-            report_groups = ReportGroup.objects()
-            for item in report_groups:
+            group_role_list = []
+            group_roles = GroupMemberRole.objects()
+            for item in group_roles:
                 # convert the mongodb query obj to json, then load it into dict
                 # make id, date and user more readable before return it
                 item_dict = json.loads(item.to_json())
                 # turn id into str format, turn datetime obj into timestamp
                 item_dict["id"] = str(item.id)
-                item_dict["group_created_at"] = int(item.group_created_at.timestamp())
+                item_dict["role_created_at"] = int(item.role_created_at.timestamp())
                 item_dict.pop("_id")
                 # get group_creator info
-                group_creator = item.group_creator
-                group_creator_dict = {
-                    'id': str(group_creator.id),
-                    'username': group_creator.username
+                role_creator = item.role_creator
+                role_creator_dict = {
+                    'id': str(role_creator.id),
+                    'role_name': role_creator.role_name
                 }
-                item_dict["group_creator"] = group_creator_dict
-                report_group_list.append(item_dict)
+                item_dict["role_creator"] = role_creator_dict
+                group_role_list.append(item_dict)
             response = {
                 'status': 'success',
                 'messages': [''],
-                'group_list': report_group_list
+                'role_list': group_role_list
                 }
         except Exception as e:
             print(e)
@@ -89,16 +91,16 @@ def get_report_group():
                     'messages': [e.args[0]]
                 }
     elif request.args['type'] == 'check_existence':
-        report_group = ReportGroup.objects(group_name=request.args['group_name'])
-        if not report_group:
+        group_role = GroupMemberRole.objects(role_name=request.args['role_name'])
+        if not group_role:
             response = {
                 'status': 'success',
-                'messages': ['组名可用'],
+                'messages': ['角色名可用'],
             }
         else:
             response = {
                 'status': 'error',
-                'messages': ['组名已存在'],
+                'messages': ['角色名已存在'],
             }
     else:
         response = {
@@ -111,10 +113,10 @@ def get_report_group():
 
 @bp.route('/', methods={'DELETE'})
 @jwt_required()
-def delete_report_group():
-    report_group = ReportGroup.objects(id=request.args['id'])
+def delete_report_member_role():
+    group_role = GroupMemberRole.objects(id=request.args['id'])
     try:
-        report_group.delete()
+        group_role.delete()
         response = {
             'status': 'success',
             'messages': ['报告组已删除']
@@ -129,18 +131,18 @@ def delete_report_group():
 
 @bp.route('/', methods={'PUT'})
 @jwt_required()
-def modify_report_group():
-    report_group_form = ReportGroupForm(request.form, meta={'csrf': False})
-    if report_group_form.validate():
-        report_group = ReportGroup.objects(id=report_group_form.id.data).first()
-        report_group.group_name = report_group_form.group_name.data
-        report_group.tag_required = report_group_form.tag_required.data
-        report_group.group_color = report_group_form.group_color.data
+def modify_report_member_role():
+    form = GroupRoleForm(request.form, meta={'csrf': False})
+    if form.validate():
+        group_role = GroupMemberRole.objects(id=form.id.data).first()
+        group_role.group_name = form.group_name.data
+        group_role.tag_required = form.tag_required.data
+        group_role.group_color = form.group_color.data
         try:
-            report_group.save()
+            group_role.save()
             response = {
                 'status': 'success',
-                'messages': ['报告组修改成功~']
+                'messages': ['报告组角色修改成功~']
             }
         except ValidationError as e:
             response = {
@@ -152,7 +154,7 @@ def modify_report_group():
         when validate, WTForms will generate a form.errors dict, which contains all the error messages
         for each form fields, here we get error messages from the form.errors dict, and generate an error info list
         """
-        error_status = list(report_group_form.errors.values())
+        error_status = list(form.errors.values())
         for i, item in enumerate(error_status):
             error_status[i] = item[0]
         # construct the return data
