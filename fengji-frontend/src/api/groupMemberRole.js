@@ -10,7 +10,14 @@ let groupMemberRole = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         }
-      })
+      }).catch(
+      function (error) {
+        ElMessage({
+          message: '出现了问题（*゜ー゜*）' + error,
+          type: 'error'
+        });
+      }
+    )
   },
   getRole(params) {
     return myAxios.get(
@@ -43,6 +50,13 @@ let groupMemberRole = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         }
+      }
+    ).catch(
+      function (error) {
+        ElMessage({
+          message: '出现了问题（*゜ー゜*）' + error,
+          type: 'error'
+        });
       }
     )
   }

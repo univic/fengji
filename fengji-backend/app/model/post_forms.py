@@ -69,6 +69,13 @@ class ReportGroupForm(Form):
 
 
 class GroupRoleForm(Form):
+    id = StringField('id')
+    role_abbr = StringField('role_abbr',
+                            [validators.input_required('未填写角色缩写'),
+                             validators.length(min=app_config.REPORT_GROUP_SETTINGS['MIN_ROLE_ABBR_LENGTH'],
+                                               max=app_config.REPORT_GROUP_SETTINGS['MAX_ROLE_ABBR_LENGTH'],
+                                               message=f"角色缩写长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_ROLE_ABBR_LENGTH']}~"
+                                                       f"{app_config.REPORT_GROUP_SETTINGS['MAX_ROLE_ABBR_LENGTH']}位")])
     role_name = StringField('role_name',
                             [validators.input_required('未填写角色名'),
                              validators.Length(min=app_config.REPORT_GROUP_SETTINGS['MIN_ROLE_NAME_LENGTH'],
@@ -76,8 +83,7 @@ class GroupRoleForm(Form):
                                                message=f"用户名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_ROLE_NAME_LENGTH']}~"
                                                        f"{app_config.REPORT_GROUP_SETTINGS['MAX_ROLE_NAME_LENGTH']}位")])
     role_description = StringField('role_description',
-                                   [validators.input_required('未填写角色描述'),
-                                    validators.length(max=app_config.REPORT_GROUP_SETTINGS['MAX_DESC_LENGTH'],
+                                   [validators.length(max=app_config.REPORT_GROUP_SETTINGS['MAX_DESC_LENGTH'],
                                                       message=f"描述不能多于{app_config.REPORT_GROUP_SETTINGS['MAX_DESC_LENGTH']}个字")
                                    ])
     role_color = StringField('role_color')

@@ -98,7 +98,6 @@ export default {
           (response) => {
             if (response.data.status === 'success') {
               this.tagList.splice(index, 1)
-              console.log(this.tagList)
               ElMessage({
                 message: response.data.messages[0],
                 type: 'success'

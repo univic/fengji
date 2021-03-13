@@ -6,7 +6,7 @@ from mongoengine import BooleanField
 
 
 class GroupMemberRole(db.Document):
-    role_code = StringField(required=True)
+    role_abbr = StringField(required=True)
     role_name = StringField(required=True, unique=True)
     role_description = StringField()
     role_creator = ReferenceField(User, required=True)
@@ -20,6 +20,7 @@ class ReportGroupMember(EmbeddedDocument):
 
 
 class ReportGroupTag(EmbeddedDocument):
+    tag_abbr = StringField(required=True)
     tag_name = StringField(required=True)
     tag_color = StringField()
     tag_created_at = DateTimeField(default=datetime.datetime.now())

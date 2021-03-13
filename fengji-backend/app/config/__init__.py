@@ -36,8 +36,10 @@ class BaseConfig(object):
         'MIN_ROLE_NAME_LENGTH': 2,
         'MAX_ROLE_NAME_LENGTH': 8,
         'MAX_DESC_LENGTH': 20,
-    }
+        'MIN_ROLE_ABBR_LENGTH': 2,
+        'MAX_ROLE_ABBR_LENGTH': 5,
 
+    }
 
 
 def get_config():

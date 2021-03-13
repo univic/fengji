@@ -18,6 +18,7 @@ def add_group_member_role():
     group_role_form = GroupRoleForm(request.form, meta={'csrf': False})
     if group_role_form.validate():
         new_group_role = GroupMemberRole()
+        new_group_role.role_abbr = group_role_form.role_abbr.data
         new_group_role.role_name = group_role_form.role_name.data
         new_group_role.role_description = group_role_form.role_description.data
         new_group_role.role_color = group_role_form.role_color.data
@@ -75,14 +76,14 @@ def get_group_member_role():
                 role_creator = item.role_creator
                 role_creator_dict = {
                     'id': str(role_creator.id),
-                    'role_name': role_creator.role_name
+                    'user_name': role_creator.username
                 }
                 item_dict["role_creator"] = role_creator_dict
                 group_role_list.append(item_dict)
             response = {
                 'status': 'success',
                 'messages': [''],
-                'role_list': group_role_list
+                'group_role_list': group_role_list
                 }
         except Exception as e:
             print(e)
@@ -119,7 +120,7 @@ def delete_report_member_role():
         group_role.delete()
         response = {
             'status': 'success',
-            'messages': ['报告组已删除']
+            'messages': ['报告组角色已删除']
         }
     except Exception as e:
         response = {
@@ -135,9 +136,10 @@ def modify_report_member_role():
     form = GroupRoleForm(request.form, meta={'csrf': False})
     if form.validate():
         group_role = GroupMemberRole.objects(id=form.id.data).first()
-        group_role.group_name = form.group_name.data
-        group_role.tag_required = form.tag_required.data
-        group_role.group_color = form.group_color.data
+        group_role.role_name = form.role_name.data
+        group_role.role_abbr = form.role_abbr.data
+        group_role.role_color = form.role_color.data
+        group_role.role_description = form.role_description.data
         try:
             group_role.save()
             response = {

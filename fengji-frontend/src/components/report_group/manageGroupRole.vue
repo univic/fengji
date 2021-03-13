@@ -6,10 +6,17 @@
         v-on:click="handleCreate"
     >添加报告组角色</el-button>
   </div>
+  <edit-group-role-dialog
+    :dialog-visible="dialogVisible"
+    v-on:closeDialog="dialogVisible = false"
+    v-on:refreshList="getRoleList"
+    ref="editRoleDialog"
+  ></edit-group-role-dialog>
   <el-table
       stripe
       :data="roleList"
   >
+    <el-table-column label="角色缩写" prop="role_abbr"></el-table-column>
     <el-table-column label="角色名" prop="role_name"></el-table-column>
     <el-table-column label="描述" prop="role_description"></el-table-column>
     <el-table-column label="操作">
@@ -30,12 +37,20 @@
 </template>
 
 <script>
+
+import api from '../../api';
+import editGroupRoleDialog from './editGroupRoleDialog.vue';
+import {ElMessage} from 'element-plus';
+
 export default {
   name: "manageGroupRole",
-  data () {
+  components: {
+    'editGroupRoleDialog': editGroupRoleDialog
+  },
+  data() {
     return {
       roleList: [],
-      editPanelVisible: false
+      dialogVisible: false
     }
   },
   created() {
@@ -43,7 +58,18 @@ export default {
   },
   methods: {
     getRoleList() {
-
+      api.groupMemberRole.getRole({
+        type: 'all',
+      }).then((response) => {
+        if (response.data.status === 'success') {
+          this.roleList = response.data.group_role_list;
+        } else {
+          ElMessage({
+            message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+            type: 'error'
+          });
+        }
+      })
     },
     handleDelete(index, row) {
       this.$confirm(
@@ -52,8 +78,8 @@ export default {
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-        this.deleteTagTemplate(index, row)
-      }).catch(()=> {
+        this.deleteRole(index, row)
+      }).catch(() => {
         this.$message({
           message: '已取消删除',
           type: 'info'
@@ -62,14 +88,34 @@ export default {
     },
     handleEdit(index, row) {
       // call the handleEdit function in child component, let it prepare the dialog title and field values
-      this.$refs.tagEditPanel.handleEdit(row)
-      this.dialogFormVisible = true
+      this.$refs.editRoleDialog.handleEdit(row)
+      this.dialogVisible = true
     },
     handleCreate() {
-      this.editPanelVisible = true
-    }
-  }
+      this.dialogVisible = true
+    },
+    deleteRole(index, row) {
+      api.groupMemberRole.deleteRole({
+        id: row.id
+      }).then(
+          (response) => {
+            if (response.data.status === 'success') {
+              this.roleList.splice(index, 1)
+              ElMessage({
+                message: response.data.messages[0],
+                type: 'success'
+              });
+            } else {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+                type: 'error'
+              });
+            }
+          }
+      )
+    },
 
+  }
 }
 </script>
 

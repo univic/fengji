@@ -1,8 +1,8 @@
 import user from "./user"
 import itemAPI from "./item";
 import tag from './tag';
-import reportGroup from './report_group';
-import groupMemberRole from './group_member_role';
+import reportGroup from './reportGroup';
+import groupMemberRole from './groupMemberRole';
 
 const api = {
   user,
