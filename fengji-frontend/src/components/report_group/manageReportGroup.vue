@@ -28,7 +28,7 @@
 
 <script>
 import api from '../../api';
-import {ElMessage} from 'element-plus';
+import { ElMessage } from 'element-plus';
 
 export default {
   name: "editReportGroup",

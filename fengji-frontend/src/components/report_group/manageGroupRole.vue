@@ -98,20 +98,20 @@ export default {
       api.groupMemberRole.deleteRole({
         id: row.id
       }).then(
-          (response) => {
-            if (response.data.status === 'success') {
-              this.roleList.splice(index, 1)
-              ElMessage({
-                message: response.data.messages[0],
-                type: 'success'
-              });
-            } else {
-              ElMessage({
-                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-                type: 'error'
-              });
-            }
+        (response) => {
+          if (response.data.status === 'success') {
+            this.roleList.splice(index, 1)
+            ElMessage({
+              message: response.data.messages[0],
+              type: 'success'
+            });
+          } else {
+            ElMessage({
+              message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+              type: 'error'
+            });
           }
+        }
       )
     },
 
