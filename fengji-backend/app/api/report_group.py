@@ -5,6 +5,9 @@ from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get
 from app.model.report_group import ReportGroup
 from app.model.post_forms import ReportGroupForm
 
+# TODO: need a get my report groups api
+# TODO: need a free to join filter
+# TODO: reconstruct GET method
 
 bp = Blueprint('report_group', __name__, url_prefix='/api/report_group')
 
@@ -100,6 +103,9 @@ def get_report_group():
                 'status': 'error',
                 'messages': ['组名已存在'],
             }
+    # return all the report groups created by current user
+    elif request.args['type'] == 'my':
+        pass
     else:
         response = {
             'status': 'error',
