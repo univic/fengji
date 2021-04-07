@@ -45,6 +45,9 @@ export default {
       reportGroupList: null,
     }
   },
+  mounted() {
+
+  },
   methods: {
     handleJoin() {
 
@@ -59,6 +62,8 @@ export default {
           (response) => {
             if (response.data.status === 'success') {
               this.reportGroupList = response.data.group_list;
+              console.log('?')
+              console.log(this.reportGroupList)
             } else {
               ElMessage({
                 message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
