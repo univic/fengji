@@ -51,6 +51,7 @@
 
 // TODO: header bar status change according to the login status
 // TODO: message icons, etc
+
 export default {
   name: "Index.vue",
   data() {
