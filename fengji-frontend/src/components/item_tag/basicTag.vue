@@ -7,9 +7,11 @@
     trigger="click"
   >
     <div>
-      <el-input>
+
+      <el-input v-model="tagValueInput">
 
       </el-input>
+      <el-button v-on:click="updateTagValue">确定</el-button>
     </div>
 
     <template #reference>
@@ -22,13 +24,23 @@
 </template>
 
 <script>
-
+//TODO: need a confirm button, save the value when clicked or enter is being pressed
 export default {
-name: "basicTag",
+  name: "basicTag",
+  emits: [
+      'updateTagValue'
+  ],
   data() {
-  return {
-    popoverVisible: false
-  }
+    return {
+      popoverVisible: false,
+      tagValueInput: null,
+
+    }
+  },
+  methods: {
+    updateTagValue: function () {
+      this.$emit('updateTagValue', this.tagValueInput)
+    }
   }
 }
 </script>

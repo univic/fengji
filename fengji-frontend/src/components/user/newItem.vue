@@ -4,10 +4,11 @@
   <div>
     默认/必选标签
     <basic-tag
-      v-for="tag in requiredTags"
+      v-for="tag in tagList"
       :key="tag.tag_name"
+      v-on:updateTagValue="updateTagValue"
     >
-      {{ tag.tag_name }}
+      {{ tag.tag_name }} : {{ tag.tag_value }}
     </basic-tag>
   </div>
 <!--    main input area-->
@@ -59,20 +60,45 @@ export default {
       newItemFocused: false,
       newItemText: null,
       rollBackText: null,
+      tagList: [],
+    }
+  },
+  // the prop value of requiredTags is async assigned, so the value is assigned after the component is mounted
+  // use deep watch to force the value get updated
+  watch: {
+    requiredTags: {
+      deep:  true,
+      handler(newValue, oldValue) {
+        this.initializeTagList()
+      }
     }
   },
   computed: {
 
   },
+  mounted() {
+    this.initializeTagList()
+  },
   methods: {
-    addRecordItem: function () {
-      this.rollBackText = this.newItemText
-      this.$emit('addItem', this.newItemText)
-      this.recordItemList.push(this.newItemText)
-      this.newItemText = null
+    initializeTagList () {
+      this.tagList = []
+      this.requiredTags.forEach( (item) => {
+        let newTagItem = item;
+        newTagItem.tag_value = item.tag_default_value;
+        this.tagList.push(newTagItem);
+      })
+    },
+    addRecordItem () {
+      this.rollBackText = this.newItemText;
+      this.$emit('addItem', this.newItemText);
+      this.recordItemList.push(this.newItemText);
+      this.newItemText = null;
     },
     rollBack: function () {
-      this.newItemText = this.rollBackText
+      this.newItemText = this.rollBackText;
+    },
+    updateTagValue: function (item) {
+
     }
   }
 }

@@ -38,7 +38,6 @@ class BaseConfig(object):
         'MAX_DESC_LENGTH': 20,
         'MIN_ROLE_ABBR_LENGTH': 2,
         'MAX_ROLE_ABBR_LENGTH': 5,
-
     }
 
 
