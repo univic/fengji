@@ -6,7 +6,7 @@
     <template #header><slot></slot></template>
     <basic-item
       v-for="item in recordItemList"
-      :key="item.titleText"
+      :key="item.item_title"
       :item="item"
       v-on:removeItem="handleRemoveItem(item.uuid)"
       v-on:showDetailDialog="openDetailDialog(item)"
@@ -67,19 +67,22 @@ export default {
 
   },
   methods: {
-    addItem(newItemText) {
+    addItem(newItem) {
       // a simple walk around to solve the "this" pointing problem inside axios
       // binding the right "this" pointer to "that", to avoid "this" pointing all over the place
       let that = this
-      let dataObj = {item_title: newItemText}
+      let dataObj = newItem
+      console.log(dataObj)
       api.itemAPI.addRecordItem(
           dataObj
       ).then(
           (response) => {
             if (response.data.status === 'success') {
+              // if new item is saved successfully, push it to the item list directly to avoid additional request
               this.recordItemList.push(
                   {
-                    titleText: newItemText,
+                    // unpack the newItem dict, get titleText and TagList
+                    ...newItem,
                     uuid: response.data.item_uuid
                   }
               )
@@ -122,7 +125,10 @@ export default {
       this.selectedTagItem = item
     },
     getRecordItems() {
+      //TODO: gei all the items when created
+      api.itemAPI.getRecordItem(
 
+      )
     }
   }
 }

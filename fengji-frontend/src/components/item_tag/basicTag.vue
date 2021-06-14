@@ -11,7 +11,10 @@
       <el-input v-model="tagValueInput">
 
       </el-input>
-      <el-button v-on:click="updateTagValue">确定</el-button>
+      <el-button
+          v-on:click="updateTagValue"
+          v-on:keyup.enter="updateTagValue"
+      >确定</el-button>
     </div>
 
     <template #reference>

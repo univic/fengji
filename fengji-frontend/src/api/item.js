@@ -1,5 +1,6 @@
 
 import myAxios from "../utilities/request";
+import {ElMessage} from "element-plus";
 
 const itemAPI = {
   addRecordItem(dataObj) {
@@ -33,6 +34,13 @@ const itemAPI = {
       {
         params: params
       }
+    ).catch(
+        function (error) {
+          ElMessage({
+            message: '出现了问题（*゜ー゜*）' + error,
+            type: 'error'
+          });
+        }
     )
   },
 }

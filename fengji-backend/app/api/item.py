@@ -18,7 +18,7 @@ def add_record_item():
                     'status': 'success',
                     'messages': ['new item added'],
                     'item_uuid': str(new_record_item.id)
-                })
+                    })
     except Exception as e:
         print(e)
         response = jsonify({
@@ -26,3 +26,9 @@ def add_record_item():
                     'messages': [e],
                 })
     return response
+
+
+@bp.route('/', methods={'GET'})
+@jwt_required()
+def get_record_item():
+    pass

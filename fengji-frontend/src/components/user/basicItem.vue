@@ -29,7 +29,7 @@
         v-on:click="showDetailPanel = !showDetailPanel"
 
       >
-        {{ item.titleText }}
+        {{ item.item_title }}
       </div>
 <!--maneuver button set -->
       <div
@@ -169,6 +169,8 @@
 </template>
 
 <script>
+
+// TODO: show corresponding tags
 export default {
   name: "basicItem",
   props: [
