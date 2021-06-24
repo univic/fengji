@@ -8,7 +8,7 @@
       v-for="item in recordItemList"
       :key="item.item_title"
       :item="item"
-      v-on:removeItem="handleRemoveItem(item.uuid)"
+      v-on:removeItem="handleRemoveItem(item)"
       v-on:showDetailDialog="openDetailDialog(item)"
     ></basic-item>
 
@@ -53,15 +53,14 @@ export default {
   },
   data () {
     return {
-      recordItemList: [{
-        titleText: "A",
-        }],
+      recordItemList: [],
       showDetailDialog: false,
       selectedTagItem: null,
     };
   },
 
   created() {
+    this.getRecordItems()
   },
   computed: {
 
@@ -83,7 +82,7 @@ export default {
                   {
                     // unpack the newItem dict, get titleText and TagList
                     ...newItem,
-                    uuid: response.data.item_uuid
+                    id: response.data.id
                   }
               )
             } else if (response.data.status === 'error') {
@@ -113,23 +112,59 @@ export default {
     triggerRollback() {
       this.$refs.newItemInput.rollBack();
     },
-    handleRemoveItem(itemUUID) {
-      this.recordItemList.forEach(function (item, index, arr) {
-        if (item.uuid === itemUUID) {
-          arr.splice(index, 1)
-        }
-      })
-    },
     openDetailDialog(item) {
       this.showDetailDialog = true
       this.selectedTagItem = item
     },
     getRecordItems() {
       //TODO: gei all the items when created
-      api.itemAPI.getRecordItem(
-
+      api.itemAPI.getRecordItem({
+        type: 'all'
+      }).then((response) => {
+        console.log(response.data)
+        this.recordItemList = response.data.record_item_list
+      }
       )
-    }
+    },
+    handleRemoveItem(item) {
+      this.$confirm(
+          '将删除该条目，是否继续', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+        this.removeItem(item)
+      }).catch(()=> {
+        this.$message({
+          message: '已取消删除',
+          type: 'info'
+        })
+      })
+    },
+    removeItem(item) {
+      api.itemAPI.deleteRecordItem({
+        id: item.id
+      }).then(
+          (response) => {
+            if (response.data.status === 'success') {
+              this.recordItemList.forEach(function (iterItem, iterIndex, IterArr) {
+                if (iterItem.id === item.id) {
+                  IterArr.splice(iterIndex, 1)
+                }
+              })
+              ElMessage({
+                message: response.data.messages[0],
+                type: 'success'
+              });
+            } else {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+                type: 'error'
+              });
+            }
+          }
+      )
+    },
   }
 }
 </script>

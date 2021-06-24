@@ -171,6 +171,9 @@
 <script>
 
 // TODO: show corresponding tags
+import api from "../../api";
+import {ElMessage} from "element-plus";
+
 export default {
   name: "basicItem",
   props: [
@@ -254,7 +257,7 @@ export default {
       this.tagInputValue = true
     },
     handleInputConfirm() {
-    }
+    },
 
   }
 }

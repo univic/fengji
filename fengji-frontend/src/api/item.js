@@ -15,6 +15,13 @@ const itemAPI = {
       {
         params: params
       }
+    ).catch(
+        function (error) {
+            ElMessage({
+                message: '出现了问题（*゜ー゜*）' + error,
+                type: 'error'
+            });
+        }
     )
   },
   editRecordItem(dataObj) {

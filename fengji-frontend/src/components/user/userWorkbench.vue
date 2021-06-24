@@ -5,13 +5,6 @@
   >
     待办事项
   </item-list>
-  <item-list
-    work-mode="Record"
-    :required-tags="requiredTags"
-  >
-    工作记录
-  </item-list>
-
 
 </template>
 
