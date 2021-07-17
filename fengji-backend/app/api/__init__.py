@@ -1,5 +1,5 @@
 
-from app.api import user, accounts, item, item_tag, report_group, group_role
+from app.api import user, accounts, item, item_tag, report_group, group_role, tag_group
 
 
 def register_blueprint(app):
@@ -8,3 +8,4 @@ def register_blueprint(app):
     app.register_blueprint(item_tag.bp)
     app.register_blueprint(report_group.bp)
     app.register_blueprint(group_role.bp)
+    app.register_blueprint(tag_group.bp)

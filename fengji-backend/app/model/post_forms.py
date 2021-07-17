@@ -80,10 +80,21 @@ class GroupRoleForm(Form):
                             [validators.input_required('未填写角色名'),
                              validators.Length(min=app_config.REPORT_GROUP_SETTINGS['MIN_ROLE_NAME_LENGTH'],
                                                max=app_config.REPORT_GROUP_SETTINGS['MAX_ROLE_NAME_LENGTH'],
-                                               message=f"用户名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_ROLE_NAME_LENGTH']}~"
+                                               message=f"角色名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_ROLE_NAME_LENGTH']}~"
                                                        f"{app_config.REPORT_GROUP_SETTINGS['MAX_ROLE_NAME_LENGTH']}位")])
     role_description = StringField('role_description',
                                    [validators.length(max=app_config.REPORT_GROUP_SETTINGS['MAX_DESC_LENGTH'],
                                                       message=f"描述不能多于{app_config.REPORT_GROUP_SETTINGS['MAX_DESC_LENGTH']}个字")
                                    ])
     role_color = StringField('role_color')
+
+
+class TagGroupForm(Form):
+    id = StringField('id')
+    tag_group_name = StringField('tag_group_name',
+                             [validators.input_required('未填写标签组名'),
+                              validators.Length(min=app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH'],
+                                                max=app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH'],
+                                                message=f"标签组长度需为{app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH']}~"
+                                                        f"{app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH']}位")])
+    tag_group_color = StringField()

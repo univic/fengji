@@ -39,6 +39,10 @@ class BaseConfig(object):
         'MIN_ROLE_ABBR_LENGTH': 2,
         'MAX_ROLE_ABBR_LENGTH': 5,
     }
+    TAG_GROUP_SETTINGS = {
+        'MIN_TAG_GROUP_NAME_LENGTH': 2,
+        'MAX_TAG_GROUP_NAME_LENGTH': 10,
+    }
 
 
 def get_config():

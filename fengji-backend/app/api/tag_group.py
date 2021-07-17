@@ -2,8 +2,8 @@ import json
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
-from app.model.tag_group import ReportGroup
-from app.model.post_forms import ReportGroupForm
+from app.model.tag_group import TagGroup
+from app.model.post_forms import TagGroupForm
 
 # TODO: need a get my report groups api
 # TODO: need a free to join filter
@@ -15,25 +15,26 @@ bp = Blueprint('tag_group', __name__, url_prefix='/api/tag_group')
 @bp.route('/', methods={'POST'})
 @jwt_required()
 def add_tag_group():
-    tag_group_form = ReportGroupForm(request.form, meta={'csrf': False})
+    tag_group_form = TagGroupForm(request.form, meta={'csrf': False})
+    print(request.form)
     if tag_group_form.validate():
-        new_group = ReportGroup()
-        group_creator = get_current_user()
-        new_group.group_name = tag_group_form.group_name.data
-        new_group.is_project = tag_group_form.is_project.data
-        new_group.group_color = tag_group_form.group_color.data
-        new_group.group_creator = group_creator
+        new_tag_group = TagGroup()
+        tag_group_creator = get_current_user()
+        new_tag_group.tag_group_name = tag_group_form.tag_group_name.data
+        new_tag_group.tag_group_color = tag_group_form.tag_group_color.data
+        new_tag_group.tag_group_creator = tag_group_creator
         try:
-            new_group.save()
+            new_tag_group.save()
             response = {
                 'status': 'success',
-                'messages': ['报告组添加成功~']
+                'messages': ['标签组添加成功~'],
+                'id': str(new_tag_group.id)
             }
         # if the group name is not unique, let the frontend know
         except NotUniqueError:
             response = {
                 'status': 'error',
-                'messages': ['重复的报告组名']
+                'messages': ['重复的标签组名']
             }
         except ValidationError as e:
             response = {
@@ -63,7 +64,7 @@ def get_tag_group():
         # return detailed info of all groups
         try:
             tag_group_list = []
-            tag_groups = ReportGroup.objects()
+            tag_groups = TagGroup.objects()
             for item in tag_groups:
                 # convert the mongodb query obj to json, then load it into dict
                 # make id, date and user more readable before return it
@@ -72,13 +73,13 @@ def get_tag_group():
                 item_dict["id"] = str(item.id)
                 item_dict["group_created_at"] = int(item.group_created_at.timestamp())
                 item_dict.pop("_id")
-                # get group_creator info
-                group_creator = item.group_creator
-                group_creator_dict = {
-                    'id': str(group_creator.id),
-                    'username': group_creator.username
+                # get tag_group_creator info
+                tag_group_creator = item.tag_group_creator
+                tag_group_creator_dict = {
+                    'id': str(tag_group_creator.id),
+                    'username': tag_group_creator.username
                 }
-                item_dict["group_creator"] = group_creator_dict
+                item_dict["tag_group_creator"] = tag_group_creator_dict
                 tag_group_list.append(item_dict)
             response = {
                 'status': 'success',
@@ -92,7 +93,7 @@ def get_tag_group():
                     'messages': [e.args[0]]
                 }
     elif request.args['type'] == 'check_existence':
-        tag_group = ReportGroup.objects(group_name=request.args['group_name'])
+        tag_group = TagGroup.objects(tag_group_name=request.args['tag_group_name'])
         if not tag_group:
             response = {
                 'status': 'success',
@@ -118,12 +119,12 @@ def get_tag_group():
 @bp.route('/', methods={'DELETE'})
 @jwt_required()
 def delete_tag_group():
-    tag_group = ReportGroup.objects(id=request.args['id'])
+    tag_group = TagGroup.objects(id=request.args['id'])
     try:
         tag_group.delete()
         response = {
             'status': 'success',
-            'messages': ['报告组已删除']
+            'messages': ['标签组已删除']
         }
     except Exception as e:
         response = {
@@ -136,17 +137,16 @@ def delete_tag_group():
 @bp.route('/', methods={'PUT'})
 @jwt_required()
 def modify_tag_group():
-    tag_group_form = ReportGroupForm(request.form, meta={'csrf': False})
+    tag_group_form = TagGroupForm(request.form, meta={'csrf': False})
     if tag_group_form.validate():
-        tag_group = ReportGroup.objects(id=tag_group_form.id.data).first()
-        tag_group.group_name = tag_group_form.group_name.data
-        tag_group.tag_required = tag_group_form.tag_required.data
-        tag_group.group_color = tag_group_form.group_color.data
+        tag_group = TagGroup.objects(id=tag_group_form.id.data).first()
+        tag_group.tag_group_name = tag_group_form.tag_group_name.data
+        tag_group.tag_group_color = tag_group_form.tag_group_color.data
         try:
             tag_group.save()
             response = {
                 'status': 'success',
-                'messages': ['报告组修改成功~']
+                'messages': ['标签组修改成功~']
             }
         except ValidationError as e:
             response = {

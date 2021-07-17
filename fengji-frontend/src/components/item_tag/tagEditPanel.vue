@@ -105,13 +105,6 @@ export default {
                   })
                 }
               }
-          ).catch(
-              function (error) {
-                ElMessage({
-                  message: '出现了问题（*゜ー゜*）' + error.message,
-                  type: 'error'
-                })
-              }
           )
         } else {
           callback()
@@ -153,6 +146,7 @@ export default {
       loadingAnimation: false,
       tagForm: {
         id: null,
+
         tag_name: null,
         tag_field_type: 'simple',
         tag_default_value: null,
@@ -226,13 +220,6 @@ export default {
             });
           }
         }
-      ).catch(
-          function (error) {
-            ElMessage({
-              message: '出现了问题（*゜ー゜*）' + error,
-              type: 'error'
-            });
-          }
       )
     },
     resetForm(formName) {

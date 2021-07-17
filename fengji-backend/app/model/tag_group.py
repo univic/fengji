@@ -7,6 +7,6 @@ from mongoengine import BooleanField
 
 class TagGroup(db.Document):
     tag_group_name = StringField(required=True, unique=True)
-    tag_group_description = StringField()
+    tag_group_color = StringField()
     tag_group_creator = ReferenceField(User, required=True)
     tag_group_created_at = DateTimeField(default=datetime.datetime.now())
