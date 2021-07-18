@@ -3,7 +3,7 @@
   <!--  quick nav buttons-->
   <div>
     <el-dialog :title="dialogTitle"
-               v-model="dialogFormVisible"
+               v-bind:model-value="dialogFormVisible"
                :before-close="handleClose">
       <el-form :model="tagForm"
                status-icon
@@ -23,6 +23,16 @@
                        :key="item.value"
                        :label="item.label"
                        :value="item.value"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="归属标签组"
+                      prop="tag_group_assignment">
+          <el-select v-model="tagForm.tag_group_assignment"
+                     placeholder="请选择归属标签组">
+            <el-option v-for="item in tagGroupList"
+                       :key="item.id"
+                       :label="item.tag_group_name"
+                       :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="标签默认值"
@@ -64,9 +74,11 @@ import api from '../../api';
 import { ElMessage } from 'element-plus';
 
 export default {
-  name: "tagEditPanel",
+  name: "editTagTemplatePanel",
   props: [
     'dialogFormVisible',
+    'tagGroupList',
+    'preSelectedTagGroup',
   ],
   emits: [
     'closeDialog',
@@ -137,13 +149,13 @@ export default {
       loadingAnimation: false,
       tagForm: {
         id: null,
-
         tag_name: null,
         tag_field_type: 'simple',
         tag_default_value: null,
         tag_required: false,
         tag_preview: false,
         tag_priority: null,
+        tag_group_assignment: null,
         tag_color: '#FFFFFF',
       },
       tagTypeOptions: [
@@ -223,7 +235,7 @@ export default {
     handleEdit (row) {
       // update the tagForm, so each fields will have corresponding default value
       for (let k in row) {
-        if (row.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(row, k)) {
           this.tagForm[k] = row[k]
         }
       }

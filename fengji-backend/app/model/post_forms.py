@@ -50,6 +50,7 @@ class TagTemplateForm(Form):
     tag_field_type = StringField('tag_field_type',
                            [validators.input_required('未选择标签类型'),
                             validators.any_of(app_config.TAG_SETTINGS['ALLOWED_TAG_TYPES'], '不允许的标签类型')])
+    tag_group_assignment = StringField('tag_group_assignment')
     tag_default_value = StringField('tag_default_value')
     tag_required = BooleanField('tag_required')
     tag_preview = BooleanField('tag_preview')

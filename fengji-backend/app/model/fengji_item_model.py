@@ -1,6 +1,6 @@
 import datetime
 from mongoengine import StringField, ReferenceField, DateTimeField, EmbeddedDocumentListField, FileField
-from app.model.item_tag import ItemTag
+from app.model.tag_template import ItemTag
 
 from app.model.user_model import User
 from app.lib.database import db

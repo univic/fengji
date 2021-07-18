@@ -1,12 +1,14 @@
 import datetime
 from app.lib.database import db
 from app.model.user_model import User
+from app.model.tag_group import TagGroup
 from mongoengine import StringField, BooleanField, IntField, EmbeddedDocument, DateTimeField, ReferenceField
 
 
 class TagTemplate(db.Document):
     tag_name = StringField(required=True, unique=True)
     tag_field_type = StringField(required=True)
+    tag_group_assignment = ReferenceField(TagGroup, required=True)
     tag_default_value = StringField()
     tag_preview = BooleanField(default=False)
     tag_required = BooleanField(default=False)

@@ -71,7 +71,7 @@ def get_tag_group():
                 item_dict = json.loads(item.to_json())
                 # turn id into str format, turn datetime obj into timestamp
                 item_dict["id"] = str(item.id)
-                item_dict["group_created_at"] = int(item.group_created_at.timestamp())
+                item_dict["tag_group_created_at"] = int(item.tag_group_created_at.timestamp())
                 item_dict.pop("_id")
                 # get tag_group_creator info
                 tag_group_creator = item.tag_group_creator
@@ -84,7 +84,7 @@ def get_tag_group():
             response = {
                 'status': 'success',
                 'messages': [''],
-                'group_list': tag_group_list
+                'tag_group_list': tag_group_list
                 }
         except Exception as e:
             print(e)

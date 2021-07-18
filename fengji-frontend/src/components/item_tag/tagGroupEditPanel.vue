@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog v-bind:title="dialogTitle"
-               v-model="dialogVisible"
+               v-bind:model-value="dialogVisible"
                v-bind:beforeClose="handleClose">
       <el-form v-bind:model="postForm"
                status-icon
@@ -89,7 +89,7 @@ export default {
     handleEdit (row) {
       // update the tagForm, so each fields will have corresponding default value
       for (let k in row) {
-        if (row.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(row, k)) {
           this.tagForm[k] = row[k];
         }
       }
