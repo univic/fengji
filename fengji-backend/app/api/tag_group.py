@@ -1,4 +1,5 @@
 import json
+import traceback
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
@@ -66,21 +67,9 @@ def get_tag_group():
             tag_group_list = []
             tag_groups = TagGroup.objects()
             for item in tag_groups:
-                # convert the mongodb query obj to json, then load it into dict
-                # make id, date and user more readable before return it
-                item_dict = json.loads(item.to_json())
-                # turn id into str format, turn datetime obj into timestamp
-                item_dict["id"] = str(item.id)
-                item_dict["tag_group_created_at"] = int(item.tag_group_created_at.timestamp())
-                item_dict.pop("_id")
-                # get tag_group_creator info
-                tag_group_creator = item.tag_group_creator
-                tag_group_creator_dict = {
-                    'id': str(tag_group_creator.id),
-                    'username': tag_group_creator.username
-                }
-                item_dict["tag_group_creator"] = tag_group_creator_dict
-                tag_group_list.append(item_dict)
+                item_json = item.to_json()
+                print(item_json)
+                tag_group_list.append(item_json)
             response = {
                 'status': 'success',
                 'messages': [''],
@@ -88,6 +77,7 @@ def get_tag_group():
                 }
         except Exception as e:
             print(e)
+            print(traceback.print_exc())
             response = {
                     'status': 'error',
                     'messages': [e.args[0]]
