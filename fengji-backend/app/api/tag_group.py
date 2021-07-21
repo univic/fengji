@@ -1,4 +1,3 @@
-import json
 import traceback
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
@@ -68,7 +67,6 @@ def get_tag_group():
             tag_groups = TagGroup.objects()
             for item in tag_groups:
                 item_json = item.to_json()
-                print(item_json)
                 tag_group_list.append(item_json)
             response = {
                 'status': 'success',
@@ -76,7 +74,6 @@ def get_tag_group():
                 'tag_group_list': tag_group_list
                 }
         except Exception as e:
-            print(e)
             print(traceback.print_exc())
             response = {
                     'status': 'error',

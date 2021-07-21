@@ -6,11 +6,11 @@
       <el-button v-on:click="handleTagCreate">添加标签</el-button>
       <el-button v-on:click="handleTagGroupCreate">添加标签组</el-button>
     </div>
-    <edit-tag-template-panel ref="editTagTemplatePanel"
+    <tag-template-edit-panel ref="editTagTemplatePanel"
                              v-bind:dialogFormVisible="dialogFormVisible"
                              v-bind:tagGroupList="tagGroupList"
                              v-on:closeDialog="dialogFormVisible = false"
-                             v-on:refreshTagList="getTagList"></edit-tag-template-panel>
+                             v-on:refreshTagList="getTagList"></tag-template-edit-panel>
     <tag-group-edit-panel ref="tagGroupEditPanel"
                           v-bind:dialogVisible="tagGroupDialogVisible"
                           v-on:closeDialog="tagGroupDialogVisible = false"></tag-group-edit-panel>
@@ -28,7 +28,7 @@
       </el-card>
     </div>
 
-    <el-table stripe
+    <!-- <el-table stripe
               :data="tagList">
       <el-table-column label="标签名"
                        prop="tag_name"></el-table-column>
@@ -50,12 +50,12 @@
                      v-on:click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
-    </el-table>
+    </el-table> -->
   </div>
 </template>
 
 <script>
-import editTagTemplatePanel from "./editTagTemplatePanel.vue";
+import tagTemplateEditPanel from "./tagTemplateEditPanel.vue";
 import tagGroupEditPanel from './tagGroupEditPanel.vue';
 import api from "../../api";
 import { ElMessage } from "element-plus";
@@ -71,7 +71,7 @@ export default {
     };
   },
   components: {
-    editTagTemplatePanel: editTagTemplatePanel,
+    tagTemplateEditPanel: tagTemplateEditPanel,
     TagGroupEditPanel: tagGroupEditPanel,
   },
   created () {

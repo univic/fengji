@@ -41,15 +41,15 @@ class LoginForm(Form):
 
 class TagTemplateForm(Form):
     id = StringField('id')
-    tag_name = StringField('tag_name',
-                           [validators.input_required('未填写标签名'),
-                            validators.Length(min=app_config.TAG_SETTINGS['MIN_TAG_NAME_LENGTH'],
-                                              max=app_config.TAG_SETTINGS['MAX_TAG_NAME_LENGTH'],
-                                              message=f"用户名长度需为{app_config.TAG_SETTINGS['MIN_TAG_NAME_LENGTH']}~"
-                                                      f"{app_config.TAG_SETTINGS['MAX_TAG_NAME_LENGTH']}位")])
+    tag_template_name = StringField('tag_template_name',
+                                    [validators.input_required('未填写标签名'),
+                                     validators.Length(min=app_config.TAG_SETTINGS['MIN_TAG_NAME_LENGTH'],
+                                                       max=app_config.TAG_SETTINGS['MAX_TAG_NAME_LENGTH'],
+                                                       message=f"用户名长度需为{app_config.TAG_SETTINGS['MIN_TAG_NAME_LENGTH']}~"
+                                                               f"{app_config.TAG_SETTINGS['MAX_TAG_NAME_LENGTH']}位")])
     tag_field_type = StringField('tag_field_type',
-                           [validators.input_required('未选择标签类型'),
-                            validators.any_of(app_config.TAG_SETTINGS['ALLOWED_TAG_TYPES'], '不允许的标签类型')])
+                                 [validators.input_required('未选择标签类型'),
+                                  validators.any_of(app_config.TAG_SETTINGS['ALLOWED_TAG_TYPES'], '不允许的标签类型')])
     tag_group_assignment = StringField('tag_group_assignment')
     tag_default_value = StringField('tag_default_value')
     tag_required = BooleanField('tag_required')
@@ -86,16 +86,16 @@ class GroupRoleForm(Form):
     role_description = StringField('role_description',
                                    [validators.length(max=app_config.REPORT_GROUP_SETTINGS['MAX_DESC_LENGTH'],
                                                       message=f"描述不能多于{app_config.REPORT_GROUP_SETTINGS['MAX_DESC_LENGTH']}个字")
-                                   ])
+                                    ])
     role_color = StringField('role_color')
 
 
 class TagGroupForm(Form):
     id = StringField('id')
     tag_group_name = StringField('tag_group_name',
-                             [validators.input_required('未填写标签组名'),
-                              validators.Length(min=app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH'],
-                                                max=app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH'],
-                                                message=f"标签组长度需为{app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH']}~"
-                                                        f"{app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH']}位")])
+                                 [validators.input_required('未填写标签组名'),
+                                  validators.Length(min=app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH'],
+                                                    max=app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH'],
+                                                    message=f"标签组长度需为{app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH']}~"
+                                                            f"{app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH']}位")])
     tag_group_color = StringField()

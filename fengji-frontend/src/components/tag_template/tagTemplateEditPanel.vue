@@ -3,15 +3,15 @@
   <!--  quick nav buttons-->
   <div>
     <el-dialog :title="dialogTitle"
-               v-model="dialogFormVisible"
+               v-bind:model-value="dialogFormVisible"
                :before-close="handleClose">
       <el-form :model="tagForm"
                status-icon
                :rules="tagFormRules"
                ref="tagForm">
         <el-form-item label="标签名称"
-                      prop="tag_name">
-          <el-input v-model="tagForm.tag_name"
+                      prop="tag_template_name">
+          <el-input v-model="tagForm.tag_template_name"
                     maxlength="10"
                     show-word-limit></el-input>
         </el-form-item>
@@ -23,6 +23,16 @@
                        :key="item.value"
                        :label="item.label"
                        :value="item.value"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="归属标签组"
+                      prop="tag_group_assignment">
+          <el-select v-model="tagForm.tag_group_assignment"
+                     placeholder="请选择归属标签组">
+            <el-option v-for="item in tagGroupList"
+                       :key="item.id"
+                       :label="item.tag_group_name"
+                       :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="标签默认值"
@@ -64,9 +74,11 @@ import api from '../../api';
 import { ElMessage } from 'element-plus';
 
 export default {
-  name: "tagEditPanel",
+  name: "tagTemplateEditPanel",
   props: [
     'dialogFormVisible',
+    'tagGroupList',
+    'preSelectedTagGroup',
   ],
   emits: [
     'closeDialog',
@@ -80,7 +92,7 @@ export default {
         if (this.dialogMode !== 'modify') {
           api.tag.getTagTemplate({
             type: 'check_existence',
-            tag_name: value,
+            tag_template_name: value,
           }).then(
             function (response) {
               if (response.data.status === 'success') {
@@ -137,13 +149,13 @@ export default {
       loadingAnimation: false,
       tagForm: {
         id: null,
-
-        tag_name: null,
+        tag_template_name: null,
         tag_field_type: 'simple',
         tag_default_value: null,
         tag_required: false,
         tag_preview: false,
         tag_priority: null,
+        tag_group_assignment: null,
         tag_color: '#FFFFFF',
       },
       tagTypeOptions: [
@@ -168,7 +180,7 @@ export default {
         // },
       ],
       tagFormRules: {
-        tag_name: [
+        tag_template_name: [
           { required: true, message: '请输入标签名', trigger: 'blur' },
           { min: 2, max: 10, message: '标签名的长度应为2~10个字符', trigger: 'blur' },
           { validator: validators.validateTagNameUnique, trigger: 'blur' }
@@ -176,7 +188,8 @@ export default {
         tag_field_type: [
           { required: true, message: '必须选择一个标签类型', trigger: 'blur' }
         ],
-        tag_default_value: [{ validator: validators.validateDefaultValue, trigger: 'blur' }]
+        tag_default_value: [{ validator: validators.validateDefaultValue, trigger: 'blur' }],
+        tag_group_assignment: [{ required: true, message: '请选择归属标签组', trigger: 'blur' }]
       },
     };
   },
@@ -223,11 +236,11 @@ export default {
     handleEdit (row) {
       // update the tagForm, so each fields will have corresponding default value
       for (let k in row) {
-        if (row.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(row, k)) {
           this.tagForm[k] = row[k]
         }
       }
-      this.dialogTitle = "编辑标签 - " + this.tagForm.tag_name
+      this.dialogTitle = "编辑标签 - " + this.tagForm.tag_template_name
       this.dialogMode = 'modify'
     },
     handleCreate () {

@@ -1,5 +1,9 @@
-from bson import json_util
+# -*- coding: utf-8 -*-
+# Author : univic
+# Date: 2021-07-18
+
 import datetime
+import app.utilities.db_util as db_util
 from app.lib.database import db
 from app.model.user_model import User
 from mongoengine import StringField, EmbeddedDocumentListField, DateTimeField, ReferenceField
@@ -12,13 +16,12 @@ class TagGroup(db.Document):
     tag_group_created_at = DateTimeField(default=datetime.datetime.now())
 
     def to_json(self):
-        print('running')
-        data = self
-        data_dict = data.to_mongo().to_dict()
-        data_dict['id'] = str(data_dict['_id'])
-        data_dict.pop('_id')
-        data2 = data['tag_group_creator'].to_mongo().to_dict()
-        data2['id'] = str(data2['_id'])
-        data2.pop('_id')
-        data_dict['tag_group_creator'] = data2
-        return data_dict
+        tag_group_data = self
+
+        # convert mongodb object to dict, replace _id
+        tag_group_dict = db_util.dbo_better_json(tag_group_data)
+        tag_group_dict['tag_group_creator'] = {
+            'id': str(tag_group_data.tag_group_creator.id),
+            'username': tag_group_data.tag_group_creator.username
+        }
+        return tag_group_dict

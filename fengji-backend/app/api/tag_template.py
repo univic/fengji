@@ -24,18 +24,8 @@ def get_tag_templates():
             for item in tag_templates:
                 # convert the mongodb query obj to json, then load it into dict
                 # make id, date and user more readable before return it
-                item_dict = json.loads(item.to_json())
-                # turn id into str format, turn datetime obj into timestamp
-                item_dict["id"] = str(item.id)
-                item_dict["tag_created_at"] = int(item.tag_created_at.timestamp())
-                item_dict.pop("_id")
-                # get tag_item_creator info
-                tag_item_creator = item.tag_created_by
-                tag_item_creator_dict = {
-                    'id': str(tag_item_creator.id),
-                    'username': tag_item_creator.username
-                }
-                item_dict["tag_created_by"] = tag_item_creator_dict
+                item_dict = item.to_json()
+
                 tag_template_list.append(item_dict)
             response = {
                 'status': 'success',
@@ -49,7 +39,7 @@ def get_tag_templates():
                     'messages': [e.args[0]]
                 }
     elif request.args['type'] == 'check_existence':
-        tag_template = TagTemplate.objects(tag_name=request.args['tag_name'])
+        tag_template = TagTemplate.objects(tag_template_name=request.args['tag_template_name'])
         if not tag_template:
             response = {
                 'status': 'success',
@@ -71,18 +61,18 @@ def get_tag_templates():
 
 @bp.route('/', methods={'POST'})
 @jwt_required()
-def add_new_tag():
-    new_tag_form = TagTemplateForm(request.form, meta={'csrf': False})
-    if new_tag_form.validate():
+def add_tag_template():
+    new_tag_template_form = TagTemplateForm(request.form, meta={'csrf': False})
+    if new_tag_template_form.validate():
         new_tag = TagTemplate()
-        tag_creator = get_current_user()
-        new_tag.tag_name = new_tag_form.tag_name.data
-        new_tag.tag_field_type = new_tag_form.tag_field_type.data
-        new_tag.tag_group_assignment = TagGroup(id=new_tag_form.tag_group_assignment.data)
-        new_tag.tag_default_value = new_tag_form.tag_default_value.data
-        new_tag.tag_preview = new_tag_form.tag_preview.data
-        new_tag.tag_color = new_tag_form.tag_color.data
-        new_tag.tag_created_by = tag_creator
+        tag_template_creator = get_current_user()
+        new_tag.tag_template_name = new_tag_template_form.tag_template_name.data
+        new_tag.tag_field_type = new_tag_template_form.tag_field_type.data
+        new_tag.tag_group_assignment = TagGroup(id=new_tag_template_form.tag_group_assignment.data)
+        new_tag.tag_default_value = new_tag_template_form.tag_default_value.data
+        new_tag.tag_preview = new_tag_template_form.tag_preview.data
+        new_tag.tag_color = new_tag_template_form.tag_color.data
+        new_tag.creator = tag_template_creator
         try:
             new_tag.save()
             response = {
@@ -105,7 +95,7 @@ def add_new_tag():
         when validate, WTForms will generate a form.errors dict, which contains all the error messages
         for each form fields, here we get error messages from the form.errors dict, and generate an error info list
         """
-        error_status = list(new_tag_form.errors.values())
+        error_status = list(new_tag_template_form.errors.values())
         for i, item in enumerate(error_status):
             error_status[i] = item[0]
         # construct the return data
@@ -140,7 +130,7 @@ def modify_tag_template():
     tag_edit_form = TagTemplateForm(request.form, meta={'csrf': False})
     if tag_edit_form.validate():
         tag_template = TagTemplate.objects(id=tag_edit_form.id.data).first()
-        tag_template.tag_name = tag_edit_form.tag_name.data
+        tag_template.tag_template_name = tag_edit_form.tag_template_name.data
         tag_template.tag_field_type = tag_edit_form.tag_field_type.data
         tag_template.tag_default_value = tag_edit_form.tag_default_value.data
         tag_template.tag_preview = tag_edit_form.tag_preview.data
