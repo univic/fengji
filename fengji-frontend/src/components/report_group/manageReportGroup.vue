@@ -1,24 +1,26 @@
 <template>
-  <el-page-header content="管理报告组"></el-page-header>
-  <el-divider></el-divider>
+  <div>
+    <el-page-header content="管理报告组"></el-page-header>
+    <el-divider></el-divider>
 
-  <el-table stripe
-            :data="reportGroupList">
-    <el-table-column label="组名"
-                     prop="group_name"></el-table-column>
-    <el-table-column label="类型"
-                     prop="group_type"></el-table-column>
-    <el-table-column label="操作">
-      <template #default="scope">
-        <el-button type="text"
-                   size="small"
-                   v-on:click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button type="text"
-                   size="small"
-                   v-on:click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+    <el-table stripe
+              :data="reportGroupList">
+      <el-table-column label="组名"
+                       prop="group_name"></el-table-column>
+      <el-table-column label="类型"
+                       prop="group_type"></el-table-column>
+      <el-table-column label="操作">
+        <template #default="scope">
+          <el-button type="text"
+                     size="small"
+                     v-on:click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button type="text"
+                     size="small"
+                     v-on:click="handleDelete(scope.$index, scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
 
 </template>
 

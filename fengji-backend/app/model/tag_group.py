@@ -24,4 +24,5 @@ class TagGroup(db.Document):
             'id': str(tag_group_data.tag_group_creator.id),
             'username': tag_group_data.tag_group_creator.username
         }
+        # tag_group_dict['tag_template_list'] = []
         return tag_group_dict

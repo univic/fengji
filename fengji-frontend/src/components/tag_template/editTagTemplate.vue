@@ -2,63 +2,57 @@
   <div>
     <!--  title here-->
     <el-page-header content="标签管理"></el-page-header>
-    <div>
-      <el-button v-on:click="handleTagCreate">添加标签</el-button>
-      <el-button v-on:click="handleTagGroupCreate">添加标签组</el-button>
-    </div>
-    <tag-template-edit-panel ref="editTagTemplatePanel"
-                             v-bind:dialogFormVisible="dialogFormVisible"
-                             v-bind:tagGroupList="tagGroupList"
-                             v-on:closeDialog="dialogFormVisible = false"
-                             v-on:refreshTagList="getTagList"></tag-template-edit-panel>
-    <tag-group-edit-panel ref="tagGroupEditPanel"
-                          v-bind:dialogVisible="tagGroupDialogVisible"
-                          v-on:closeDialog="tagGroupDialogVisible = false"></tag-group-edit-panel>
-    <div>
-      <!--  tag group card here-->
-      <el-card v-for="tagGroup in tagGroupList"
-               v-bind:key="tagGroup.id">
-        <template #header>
-          <div>
-            <span> {{tagGroup.tag_group_name}} </span>
-            <el-button>编辑</el-button>
-            <el-button>删除</el-button>
+    <el-skeleton v-if="loading === true"
+                 :rows="5"
+                 animated />
+    <div v-else>
+      <div>
+        <el-button v-on:click="handleTagCreate">添加标签</el-button>
+        <el-button v-on:click="handleTagGroupCreate">添加标签组</el-button>
+      </div>
+      <tag-template-edit-panel ref="editTagTemplatePanel"
+                               v-bind:dialogFormVisible="dialogFormVisible"
+                               v-bind:tagGroupList="tagGroupList"
+                               v-on:closeDialog="dialogFormVisible = false"
+                               v-on:refreshTagList="getTagTemplateList"></tag-template-edit-panel>
+      <tag-group-edit-panel ref="tagGroupEditPanel"
+                            v-bind:dialogVisible="tagGroupDialogVisible"
+                            v-on:closeDialog="tagGroupDialogVisible = false"></tag-group-edit-panel>
+
+      <div>
+        <!--  tag group card here-->
+        <el-card v-for="tagGroup in tagGroupList"
+                 v-bind:key="tagGroup.id">
+          <template #header>
+            <div>
+              <span> {{tagGroup.tag_group_name}} </span>
+              <el-button>编辑</el-button>
+              <el-button>删除</el-button>
+            </div>
+          </template>
+          <div v-if="tagGroup.tag_template_list && tagGroup.tag_template_list.length > 0">
+            <tag-template-item v-for="item in tagGroup.tag_template_list"
+                               v-bind:key="item.id"
+                               v-bind:tagTemplateItem="item"></tag-template-item>
           </div>
-        </template>
-      </el-card>
+          <div v-else>
+            <el-empty></el-empty>
+          </div>
+
+        </el-card>
+      </div>
     </div>
 
-    <!-- <el-table stripe
-              :data="tagList">
-      <el-table-column label="标签名"
-                       prop="tag_name"></el-table-column>
-      <el-table-column label="类型"
-                       prop="tag_field_type"></el-table-column>
-      <el-table-column label="默认值"
-                       prop="tag_default_value"></el-table-column>
-      <el-table-column label="必选标签"
-                       prop="tag_required"></el-table-column>
-      <el-table-column label="标签预览"
-                       prop="tag_preview"></el-table-column>
-      <el-table-column label="操作">
-        <template #default="scope">
-          <el-button type="text"
-                     size="small"
-                     v-on:click="handleTagEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button type="text"
-                     size="small"
-                     v-on:click="handleDelete(scope.$index, scope.row)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table> -->
   </div>
 </template>
 
 <script>
-import tagTemplateEditPanel from "./tagTemplateEditPanel.vue";
-import tagGroupEditPanel from './tagGroupEditPanel.vue';
+
 import api from "../../api";
 import { ElMessage } from "element-plus";
+import tagTemplateEditPanel from "./tagTemplateEditPanel.vue";
+import tagGroupEditPanel from './tagGroupEditPanel.vue';
+import tagTemplateItem from './tagTemplateItem.vue';
 
 export default {
   name: "showTags",
@@ -67,26 +61,29 @@ export default {
       dialogFormVisible: false,
       tagGroupDialogVisible: false,
       tagGroupList: [],
-      tagList: [],
+      tagTemplateList: [],
+      loading: true,
     };
   },
   components: {
     tagTemplateEditPanel: tagTemplateEditPanel,
     TagGroupEditPanel: tagGroupEditPanel,
+    tagTemplateItem: tagTemplateItem,
   },
   created () {
-    this.getTagData()
+    this.getTagTemplateData()
   },
   mounted () {
 
   },
   methods: {
     // use a promise to send async request
-    getTagData () {
+    getTagTemplateData () {
       let p1 = new Promise(this.getTagGroupList)
-      let p2 = new Promise(this.getTagList)
+      let p2 = new Promise(this.getTagTemplateList)
       Promise.all([p1, p2]).then(
-        console.log('oh wow')
+        this.assignTagTemplateToTagGroup,
+        this.loading = false
       ).catch((result) => {
         ElMessage({
           message: result,
@@ -107,17 +104,28 @@ export default {
         }
       })
     },
-    getTagList (resolve, reject) {
+    getTagTemplateList (resolve, reject) {
       api.tag.getTagTemplate({
         type: "all",
       }).then((response) => {
         if (response.data.status === "success") {
-          this.tagList = response.data.tag_template_list;
+          this.tagTemplateList = response.data.tag_template_list;
           resolve('success');
         } else {
           reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
         }
       });
+    },
+    assignTagTemplateToTagGroup () {
+      this.tagGroupList.forEach((tagGroupElement, index) => {
+        this.tagGroupList[index].tag_template_list = this.filterTagTemplate(tagGroupElement.id, this.tagTemplateList)
+      });
+    },
+    filterTagTemplate (tagGroupID, tagTemplateList) {
+      let filteredList = tagTemplateList.filter((item) => {
+        return item.tag_group_assignment.id === tagGroupID
+      })
+      return filteredList
     },
     handleDelete (index, row) {
       this.$confirm("将永久删除该标签，是否继续", "提示", {
@@ -142,7 +150,7 @@ export default {
         })
         .then((response) => {
           if (response.data.status === "success") {
-            this.tagList.splice(index, 1);
+            this.tagTemplateList.splice(index, 1);
             ElMessage({
               message: response.data.messages[0],
               type: "success",
