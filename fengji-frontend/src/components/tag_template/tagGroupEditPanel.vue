@@ -39,7 +39,7 @@ export default {
   ],
   emits: [
     'closeDialog',
-    'refreshTagList'
+    'refreshTagGroupList'
   ],
   data () {
     let validators = {
@@ -86,14 +86,14 @@ export default {
       this.dialogTitle = "创建标签组";
       this.dialogMode = 'create';
     },
-    handleEdit (row) {
+    handleEdit (tagGroupElement) {
       // update the tagForm, so each fields will have corresponding default value
-      for (let k in row) {
-        if (Object.prototype.hasOwnProperty.call(row, k)) {
-          this.tagForm[k] = row[k];
+      for (let item in tagGroupElement) {
+        if (Object.prototype.hasOwnProperty.call(this.postForm, item)) {
+          this.postForm[item] = tagGroupElement[item];
         }
       }
-      this.dialogTitle = "编辑标签组 - " + this.tagForm.tag_name;
+      this.dialogTitle = "编辑标签组 - " + this.postForm.tag_group_name;
       this.dialogMode = 'modify';
     },
     handleSubmit () {
@@ -113,11 +113,11 @@ export default {
         if (response.data.status === 'success') {
           this.handleClose();
           this.resetForm('tagGroupForm');
+          this.$emit('refreshTagGroupList')
           ElMessage({
             message: response.data.messages[0],
             type: 'success'
           });
-          this.$emit('refreshTagList')
         } else {
           ElMessage({
             message: '出现了问题（*゜ー゜*）' + response.data.messages[0],

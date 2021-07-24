@@ -17,30 +17,14 @@
                                v-on:refreshTagList="getTagTemplateList"></tag-template-edit-panel>
       <tag-group-edit-panel ref="tagGroupEditPanel"
                             v-bind:dialogVisible="tagGroupDialogVisible"
-                            v-on:closeDialog="tagGroupDialogVisible = false"></tag-group-edit-panel>
+                            v-on:closeDialog="tagGroupDialogVisible = false"
+                            v-on:refreshTagGroupList="handleListRefresh"></tag-group-edit-panel>
 
-      <div>
-        <!--  tag group card here-->
-        <el-card v-for="tagGroup in tagGroupList"
-                 v-bind:key="tagGroup.id">
-          <template #header>
-            <div>
-              <span> {{tagGroup.tag_group_name}} </span>
-              <el-button>编辑</el-button>
-              <el-button>删除</el-button>
-            </div>
-          </template>
-          <div v-if="tagGroup.tag_template_list && tagGroup.tag_template_list.length > 0">
-            <tag-template-item v-for="item in tagGroup.tag_template_list"
-                               v-bind:key="item.id"
-                               v-bind:tagTemplateItem="item"></tag-template-item>
-          </div>
-          <div v-else>
-            <el-empty></el-empty>
-          </div>
-
-        </el-card>
-      </div>
+      <tag-group-display-card v-for="(tagGroup, index) in tagGroupList"
+                              v-bind:tagGroupElement="tagGroup"
+                              v-bind:key="tagGroup.id"
+                              v-on:deleteTagGroup="tagGroupList.splice(index, 1)"
+                              v-on:editTagGroup="handleTagGroupEdit(tagGroup)"></tag-group-display-card>
     </div>
 
   </div>
@@ -52,7 +36,7 @@ import api from "../../api";
 import { ElMessage } from "element-plus";
 import tagTemplateEditPanel from "./tagTemplateEditPanel.vue";
 import tagGroupEditPanel from './tagGroupEditPanel.vue';
-import tagTemplateItem from './tagTemplateItem.vue';
+import tagGroupDisplayCard from './tagGroupDisplayCard.vue'
 
 export default {
   name: "showTags",
@@ -68,7 +52,7 @@ export default {
   components: {
     tagTemplateEditPanel: tagTemplateEditPanel,
     TagGroupEditPanel: tagGroupEditPanel,
-    tagTemplateItem: tagTemplateItem,
+    tagGroupDisplayCard: tagGroupDisplayCard,
   },
   created () {
     this.getTagTemplateData()
@@ -168,9 +152,9 @@ export default {
       this.$refs.editTagTemplatePanel.handleEdit(row);
       this.dialogFormVisible = true;
     },
-    handleTagGroupEdit (index, row) {
+    handleTagGroupEdit (tagGroupElement) {
       // call the handleEdit function in child component, let it prepare the dialog title and field values
-      this.$refs.tagGroupEditPanel.handleEdit(row);
+      this.$refs.tagGroupEditPanel.handleEdit(tagGroupElement);
       this.tagGroupDialogVisible = true;
     },
     handleTagCreate () {
@@ -182,6 +166,11 @@ export default {
       this.$refs.tagGroupEditPanel.handleCreate();
       this.tagGroupDialogVisible = true;
     },
+    handleListRefresh () {
+      console.log('1')
+      this.loading = true;
+      this.getTagTemplateData();
+    }
 
   },
 };
