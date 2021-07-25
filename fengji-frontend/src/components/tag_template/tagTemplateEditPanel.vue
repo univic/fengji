@@ -233,11 +233,11 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields()
     },
-    handleEdit (row) {
+    handleEdit (tagTemplateElement) {
       // update the tagForm, so each fields will have corresponding default value
-      for (let k in row) {
-        if (Object.prototype.hasOwnProperty.call(row, k)) {
-          this.tagForm[k] = row[k]
+      for (let k in tagTemplateElement) {
+        if (Object.prototype.hasOwnProperty.call(tagTemplateElement, k)) {
+          this.tagForm[k] = tagTemplateElement[k]
         }
       }
       this.dialogTitle = "编辑标签 - " + this.tagForm.tag_template_name

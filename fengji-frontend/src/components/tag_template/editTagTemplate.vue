@@ -7,14 +7,14 @@
                  animated />
     <div v-else>
       <div>
-        <el-button v-on:click="handleTagCreate">添加标签</el-button>
+        <el-button v-on:click="handleTagTemplateCreate">添加标签</el-button>
         <el-button v-on:click="handleTagGroupCreate">添加标签组</el-button>
       </div>
       <tag-template-edit-panel ref="editTagTemplatePanel"
-                               v-bind:dialogFormVisible="dialogFormVisible"
+                               v-bind:dialogFormVisible="tagTemplateDialogVisible"
                                v-bind:tagGroupList="tagGroupList"
-                               v-on:closeDialog="dialogFormVisible = false"
-                               v-on:refreshTagList="getTagTemplateList"></tag-template-edit-panel>
+                               v-on:closeDialog="tagTemplateDialogVisible = false"
+                               v-on:refreshTagList="getTagTemplateData"></tag-template-edit-panel>
       <tag-group-edit-panel ref="tagGroupEditPanel"
                             v-bind:dialogVisible="tagGroupDialogVisible"
                             v-on:closeDialog="tagGroupDialogVisible = false"
@@ -23,8 +23,10 @@
       <tag-group-display-card v-for="(tagGroup, index) in tagGroupList"
                               v-bind:tagGroupElement="tagGroup"
                               v-bind:key="tagGroup.id"
-                              v-on:deleteTagGroup="tagGroupList.splice(index, 1)"
-                              v-on:editTagGroup="handleTagGroupEdit(tagGroup)"></tag-group-display-card>
+                              v-on:deleteTagGroup="handleTagGroupDelete(index)"
+                              v-on:editTagGroup="handleTagGroupEdit(tagGroup)"
+                              v-on:editTagTemplate="handleEditTagTemplate(index, $event)"
+                              v-on:deleteTagTemplate="handleDeleteTagTemplate(index, $event)"></tag-group-display-card>
     </div>
 
   </div>
@@ -42,7 +44,7 @@ export default {
   name: "showTags",
   data () {
     return {
-      dialogFormVisible: false,
+      tagTemplateDialogVisible: false,
       tagGroupDialogVisible: false,
       tagGroupList: [],
       tagTemplateList: [],
@@ -75,7 +77,6 @@ export default {
         })
       })
     },
-
     getTagGroupList (resolve, reject) {
       api.tagGroup.getTagGroup({
         type: 'all',
@@ -111,63 +112,32 @@ export default {
       })
       return filteredList
     },
-    handleDelete (index, row) {
-      this.$confirm("将永久删除该标签，是否继续", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          this.deleteTagTemplate(index, row);
-        })
-        .catch(() => {
-          this.$message({
-            message: "已取消删除",
-            type: "info",
-          });
-        });
+    handleTagTemplateCreate () {
+      // call the handleCreate function in child component, let it prepare the dialog title
+      this.$refs.editTagTemplatePanel.handleCreate();
+      this.tagTemplateDialogVisible = true;
     },
-    deleteTagTemplate (index, row) {
-      api.tag
-        .deleteTagTemplate({
-          id: row.id,
-        })
-        .then((response) => {
-          if (response.data.status === "success") {
-            this.tagTemplateList.splice(index, 1);
-            ElMessage({
-              message: response.data.messages[0],
-              type: "success",
-            });
-          } else {
-            ElMessage({
-              message: "出现了问题（*゜ー゜*）" + response.data.messages[0],
-              type: "error",
-            });
-          }
-        });
-    },
-    handleTagEdit (index, row) {
+    handleEditTagTemplate (tagGroupIndex, tagTemplateIndex) {
       // call the handleEdit function in child component, let it prepare the dialog title and field values
-      this.$refs.editTagTemplatePanel.handleEdit(row);
-      this.dialogFormVisible = true;
+      this.$refs.editTagTemplatePanel.handleEdit(this.tagGroupList[tagGroupIndex].tag_template_list[tagTemplateIndex]);
+      this.tagTemplateDialogVisible = true;
+    },
+    handleDeleteTagTemplate (tagGroupIndex, tagTemplateIndex) {
+      this.tagGroupList[tagGroupIndex].tag_template_list.splice(tagTemplateIndex, 1)
+    },
+    handleTagGroupCreate () {
+      this.$refs.tagGroupEditPanel.handleCreate();
+      this.tagGroupDialogVisible = true;
+    },
+    handleTagGroupDelete (index) {
+      this.tagGroupList.splice(index, 1)
     },
     handleTagGroupEdit (tagGroupElement) {
       // call the handleEdit function in child component, let it prepare the dialog title and field values
       this.$refs.tagGroupEditPanel.handleEdit(tagGroupElement);
       this.tagGroupDialogVisible = true;
     },
-    handleTagCreate () {
-      // call the handleCreate function in child component, let it prepare the dialog title
-      this.$refs.editTagTemplatePanel.handleCreate();
-      this.dialogFormVisible = true;
-    },
-    handleTagGroupCreate () {
-      this.$refs.tagGroupEditPanel.handleCreate();
-      this.tagGroupDialogVisible = true;
-    },
     handleListRefresh () {
-      console.log('1')
       this.loading = true;
       this.getTagTemplateData();
     }

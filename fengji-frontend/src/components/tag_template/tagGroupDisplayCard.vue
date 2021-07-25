@@ -5,18 +5,23 @@
       <template #header>
         <div>
           <span> {{tagGroupElement.tag_group_name}} </span>
-          <el-button v-on:click="handleEdit">编辑</el-button>
-          <el-button v-on:click="handleDelete">删除</el-button>
+          <el-button v-on:click="handleEditTagGroup"
+                     icon="el-icon-edit"
+                     circle></el-button>
+          <el-button v-on:click="handleDeleteTagGroup"
+                     icon="el-icon-delete"
+                     circle></el-button>
         </div>
       </template>
       <div v-if="tagGroupElement.tag_template_list && tagGroupElement.tag_template_list.length > 0">
-        <tag-template-item v-for="tagTemplateElement in tagGroupElement.tag_template_list"
+        <tag-template-item v-for="(tagTemplateElement, index) in tagGroupElement.tag_template_list"
                            v-bind:key="tagTemplateElement.id"
-                           v-bind:tagTemplateItem="tagTemplateElement"></tag-template-item>
+                           v-bind:tagTemplateItem="tagTemplateElement"
+                           v-on:editTagTemplate="handleEditTagTemplate(index)"
+                           v-on:deleteTagTemplate="handleDeleteTagTemplate(index)"></tag-template-item>
       </div>
       <div v-else>
         <el-empty description="暂无数据">
-          <el-button type="primary">添加标签</el-button>
         </el-empty>
       </div>
 
@@ -37,6 +42,8 @@ export default {
   emits: [
     'deleteTagGroup',
     'editTagGroup',
+    'deleteTagTemplate',
+    'editTagTemplate',
   ],
   components: {
     tagTemplateItem: tagTemplateItem,
@@ -45,7 +52,7 @@ export default {
     return {}
   },
   methods: {
-    handleDelete () {
+    handleDeleteTagGroup () {
       this.$confirm("将永久删除该标签组，是否继续", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -84,9 +91,15 @@ export default {
         }
       });
     },
-    handleEdit () {
+    handleEditTagGroup () {
       this.$emit('editTagGroup')
-    }
+    },
+    handleEditTagTemplate (tagTemplateIndex) {
+      this.$emit('editTagTemplate', tagTemplateIndex)
+    },
+    handleDeleteTagTemplate (tagTemplateIndex) {
+      this.$emit('deleteTagTemplate', tagTemplateIndex)
+    },
   }
 
 }
