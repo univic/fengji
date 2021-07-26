@@ -31,12 +31,6 @@ const userRouter = [
           import('../components/tag_template/editTagTemplate.vue'),
       },
       {
-        path: '/user/create_report_group',
-        name: 'createReportGroup',
-        component: () =>
-          import('../components/report_group/createReportGroup.vue'),
-      },
-      {
         path: '/user/manage_report_group',
         name: 'manageReportGroup',
         component: () =>

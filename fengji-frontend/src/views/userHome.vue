@@ -44,10 +44,6 @@
             <i class="el-icon-collection-tag"></i>
             <span>标签管理</span>
           </el-menu-item>
-          <el-menu-item index="/user/create_report_group">
-            <i class="el-icon-document-add"></i>
-            <span>创建报告组</span>
-          </el-menu-item>
           <el-menu-item index="/user/manage_report_group">
             <i class="el-icon-edit"></i>
             <span>报告组管理</span>
@@ -83,8 +79,6 @@
 
 <script>
 
-import recordItemList from "../components/user/itemList.vue";
-
 export default {
   name: "userHome",
   data () {
@@ -93,7 +87,6 @@ export default {
     }
   },
   components: {
-    recordItemList,
   },
   computed: {
     userIdentity () {

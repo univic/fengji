@@ -35,6 +35,10 @@ class TagTemplate(db.Document):
         return item_dict
 
 
+class ReportGroupTagTemplate(db.Document):
+    tag_template_name = StringField(required=True, unique=True)
+
+
 class ItemTag(EmbeddedDocument):
     tag_field_value = StringField()
     tag_name = StringField(required=True)

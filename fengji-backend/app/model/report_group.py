@@ -1,11 +1,12 @@
 import datetime
-from app.lib.database import db
-from app.model.user_model import User
 from mongoengine import StringField, EmbeddedDocumentListField, DateTimeField, ReferenceField, ListField, EmbeddedDocument
 from mongoengine import BooleanField
+from app.lib.database import db
+from app.model.user_model import User
+from app.model.tag_template import ReportGroupTagTemplate
 
 
-class GroupMemberRole(db.Document):
+class ReportGroupMemberRole(db.Document):
     role_abbr = StringField(required=True)
     role_name = StringField(required=True, unique=True)
     role_description = StringField()
@@ -16,7 +17,7 @@ class GroupMemberRole(db.Document):
 
 class ReportGroupMember(EmbeddedDocument):
     user = ReferenceField(User)
-    role = ListField(ReferenceField(GroupMemberRole))
+    role = ListField(ReferenceField(ReportGroupMemberRole))
 
 
 class ReportGroupTag(EmbeddedDocument):
@@ -32,16 +33,12 @@ class ReportGroup(db.Document):
     20 - active
     99 - locked
     """
-    group_name = StringField(required=True, unique=True)
-    group_color = StringField()
-    group_created_at = DateTimeField(default=datetime.datetime.now())
-    group_creator = ReferenceField(User, required=True)
-    is_open = BooleanField(default=False)
-    group_members = EmbeddedDocumentListField(ReportGroupMember)
-    group_status = ListField(StringField())
-    sub_group = None
-
-
-# a walk around for self referencing
-ReportGroup.sub_group = ListField(ReferenceField(ReportGroup))
-
+    name = StringField(required=True, unique=True)
+    color = StringField()
+    created_at = DateTimeField(default=datetime.datetime.now())
+    creator = ReferenceField(User, required=True)
+    open_join = BooleanField(default=False)
+    member_user = ListField(ReferenceField(User, required=True))
+    member_group = ListField(ReferenceField('self'))
+    status = ListField(StringField())
+    tag_list = EmbeddedDocumentListField(ReportGroupTagTemplate)

@@ -1,19 +1,18 @@
 <template>
-  <el-page-header content="我的报告组"></el-page-header>
-  <el-divider></el-divider>
-  <el-button
-    type="primary"
-    v-on:click="dialogVisible = true"
-  >加入报告组</el-button>
-  <join-report-group-dialog
-    v-bind:dialog-visible="dialogVisible"
-    v-on:closeDialog="dialogVisible = false"
-    v-on:refreshList="getList"
-  ></join-report-group-dialog>
-  <div>已经加入的报告组</div>
-  <el-card>
+  <div>
+    <el-page-header content="我的报告组"></el-page-header>
+    <el-divider></el-divider>
+    <el-button type="primary"
+               v-on:click="dialogVisible = true">加入报告组</el-button>
+    <join-report-group-dialog v-bind:dialog-visible="dialogVisible"
+                              v-on:closeDialog="dialogVisible = false"
+                              v-on:refreshList="getList"></join-report-group-dialog>
+    <div>已经加入的报告组</div>
+    <el-card>
 
-  </el-card>
+    </el-card>
+  </div>
+
 </template>
 
 <script>
@@ -23,7 +22,7 @@
 
 import joinReportGroupDialog from './joinReportGroupDialog.vue';
 import api from '../../api';
-import {ElMessage} from 'element-plus';
+import { ElMessage } from 'element-plus';
 
 export default {
   name: "myReportGroup.vue",
@@ -36,7 +35,7 @@ export default {
     }
   },
   methods: {
-    getList() {
+    getList () {
       api.reportGroup.getReportGroup({
         type: 'all',
       }).then(
@@ -58,5 +57,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

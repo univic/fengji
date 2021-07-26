@@ -2,6 +2,9 @@
   <div>
     <el-page-header content="管理报告组"></el-page-header>
     <el-divider></el-divider>
+    <el-button v-on:click="handleCreateReportGroup">创建报告组</el-button>
+    <create-report-group ref="createReportGroup"
+                         v-on:refreshList="getGroupList"></create-report-group>
 
     <el-table stripe
               :data="reportGroupList">
@@ -27,13 +30,17 @@
 <script>
 import api from '../../api';
 import { ElMessage } from 'element-plus';
+import createReportGroup from './createReportGroup.vue'
 
 export default {
-  name: "editReportGroup",
+  name: "manageReportGroup",
   data () {
     return {
       reportGroupList: null,
     }
+  },
+  components: {
+    createReportGroup: createReportGroup
   },
   created () {
     this.getGroupList()
@@ -101,9 +108,9 @@ export default {
       // call the handleEdit function in child component, let it prepare the dialog title and field values
       // this.$refs.tagEditPanel.handleEdit(row)
     },
-    handleTagCreate () {
+    handleCreateReportGroup () {
       // call the handleCreate function in child component, let it prepare the dialog title
-      // this.$refs.tagEditPanel.handleCreate()
+      this.$refs.createReportGroup.handleCreate()
     }
   }
 }

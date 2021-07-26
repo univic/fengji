@@ -6,7 +6,7 @@ import json
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
-from app.model.report_group import GroupMemberRole
+from app.model.report_group import ReportGroupMemberRole
 from app.model.post_forms import GroupRoleForm
 
 bp = Blueprint('group_role', __name__, url_prefix='/api/group_member_role')
@@ -17,7 +17,7 @@ bp = Blueprint('group_role', __name__, url_prefix='/api/group_member_role')
 def add_group_member_role():
     group_role_form = GroupRoleForm(request.form, meta={'csrf': False})
     if group_role_form.validate():
-        new_group_role = GroupMemberRole()
+        new_group_role = ReportGroupMemberRole()
         new_group_role.role_abbr = group_role_form.role_abbr.data
         new_group_role.role_name = group_role_form.role_name.data
         new_group_role.role_description = group_role_form.role_description.data
@@ -63,7 +63,7 @@ def get_group_member_role():
         # return detailed info of all groups
         try:
             group_role_list = []
-            group_roles = GroupMemberRole.objects()
+            group_roles = ReportGroupMemberRole.objects()
             for item in group_roles:
                 # convert the mongodb query obj to json, then load it into dict
                 # make id, date and user more readable before return it
@@ -92,7 +92,7 @@ def get_group_member_role():
                     'messages': [e.args[0]]
                 }
     elif request.args['type'] == 'check_existence':
-        group_role = GroupMemberRole.objects(role_name=request.args['role_name'])
+        group_role = ReportGroupMemberRole.objects(role_name=request.args['role_name'])
         if not group_role:
             response = {
                 'status': 'success',
@@ -115,7 +115,7 @@ def get_group_member_role():
 @bp.route('/', methods={'DELETE'})
 @jwt_required()
 def delete_report_member_role():
-    group_role = GroupMemberRole.objects(id=request.args['id'])
+    group_role = ReportGroupMemberRole.objects(id=request.args['id'])
     try:
         group_role.delete()
         response = {
@@ -135,7 +135,7 @@ def delete_report_member_role():
 def modify_report_member_role():
     form = GroupRoleForm(request.form, meta={'csrf': False})
     if form.validate():
-        group_role = GroupMemberRole.objects(id=form.id.data).first()
+        group_role = ReportGroupMemberRole.objects(id=form.id.data).first()
         group_role.role_name = form.role_name.data
         group_role.role_abbr = form.role_abbr.data
         group_role.role_color = form.role_color.data

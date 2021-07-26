@@ -17,14 +17,14 @@ bp = Blueprint('report_group', __name__, url_prefix='/api/report_group')
 def add_report_group():
     report_group_form = ReportGroupForm(request.form, meta={'csrf': False})
     if report_group_form.validate():
-        new_group = ReportGroup()
+        new_report_group = ReportGroup()
         group_creator = get_current_user()
-        new_group.group_name = report_group_form.group_name.data
-        new_group.is_project = report_group_form.is_project.data
-        new_group.group_color = report_group_form.group_color.data
-        new_group.group_creator = group_creator
+        new_report_group.group_name = report_group_form.group_name.data
+        new_report_group.is_project = report_group_form.is_project.data
+        new_report_group.group_color = report_group_form.group_color.data
+        new_report_group.group_creator = group_creator
         try:
-            new_group.save()
+            new_report_group.save()
             response = {
                 'status': 'success',
                 'messages': ['报告组添加成功~']
