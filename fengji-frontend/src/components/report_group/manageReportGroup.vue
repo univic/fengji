@@ -9,7 +9,7 @@
     <el-table stripe
               :data="reportGroupList">
       <el-table-column label="组名"
-                       prop="group_name"></el-table-column>
+                       prop="name"></el-table-column>
       <el-table-column label="类型"
                        prop="group_type"></el-table-column>
       <el-table-column label="操作">

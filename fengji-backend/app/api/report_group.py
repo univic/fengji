@@ -19,10 +19,9 @@ def add_report_group():
     if report_group_form.validate():
         new_report_group = ReportGroup()
         group_creator = get_current_user()
-        new_report_group.group_name = report_group_form.group_name.data
-        new_report_group.is_project = report_group_form.is_project.data
-        new_report_group.group_color = report_group_form.group_color.data
-        new_report_group.group_creator = group_creator
+        new_report_group.name = report_group_form.name.data
+        new_report_group.color = report_group_form.color.data
+        new_report_group.creator = group_creator
         try:
             new_report_group.save()
             response = {
@@ -70,10 +69,10 @@ def get_report_group():
                 item_dict = json.loads(item.to_json())
                 # turn id into str format, turn datetime obj into timestamp
                 item_dict["id"] = str(item.id)
-                item_dict["group_created_at"] = int(item.group_created_at.timestamp())
+                item_dict["created_at"] = int(item.created_at.timestamp())
                 item_dict.pop("_id")
                 # get group_creator info
-                group_creator = item.group_creator
+                group_creator = item.creator 
                 group_creator_dict = {
                     'id': str(group_creator.id),
                     'username': group_creator.username

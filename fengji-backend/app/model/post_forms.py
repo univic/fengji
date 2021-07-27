@@ -58,15 +58,14 @@ class TagTemplateForm(Form):
 
 
 class ReportGroupForm(Form):
-    group_name = StringField('group_name',
+    name = StringField('name',
                              [validators.input_required('未填写报告组名'),
                               validators.Length(min=app_config.REPORT_GROUP_SETTINGS['MIN_GROUP_NAME_LENGTH'],
                                                 max=app_config.REPORT_GROUP_SETTINGS['MAX_GROUP_NAME_LENGTH'],
-                                                message=f"用户名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_GROUP_NAME_LENGTH']}~"
+                                                message=f"报告组名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_GROUP_NAME_LENGTH']}~"
                                                         f"{app_config.REPORT_GROUP_SETTINGS['MAX_GROUP_NAME_LENGTH']}位")])
-    is_project = BooleanField('is_project')
-    is_open = BooleanField('is_open')
-    group_color = StringField('group_color')
+    open_join = BooleanField('open_join')
+    color = StringField('color')
 
 
 class GroupRoleForm(Form):

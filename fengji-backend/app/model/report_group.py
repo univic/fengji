@@ -41,4 +41,4 @@ class ReportGroup(db.Document):
     member_user = ListField(ReferenceField(User, required=True))
     member_group = ListField(ReferenceField('self'))
     status = ListField(StringField())
-    tag_list = EmbeddedDocumentListField(ReportGroupTagTemplate)
+    tag_list = EmbeddedDocumentListField(ReportGroupTag)

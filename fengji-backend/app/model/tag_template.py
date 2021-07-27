@@ -35,10 +35,6 @@ class TagTemplate(db.Document):
         return item_dict
 
 
-class ReportGroupTagTemplate(db.Document):
-    tag_template_name = StringField(required=True, unique=True)
-
-
 class ItemTag(EmbeddedDocument):
     tag_field_value = StringField()
     tag_name = StringField(required=True)
@@ -48,4 +44,16 @@ class ItemTag(EmbeddedDocument):
     tag_priority = IntField(default=1)
     tag_color = StringField()
     tag_created_at = DateTimeField(default=datetime.datetime.now())
-    tag_created_by = ReferenceField(User, required=True)
+    creator = ReferenceField(User, required=True)
+    ref_tag_template = ReferenceField(TagTemplate, required=True)
+
+
+class ReportGroupTagTemplate(db.Document):
+    tag_template_name = StringField(required=True, unique=True)
+
+
+class ReportGroupTag(EmbeddedDocument):
+    tag_template_name = StringField(required=True, unique=True)
+    ref_tag_template = ReferenceField(ReportGroupTagTemplate, required=True)
+
+
