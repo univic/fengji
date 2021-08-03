@@ -33,6 +33,7 @@ class RegistrationForm(Form):
 
 
 class LoginForm(Form):
+    id = StringField('id')
     username = StringField('username',
                            [validators.InputRequired('未填写用户名')])
     password = StringField('password',
@@ -58,6 +59,7 @@ class TagTemplateForm(Form):
 
 
 class ReportGroupForm(Form):
+    id = StringField('id')
     name = StringField('name',
                              [validators.input_required('未填写报告组名'),
                               validators.Length(min=app_config.REPORT_GROUP_SETTINGS['MIN_GROUP_NAME_LENGTH'],
@@ -98,3 +100,8 @@ class TagGroupForm(Form):
                                                     message=f"标签组长度需为{app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH']}~"
                                                             f"{app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH']}位")])
     tag_group_color = StringField()
+
+
+class TodoItem(Form):
+    id = StringField('id')
+    title = StringField('title')
