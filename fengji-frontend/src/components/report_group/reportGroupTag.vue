@@ -1,14 +1,19 @@
 <template>
   <el-popover>
-    <el-tag>
+    <div>
 
-    </el-tag>
+    </div>
+    <template #reference>
+      <el-tag>
+        <slot></slot>
+      </el-tag>
+    </template>
   </el-popover>
 </template>
 
 <script>
 export default {
-  name: "reportGroupSelector",
+  name: "reportGroupTag",
   data() {
     return {
       popoverVisible: false,
