@@ -12,11 +12,11 @@
       v-on:showDetailDialog="openDetailDialog(item)"
     ></basic-item>
 
-    <new-item
+    <new-todo-item
       ref="newItemInput"
       v-on:add-item="addItem"
       :required-tags="requiredTags"
-    ></new-item>
+    ></new-todo-item>
   </el-card>
   <el-dialog
     v-model="showDetailDialog"
@@ -31,7 +31,7 @@
 
 <script>
   import basicItem from "./basicItem.vue";
-  import newItem from "./newItem.vue";
+  import newTodoItem from "../todo_item/newTodoItem.vue";
   import tagDetailedDialog from "../tagDetailedDialog.vue";
   import { ElMessage } from "element-plus";
   import api from "../../api";
@@ -47,7 +47,7 @@ export default {
 
   ],
   components: {
-    newItem,
+    newTodoItem,
     basicItem,
     tagDetailedDialog,
   },

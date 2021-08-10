@@ -72,7 +72,7 @@ def get_report_group():
                 item_dict["created_at"] = int(item.created_at.timestamp())
                 item_dict.pop("_id")
                 # get group_creator info
-                group_creator = item.creator 
+                group_creator = item.creator
                 group_creator_dict = {
                     'id': str(group_creator.id),
                     'username': group_creator.username
