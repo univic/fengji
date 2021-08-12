@@ -20,7 +20,9 @@
             class="el-icon-plus"
             v-if="!newItemFocused"
             style="width: 10%"
-        ></span>
+        >
+
+        </span>
       <span
           class="el-icon-circle-plus"
           v-else

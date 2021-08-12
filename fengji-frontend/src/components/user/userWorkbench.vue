@@ -26,11 +26,27 @@ export default {
   },
   created() {
     this.getTagTemplate();
+    this.getMyReportGroup();
 
   },
   computed: {
   },
   methods: {
+    getMyReportGroup() {
+      api.reportGroup.getReportGroup({
+        type: 'my',
+      }).then((response) => {
+            if (response.data.status === 'success') {
+              console.log(response.data.report_group_list)
+            } else {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+                type: 'error'
+              });
+            }
+          }
+      )
+    },
     getTagTemplate() {
       api.tag.getTagTemplate({
         type: 'all',

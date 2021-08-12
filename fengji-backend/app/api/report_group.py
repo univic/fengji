@@ -3,6 +3,7 @@ from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
 from app.model.report_group import ReportGroup
+from app.model.user_model import User
 from app.model.post_forms import ReportGroupForm
 
 # TODO: need a get my report groups api
@@ -91,7 +92,7 @@ def get_report_group():
                     'messages': [e.args[0]]
                 }
     elif request.args['type'] == 'check_existence':
-        report_group = ReportGroup.objects(group_name=request.args['group_name'])
+        report_group = ReportGroup.objects(name=request.args['name'])
         if not report_group:
             response = {
                 'status': 'success',
@@ -104,7 +105,16 @@ def get_report_group():
             }
     # return all the report groups created by current user
     elif request.args['type'] == 'my':
-        pass
+        # user = User.objects(id=get_current_user().id)
+        report_groups = ReportGroup.objects(creator='6035240d44284e6b7e90ccc2')
+        report_group_list = report_groups
+        for item in report_group_list:
+            print(item.to_json())
+        response = {
+            'status': 'success',
+            'messages': [''],
+            'report_group_list': report_group_list
+        }
     else:
         response = {
             'status': 'error',

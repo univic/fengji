@@ -1,13 +1,17 @@
-import types from "../types"
+import types from "../types";
 
 const state = {
   userIdentity: '123',
+  myReportGroup: null,
 }
 
 let getters = {
   count(state) {
     return state.count
-  }
+  },
+  myReportGroup(state) {
+    return state.myReportGroup
+  },
 }
 
 const mutations = {

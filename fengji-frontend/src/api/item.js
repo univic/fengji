@@ -5,13 +5,13 @@ import {ElMessage} from "element-plus";
 const itemAPI = {
   addRecordItem(dataObj) {
     return myAxios.post(
-      'api/item/',
+      'api/todo_item/',
       dataObj
     );
   },
   deleteRecordItem(params) {
     return myAxios.delete(
-      'api/item/',
+      'api/todo_item/',
       {
         params: params
       }
@@ -26,7 +26,7 @@ const itemAPI = {
   },
   editRecordItem(dataObj) {
     return myAxios.put(
-      'api/item/',
+      'api/todo_item/',
       dataObj,
       {
         headers: {
@@ -37,7 +37,7 @@ const itemAPI = {
   },
   getRecordItem(params) {
     return myAxios.get(
-      '/api/item/',
+      '/api/todo_item/',
       {
         params: params
       }

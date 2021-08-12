@@ -50,7 +50,7 @@ export default {
       validateGroupName: (rule, value, callback) => {
         api.reportGroup.getReportGroup({
           type: 'check_existence',
-          group_name: value,
+          name: value,
         }).then(
           function (response) {
             if (response.data.status === 'success') {
