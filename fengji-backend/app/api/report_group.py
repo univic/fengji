@@ -67,18 +67,7 @@ def get_report_group():
             for item in report_groups:
                 # convert the mongodb query obj to json, then load it into dict
                 # make id, date and user more readable before return it
-                item_dict = json.loads(item.to_json())
-                # turn id into str format, turn datetime obj into timestamp
-                item_dict["id"] = str(item.id)
-                item_dict["created_at"] = int(item.created_at.timestamp())
-                item_dict.pop("_id")
-                # get group_creator info
-                group_creator = item.creator
-                group_creator_dict = {
-                    'id': str(group_creator.id),
-                    'username': group_creator.username
-                }
-                item_dict["group_creator"] = group_creator_dict
+                item_dict = item.to_json()
                 report_group_list.append(item_dict)
             response = {
                 'status': 'success',
@@ -105,11 +94,11 @@ def get_report_group():
             }
     # return all the report groups created by current user
     elif request.args['type'] == 'my':
-        # user = User.objects(id=get_current_user().id)
-        report_groups = ReportGroup.objects(creator='6035240d44284e6b7e90ccc2')
-        report_group_list = report_groups
-        for item in report_group_list:
+        report_groups = ReportGroup.objects(creator=get_current_user().id)
+        report_group_list = []
+        for item in report_groups:
             print(item.to_json())
+            report_group_list.append(item.to_json())
         response = {
             'status': 'success',
             'messages': [''],

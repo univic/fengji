@@ -3,6 +3,7 @@ from mongoengine import StringField, EmbeddedDocumentListField, DateTimeField, R
 from mongoengine import BooleanField
 from app.lib.database import db
 from app.model.user_model import User
+import app.utilities.db_util as db_util
 from app.model.tag_template import ReportGroupTagTemplate
 
 
@@ -35,7 +36,7 @@ class ReportGroup(db.Document):
     """
     name = StringField(required=True, unique=True)
     color = StringField()
-    created_at = DateTimeField(default=datetime.datetime.now())
+    create_time = DateTimeField(default=datetime.datetime.now())
     creator = ReferenceField(User, required=True)
     open_join = BooleanField(default=False)
     member_user = ListField(ReferenceField(User, required=True))
@@ -46,3 +47,13 @@ class ReportGroup(db.Document):
     tag_list = EmbeddedDocumentListField(ReportGroupTag)
     related_project = StringField()  # should be a reference field, but leave it here for now
 
+    def to_json(self):
+        raw_data = self
+        # convert mongodb object to dict, replace _id
+        item_dict = db_util.dbo_better_json(raw_data)
+        item_dict["create_time"] = int(raw_data.create_time.timestamp())
+        item_dict["creator"] = {
+                    'id': str(raw_data.creator.id),
+                    'username': raw_data.creator.username
+                }
+        return item_dict
