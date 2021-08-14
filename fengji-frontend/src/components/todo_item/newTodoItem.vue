@@ -1,6 +1,8 @@
 <template>
 
-  <report-group-tag></report-group-tag>
+  <report-group-tag
+    v-on:selectReportGroup="updateReportGroupList"
+  ></report-group-tag>
   <!--  default tag-->
   <div>
     <basic-tag
@@ -69,6 +71,7 @@ export default {
       newItem: {
         title: null,
         tag_list: null,
+        report_group_list: null,
       },
     }
   },
@@ -112,6 +115,10 @@ export default {
     },
     updateTagValue: function (index, newTagValue) {
       this.tagList[index].tag_value = newTagValue
+    },
+    // upon reportGroupTag emit 'selectReportGroup', update report_group_list with the payload
+    updateReportGroupList: function (new_list) {
+      this.newItem.report_group_list = new_list
     }
   }
 }

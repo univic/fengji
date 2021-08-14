@@ -2,6 +2,7 @@ import json
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_current_user
 from app.model.todo_item import TodoItem
+from app.model.report_group import ReportGroup
 
 bp = Blueprint('todo_item', __name__, url_prefix='/api/todo_item')
 
@@ -10,9 +11,16 @@ bp = Blueprint('todo_item', __name__, url_prefix='/api/todo_item')
 @jwt_required()
 def add_todo_item():
     new_todo_item = TodoItem()
-    print(request.data)
     post_data = request.get_json()
     new_todo_item.title = post_data['title']
+    posted_report_group_list = post_data['report_group_list']
+    report_group_list = []
+    # query the related ReportGroup item, pass it to the reference field
+    for element in posted_report_group_list:
+        report_group_items = ReportGroup.objects(id=element, creator=get_current_user().id)
+        for item in report_group_items:
+            report_group_list.append(item)
+    new_todo_item.report_group_list = report_group_list
     new_todo_item.creator = get_current_user()
     try:
         new_todo_item.save()
@@ -52,9 +60,13 @@ def get_todo_item():
                 'messages': [''],
                 'todo_item_list': todo_item_list
             }
-        except Exception:
-            pass
-        return response
+        except Exception as e:
+            print(e)
+            response = {
+                'status': 'error',
+                'messages': [e]
+            }
+    return response
 
 
 @bp.route('/', methods={'DELETE'})

@@ -98,7 +98,7 @@ def get_report_group():
         report_groups = ReportGroup.objects(creator=get_current_user().id)
         report_group_list = []
         for item in report_groups:
-            print(item.to_json())
+
             report_group_list.append(item.to_json())
         response = {
             'status': 'success',

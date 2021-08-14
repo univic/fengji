@@ -12,7 +12,7 @@ class TodoItem(db.Document):
     create_time = DateTimeField(default=datetime.datetime.now())
     creator = ReferenceField(User, required=True)
     owner = ReferenceField(User)
-    report_to_group = ListField(ReferenceField(ReportGroup, required=True))
+    report_group_list = ListField(ReferenceField(ReportGroup, required=True))
     start_time = DateTimeField()
     planned_finish_time = DateTimeField()
     actual_finish_time = DateTimeField()

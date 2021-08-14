@@ -29,7 +29,7 @@
         v-on:click="showDetailPanel = !showDetailPanel"
 
       >
-        {{ item.item_title }}
+        {{ item.title }}
       </div>
 <!--maneuver button set -->
       <div

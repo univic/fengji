@@ -6,7 +6,7 @@
     <template #header><slot></slot></template>
     <basic-item
       v-for="item in recordItemList"
-      :key="item.item_title"
+      :key="item.id"
       :item="item"
       v-on:removeItem="handleRemoveItem(item)"
       v-on:showDetailDialog="openDetailDialog(item)"
@@ -122,7 +122,7 @@ export default {
         type: 'all'
       }).then((response) => {
         console.log(response.data)
-        this.recordItemList = response.data.record_item_list
+        this.recordItemList = response.data.todo_item_list
       }
       )
     },

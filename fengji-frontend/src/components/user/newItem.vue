@@ -61,10 +61,11 @@ export default {
       newItemText: null,
       rollBackText: null,
       tagList: [],
-      // key name must align with backstage
+      // key name must align with backend
       newItem: {
         item_title: null,
         tag_list: null,
+        report_group_list: null,
       },
     }
   },

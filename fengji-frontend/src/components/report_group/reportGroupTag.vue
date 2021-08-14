@@ -35,10 +35,21 @@
 <script>
 export default {
   name: "reportGroupTag",
+  emits: [
+    'selectReportGroup'
+  ],
   data() {
     return {
       popoverVisible: false,
       selectedReportGroup: [],
+    }
+  },
+  watch: {
+    selectedReportGroup: {
+      deep:  true,
+      handler(newValue, oldValue) {
+        this.$emit('selectReportGroup', this.selectedReportGroup)
+      }
     }
   },
   computed: {
