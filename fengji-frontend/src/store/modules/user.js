@@ -16,7 +16,10 @@ let getters = {
 
 const mutations = {
   [types.SET_USER_IDENTITY](state, payload) {
-    state.userIdentity = payload
+    state.userIdentity = payload;
+  },
+  setMyReportGroup(state, payload) {
+    state.myReportGroup = payload;
   }
 }
 
@@ -26,7 +29,7 @@ const actions = {
   },
   decrement( { commit, state }) {
     commit(types.DECREMENT)
-  }
+  },
 }
 
 export default {

@@ -4,7 +4,7 @@
   <div>
     <el-dialog v-model="dialogVisible">
       <div>
-        <el-page-header content="创建报告组"></el-page-header>
+        <el-page-header :content="dialogTitle"></el-page-header>
         <el-divider></el-divider>
         <el-form :model="reportGroupForm"
                  status-icon
@@ -42,7 +42,7 @@ import api from '../../api';
 import { ElMessage } from 'element-plus';
 
 export default {
-  name: "editReportGroup.vue",
+  name: "editReportGroup",
   emits: [
     'refreshList'
   ],
@@ -70,6 +70,8 @@ export default {
     }
     return {
       dialogVisible: false,
+      dialogMode: null,
+      dialogTitle: '创建标签',
       reportGroupForm: {
         id: null,
         name: null,
@@ -87,8 +89,21 @@ export default {
   },
   methods: {
     handleCreate () {
-      this.dialogVisible = true
+      this.dialogTitle = "创建报告组";
+      this.dialogVisible = true;
+      this.dialogMode = 'create';
     },
+    handleEdit (elements) {
+      this.dialogVisible = true
+      for (let item in elements) {
+        if (Object.prototype.hasOwnProperty.call(this.reportGroupForm, item)) {
+          this.reportGroupForm[item] = elements[item];
+        }
+      }
+      this.dialogTitle = "编辑报告组 - " + this.reportGroupForm.name;
+      this.dialogMode = 'modify';
+    },
+
     handleSubmit () {
       this.$refs.reportGroupForm.validate((valid) => {
         if (valid) {
@@ -98,11 +113,15 @@ export default {
     },
     submitNewTag () {
       let dataObj = qs.stringify(this.reportGroupForm);
-      api.reportGroup.addNewGroup(dataObj).then((response) => {
+      let cAPI = api.reportGroup.addNewGroup;
+      if (this.dialogMode === 'modify') {
+        cAPI = api.reportGroup.editReportGroup;
+      }
+      cAPI(dataObj).then((response) => {
         if (response.data.status === 'success') {
           this.$refs.reportGroupForm.resetFields();
           this.dialogVisible = false;
-          this.$emit('refreshList')
+          this.$emit('refreshList');
           ElMessage({
             message: response.data.messages[0],
             type: 'success'

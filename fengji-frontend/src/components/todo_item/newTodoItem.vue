@@ -53,7 +53,7 @@ export default {
   ],
   components: {
     reportGroupTag,
-    basicTag
+    basicTag,
   },
   emits: [
     'addItem'
@@ -67,7 +67,7 @@ export default {
       tagList: [],
       // key name must align with backstage
       newItem: {
-        item_title: null,
+        title: null,
         tag_list: null,
       },
     }
@@ -101,7 +101,7 @@ export default {
     },
     addRecordItem () {
       this.rollBackText = this.newItemText;
-      this.newItem.item_title = this.newItemText;
+      this.newItem.title = this.newItemText;
       this.newItem.tag_list = this.tagList;
       this.$emit('addItem', this.newItem);
       // this.recordItemList.push(this.newItem);

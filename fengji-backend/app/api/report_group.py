@@ -1,4 +1,4 @@
-import json
+import traceback
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
@@ -19,10 +19,10 @@ def add_report_group():
     report_group_form = ReportGroupForm(request.form, meta={'csrf': False})
     if report_group_form.validate():
         new_report_group = ReportGroup()
-        group_creator = get_current_user()
         new_report_group.name = report_group_form.name.data
         new_report_group.color = report_group_form.color.data
-        new_report_group.creator = group_creator
+        new_report_group.open_join = report_group_form.open_join.data
+        new_report_group.creator = get_current_user()
         try:
             new_report_group.save()
             response = {
@@ -30,11 +30,12 @@ def add_report_group():
                 'messages': ['报告组添加成功~']
             }
         # if the group name is not unique, let the frontend know
-        except NotUniqueError:
+        except NotUniqueError as e:
             response = {
                 'status': 'error',
                 'messages': ['重复的报告组名']
             }
+            print(traceback.print_exc())
         except ValidationError as e:
             response = {
                 'status': 'error',
@@ -137,9 +138,9 @@ def modify_report_group():
     report_group_form = ReportGroupForm(request.form, meta={'csrf': False})
     if report_group_form.validate():
         report_group = ReportGroup.objects(id=report_group_form.id.data).first()
-        report_group.group_name = report_group_form.group_name.data
-        report_group.tag_required = report_group_form.tag_required.data
-        report_group.group_color = report_group_form.group_color.data
+        report_group.name = report_group_form.name.data
+        report_group.open_join = report_group_form.open_join.data
+        report_group.color = report_group_form.color.data
         try:
             report_group.save()
             response = {

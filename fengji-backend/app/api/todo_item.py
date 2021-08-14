@@ -1,6 +1,6 @@
 import json
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_current_user
 from app.model.todo_item import TodoItem
 
 bp = Blueprint('todo_item', __name__, url_prefix='/api/todo_item')
@@ -13,6 +13,7 @@ def add_todo_item():
     print(request.data)
     post_data = request.get_json()
     new_todo_item.title = post_data['title']
+    new_todo_item.creator = get_current_user()
     try:
         new_todo_item.save()
         response = jsonify({
