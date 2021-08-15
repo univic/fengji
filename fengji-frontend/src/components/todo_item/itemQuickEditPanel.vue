@@ -8,6 +8,9 @@
 
       <!--          tag container -->
       <div style="width: 70%">
+        <report-group-tag
+            v-on:selectReportGroup="updateReportGroupList"
+        ></report-group-tag>
         <el-tag
             v-for="(tagItem, tagItemIndex) in itemTags"
             :key="tagItem.tag_id"
@@ -34,18 +37,12 @@
           </el-button>
         </item-add-tag-panel>
 
-        <el-button
-            size="small"
-            v-on:click="tagDialogVisible = true"
-        >更多 >></el-button>
-
       <!--          edit tag-->
         <div>
           <!--            if no tag is selected...-->
           <div
               v-if="tagSelected === null"
           >
-            点击上方标签，修改标签内容
           </div>
           <!--            if a tag is selected, show the tag's fields and values-->
           <div
@@ -80,7 +77,7 @@
       <el-button
           type="primary"
           size="small"
-          v-on:click="handleTagDetailPanelSave"
+          v-on:click="handleSave"
       >
         确定
       </el-button>
@@ -93,7 +90,7 @@
       </el-button>
       <el-button
           size="small"
-          v-on:click="showDetailPanel = false"
+          v-on:click="handleCloseQuickEditPanel"
       >
         取消
       </el-button>
@@ -103,59 +100,30 @@
 
 <script>
 import itemAddTagPanel from "./itemAddTagPanel.vue";
+import reportGroupTag from "../report_group/reportGroupTag.vue";
 
 export default {
   name: "tagQuickEditPanel",
   components: {
     itemAddTagPanel,
+    reportGroupTag
   },
-  emits: [],
+  emits: [
+      'closeQuickEditPanel',
+      'saveQuickEditPanel',
+  ],
   data () {
     return {
-      itemTags: [
-        {
-          tag_id: 'aaa',
-          tag_name: '报告组',
-          tag_attr: 'required',
-          tag_priority: 1,
-          tag_field_list: [
-            {
-              tag_field_name: '报告组ID',
-              tag_field_value: 'abc',
-              tag_field_type: 'text',
-              tag_field_for_preview: false,
-              tag_field_editable: false,
-            },
-            {
-              tag_field_name: '报告组名称',
-              tag_field_value: 'ERP产品域',
-              tag_field_type: 'text',
-              tag_field_for_preview: true,
-              tag_field_editable: false,
-            },
-          ]
-        },
-        {
-          tag_id: 'bbb',
-          tag_name: '⏱工时',
-          tag_attr: 'optional',
-          tag_priority: 1,
-          tag_field_list: [
-            {
-              tag_field_name: '花费工时（小时）',
-              tag_field_value: 2,
-              tag_field_type: 'number',
-              tag_field_for_preview: true,
-              tag_field_editable: true,
-            },
-          ]
-        },
-      ],
+      tagInputVisible: false,
+      showAddTagSelector: false,
+      itemTags: [],
       tagSelected : null,
       indexOfTagSelected: null,
-      tagInputVisible: false,
       tagInputValue: null,
-      showAddTagSelector: false,
+      postForm: {
+        report_group_list: [],
+        tag_list: [],
+      }
     }
   },
   methods: {
@@ -170,14 +138,24 @@ export default {
         }
       })
     },
-    handleTagDetailPanelSave() {
-
+    handleSave() {
+      // upon save, emit the postForm to the parent component
+      this.$emit('saveQuickEditPanel', this.postForm)
     },
     showTagInput() {
       this.tagInputValue = true
     },
     handleInputConfirm() {
     },
+    handleCloseQuickEditPanel () {
+      this.$emit('closeQuickEditPanel')
+    },
+    handleSubmit() {
+
+    },
+    updateReportGroupList: function (new_list) {
+      this.postForm.report_group_list = new_list;
+    }
   }
 }
 </script>

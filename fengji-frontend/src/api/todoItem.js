@@ -2,14 +2,14 @@
 import myAxios from "../utilities/request";
 import {ElMessage} from "element-plus";
 
-const itemAPI = {
-  addRecordItem(dataObj) {
+const todoItem = {
+  addTodoItem(dataObj) {
     return myAxios.post(
       'api/todo_item/',
       dataObj
     );
   },
-  deleteRecordItem(params) {
+  deleteTodoItem(params) {
     return myAxios.delete(
       'api/todo_item/',
       {
@@ -24,7 +24,7 @@ const itemAPI = {
         }
     )
   },
-  editRecordItem(dataObj) {
+  editTodoItem(dataObj) {
     return myAxios.put(
       'api/todo_item/',
       dataObj,
@@ -35,7 +35,7 @@ const itemAPI = {
       }
     )
   },
-  getRecordItem(params) {
+  getTodoItem(params) {
     return myAxios.get(
       '/api/todo_item/',
       {
@@ -52,4 +52,4 @@ const itemAPI = {
   },
 }
 
-export default itemAPI;
+export default todoItem;

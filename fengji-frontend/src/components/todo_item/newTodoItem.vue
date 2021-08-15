@@ -1,23 +1,23 @@
 <template>
 
   <report-group-tag
-    v-on:selectReportGroup="updateReportGroupList"
+      v-on:selectReportGroup="updateReportGroupList"
   ></report-group-tag>
   <!--  default tag-->
   <div>
     <basic-tag
-      v-for="(tag, index) in tagList"
-      :key="tag.id"
-      v-on:updateTagValue="updateTagValue(index, $event)"
+        v-for="(tag, index) in tagList"
+        :key="tag.id"
+        v-on:updateTagValue="updateTagValue(index, $event)"
     >
       {{ tag.tag_name }} : {{ tag.tag_value }}
     </basic-tag>
   </div>
-<!--    main input area-->
-    <div
+  <!--    main input area-->
+  <div
       v-on:mouseover="newItemHighLighted=true"
       v-on:mouseout="newItemHighLighted = newItemFocused"
-    >
+  >
         <span
             class="el-icon-plus"
             v-if="!newItemFocused"
@@ -25,22 +25,22 @@
         >
 
         </span>
-      <span
-          class="el-icon-circle-plus"
-          v-else
-          style="width: 10%"
-      ></span>
-      <el-input
-          v-model="newItemText"
-          v-on:keypress.enter="addRecordItem"
-          v-on:focus="newItemFocused=true"
-          v-on:blur="newItemFocused=false"
-          style="width: 80%"
-          type="flex"
-          align="right"
-      >
-      </el-input>
-    </div>
+    <span
+        class="el-icon-circle-plus"
+        v-else
+        style="width: 10%"
+    ></span>
+    <el-input
+        v-model="newItemText"
+        v-on:keypress.enter="addRecordItem"
+        v-on:focus="newItemFocused=true"
+        v-on:blur="newItemFocused=false"
+        style="width: 80%"
+        type="flex"
+        align="right"
+    >
+    </el-input>
+  </div>
 
 </template>
 
@@ -60,7 +60,7 @@ export default {
   emits: [
     'addItem'
   ],
-  data () {
+  data() {
     return {
       newItemHighLighted: false,
       newItemFocused: false,
@@ -73,36 +73,34 @@ export default {
         tag_list: null,
         report_group_list: null,
       },
-    }
+    };
   },
   // the prop value of requiredTags is async assigned, so the value is assigned after the component is mounted
   // use deep watch to force the value get updated
   watch: {
     requiredTags: {
-      deep:  true,
+      deep: true,
       handler(newValue, oldValue) {
-        this.initializeTagList()
+        this.initializeTagList();
       }
     }
   },
-  computed: {
-
-  },
+  computed: {},
   mounted() {
-    this.initializeTagList()
+    this.initializeTagList();
   },
   methods: {
-    initializeTagList () {
-      this.tagList = []
-      this.requiredTags.forEach( (item) => {
+    initializeTagList() {
+      this.tagList = [];
+      this.requiredTags.forEach((item) => {
         // use shallow copy, or the newTagItem will point to the same address as requiredTags
         // in that case the tagList will be initialized instantly after value change due to the watcher
         let newTagItem = {...item};
         newTagItem.tag_value = item.tag_default_value;
         this.tagList.push(newTagItem);
-      })
+      });
     },
-    addRecordItem () {
+    addRecordItem() {
       this.rollBackText = this.newItemText;
       this.newItem.title = this.newItemText;
       this.newItem.tag_list = this.tagList;
@@ -114,14 +112,14 @@ export default {
       this.newItemText = this.rollBackText;
     },
     updateTagValue: function (index, newTagValue) {
-      this.tagList[index].tag_value = newTagValue
+      this.tagList[index].tag_value = newTagValue;
     },
     // upon reportGroupTag emit 'selectReportGroup', update report_group_list with the payload
     updateReportGroupList: function (new_list) {
-      this.newItem.report_group_list = new_list
+      this.newItem.report_group_list = new_list;
     }
   }
-}
+};
 </script>
 
 <style scoped>

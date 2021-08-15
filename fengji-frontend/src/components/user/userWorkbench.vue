@@ -1,22 +1,22 @@
 <template>
-  <item-list
+  <todo-item-list
       work-mode="Plan"
       :required-tags="requiredTags"
   >
     待办事项
-  </item-list>
+  </todo-item-list>
 
 </template>
 
 <script>
-import itemList from './itemList.vue';
+import todoItemList from '../todo_item/todoItemList.vue';
 import api from '../../api';
 import {ElMessage} from 'element-plus';
 
 export default {
   name: "userWorkbench",
   components: {
-    itemList,
+    todoItemList,
   },
   data () {
     return {
@@ -27,7 +27,6 @@ export default {
   created() {
     this.getTagTemplate();
     this.getMyReportGroup();
-
   },
   computed: {
   },

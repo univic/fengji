@@ -26,8 +26,9 @@
 <!--      title content here-->
       <div
         style="flex: 1 1 auto; text-align: start"
-        v-on:click="showDetailPanel = !showDetailPanel"
-
+        v-on:mouseenter="showCommandButtons = true"
+        v-on:mouseleave="showCommandButtons = false"
+        v-on:click="toggleQuickEditPanel"
       >
         {{ item.title }}
       </div>
@@ -35,8 +36,11 @@
       <div
         style="flex: 0 0 auto; text-align: start"
       >
-        <div style="margin-left: auto">
+        <div
+            v-show="showCommandButtons"
+          style="margin-left: auto">
           <el-tooltip
+
             effect="dark"
             content="详情"
             placement="top"
@@ -69,7 +73,9 @@
 <!--      detail panel-->
     <el-collapse-transition>
       <item-quick-edit-panel
-          v-show="showDetailPanel"
+          v-show="showQuickEditPanel"
+          v-on:closeQuickEditPanel="toggleQuickEditPanel"
+          v-on:saveQuickEditPanel="handleSaveQuickEditPanel"
       ></item-quick-edit-panel>
     </el-collapse-transition>
 
@@ -77,12 +83,12 @@
 </template>
 
 <script>
-
-import itemQuickEditPanel from "../record_item/itemQuickEditPanel.vue";
+import
+import itemQuickEditPanel from "./itemQuickEditPanel.vue";
 // TODO: show corresponding tags
 
 export default {
-  name: "basicItem",
+  name: "todoItem",
   props: [
     'item'
   ],
@@ -96,16 +102,50 @@ export default {
   data () {
     return {
       quickTagList: null,
+      showQuickEditPanel: false,
       showDetailPanel: false,
+      showCommandButtons: false,
       tagDialogVisible: false,
       checkboxStatus: 'mouseLeave',
+      postForm: {
+        id :null,
+        title: null,
+        tag_list: null,
+        report_group_list: null,
+      }
     }
   },
   computed: {
 
   },
   methods: {
+    handleSelectReportGroup () {
 
+    },
+    handleSelectTag () {
+
+    },
+    handleSubmit () {
+
+    },
+    handleSaveQuickEditPanel (updatedElements) {
+      // update the postForm
+      this.postForm.tag_list = updatedElements.tag_list
+      this.postForm.report_group_list = updatedElements.report_group_list
+      // validate data
+
+      //submit save
+      this.handleSubmit()
+    },
+    toggleQuickEditPanel () {
+      this.showQuickEditPanel = !this.showQuickEditPanel
+    },
+    handleOpenDetailPanel () {
+
+    },
+    handleCloseDetailPanel () {
+
+    },
 
   }
 }

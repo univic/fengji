@@ -1,28 +1,42 @@
 <template>
   <el-popover
-    trigger="manual"
-    v-model:visible="popoverVisible"
+      trigger="manual"
+      v-model:visible="popoverVisible"
   >
     <div>
-      <el-select
-          v-model="selectedReportGroup"
-          multiple
-          placeholder="请选择报告组"
-      >
-        <el-option
-          v-for="item in myReportGroup"
-          v-bind:key="item.id"
-          v-bind:label="item.name"
-          v-bind:value="item.id"
+      <div>
+        <el-select
+            v-model="selectedReportGroup"
+            multiple
+            placeholder="请选择报告组"
         >
+          <el-option
+              v-for="item in myReportGroup"
+              v-bind:key="item.id"
+              v-bind:label="item.name"
+              v-bind:value="item.id"
+          >
 
-        </el-option>
+          </el-option>
 
-      </el-select>
+        </el-select>
+        <div>
+          <el-button
+              type="primary"
+          >确定
+          </el-button>
+          <el-button
+              type="info"
+              v-on:click="showAddTagSelector = false"
+          >取消
+          </el-button>
+        </div>
+
+      </div>
     </div>
     <template #reference>
       <el-tag
-        v-on:click="popoverVisible = !popoverVisible"
+          v-on:click="popoverVisible = !popoverVisible"
       >
         <slot></slot>
         报告组:{{ selectedReportGroupText }}
@@ -42,19 +56,19 @@ export default {
     return {
       popoverVisible: false,
       selectedReportGroup: [],
-    }
+    };
   },
   watch: {
     selectedReportGroup: {
-      deep:  true,
+      deep: true,
       handler(newValue, oldValue) {
-        this.$emit('selectReportGroup', this.selectedReportGroup)
+        this.$emit('selectReportGroup', this.selectedReportGroup);
       }
     }
   },
   computed: {
     myReportGroup() {
-      return this.$store.state.user.myReportGroup
+      return this.$store.state.user.myReportGroup;
     },
     selectedReportGroupText() {
       // determine the tag display text, according to the length of the report group name
@@ -66,9 +80,9 @@ export default {
         // find the name of the selected report group with the GUID
         this.myReportGroup.forEach((iterItem, iterIndex, IterArr) => {
           if (iterItem.id === this.selectedReportGroup[0]) {
-            firstReportGroupName = iterItem.name
+            firstReportGroupName = iterItem.name;
           }
-        })
+        });
         // slice the report group name, if it is too long
         if (firstReportGroupName.length > maxStrLength) {
           text = firstReportGroupName.slice(0, maxStrLength) + "...";
@@ -81,10 +95,10 @@ export default {
         }
 
       }
-      return text
+      return text;
     }
   }
-}
+};
 </script>
 
 <style scoped>

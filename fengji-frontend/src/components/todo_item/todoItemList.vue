@@ -4,13 +4,13 @@
     style="width: 50%"
   >
     <template #header><slot></slot></template>
-    <basic-item
+    <todo-item
       v-for="item in recordItemList"
       :key="item.id"
       :item="item"
       v-on:removeItem="handleRemoveItem(item)"
       v-on:showDetailDialog="openDetailDialog(item)"
-    ></basic-item>
+    ></todo-item>
 
     <new-todo-item
       ref="newItemInput"
@@ -30,14 +30,14 @@
 </template>
 
 <script>
-  import basicItem from "./basicItem.vue";
-  import newTodoItem from "../todo_item/newTodoItem.vue";
+  import todoItem from "./todoItem.vue";
+  import newTodoItem from "./newTodoItem.vue";
   import tagDetailedDialog from "../tagDetailedDialog.vue";
   import { ElMessage } from "element-plus";
   import api from "../../api";
 
 export default {
-  name: "recordItemList",
+  name: "todoItemList",
   props: [
     'workMode',
     'requiredTags',
@@ -48,7 +48,7 @@ export default {
   ],
   components: {
     newTodoItem,
-    basicItem,
+    todoItem,
     tagDetailedDialog,
   },
   data () {

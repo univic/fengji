@@ -4,7 +4,13 @@
       <div>
         <el-select
             placeholder="请选择标签"
-        ></el-select>
+            v-model="selectedTags"
+            multiple
+        >
+          <el-option>
+
+          </el-option>
+        </el-select>
       </div>
 
       <div>
@@ -26,7 +32,14 @@
 
 <script>
 export default {
-  name: "itemAddTagPanel"
+  name: "itemAddTagPanel",
+  data () {
+    return {
+      showAddTagSelector: false,
+      selectedTags: [],
+    }
+  }
+
 }
 </script>
 
