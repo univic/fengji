@@ -37,9 +37,10 @@ export default {
     return {
       popoverVisible: false,
       tagValueInput: null,
-
+      convertedTagTemplateList: [],
     }
   },
+
   methods: {
     updateTagValue: function () {
       this.$emit('updateTagValue', this.tagValueInput)

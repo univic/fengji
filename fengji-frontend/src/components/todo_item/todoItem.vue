@@ -83,7 +83,6 @@
 </template>
 
 <script>
-import
 import itemQuickEditPanel from "./itemQuickEditPanel.vue";
 // TODO: show corresponding tags
 

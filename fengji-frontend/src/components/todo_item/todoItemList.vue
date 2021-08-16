@@ -56,23 +56,109 @@ export default {
       recordItemList: [],
       showDetailDialog: false,
       selectedTagItem: null,
+      tagGroupList: [],
+      tagTemplateList: [],
+      convertedTagTemplateList: [],
     };
   },
 
   created() {
     this.getRecordItems()
-  },
-  computed: {
+    this.getTagTemplateData()
 
   },
+  computed: {
+    groupedTagTemplateList () {
+      return this.$store.getters['tagTemplate/getTagTemplateList']
+    },
+  },
   methods: {
+    // use a promise to send async request
+    getTagTemplateData () {
+      let p1 = new Promise(this.getTagGroupList)
+      let p2 = new Promise(this.getTagTemplateList)
+      Promise.all([p1, p2]).then(() => {
+        this.assignTagTemplateToTagGroup();
+        this.$store.commit('tagTemplate/setTagTemplateList', this.tagGroupList);
+        this.convertTagTemplateList();
+      }).catch((result) => {
+        ElMessage({
+          message: result,
+          type: "error",
+        })
+      })
+    },
+    getTagGroupList (resolve, reject) {
+      api.tagGroup.getTagGroup({
+        type: 'all',
+      }).then((response) => {
+        if (response.data.status === "success") {
+          this.tagGroupList = response.data.tag_group_list;
+          resolve('success');
+        } else {
+          reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
+        }
+      })
+    },
+    getTagTemplateList (resolve, reject) {
+      api.tag.getTagTemplate({
+        type: "all",
+      }).then((response) => {
+        if (response.data.status === "success") {
+          this.tagTemplateList = response.data.tag_template_list;
+          resolve('success');
+        } else {
+          reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
+        }
+      });
+    },
+    assignTagTemplateToTagGroup () {
+      this.tagGroupList.forEach((tagGroupElement, index) => {
+        this.tagGroupList[index].tag_template_list = this.filterTagTemplate(tagGroupElement.id, this.tagTemplateList)
+      });
+    },
+    filterTagTemplate (tagGroupID, tagTemplateList) {
+      let filteredList = tagTemplateList.filter((item) => {
+        return item.tag_group_assignment.id === tagGroupID
+      })
+      return filteredList
+    },
+    convertTagTemplateList () {
+      let rawList = this.groupedTagTemplateList;
+      let convertedList = [];
+      if (rawList.length > 0 ) {
+        rawList.forEach((element, index) => {
+          let convertedDict = {
+            label: element.tag_group_name,
+            children: [],
+          }
+          if (element.tag_template_list && element.tag_template_list.length > 0) {
+            element.tag_template_list.forEach((item, index) => {
+              let convertedItem = {
+                label: item.tag_template_name,
+                value: item.id
+              }
+              console.log(convertedItem)
+              convertedDict.children.push(convertedItem)
+            })
+          } else {
+
+          }
+          convertedList.push(convertedDict)
+        });
+      } else {
+
+      }
+
+      this.$store.commit('tagTemplate/setConvertedTagTemplateList', convertedList);
+    },
+
     addItem(newItem) {
       // a simple walk around to solve the "this" pointing problem inside axios
       // binding the right "this" pointer to "that", to avoid "this" pointing all over the place
       let that = this
       let dataObj = newItem
-      console.log(dataObj)
-      api.itemAPI.addRecordItem(
+      api.todoItem.addTodoItem(
           dataObj
       ).then(
           (response) => {
@@ -118,7 +204,7 @@ export default {
     },
     getRecordItems() {
       //TODO: gei all the items when created
-      api.itemAPI.getRecordItem({
+      api.todoItem.getTodoItem({
         type: 'all'
       }).then((response) => {
         console.log(response.data)
@@ -142,7 +228,7 @@ export default {
       })
     },
     removeItem(item) {
-      api.itemAPI.deleteRecordItem({
+      api.todoItem.deleteTodoItem({
         id: item.id
       }).then(
           (response) => {

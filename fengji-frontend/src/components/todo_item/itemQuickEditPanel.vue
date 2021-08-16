@@ -28,9 +28,12 @@
             @blur="handleInputConfirm"
         >
         </el-input>
-        <item-add-tag-panel>
+        <item-add-tag-panel
+          v-bind:popoverVisible = "addTagPopoverVisible"
+          v-on:closePopover = "handleCloseAddTagPopover"
+        >
           <el-button
-              @click="showTagInput"
+              @click="addTagPopoverVisible = true"
               size="small"
           >
             + 新标签
@@ -114,6 +117,7 @@ export default {
   ],
   data () {
     return {
+      addTagPopoverVisible: false,
       tagInputVisible: false,
       showAddTagSelector: false,
       itemTags: [],
@@ -125,6 +129,9 @@ export default {
         tag_list: [],
       }
     }
+  },
+  computed: {
+
   },
   methods: {
     handleTagSelection(tagSelected, indexOfTagSelected) {
@@ -149,6 +156,9 @@ export default {
     },
     handleCloseQuickEditPanel () {
       this.$emit('closeQuickEditPanel')
+    },
+    handleCloseAddTagPopover () {
+      this.addTagPopoverVisible = false
     },
     handleSubmit() {
 
