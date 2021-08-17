@@ -13,18 +13,18 @@
       <tag-template-edit-panel ref="editTagTemplatePanel"
                                v-bind:dialogFormVisible="tagTemplateDialogVisible"
                                v-bind:tagGroupList="tagGroupList"
-                               v-on:closeDialog="tagTemplateDialogVisible = false"
+                               v-on:closeDialog="t agTemplateDialogVisible = false"
                                v-on:refreshTagList="getTagTemplateData"></tag-template-edit-panel>
       <tag-group-edit-panel ref="tagGroupEditPanel"
                             v-bind:dialogVisible="tagGroupDialogVisible"
                             v-on:closeDialog="tagGroupDialogVisible = false"
                             v-on:refreshTagGroupList="handleListRefresh"></tag-group-edit-panel>
 
-      <tag-group-display-card v-for="(tagGroup, index) in tagGroupList"
-                              v-bind:tagGroupElement="tagGroup"
-                              v-bind:key="tagGroup.id"
+      <tag-group-display-card v-for="(tagTemplateGroup, index) in tagGroupList"
+                              v-bind:tagGroupElement="tagTemplateGroup"
+                              v-bind:key="tagTemplateGroup.id"
                               v-on:deleteTagGroup="handleTagGroupDelete(index)"
-                              v-on:editTagGroup="handleTagGroupEdit(tagGroup)"
+                              v-on:editTagGroup="handleTagGroupEdit(tagTemplateGroup)"
                               v-on:editTagTemplate="handleEditTagTemplate(index, $event)"
                               v-on:deleteTagTemplate="handleDeleteTagTemplate(index, $event)"></tag-group-display-card>
     </div>
@@ -37,8 +37,8 @@
 import api from "../../api";
 import { ElMessage } from "element-plus";
 import tagTemplateEditPanel from "./tagTemplateEditPanel.vue";
-import tagGroupEditPanel from './tagGroupEditPanel.vue';
-import tagGroupDisplayCard from './tagGroupDisplayCard.vue'
+import tagGroupEditPanel from './tagTemplateGroupEditPanel.vue';
+import tagGroupDisplayCard from './tagTemplateGroupDisplayCard.vue'
 
 export default {
   name: "showTags",
@@ -78,7 +78,7 @@ export default {
       })
     },
     getTagGroupList (resolve, reject) {
-      api.tagGroup.getTagGroup({
+      api.tagTemplateGroup.getTagTemplateGroup({
         type: 'all',
       }).then((response) => {
         if (response.data.status === "success") {

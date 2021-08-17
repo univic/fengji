@@ -8,14 +8,20 @@
                v-bind:rules="formRules"
                ref="tagGroupForm">
         <el-form-item label="标签组名称"
-                      prop="tag_group_name">
-          <el-input v-model="postForm.tag_group_name"
+                      prop="name">
+          <el-input v-model="postForm.name"
                     maxlength="10"
                     show-word-limit></el-input>
         </el-form-item>
+        <el-form-item label="隶属标签组"
+                      prop="parent_group">
+          <el-input v-model="postForm.parent_group"
+                    maxlength="24"
+                    show-word-limit></el-input>
+        </el-form-item>
         <el-form-item label="标签组颜色"
-                      prop="tag_group_color">
-          <el-color-picker v-model="postForm.tag_group_color"></el-color-picker>
+                      prop="color">
+          <el-color-picker v-model="postForm.color"></el-color-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="primary"
@@ -44,9 +50,9 @@ export default {
   data () {
     let validators = {
       validateTagGroupNameUnique: (rule, value, callback) => {
-        api.tagGroup.getTagGroup({
+        api.tagTemplateGroup.getTagTemplateGroup({
           type: 'check_existence',
-          tag_group_name: value
+          name: value
         }).then(
           function (response) {
             if (response.data.status === 'success') {
@@ -68,11 +74,12 @@ export default {
       dialogTitle: '创建标签',
       postForm: {
         id: null,
-        tag_group_name: null,
-        tag_group_color: '#FFFFFF'
+        name: null,
+        color: '#FFFFFF',
+        parent_group: null,
       },
       formRules: {
-        tag_group_name: [
+        name: [
           { required: true, message: '请输入标签组名', trigger: 'blur' },
           { min: 2, max: 10, message: '标签组名的长度应为2~10个字符', trigger: 'blur' },
           { validator: validators.validateTagGroupNameUnique, trigger: 'blur' },
@@ -93,7 +100,7 @@ export default {
           this.postForm[item] = tagGroupElement[item];
         }
       }
-      this.dialogTitle = "编辑标签组 - " + this.postForm.tag_group_name;
+      this.dialogTitle = "编辑标签组 - " + this.postForm.name;
       this.dialogMode = 'modify';
     },
     handleSubmit () {
@@ -105,9 +112,9 @@ export default {
     },
     submitTagGroup () {
       let dataObj = qs.stringify(this.postForm);
-      let cAPI = api.tagGroup.addNewTagGroup;
+      let cAPI = api.tagTemplateGroup.addNewTagTemplateGroup;
       if (this.dialogMode === 'modify') {
-        cAPI = api.tagGroup.editTagGroup;
+        cAPI = api.tagTemplateGroup.editTagTemplateGroup;
       }
       cAPI(dataObj).then((response) => {
         if (response.data.status === 'success') {

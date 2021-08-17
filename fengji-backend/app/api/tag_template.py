@@ -6,7 +6,7 @@ import json
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from app.model.tag_template import TagTemplate
-from app.model.tag_template_group import TagGroup
+from app.model.tag_template_group import TagTemplateGroup
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
 from app.model.post_forms import TagTemplateForm
 
@@ -68,7 +68,7 @@ def add_tag_template():
         tag_template_creator = get_current_user()
         new_tag.tag_template_name = new_tag_template_form.tag_template_name.data
         new_tag.tag_field_type = new_tag_template_form.tag_field_type.data
-        new_tag.tag_group_assignment = TagGroup(id=new_tag_template_form.tag_group_assignment.data)
+        new_tag.tag_group_assignment = TagTemplateGroup(id=new_tag_template_form.tag_group_assignment.data)
         new_tag.tag_default_value = new_tag_template_form.tag_default_value.data
         new_tag.tag_preview = new_tag_template_form.tag_preview.data
         new_tag.tag_color = new_tag_template_form.tag_color.data

@@ -20,8 +20,9 @@ def add_tag_template_group():
         new_item = TagTemplateGroup()
         new_item.name = form.name.data
         new_item.color = form.color.data
-        new_item.parent_group = form.parent_group.data
-        new_item.creator = current_user
+        if form.parent_group.data is not '':
+            new_item.parent_group = TagTemplateGroup(id=form.parent_group.data)
+        new_item.creator = get_current_user()
         try:
             new_item.save()
             response = {
@@ -63,6 +64,7 @@ def get_tag_template_group():
         # return detailed info of all groups
         try:
             tag_group_list = []
+            root_node = TagTemplateGroup.objects(id='611bc127efb77665894723e6')
             tag_groups = TagTemplateGroup.objects()
             for item in tag_groups:
                 item_json = item.to_json()
@@ -79,7 +81,7 @@ def get_tag_template_group():
                     'messages': [e.args[0]]
                 }
     elif request.args['type'] == 'check_existence':
-        tag_group = TagTemplateGroup.objects(tag_group_name=request.args['tag_group_name'])
+        tag_group = TagTemplateGroup.objects(name=request.args['name'])
         if not tag_group:
             response = {
                 'status': 'success',
@@ -91,7 +93,7 @@ def get_tag_template_group():
                 'messages': ['组名已存在'],
             }
     # return all the report groups created by current user
-    elif request.args['type'] == 'my':
+    elif request.args['type'] == 'tree':
         pass
     else:
         response = {

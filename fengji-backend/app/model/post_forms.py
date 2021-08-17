@@ -99,8 +99,8 @@ class TagTemplateGroupForm(Form):
                                                     max=app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH'],
                                                     message=f"标签组长度需为{app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH']}~"
                                                             f"{app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH']}位")])
-    color = StringField(),
-    parent_group = StringField(),
+    color = StringField()
+    parent_group = StringField()
 
 
 class TodoItem(Form):

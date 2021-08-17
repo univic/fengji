@@ -1,7 +1,7 @@
 import datetime
 from app.lib.database import db
 from app.model.user_model import User
-from app.model.tag_template_group import TagGroup
+from app.model.tag_template_group import TagTemplateGroup
 import app.utilities.db_util as db_util
 from mongoengine import StringField, BooleanField, IntField, EmbeddedDocument, DateTimeField, ReferenceField
 
@@ -9,7 +9,7 @@ from mongoengine import StringField, BooleanField, IntField, EmbeddedDocument, D
 class TagTemplate(db.Document):
     tag_template_name = StringField(required=True, unique=True)
     tag_field_type = StringField(required=True)
-    tag_group_assignment = ReferenceField(TagGroup, required=True)
+    tag_group_assignment = ReferenceField(TagTemplateGroup, required=True)
     tag_default_value = StringField()
     tag_preview = BooleanField(default=False)
     tag_required = BooleanField(default=False)

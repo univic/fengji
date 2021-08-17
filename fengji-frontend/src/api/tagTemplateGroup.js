@@ -1,10 +1,10 @@
 import myAxios from '../utilities/request';
 import { ElMessage } from 'element-plus';
 
-let tagGroup = {
-  addNewTagGroup(dataObj) {
+let tagTemplateGroup = {
+  addNewTagTemplateGroup(dataObj) {
     return myAxios
-      .post('/api/tag_group/', dataObj, {
+      .post('/api/tag_template_group/', dataObj, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -16,9 +16,9 @@ let tagGroup = {
         });
       });
   },
-  getTagGroup(params) {
+  getTagTemplateGroup(params) {
     return myAxios
-      .get('/api/tag_group/', {
+      .get('/api/tag_template_group/', {
         params: params,
       })
       .catch(function (error) {
@@ -28,9 +28,9 @@ let tagGroup = {
         });
       });
   },
-  deleteTagGroup(params) {
+  deleteTagTemplateGroup(params) {
     return myAxios
-      .delete('api/tag_group/', {
+      .delete('api/tag_template_group/', {
         params: params,
       })
       .catch(function (error) {
@@ -40,9 +40,9 @@ let tagGroup = {
         });
       });
   },
-  editTagGroup(dataObj) {
+  editTagTemplateGroup(dataObj) {
     return myAxios
-      .put('api/tag_group/', dataObj, {
+      .put('api/tag_template_group/', dataObj, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -56,4 +56,4 @@ let tagGroup = {
   },
 };
 
-export default tagGroup;
+export default tagTemplateGroup;
