@@ -1,7 +1,7 @@
 import datetime
 from app.lib.database import db
 from app.model.user_model import User
-from app.model.tag_group import TagGroup
+from app.model.tag_template_group import TagGroup
 import app.utilities.db_util as db_util
 from mongoengine import StringField, BooleanField, IntField, EmbeddedDocument, DateTimeField, ReferenceField
 

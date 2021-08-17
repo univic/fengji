@@ -2,7 +2,7 @@ import traceback
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
-from app.model.tag_group import TagGroup
+from app.model.tag_template_group import TagGroup
 from app.model.post_forms import TagGroupForm
 
 # TODO: need a get my report groups api

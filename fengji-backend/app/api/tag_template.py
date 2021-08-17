@@ -6,7 +6,7 @@ import json
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from app.model.tag_template import TagTemplate
-from app.model.tag_group import TagGroup
+from app.model.tag_template_group import TagGroup
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
 from app.model.post_forms import TagTemplateForm
 
