@@ -2,33 +2,32 @@ import traceback
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
-from app.model.tag_template_group import TagGroup
-from app.model.post_forms import TagGroupForm
+from app.model.tag_template_group import TagTemplateGroup
+from app.model.post_forms import TagTemplateGroupForm
 
 # TODO: need a get my report groups api
 # TODO: need a free to join filter
 # TODO: reconstruct GET method
 
-bp = Blueprint('tag_group', __name__, url_prefix='/api/tag_group')
+bp = Blueprint('tag_template_group', __name__, url_prefix='/api/tag_template_group')
 
 
 @bp.route('/', methods={'POST'})
 @jwt_required()
-def add_tag_group():
-    tag_group_form = TagGroupForm(request.form, meta={'csrf': False})
-    print(request.form)
-    if tag_group_form.validate():
-        new_tag_group = TagGroup()
-        tag_group_creator = get_current_user()
-        new_tag_group.tag_group_name = tag_group_form.tag_group_name.data
-        new_tag_group.tag_group_color = tag_group_form.tag_group_color.data
-        new_tag_group.tag_group_creator = tag_group_creator
+def add_tag_template_group():
+    form = TagTemplateGroupForm(request.form, meta={'csrf': False})
+    if form.validate():
+        new_item = TagTemplateGroup()
+        new_item.name = form.name.data
+        new_item.color = form.color.data
+        new_item.parent_group = form.parent_group.data
+        new_item.creator = current_user
         try:
-            new_tag_group.save()
+            new_item.save()
             response = {
                 'status': 'success',
                 'messages': ['标签组添加成功~'],
-                'id': str(new_tag_group.id)
+                'id': str(new_item.id)
             }
         # if the group name is not unique, let the frontend know
         except NotUniqueError:
@@ -46,7 +45,7 @@ def add_tag_group():
         when validate, WTForms will generate a form.errors dict, which contains all the error messages
         for each form fields, here we get error messages from the form.errors dict, and generate an error info list
         """
-        error_status = list(tag_group_form.errors.values())
+        error_status = list(form.errors.values())
         for i, item in enumerate(error_status):
             error_status[i] = item[0]
         # construct the return data
@@ -59,12 +58,12 @@ def add_tag_group():
 
 @bp.route('/', methods={'GET'})
 @jwt_required()
-def get_tag_group():
+def get_tag_template_group():
     if request.args['type'] == 'all':
         # return detailed info of all groups
         try:
             tag_group_list = []
-            tag_groups = TagGroup.objects()
+            tag_groups = TagTemplateGroup.objects()
             for item in tag_groups:
                 item_json = item.to_json()
                 tag_group_list.append(item_json)
@@ -80,7 +79,7 @@ def get_tag_group():
                     'messages': [e.args[0]]
                 }
     elif request.args['type'] == 'check_existence':
-        tag_group = TagGroup.objects(tag_group_name=request.args['tag_group_name'])
+        tag_group = TagTemplateGroup.objects(tag_group_name=request.args['tag_group_name'])
         if not tag_group:
             response = {
                 'status': 'success',
@@ -105,8 +104,8 @@ def get_tag_group():
 
 @bp.route('/', methods={'DELETE'})
 @jwt_required()
-def delete_tag_group():
-    tag_group = TagGroup.objects(id=request.args['id'])
+def delete_tag_template_group():
+    tag_group = TagTemplateGroup.objects(id=request.args['id'])
     try:
         tag_group.delete()
         response = {
@@ -123,14 +122,14 @@ def delete_tag_group():
 
 @bp.route('/', methods={'PUT'})
 @jwt_required()
-def modify_tag_group():
-    tag_group_form = TagGroupForm(request.form, meta={'csrf': False})
-    if tag_group_form.validate():
-        tag_group = TagGroup.objects(id=tag_group_form.id.data).first()
-        tag_group.tag_group_name = tag_group_form.tag_group_name.data
-        tag_group.tag_group_color = tag_group_form.tag_group_color.data
+def modify_tag_template_group():
+    form = TagTemplateGroup(request.form, meta={'csrf': False})
+    if form.validate():
+        item = TagTemplateGroup.objects(id=form.id.data).first()
+        item.name = form.name.data
+        item.tag_group_color = form.color.data
         try:
-            tag_group.save()
+            item.save()
             response = {
                 'status': 'success',
                 'messages': ['标签组修改成功~']
@@ -145,7 +144,7 @@ def modify_tag_group():
         when validate, WTForms will generate a form.errors dict, which contains all the error messages
         for each form fields, here we get error messages from the form.errors dict, and generate an error info list
         """
-        error_status = list(tag_group_form.errors.values())
+        error_status = list(form.errors.values())
         for i, item in enumerate(error_status):
             error_status[i] = item[0]
         # construct the return data

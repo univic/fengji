@@ -91,15 +91,16 @@ class GroupRoleForm(Form):
     role_color = StringField('role_color')
 
 
-class TagGroupForm(Form):
+class TagTemplateGroupForm(Form):
     id = StringField('id')
-    tag_group_name = StringField('tag_group_name',
+    name = StringField('name',
                                  [validators.input_required('未填写标签组名'),
                                   validators.Length(min=app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH'],
                                                     max=app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH'],
                                                     message=f"标签组长度需为{app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH']}~"
                                                             f"{app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH']}位")])
-    tag_group_color = StringField()
+    color = StringField(),
+    parent_group = StringField(),
 
 
 class TodoItem(Form):
