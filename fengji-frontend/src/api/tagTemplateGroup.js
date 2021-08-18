@@ -20,6 +20,15 @@ let tagTemplateGroup = {
     return myAxios
       .get('/api/tag_template_group/', {
         params: params,
+      }).then((response)=> {
+        if (response.data.status === "success") {
+          return response
+        } else {
+          ElMessage({
+            message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+            type: 'error'
+          });
+        }
       })
       .catch(function (error) {
         ElMessage({

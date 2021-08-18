@@ -29,18 +29,11 @@ const actions = {
     api.tagTemplateGroup.getTagTemplateGroup({
       type: 'all',
     }).then((response) => {
-      if (response.data.status === "success") {
         context.commit('setTagTemplateGroupList', response.data.tag_group_list)
         ElMessage({
           message: response.data.messages[0],
           type: 'success'
         });
-      } else {
-        ElMessage({
-          message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-          type: 'error'
-        });
-      }
     })
   },
 }

@@ -23,7 +23,7 @@ class TagTemplateGroup(db.Document):
         output_dict = db_util.dbo_better_json(data)
 
         # use recursive search to go through the tree structure
-        if data.child_group and recursive_search:
+        if data.child_group != [] and recursive_search:
             child_group_list = []
             for element in data.child_group:
                 # for each reference element(TagTemplateGroup), call to_json method again
@@ -36,16 +36,15 @@ class TagTemplateGroup(db.Document):
         output_dict = self.convert_refs(output_dict)
         return output_dict
 
-    @staticmethod
-    def convert_refs(data):
+    def convert_refs(self, data):
         # convert the creator reference field to a json readable format
         data['creator'] = {
-            'id': str(data.creator.id),
-            'username': data.creator.username
+            'id': str(self.creator.id),
+            'username': self.creator.username
         }
         if 'parent_group' in data.keys():
             data['parent_group'] = {
-                'id': str(data['parent_group']),
+                'id': str(self['parent_group']),
             }
         return data
 
