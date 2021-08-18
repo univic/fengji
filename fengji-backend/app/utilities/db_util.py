@@ -5,7 +5,7 @@
 def dbo_better_json(db_object):
     db_dict = db_object.to_mongo().to_dict()
     db_object = dbo_drop_id(db_dict)
-    return db_dict
+    return db_object
 
 
 # convert _id to serializable id str

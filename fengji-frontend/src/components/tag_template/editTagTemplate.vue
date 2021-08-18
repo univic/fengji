@@ -13,7 +13,7 @@
       <tag-template-edit-panel ref="editTagTemplatePanel"
                                v-bind:dialogFormVisible="tagTemplateDialogVisible"
                                v-bind:tagGroupList="tagGroupList"
-                               v-on:closeDialog="t agTemplateDialogVisible = false"
+                               v-on:closeDialog="tagTemplateDialogVisible = false"
                                v-on:refreshTagList="getTagTemplateData"></tag-template-edit-panel>
       <tag-group-edit-panel ref="tagGroupEditPanel"
                             v-bind:dialogVisible="tagGroupDialogVisible"

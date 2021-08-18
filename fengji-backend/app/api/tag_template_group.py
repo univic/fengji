@@ -15,21 +15,27 @@ bp = Blueprint('tag_template_group', __name__, url_prefix='/api/tag_template_gro
 @bp.route('/', methods={'POST'})
 @jwt_required()
 def add_tag_template_group():
+    parent_group = None
     form = TagTemplateGroupForm(request.form, meta={'csrf': False})
     if form.validate():
         new_item = TagTemplateGroup()
         new_item.name = form.name.data
         new_item.color = form.color.data
-        if form.parent_group.data is not '':
-            new_item.parent_group = TagTemplateGroup(id=form.parent_group.data)
         new_item.creator = get_current_user()
+        if form.parent_group.data != '':
+            parent_group = TagTemplateGroup.objects(id=form.parent_group.data).first()
+            new_item.parent_group = parent_group
         try:
             new_item.save()
+            if parent_group:
+                parent_group.child_group.append(new_item)
+                parent_group.save()
             response = {
                 'status': 'success',
                 'messages': ['标签组添加成功~'],
                 'id': str(new_item.id)
             }
+
         # if the group name is not unique, let the frontend know
         except NotUniqueError:
             response = {
@@ -65,9 +71,8 @@ def get_tag_template_group():
         try:
             tag_group_list = []
             root_node = TagTemplateGroup.objects(id='611bc127efb77665894723e6')
-            tag_groups = TagTemplateGroup.objects()
-            for item in tag_groups:
-                item_json = item.to_json()
+            for item in root_node:
+                item_json = item.to_json(recursive_search=True)
                 tag_group_list.append(item_json)
             response = {
                 'status': 'success',

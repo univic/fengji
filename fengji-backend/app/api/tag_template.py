@@ -2,7 +2,6 @@
 # Author : univic
 # Date: 2021-02-28
 
-import json
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from app.model.tag_template import TagTemplate

@@ -18,25 +18,34 @@ class TagTemplateGroup(db.Document):
     child_group = ListField(ReferenceField('self'))
 
     def to_json(self, recursive_search=False):
+
         data = self
+        output_dict = db_util.dbo_better_json(data)
 
         # use recursive search to go through the tree structure
         if data.child_group and recursive_search:
             child_group_list = []
             for element in data.child_group:
+                # for each reference element(TagTemplateGroup), call to_json method again
                 child_group_dict = element.to_json(recursive_search=True)
                 child_group_list.append(child_group_dict)
-        # convert mongodb object to dict, replace _id
-        output_dict = db_util.dbo_better_json(data)
-        output_dict['creator'] = {
+            # convert mongodb object to dict, replace _id
+            output_dict['child_group'] = child_group_list
+
+        # use convert_refs to convert reference fields to json readable format
+        output_dict = self.convert_refs(output_dict)
+        return output_dict
+
+    @staticmethod
+    def convert_refs(data):
+        # convert the creator reference field to a json readable format
+        data['creator'] = {
             'id': str(data.creator.id),
             'username': data.creator.username
         }
-        return output_dict
-
-    def recursive_structure_search(self, data):
-        if data.child_group:
-            for element in data.child_group:
-                item = TagTemplateGroup(id=element.id)
-                self.recursive_structure_search(item)
+        if 'parent_group' in data.keys():
+            data['parent_group'] = {
+                'id': str(data['parent_group']),
+            }
+        return data
 
