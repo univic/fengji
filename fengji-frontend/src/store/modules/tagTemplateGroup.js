@@ -1,5 +1,5 @@
 import api from "../../api";
-import {ElMessage} from "element-plus";
+import message from "../../utilities/message";
 
 const state = {
   tagTemplateGroupList: [],
@@ -8,19 +8,19 @@ const state = {
 
 let getters = {
   getTagTemplateGroupList(state) {
-    return state.tagTemplateList
+    return state.tagTemplateGroupList
   },
   getConvertedTagTemplateGroupList(state) {
-    return state.convertedTagTemplateList
+    return state.convertedTagTemplateGroupList
   },
 }
 
 const mutations = {
   setTagTemplateGroupList(state, payload) {
-    state.tagTemplateList = payload
+    state.tagTemplateGroupList = payload
   },
   setConvertedTagTemplateGroupList(state, payload) {
-    state.convertedTagTemplateList = payload
+    state.convertedTagTemplateGroupList = payload
   }
 }
 
@@ -29,11 +29,8 @@ const actions = {
     api.tagTemplateGroup.getTagTemplateGroup({
       type: 'all',
     }).then((response) => {
-        context.commit('setTagTemplateGroupList', response.data.tag_group_list)
-        ElMessage({
-          message: response.data.messages[0],
-          type: 'success'
-        });
+        context.commit('setTagTemplateGroupList', response.data.tag_group_list);
+        return response
     })
   },
 }

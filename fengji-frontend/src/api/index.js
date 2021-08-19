@@ -1,6 +1,6 @@
 import user from "./user"
 import todoItem from "./todoItem";
-import tag from './tag';
+import tagTemplate from './tagTemplate';
 import reportGroup from './reportGroup';
 import tagTemplateGroup from "./tagTemplateGroup";
 import groupMemberRole from './groupMemberRole';
@@ -8,7 +8,7 @@ import groupMemberRole from './groupMemberRole';
 const api = {
   user,
   todoItem,
-  tag,
+  tagTemplate,
   tagTemplateGroup,
   reportGroup,
   groupMemberRole,

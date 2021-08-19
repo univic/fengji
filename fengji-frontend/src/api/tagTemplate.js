@@ -1,22 +1,24 @@
 import myAxios from "../utilities/request";
+import message from "../utilities/message";
 import {ElMessage} from 'element-plus';
 
-let tag = {
+let tagTemplate = {
   getTagTemplate(params) {
     return myAxios.get(
       '/api/tag_template/',
       {
         params: params
       }
-    ).catch(
-      function (error) {
-        ElMessage({
-          message: '出现了问题（*゜ー゜*）' + error,
-          type: 'error'
-        });
-      }
-    )
+    ).then((response)=> {
+      if (response.data.status === "success") {
+        return response
+      } else {
+        message.emitErrorMessage(response.data.messages[0]);
+    }}).catch((error) => {
+        message.emitErrorMessage(error)
+      })
   },
+
   submitNewTag(dataObj) {
     return myAxios.post(
       '/api/tag_template/',
@@ -62,4 +64,4 @@ let tag = {
   }
 }
 
-export default tag
+export default tagTemplate

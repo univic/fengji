@@ -1,4 +1,5 @@
 import types from "../types";
+import api from "../../api";
 
 const state = {
   tagTemplateList: [],
@@ -24,7 +25,14 @@ const mutations = {
 }
 
 const actions = {
-
+  getTagTemplateList(context) {
+    api.tagTemplate.getTagTemplate({
+      type: 'all',
+    }).then((response) => {
+      context.commit('setTagTemplateList', response.data.tag_template_list);
+      return response
+    })
+  },
 }
 
 export default {

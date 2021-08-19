@@ -15,9 +15,11 @@
         </el-form-item>
         <el-form-item label="隶属标签组"
                       prop="parent_group">
-          <el-input v-model="postForm.parent_group"
-                    maxlength="24"
-                    show-word-limit></el-input>
+          <el-cascader v-model="postForm.tag_group_assignment"
+                       placeholder="请选择归属标签组"
+                       v-bind:options="tagTemplateGroup"
+                       v-bind:props="tagGroupCascaderProps"
+          ></el-cascader>
         </el-form-item>
         <el-form-item label="标签组颜色"
                       prop="color">
@@ -84,7 +86,18 @@ export default {
           { min: 2, max: 10, message: '标签组名的长度应为2~10个字符', trigger: 'blur' },
           { validator: validators.validateTagGroupNameUnique, trigger: 'blur' },
         ]
+      },
+      tagGroupCascaderProps: {
+        checkStrictly: true,
+        value: 'id',
+        label: 'name',
+        children: 'child_group',
       }
+    }
+  },
+  computed: {
+    tagTemplateGroup() {
+      return this.$store.getters['tagTemplateGroup/getTagTemplateGroupList']
     }
   },
   methods: {

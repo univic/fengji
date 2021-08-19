@@ -57,12 +57,17 @@ export default {
     tagGroupDisplayCard: tagGroupDisplayCard,
   },
   created () {
-    this.getTagTemplateData()
+    //this.getTagTemplateData()
+    this.handleInitialization()
   },
   mounted () {
 
   },
   methods: {
+    handleInitialization () {
+      this.$store.dispatch('tagTemplate/getTagTemplateList')
+      this.$store.dispatch('tagTemplateGroup/getTagTemplateGroupList').then(this.loading = false);
+    },
     // use a promise to send async request
     getTagTemplateData () {
       let p1 = new Promise(this.getTagGroupList)

@@ -27,13 +27,12 @@
         </el-form-item>
         <el-form-item label="归属标签组"
                       prop="tag_group_assignment">
-          <el-select v-model="tagForm.tag_group_assignment"
-                     placeholder="请选择归属标签组">
-            <el-option v-for="item in tagGroupList"
-                       :key="item.id"
-                       :label="item.tag_group_name"
-                       :value="item.id"></el-option>
-          </el-select>
+          <el-cascader v-model="tagForm.tag_group_assignment"
+                       placeholder="请选择归属标签组"
+                       v-bind:options="tagTemplateGroup"
+                       v-bind:props="tagGroupCascaderProps"
+          >
+          </el-cascader>
         </el-form-item>
         <el-form-item label="标签默认值"
                       v-if="tagForm.tag_field_type !== 'simple'"
@@ -60,7 +59,8 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary"
-                     v-on:click="handleSubmit">提交</el-button>
+                     v-on:click="handleSubmit">提交
+          </el-button>
           <el-button v-on:click="resetForm('tagForm')">重置</el-button>
         </el-form-item>
       </el-form>
@@ -71,7 +71,7 @@
 <script>
 import qs from 'qs';
 import api from '../../api';
-import { ElMessage } from 'element-plus';
+import {ElMessage} from 'element-plus';
 
 export default {
   name: "tagTemplateEditPanel",
@@ -84,7 +84,7 @@ export default {
     'closeDialog',
     'refreshTagList'
   ],
-  data () {
+  data() {
     let validators = {
       validateTagNameUnique: (rule, value, callback) => {
         // use a customized find function to see if the tag name has already existed
@@ -94,28 +94,28 @@ export default {
             type: 'check_existence',
             tag_template_name: value,
           }).then(
-            function (response) {
-              if (response.data.status === 'success') {
-                callback()
-              } else if (response.data.status === 'error') {
-                callback(new Error(response.data.messages[0]))
-              } else {
-                ElMessage({
-                  message: '出现了问题（*゜ー゜*）',
-                  type: 'error',
-                })
+              function (response) {
+                if (response.data.status === 'success') {
+                  callback();
+                } else if (response.data.status === 'error') {
+                  callback(new Error(response.data.messages[0]));
+                } else {
+                  ElMessage({
+                    message: '出现了问题（*゜ー゜*）',
+                    type: 'error',
+                  });
+                }
               }
-            }
-          )
+          );
         } else {
-          callback()
+          callback();
         }
 
       },
       // apply different validation rule according to the selected tag_field_type
       validateDefaultValue: (rule, value, callback) => {
         let singleSelectReg = new RegExp("^(.+)(;.+)");
-        let numReg = new RegExp("^([0-9]+)(.[0-9]+)?$")
+        let numReg = new RegExp("^([0-9]+)(.[0-9]+)?$");
         if (value !== null) {
           switch (this.tagForm.tag_field_type) {
             case 'select':
@@ -139,10 +139,10 @@ export default {
               break;
           }
         } else {
-          callback()
+          callback();
         }
       },
-    }
+    };
     return {
       dialogTitle: '创建标签',
       dialogMode: null,
@@ -181,75 +181,84 @@ export default {
       ],
       tagFormRules: {
         tag_template_name: [
-          { required: true, message: '请输入标签名', trigger: 'blur' },
-          { min: 2, max: 10, message: '标签名的长度应为2~10个字符', trigger: 'blur' },
-          { validator: validators.validateTagNameUnique, trigger: 'blur' }
+          {required: true, message: '请输入标签名', trigger: 'blur'},
+          {min: 2, max: 10, message: '标签名的长度应为2~10个字符', trigger: 'blur'},
+          {validator: validators.validateTagNameUnique, trigger: 'blur'}
         ],
         tag_field_type: [
-          { required: true, message: '必须选择一个标签类型', trigger: 'blur' }
+          {required: true, message: '必须选择一个标签类型', trigger: 'blur'}
         ],
-        tag_default_value: [{ validator: validators.validateDefaultValue, trigger: 'blur' }],
-        tag_group_assignment: [{ required: true, message: '请选择归属标签组', trigger: 'blur' }]
+        tag_default_value: [{validator: validators.validateDefaultValue, trigger: 'blur'}],
+        tag_group_assignment: [{required: true, message: '请选择归属标签组', trigger: 'blur'}]
       },
+      tagGroupCascaderProps: {
+        checkStrictly: true,
+        value: 'id',
+        label: 'name',
+        children: 'child_group',
+      }
     };
   },
   computed: {
+    tagTemplateGroup() {
+      return this.$store.getters['tagTemplateGroup/getTagTemplateGroupList']
+    }
   },
   methods: {
-    handleClose () {
-      this.$emit('closeDialog')
+    handleClose() {
+      this.$emit('closeDialog');
     },
-    handleSubmit () {
+    handleSubmit() {
       this.$refs.tagForm.validate((valid) => {
         if (valid) {
-          this.submitNewTag()
+          this.submitNewTag();
         }
-      })
+      });
     },
-    submitNewTag () {
+    submitNewTag() {
       let dataObj = qs.stringify(this.tagForm);
       let cAPI = api.tag.submitNewTag;
       if (this.dialogMode === 'modify') {
-        cAPI = api.tag.editTagTemplate
+        cAPI = api.tag.editTagTemplate;
       }
       cAPI(dataObj).then((response) => {
-        if (response.data.status === 'success') {
-          this.handleClose();
-          this.resetForm('tagForm');
-          ElMessage({
-            message: response.data.messages[0],
-            type: 'success'
-          });
-          this.$emit('refreshTagList')
-        } else {
-          ElMessage({
-            message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-            type: 'error'
-          });
-        }
-      }
-      )
+            if (response.data.status === 'success') {
+              this.handleClose();
+              this.resetForm('tagForm');
+              ElMessage({
+                message: response.data.messages[0],
+                type: 'success'
+              });
+              this.$emit('refreshTagList');
+            } else {
+              ElMessage({
+                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+                type: 'error'
+              });
+            }
+          }
+      );
     },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
     },
-    handleEdit (tagTemplateElement) {
+    handleEdit(tagTemplateElement) {
       // update the tagForm, so each fields will have corresponding default value
       for (let k in tagTemplateElement) {
         if (Object.prototype.hasOwnProperty.call(tagTemplateElement, k)) {
-          this.tagForm[k] = tagTemplateElement[k]
+          this.tagForm[k] = tagTemplateElement[k];
         }
       }
-      this.dialogTitle = "编辑标签 - " + this.tagForm.tag_template_name
-      this.dialogMode = 'modify'
+      this.dialogTitle = "编辑标签 - " + this.tagForm.tag_template_name;
+      this.dialogMode = 'modify';
     },
-    handleCreate () {
+    handleCreate() {
       // handle the create call, prepare the dialog title
-      this.dialogTitle = "创建标签"
-      this.dialogMode = 'create'
+      this.dialogTitle = "创建标签";
+      this.dialogMode = 'create';
     }
   }
-}
+};
 </script>
 
 <style scoped>

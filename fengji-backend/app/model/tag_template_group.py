@@ -31,6 +31,9 @@ class TagTemplateGroup(db.Document):
                 child_group_list.append(child_group_dict)
             # convert mongodb object to dict, replace _id
             output_dict['child_group'] = child_group_list
+        elif not data.child_group:
+            # remove the empty array, otherwise the frontend cascader will have a residual panel.
+            output_dict['child_group'] = None
 
         # use convert_refs to convert reference fields to json readable format
         output_dict = self.convert_refs(output_dict)
