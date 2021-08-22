@@ -14,11 +14,20 @@
                                v-bind:dialogFormVisible="tagTemplateDialogVisible"
                                v-bind:tagGroupList="tagGroupList"
                                v-on:closeDialog="tagTemplateDialogVisible = false"
-                               v-on:refreshTagList="getTagTemplateData"></tag-template-edit-panel>
+                               v-on:refreshTagList="handleInitialization"></tag-template-edit-panel>
       <tag-group-edit-panel ref="tagGroupEditPanel"
                             v-bind:dialogVisible="tagGroupDialogVisible"
                             v-on:closeDialog="tagGroupDialogVisible = false"
                             v-on:refreshTagGroupList="handleListRefresh"></tag-group-edit-panel>
+      <div>
+        <el-tree
+          v-bind:data="this.$store.state.tagTemplateGroup.tagTemplateGroupList"
+          v-bind:props="treeProps"
+          v-on:node-click="handleNodeClick"
+        >
+
+        </el-tree>
+      </div>
 
       <tag-group-display-card v-for="(tagTemplateGroup, index) in tagGroupList"
                               v-bind:tagGroupElement="tagTemplateGroup"
@@ -49,6 +58,12 @@ export default {
       tagGroupList: [],
       tagTemplateList: [],
       loading: true,
+      treeProps: {
+        value: 'id',
+        label: 'name',
+        children: 'child_group',
+      },
+      selectedNode: null,
     };
   },
   components: {
@@ -63,60 +78,67 @@ export default {
   mounted () {
 
   },
+  computed () {
+
+  },
   methods: {
     handleInitialization () {
       this.$store.dispatch('tagTemplate/getTagTemplateList')
       this.$store.dispatch('tagTemplateGroup/getTagTemplateGroupList').then(this.loading = false);
     },
-    // use a promise to send async request
-    getTagTemplateData () {
-      let p1 = new Promise(this.getTagGroupList)
-      let p2 = new Promise(this.getTagTemplateList)
-      Promise.all([p1, p2]).then(
-        this.assignTagTemplateToTagGroup,
-        this.loading = false
-      ).catch((result) => {
-        ElMessage({
-          message: result,
-          type: "error",
-        })
-      })
+    handleNodeClick(data) {
+      console.log(data)
+      this.selectedNode = data
     },
-    getTagGroupList (resolve, reject) {
-      api.tagTemplateGroup.getTagTemplateGroup({
-        type: 'all',
-      }).then((response) => {
-        if (response.data.status === "success") {
-          this.tagGroupList = response.data.tag_group_list;
-          resolve('success');
-        } else {
-          reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
-        }
-      })
-    },
-    getTagTemplateList (resolve, reject) {
-      api.tag.getTagTemplate({
-        type: "all",
-      }).then((response) => {
-        if (response.data.status === "success") {
-          this.tagTemplateList = response.data.tag_template_list;
-          resolve('success');
-        } else {
-          reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
-        }
-      });
-    },
-    assignTagTemplateToTagGroup () {
-      this.tagGroupList.forEach((tagGroupElement, index) => {
-        this.tagGroupList[index].tag_template_list = this.filterTagTemplate(tagGroupElement.id, this.tagTemplateList)
-      });
-    },
-    filterTagTemplate (tagGroupID, tagTemplateList) {
-      let filteredList = tagTemplateList.filter((item) => {
-        return item.tag_group_assignment.id === tagGroupID
-      })
-      return filteredList
-    },
+    // // use a promise to send async request
+    // getTagTemplateData () {
+    //   let p1 = new Promise(this.getTagGroupList)
+    //   let p2 = new Promise(this.getTagTemplateList)
+    //   Promise.all([p1, p2]).then(
+    //     this.assignTagTemplateToTagGroup,
+    //     this.loading = false
+    //   ).catch((result) => {
+    //     ElMessage({
+    //       message: result,
+    //       type: "error",
+    //     })
+    //   })
+    // },
+    // getTagGroupList (resolve, reject) {
+    //   api.tagTemplateGroup.getTagTemplateGroup({
+    //     type: 'all',
+    //   }).then((response) => {
+    //     if (response.data.status === "success") {
+    //       this.tagGroupList = response.data.tag_group_list;
+    //       resolve('success');
+    //     } else {
+    //       reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
+    //     }
+    //   })
+    // },
+    // getTagTemplateList (resolve, reject) {
+    //   api.tag.getTagTemplate({
+    //     type: "all",
+    //   }).then((response) => {
+    //     if (response.data.status === "success") {
+    //       this.tagTemplateList = response.data.tag_template_list;
+    //       resolve('success');
+    //     } else {
+    //       reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
+    //     }
+    //   });
+    // },
+    // assignTagTemplateToTagGroup () {
+    //   this.tagGroupList.forEach((tagGroupElement, index) => {
+    //     this.tagGroupList[index].tag_template_list = this.filterTagTemplate(tagGroupElement.id, this.tagTemplateList)
+    //   });
+    // },
+    // filterTagTemplate (tagGroupID, tagTemplateList) {
+    //   let filteredList = tagTemplateList.filter((item) => {
+    //     return item.tag_group_assignment.id === tagGroupID
+    //   })
+    //   return filteredList
+    // },
     handleTagTemplateCreate () {
       // call the handleCreate function in child component, let it prepare the dialog title
       this.$refs.editTagTemplatePanel.handleCreate();
