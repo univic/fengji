@@ -1,6 +1,5 @@
 import myAxios from "../utilities/request";
 import message from "../utilities/message";
-import {ElMessage} from 'element-plus';
 
 let tagTemplate = {
   getTagTemplate(params) {
@@ -13,7 +12,7 @@ let tagTemplate = {
       if (response.data.status === "success") {
         return response
       } else {
-        message.emitErrorMessage(response.data.messages[0]);
+        return response
     }}).catch((error) => {
         message.emitErrorMessage(error)
       })
@@ -27,14 +26,15 @@ let tagTemplate = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         }
-    }).catch(
-      function (error) {
-        ElMessage({
-          message: '出现了问题（*゜ー゜*）' + error,
-          type: 'error'
-        });
+    }).then((response)=> {
+      if (response.data.status === "success") {
+        return response
+      } else {
+        message.emitErrorMessage(response.data.messages[0]);
       }
-    )
+    }).catch((error) => {
+        message.emitErrorMessage(error)
+      })
   },
   deleteTagTemplate(params) {
     return myAxios.delete(
@@ -42,14 +42,9 @@ let tagTemplate = {
       {
         params: params
       }
-    ).catch(
-      function (error) {
-        ElMessage({
-          message: '出现了问题（*゜ー゜*）' + error,
-          type: 'error'
-        });
-      }
-    )
+    ).catch((error) => {
+      message.emitErrorMessage(error)
+    })
   },
   editTagTemplate(dataObj) {
     return myAxios.put(

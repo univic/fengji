@@ -2,6 +2,7 @@ import traceback
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
+
 from app.model.tag_template_group import TagTemplateGroup
 from app.model.post_forms import TagTemplateGroupForm
 
@@ -70,14 +71,16 @@ def get_tag_template_group():
         # return detailed info of all groups
         try:
             tag_group_list = []
+
             root_node = TagTemplateGroup.objects(id='611bc127efb77665894723e6')
             for item in root_node:
-                item_json = item.to_json(recursive_search=True)
+                item_json = item.to_json(recursive_search=True, with_tags=request.args['with_tags'])
                 tag_group_list.append(item_json)
+
             response = {
                 'status': 'success',
                 'messages': [''],
-                'tag_group_list': tag_group_list
+                'tag_group_list': tag_group_list,
                 }
         except Exception as e:
             print(traceback.print_exc())
@@ -97,9 +100,6 @@ def get_tag_template_group():
                 'status': 'error',
                 'messages': ['组名已存在'],
             }
-    # return all the report groups created by current user
-    elif request.args['type'] == 'tree':
-        pass
     else:
         response = {
             'status': 'error',

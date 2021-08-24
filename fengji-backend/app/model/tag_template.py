@@ -26,7 +26,7 @@ class TagTemplate(db.Document):
         item_dict["create_time"] = int(raw_data.create_time.timestamp())
         item_dict['tag_group_assignment'] = {
             'id': str(raw_data.tag_group_assignment.id),
-            'tag_group_name': raw_data.tag_group_assignment.tag_group_name
+            'name': raw_data.tag_group_assignment.name
         }
         item_dict["creator"] = {
                     'id': str(raw_data.creator.id),

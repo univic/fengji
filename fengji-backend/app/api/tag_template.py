@@ -61,16 +61,17 @@ def get_tag_templates():
 @bp.route('/', methods={'POST'})
 @jwt_required()
 def add_tag_template():
-    new_tag_template_form = TagTemplateForm(request.form, meta={'csrf': False})
-    if new_tag_template_form.validate():
+    form = TagTemplateForm(request.form, meta={'csrf': False})
+    if form.validate():
         new_tag = TagTemplate()
         tag_template_creator = get_current_user()
-        new_tag.tag_template_name = new_tag_template_form.tag_template_name.data
-        new_tag.tag_field_type = new_tag_template_form.tag_field_type.data
-        new_tag.tag_group_assignment = TagTemplateGroup(id=new_tag_template_form.tag_group_assignment.data)
-        new_tag.tag_default_value = new_tag_template_form.tag_default_value.data
-        new_tag.tag_preview = new_tag_template_form.tag_preview.data
-        new_tag.tag_color = new_tag_template_form.tag_color.data
+        new_tag.tag_template_name = form.tag_template_name.data
+        new_tag.tag_field_type = form.tag_field_type.data
+        tag_template_group = TagTemplateGroup.objects(id=form.tag_group_assignment.data).first()
+        new_tag.tag_group_assignment = tag_template_group
+        new_tag.tag_default_value = form.tag_default_value.data
+        new_tag.tag_preview = form.tag_preview.data
+        new_tag.tag_color = form.tag_color.data
         new_tag.creator = tag_template_creator
         try:
             new_tag.save()
@@ -89,12 +90,17 @@ def add_tag_template():
                 'status': 'error',
                 'messages': [e.message]
             }
+        except Exception as e:
+            response = {
+                'status': 'error',
+                'messages': [e]
+            }
     else:
         """
         when validate, WTForms will generate a form.errors dict, which contains all the error messages
         for each form fields, here we get error messages from the form.errors dict, and generate an error info list
         """
-        error_status = list(new_tag_template_form.errors.values())
+        error_status = list(form.errors.values())
         for i, item in enumerate(error_status):
             error_status[i] = item[0]
         # construct the return data

@@ -71,7 +71,7 @@
 <script>
 import qs from 'qs';
 import api from '../../api';
-import {ElMessage} from 'element-plus';
+import message from "../../utilities/message";
 
 export default {
   name: "tagTemplateEditPanel",
@@ -90,27 +90,18 @@ export default {
         // use a customized find function to see if the tag name has already existed
         // only do the unique check if dialogMode is not 'modify'
         if (this.dialogMode !== 'modify') {
-          api.tag.getTagTemplate({
+          api.tagTemplate.getTagTemplate({
             type: 'check_existence',
             tag_template_name: value,
-          }).then(
-              function (response) {
-                if (response.data.status === 'success') {
-                  callback();
-                } else if (response.data.status === 'error') {
-                  callback(new Error(response.data.messages[0]));
-                } else {
-                  ElMessage({
-                    message: '出现了问题（*゜ー゜*）',
-                    type: 'error',
-                  });
-                }
-              }
+          }).then((response) => {
+            if (response.data.status === 'success') {
+              callback();
+            } else {
+              callback(new Error(response.data.messages[0]));
+            }
+          }
           );
-        } else {
-          callback();
         }
-
       },
       // apply different validation rule according to the selected tag_field_type
       validateDefaultValue: (rule, value, callback) => {
@@ -192,7 +183,8 @@ export default {
         tag_group_assignment: [{required: true, message: '请选择归属标签组', trigger: 'blur'}]
       },
       tagGroupCascaderProps: {
-        checkStrictly: true,
+        checkStrictly: true,      // can select parent nodes
+        emitPath: false,            // return selected node only
         value: 'id',
         label: 'name',
         children: 'child_group',
@@ -201,7 +193,7 @@ export default {
   },
   computed: {
     tagTemplateGroup() {
-      return this.$store.getters['tagTemplateGroup/getTagTemplateGroupList']
+      return this.$store.getters['tagTemplateGroup/getTagTemplateGroupList'];
     }
   },
   methods: {
@@ -217,24 +209,16 @@ export default {
     },
     submitNewTag() {
       let dataObj = qs.stringify(this.tagForm);
-      let cAPI = api.tag.submitNewTag;
+      let cAPI = api.tagTemplate.submitNewTag;
       if (this.dialogMode === 'modify') {
-        cAPI = api.tag.editTagTemplate;
+        cAPI = api.tagTemplate.editTagTemplate;
       }
       cAPI(dataObj).then((response) => {
             if (response.data.status === 'success') {
               this.handleClose();
               this.resetForm('tagForm');
-              ElMessage({
-                message: response.data.messages[0],
-                type: 'success'
-              });
+              message.emitSuccessMessage(response.data.messages[0])
               this.$emit('refreshTagList');
-            } else {
-              ElMessage({
-                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-                type: 'error'
-              });
             }
           }
       );

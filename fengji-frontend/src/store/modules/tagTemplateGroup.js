@@ -28,6 +28,7 @@ const actions = {
   getTagTemplateGroupList(context) {
     api.tagTemplateGroup.getTagTemplateGroup({
       type: 'all',
+      with_tags: true,
     }).then((response) => {
         context.commit('setTagTemplateGroupList', response.data.tag_group_list);
         return response

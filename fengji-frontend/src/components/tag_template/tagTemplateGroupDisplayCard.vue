@@ -4,7 +4,7 @@
     <el-card>
       <template #header>
         <div>
-          <span> {{tagGroupElement.tag_group_name}} </span>
+          <span> {{tagGroupElement.name}} </span>
           <el-button v-on:click="handleEditTagGroup"
                      icon="el-icon-edit"
                      circle></el-button>
@@ -76,7 +76,7 @@ export default {
       })
     },
     deleteTagGroup (tagGroupID) {
-      api.tagGroup.deleteTagGroup({ id: tagGroupID }).then((response) => {
+      api.tagTemplateGroup.deleteTagTemplateGroup({ id: tagGroupID }).then((response) => {
         if (response.data.status === "success") {
           this.$emit('deleteTagGroup')
           ElMessage({
