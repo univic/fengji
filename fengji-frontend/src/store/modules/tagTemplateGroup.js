@@ -1,5 +1,4 @@
 import api from "../../api";
-import message from "../../utilities/message";
 
 const state = {
   tagTemplateGroupList: [],
