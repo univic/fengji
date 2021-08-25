@@ -68,6 +68,7 @@ class ReportGroupForm(Form):
                                                         f"{app_config.REPORT_GROUP_SETTINGS['MAX_GROUP_NAME_LENGTH']}位")])
     open_join = BooleanField('open_join')
     color = StringField('color')
+    parent_node = StringField('parent_node')
 
 
 class GroupRoleForm(Form):

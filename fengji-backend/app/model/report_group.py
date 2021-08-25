@@ -40,9 +40,9 @@ class ReportGroup(db.Document):
     creator = ReferenceField(User, required=True)
     open_join = BooleanField(default=False)
     member_user = ListField(ReferenceField(User, required=True))
-    member_group = ListField(ReferenceField('self'))
     report_to_user = ListField(ReferenceField(User, required=True))
-    report_to_group = ListField(ReferenceField('self'))
+    parent_node = ReferenceField('self')
+    member_node = ListField(ReferenceField('self'))
     status = ListField(StringField())
     tag_list = EmbeddedDocumentListField(ReportGroupTag)
     related_project = StringField()  # should be a reference field, but leave it here for now

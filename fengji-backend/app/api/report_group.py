@@ -21,6 +21,7 @@ def add_report_group():
         new_report_group = ReportGroup()
         new_report_group.name = report_group_form.name.data
         new_report_group.color = report_group_form.color.data
+
         new_report_group.open_join = report_group_form.open_join.data
         new_report_group.creator = get_current_user()
         try:

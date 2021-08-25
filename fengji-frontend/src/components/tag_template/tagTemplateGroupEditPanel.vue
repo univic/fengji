@@ -88,7 +88,8 @@ export default {
         ]
       },
       tagGroupCascaderProps: {
-        checkStrictly: true,
+        checkStrictly: true,        // can select parent nodes
+        emitPath: false,            // return selected node only
         value: 'id',
         label: 'name',
         children: 'child_group',
