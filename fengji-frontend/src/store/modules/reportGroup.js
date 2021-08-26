@@ -15,11 +15,9 @@ const mutations = {
 const actions = {
   getReportGroupList(context) {
     api.reportGroup.getReportGroup({
-
     }).then((response) => {
       context.commit('setReportGroupList', response.data.report_group_list)
       }
-
     )
   },
 }

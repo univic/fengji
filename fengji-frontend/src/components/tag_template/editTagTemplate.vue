@@ -25,7 +25,6 @@
             v-bind:props="treeProps"
             v-on:node-click="handleNodeClick"
         >
-
         </el-tree>
       </div>
       <div v-if="!selectedNode">
