@@ -1,4 +1,3 @@
-import types from "../types";
 import api from "../../api";
 
 const state = {

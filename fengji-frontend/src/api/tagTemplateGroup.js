@@ -1,4 +1,5 @@
 import myAxios from '../utilities/request';
+import message from "../utilities/message";
 import { ElMessage } from 'element-plus';
 
 let tagTemplateGroup = {
@@ -8,12 +9,8 @@ let tagTemplateGroup = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-      })
-      .catch(function (error) {
-        ElMessage({
-          message: '出现了问题（*゜ー゜*）' + error,
-          type: 'error',
-        });
+      }).catch((error) => {
+        message.emitErrorMessage(error);
       });
   },
   getTagTemplateGroup(params) {
@@ -24,29 +21,18 @@ let tagTemplateGroup = {
         if (response.data.status === "success") {
           return response
         } else {
-          ElMessage({
-            message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-            type: 'error'
-          });
+          message.emitErrorMessage(response.data.messages[0]);
         }
-      })
-      .catch(function (error) {
-        ElMessage({
-          message: '出现了问题（*゜ー゜*）' + error.message,
-          type: 'error',
-        });
+      }).catch((error) => {
+        message.emitErrorMessage(error);
       });
   },
   deleteTagTemplateGroup(params) {
     return myAxios
       .delete('api/tag_template_group/', {
         params: params,
-      })
-      .catch(function (error) {
-        ElMessage({
-          message: '出现了问题（*゜ー゜*）' + error,
-          type: 'error',
-        });
+      }).catch((error) => {
+        message.emitErrorMessage(error);
       });
   },
   editTagTemplateGroup(dataObj) {
@@ -55,13 +41,9 @@ let tagTemplateGroup = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
+      }).catch((error) => {
+        message.emitErrorMessage(error);
       })
-      .catch(function (error) {
-        ElMessage({
-          message: '出现了问题（*゜ー゜*）' + error,
-          type: 'error',
-        });
-      });
   },
 };
 

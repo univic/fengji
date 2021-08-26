@@ -26,29 +26,18 @@ export default {
     }
   },
   created() {
-    // this.getTagTemplate();
-    // this.getMyReportGroup();
+    this.handleInitialization()
   },
   computed: {
   },
   methods: {
+
     handleInitialization() {
-      this.$store.dispatch('tagTemplateGroup/getTagTemplateGroupList').then(this.loading = false);
-    },
-    getMyReportGroup() {
-      api.reportGroup.getReportGroup({
-        type: 'my',
-      }).then((response) => {
-            if (response.data.status === 'success') {
-              this.$store.commit('user/setMyReportGroup', response.data.report_group_list)
-            } else {
-              ElMessage({
-                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-                type: 'error'
-              });
-            }
-          }
-      )
+      let p1 = this.$store.dispatch('tagTemplateGroup/getTagTemplateGroupList');
+      let p2 = this.$store.dispatch('reportGroup/getReportGroupList');
+      Promise.all([p1, p2]).then(()=>{
+        console.log('resolved')
+      })
     },
   }
 }

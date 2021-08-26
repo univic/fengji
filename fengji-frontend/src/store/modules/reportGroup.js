@@ -2,25 +2,29 @@ import api from "../../api";
 
 const state = {
   reportGroupList: [],
-}
+};
 
-let getters = {}
+let getters = {};
 
 const mutations = {
   setReportGroupList(state, payload) {
-    state.reportGroupList = payload
+    state.reportGroupList = payload;
   },
-}
+};
 
 const actions = {
   getReportGroupList(context) {
-    api.reportGroup.getReportGroup({
-    }).then((response) => {
-      context.commit('setReportGroupList', response.data.report_group_list)
-      }
-    )
-  },
-}
+    return new Promise((resolve, reject) => {
+      api.reportGroup.getReportGroup({
+        type: 'all',
+      }).then((response) => {
+          context.commit('setReportGroupList', response.data.report_group_list);
+          resolve();
+        }
+      );
+    });
+  }
+};
 
 export default {
   namespaced: true,
@@ -28,4 +32,4 @@ export default {
   getters,
   actions,
   mutations
-}
+};

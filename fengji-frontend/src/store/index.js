@@ -5,6 +5,7 @@ import actions from "./actions"
 import user from "./modules/user"
 import tagTemplate from "./modules/tagTemplate"
 import tagTemplateGroup from "./modules/tagTemplateGroup";
+import reportGroup from "./modules/reportGroup";
 
 const store = createStore({
   state() {
@@ -19,6 +20,7 @@ const store = createStore({
     user,
     tagTemplate,
     tagTemplateGroup,
+    reportGroup,
   }
 })
 
