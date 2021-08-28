@@ -1,14 +1,11 @@
 import traceback
 from mongoengine.errors import NotUniqueError, ValidationError
+from mongoengine.queryset.visitor import Q
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
 from app.model.report_group import ReportGroup
 from app.model.user_model import User
 from app.model.post_forms import ReportGroupForm
-
-# TODO: need a get my report groups api
-# TODO: need a free to join filter
-# TODO: reconstruct GET method
 
 bp = Blueprint('report_group', __name__, url_prefix='/api/report_group')
 
@@ -62,14 +59,14 @@ def add_report_group():
 @jwt_required()
 def get_report_group():
     if request.args['type'] == 'all':
-        # return detailed info of all groups
+        # TODO: search from a root node
         try:
             report_group_list = []
             report_groups = ReportGroup.objects()
             for item in report_groups:
                 # convert the mongodb query obj to json, then load it into dict
                 # make id, date and user more readable before return it
-                item_dict = item.to_json()
+                item_dict = item.to_json(recursive_search=True, with_tags=request.args['with_tags'])
                 report_group_list.append(item_dict)
             response = {
                 'status': 'success',
@@ -96,15 +93,40 @@ def get_report_group():
             }
     # return all the report groups created by current user
     elif request.args['type'] == 'my':
-        report_groups = ReportGroup.objects(creator=get_current_user().id)
+        user = get_current_user()
+        # use Q object to combine a number of constraints
+        user_report_groups = ReportGroup.objects(Q(creator=user) | Q(member_user=user) | Q(report_to_user=user))
         report_group_list = []
-        for item in report_groups:
+        # find the top nodes
+        for item in user_report_groups:
+            # a dict which key is the id of the parent node, and value is the id of its' parent node
+            parent_dict = {}
+            child_list = []
+            if item.id in child_list:
+                # if current item is a known child node, just leave it
+                pass
+            else:
+                if item.id in parent_dict.keys():
+                    # if current item is a known parent node, replace the previously logged node
+                    for i, element in enumerate(report_group_list):
+                        if element.id == parent_dict[item.id]:
+                            report_group_list.pop(i)
+                            parent_dict.pop(item.id)
+                            break
+                # if the id of current item does not exist in the either dict, log it as a parent node
+                report_group_list.append(item)
+                if item.child_node:
+                    child_list += item.child_node
+                if item.parent_node:
+                    parent_dict[item.parent_node.id] = item.id
+        # get serialized content, use list comprehensions
+        output_list = [item.to_json(recursive_search=True, with_tags=request.args['with_descendant'])
+                       for item in report_group_list]
 
-            report_group_list.append(item.to_json())
         response = {
             'status': 'success',
             'messages': [''],
-            'report_group_list': report_group_list
+            'report_group_list': output_list
         }
     else:
         response = {
