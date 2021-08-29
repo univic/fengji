@@ -1,5 +1,6 @@
 import datetime
-from mongoengine import StringField, EmbeddedDocumentListField, DateTimeField, ReferenceField, ListField, EmbeddedDocument
+from mongoengine import StringField, EmbeddedDocumentListField, DateTimeField, ReferenceField, ListField, \
+    EmbeddedDocument
 from mongoengine import BooleanField
 from app.lib.database import db
 from app.model.user_model import User
@@ -56,14 +57,22 @@ class ReportGroup(db.Document):
         return output_dict
 
     def convert_refs(self, data):
-        data["create_time"] = int(data.create_time.timestamp())
         # convert the creator reference field to a json readable format
-        data['creator'] = {
-            'id': str(self.creator.id),
-            'username': self.creator.username
+        output_dict = {
+            "create_time": int(data.create_time.timestamp()),
+            'creator': self.get_document_dict(data.creator, ['username']),
+            'parent_node': self.get_document_dict(data.parent_node, ['name'])
+            'member_node': [self.get_document_dict(item, ['name']) for item in data.member_node],
+            'member_user': [self.get_document_dict(item, ['username']) for item in data.member_user],
+            'report_to_user': [self.get_document_dict(item, ['username']) for item in data.report_to_user]
         }
-        data['parent_group'] = {
-            'id': str(self['parent_group']),
+        return output_dict
+
+    @staticmethod
+    def get_document_dict(document, attribute_list):
+        user_dict = {
+            'id': str(document.id),
         }
-        data['member_user'] = []
-        return data
+        for attr in attribute_list:
+            user_dict[attr] = document.attr
+        return user_dict
