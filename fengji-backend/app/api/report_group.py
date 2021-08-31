@@ -120,7 +120,7 @@ def get_report_group():
                 if item.parent_node:
                     parent_dict[item.parent_node.id] = item.id
         # get serialized content, use list comprehensions
-        output_list = [item.to_json(recursive_search=True, with_tags=request.args['with_descendant'])
+        output_list = [item.to_json(recursive_search=True, with_descendant=request.args['with_descendant'])
                        for item in report_group_list]
 
         response = {

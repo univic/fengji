@@ -48,12 +48,16 @@ class ReportGroup(db.Document):
     tag_list = EmbeddedDocumentListField(ReportGroupTag)
     related_project = StringField()  # should be a reference field, but leave it here for now
 
-    def to_json(self, recursive_search, with_tags):
+    def to_json(self, recursive_search, with_descendant):
         raw_data = self
         # convert mongodb object to dict, replace _id
         item_dict = db_util.dbo_better_json(raw_data)
 
         output_dict = self.convert_refs(item_dict)
+        if with_descendant:
+            output_dict['member_node'] = [item.to_json() for item in raw_data.member_node]
+        else:
+            pass
         return output_dict
 
     def convert_refs(self, data):
@@ -61,7 +65,7 @@ class ReportGroup(db.Document):
         output_dict = {
             "create_time": int(data.create_time.timestamp()),
             'creator': self.get_document_dict(data.creator, ['username']),
-            'parent_node': self.get_document_dict(data.parent_node, ['name'])
+            'parent_node': self.get_document_dict(data.parent_node, ['name']),
             'member_node': [self.get_document_dict(item, ['name']) for item in data.member_node],
             'member_user': [self.get_document_dict(item, ['username']) for item in data.member_user],
             'report_to_user': [self.get_document_dict(item, ['username']) for item in data.report_to_user]
