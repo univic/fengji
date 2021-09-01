@@ -2,7 +2,7 @@ import traceback
 from mongoengine.errors import NotUniqueError, ValidationError
 from mongoengine.queryset.visitor import Q
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import get_jwt_identity, jwt_required, current_user, get_current_user
+from flask_jwt_extended import get_jwt_identity, jwt_required, get_current_user
 from app.model.report_group import ReportGroup
 from app.model.user_model import User
 from app.model.post_forms import ReportGroupForm
@@ -18,9 +18,10 @@ def add_report_group():
         new_report_group = ReportGroup()
         new_report_group.name = report_group_form.name.data
         new_report_group.color = report_group_form.color.data
-
         new_report_group.open_join = report_group_form.open_join.data
-        new_report_group.creator = get_current_user()
+        current_user = get_current_user()
+        new_report_group.creator = current_user
+        new_report_group.report_to_user = [current_user]
         try:
             new_report_group.save()
             response = {
@@ -66,7 +67,7 @@ def get_report_group():
             for item in report_groups:
                 # convert the mongodb query obj to json, then load it into dict
                 # make id, date and user more readable before return it
-                item_dict = item.to_json(recursive_search=True, with_tags=request.args['with_tags'])
+                item_dict = item.to_json(recursive_search=True, with_descendant=request.args['with_descendant'])
                 report_group_list.append(item_dict)
             response = {
                 'status': 'success',
@@ -74,7 +75,7 @@ def get_report_group():
                 'group_list': report_group_list
                 }
         except Exception as e:
-            print(e)
+            print(traceback.print_exc())
             response = {
                     'status': 'error',
                     'messages': [e.args[0]]

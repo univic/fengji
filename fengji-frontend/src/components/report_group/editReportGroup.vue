@@ -14,9 +14,19 @@
                         prop="name">
             <el-input v-model="reportGroupForm.name"></el-input>
           </el-form-item>
+          <el-form-item label="归属报告组组"
+                        prop="tag_group_assignment">
+            <el-cascader v-model="reportGroupForm.tag_group_assignment"
+                         placeholder="请选择归属标签组"
+                         v-bind:options="cascaderOptions"
+                         v-bind:props="cascaderProps"
+            >
+            </el-cascader>
+          </el-form-item>
           <el-form-item label="加入方式"
-                        prop="open_join">
-            <el-radio-group v-model="reportGroupForm.open_join">
+                        prop="open_join"
+          >
+            <el-radio-group disabled v-model="reportGroupForm.open_join">
               <el-radio-button label="true">开放加入</el-radio-button>
               <el-radio-button label="false">邀请加入</el-radio-button>
             </el-radio-group>
@@ -45,6 +55,9 @@ export default {
   name: "editReportGroup",
   emits: [
     'refreshList'
+  ],
+  props: [
+
   ],
   data () {
     let validators = {
@@ -84,6 +97,14 @@ export default {
           { min: 3, max: 50, message: '报告组名的长度应为3~50个字符', trigger: 'blur' },
           { validator: validators.validateGroupName, trigger: 'blur' }
         ],
+      },
+      cascaderOptions: [],
+      cascaderProps: {
+        checkStrictly: true,      // can select parent nodes
+        emitPath: false,            // return selected node only
+        value: 'id',
+        label: 'name',
+        children: 'child_group',
       }
     }
   },

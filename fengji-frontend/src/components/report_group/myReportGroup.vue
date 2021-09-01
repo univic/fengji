@@ -2,15 +2,20 @@
   <div>
     <el-page-header content="我的报告组"></el-page-header>
     <el-divider></el-divider>
-    <el-button type="primary"
-               v-on:click="dialogVisible = true">加入报告组</el-button>
+    <el-button v-on:click="handleCreateReportGroup"
+    >创建报告组</el-button>
+    <el-button
+        v-on:click="dialogVisible = true">加入报告组</el-button>
+    <edit-report-group ref="editReportGroup"
+                       v-on:refreshList="handleInitialization"></edit-report-group>
     <join-report-group-dialog v-bind:dialog-visible="dialogVisible"
                               v-on:closeDialog="dialogVisible = false"
-                              v-on:refreshList="getList"></join-report-group-dialog>
-    <div>已经加入的报告组</div>
+                              v-on:refreshList="handleInitialization"></join-report-group-dialog>
+    <div>我创建的报告组</div>
     <el-card>
 
     </el-card>
+    <div>我加入的报告组</div>
   </div>
 
 </template>
@@ -21,36 +26,30 @@
 // TODO need to differentiate between ordinary report groups and project-like groups
 
 import joinReportGroupDialog from './joinReportGroupDialog.vue';
-import api from '../../api';
-import { ElMessage } from 'element-plus';
+import editReportGroup from "./editReportGroup.vue";
 
 export default {
   name: "myReportGroup.vue",
   components: {
     'joinReportGroupDialog': joinReportGroupDialog,
+    'editReportGroup': editReportGroup,
   },
   data () {
     return {
       dialogVisible: false,
+      editDialogVisible: false,
     }
   },
   methods: {
-    getList () {
-      api.reportGroup.getReportGroup({
-        type: 'all',
-      }).then(
-        (response) => {
-          if (response.data.status === 'success') {
-            this.reportGroupList = response.data.group_list;
-          } else {
-            ElMessage({
-              message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-              type: 'error'
-            });
-          }
-        }
-      )
+    handleInitialization() {
+      this.loading = true;
+      this.$store.dispatch('reportGroup/getReportGroupList').then(this.loading = false);
     },
+    handleCreateReportGroup () {
+      // call the handleCreate function in child component, let it prepare the dialog title
+      this.$refs.editReportGroup.handleCreate()
+    }
+
   }
 
 }

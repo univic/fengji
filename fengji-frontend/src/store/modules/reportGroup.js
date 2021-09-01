@@ -17,7 +17,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       api.reportGroup.getReportGroup({
         type: 'all',
-        with_tags: true,
+        with_descendant: true,
       }).then((response) => {
           context.commit('setReportGroupList', response.data.report_group_list);
           resolve();

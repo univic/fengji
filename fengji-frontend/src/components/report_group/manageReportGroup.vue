@@ -37,15 +37,20 @@ export default {
   data () {
     return {
       reportGroupList: null,
+      loading: false,
     }
   },
   components: {
     editReportGroup: editReportGroup
   },
   created () {
-    this.getGroupList();
+    this.handleInitialization()
   },
   methods: {
+    handleInitialization() {
+      this.loading = true;
+      this.$store.dispatch('reportGroup/getReportGroupList').then(this.loading = false);
+    },
     getGroupList () {
       api.reportGroup.getReportGroup({
         type: 'all',

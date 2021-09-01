@@ -51,32 +51,36 @@ class ReportGroup(db.Document):
     def to_json(self, recursive_search, with_descendant):
         raw_data = self
         # convert mongodb object to dict, replace _id
-        item_dict = db_util.dbo_better_json(raw_data)
+        output_dict = db_util.dbo_better_json(raw_data)
 
-        output_dict = self.convert_refs(item_dict)
+        output_dict = self.convert_refs(output_dict, raw_data)
         if with_descendant:
             output_dict['member_node'] = [item.to_json() for item in raw_data.member_node]
         else:
             pass
         return output_dict
 
-    def convert_refs(self, data):
+    def convert_refs(self, output_dict, raw_data):
         # convert the creator reference field to a json readable format
+        print(output_dict)
         output_dict = {
-            "create_time": int(data.create_time.timestamp()),
-            'creator': self.get_document_dict(data.creator, ['username']),
-            'parent_node': self.get_document_dict(data.parent_node, ['name']),
-            'member_node': [self.get_document_dict(item, ['name']) for item in data.member_node],
-            'member_user': [self.get_document_dict(item, ['username']) for item in data.member_user],
-            'report_to_user': [self.get_document_dict(item, ['username']) for item in data.report_to_user]
+            "create_time": int(raw_data.create_time.timestamp()),
+            'creator': self.get_document_dict(raw_data.creator, ['username']),
+            'parent_node': self.get_document_dict(raw_data.parent_node, ['name']),
+            'member_node': [self.get_document_dict(item, ['name']) for item in raw_data.member_node],
+            'member_user': [self.get_document_dict(item, ['username']) for item in raw_data.member_user],
+            'report_to_user': [self.get_document_dict(item, ['username']) for item in raw_data.report_to_user]
         }
         return output_dict
 
     @staticmethod
     def get_document_dict(document, attribute_list):
-        user_dict = {
-            'id': str(document.id),
-        }
-        for attr in attribute_list:
-            user_dict[attr] = document.attr
-        return user_dict
+        if document:
+            user_dict = {
+                'id': str(document.id),
+            }
+            for attr in attribute_list:
+                user_dict[attr] = document[attr]
+            return user_dict
+        else:
+            return None
