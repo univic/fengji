@@ -102,8 +102,8 @@ def get_report_group():
         for item in user_report_groups:
             # a dict which key is the id of the parent node, and value is the id of its' parent node
             parent_dict = {}
-            child_list = []
-            if item.id in child_list:
+            member_node_list = []
+            if item.id in member_node_list:
                 # if current item is a known child node, just leave it
                 pass
             else:
@@ -116,8 +116,8 @@ def get_report_group():
                             break
                 # if the id of current item does not exist in the either dict, log it as a parent node
                 report_group_list.append(item)
-                if item.child_node:
-                    child_list += item.child_node
+                if item.member_node:
+                    member_node_list += item.member_node
                 if item.parent_node:
                     parent_dict[item.parent_node.id] = item.id
         # get serialized content, use list comprehensions

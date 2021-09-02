@@ -14,10 +14,10 @@
                         prop="name">
             <el-input v-model="reportGroupForm.name"></el-input>
           </el-form-item>
-          <el-form-item label="归属报告组组"
+          <el-form-item label="归属报告组"
                         prop="tag_group_assignment">
             <el-cascader v-model="reportGroupForm.tag_group_assignment"
-                         placeholder="请选择归属标签组"
+                         placeholder="请选择归属报告组"
                          v-bind:options="cascaderOptions"
                          v-bind:props="cascaderProps"
             >
@@ -98,15 +98,19 @@ export default {
           { validator: validators.validateGroupName, trigger: 'blur' }
         ],
       },
-      cascaderOptions: [],
       cascaderProps: {
         checkStrictly: true,      // can select parent nodes
         emitPath: false,            // return selected node only
         value: 'id',
         label: 'name',
-        children: 'child_group',
+        children: 'member_node',
       }
     }
+  },
+  computed: {
+    cascaderOptions() {
+      return this.$store.state.reportGroup.myReportGroupList;
+    },
   },
   methods: {
     handleCreate () {

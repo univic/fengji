@@ -40,10 +40,13 @@ export default {
       editDialogVisible: false,
     }
   },
+  created() {
+    this.handleInitialization();
+  },
   methods: {
     handleInitialization() {
       this.loading = true;
-      this.$store.dispatch('reportGroup/getReportGroupList').then(this.loading = false);
+      this.$store.dispatch('reportGroup/getMyReportGroupList').then(this.loading = false);
     },
     handleCreateReportGroup () {
       // call the handleCreate function in child component, let it prepare the dialog title
