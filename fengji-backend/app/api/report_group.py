@@ -13,17 +13,24 @@ bp = Blueprint('report_group', __name__, url_prefix='/api/report_group')
 @bp.route('/', methods={'POST'})
 @jwt_required()
 def add_report_group():
-    report_group_form = ReportGroupForm(request.form, meta={'csrf': False})
-    if report_group_form.validate():
+    form = ReportGroupForm(request.form, meta={'csrf': False})
+    parent_node = None
+    if form.validate():
         new_report_group = ReportGroup()
-        new_report_group.name = report_group_form.name.data
-        new_report_group.color = report_group_form.color.data
-        new_report_group.open_join = report_group_form.open_join.data
+        new_report_group.name = form.name.data
+        new_report_group.color = form.color.data
+        new_report_group.open_join = form.open_join.data
         current_user = get_current_user()
         new_report_group.creator = current_user
         new_report_group.report_to_user = [current_user]
+        if form.parent_node.data != '':
+            parent_node = ReportGroup.objects(id=form.parent_node.data).first()
+            new_report_group.parent_node = parent_node
         try:
             new_report_group.save()
+            if parent_node:
+                parent_node.member_node.append(new_report_group)
+                parent_node.save()
             response = {
                 'status': 'success',
                 'messages': ['报告组添加成功~']
@@ -45,7 +52,7 @@ def add_report_group():
         when validate, WTForms will generate a form.errors dict, which contains all the error messages
         for each form fields, here we get error messages from the form.errors dict, and generate an error info list
         """
-        error_status = list(report_group_form.errors.values())
+        error_status = list(form.errors.values())
         for i, item in enumerate(error_status):
             error_status[i] = item[0]
         # construct the return data
@@ -98,11 +105,11 @@ def get_report_group():
         # use Q object to combine a number of constraints
         user_report_groups = ReportGroup.objects(Q(creator=user) | Q(member_user=user) | Q(report_to_user=user))
         report_group_list = []
+        parent_dict = {}
+        member_node_list = []
         # find the top nodes
         for item in user_report_groups:
             # a dict which key is the id of the parent node, and value is the id of its' parent node
-            parent_dict = {}
-            member_node_list = []
             if item.id in member_node_list:
                 # if current item is a known child node, just leave it
                 pass
@@ -112,18 +119,17 @@ def get_report_group():
                     for i, element in enumerate(report_group_list):
                         if element.id == parent_dict[item.id]:
                             report_group_list.pop(i)
-                            parent_dict.pop(item.id)
                             break
                 # if the id of current item does not exist in the either dict, log it as a parent node
                 report_group_list.append(item)
                 if item.member_node:
-                    member_node_list += item.member_node
+                    for obj in item.member_node:
+                        member_node_list.append(obj.id)
                 if item.parent_node:
                     parent_dict[item.parent_node.id] = item.id
         # get serialized content, use list comprehensions
         output_list = [item.to_json(recursive_search=True, with_descendant=request.args['with_descendant'])
                        for item in report_group_list]
-
         response = {
             'status': 'success',
             'messages': [''],

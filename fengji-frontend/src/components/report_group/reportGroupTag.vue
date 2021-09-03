@@ -5,29 +5,21 @@
   >
     <div>
       <div>
-        <el-select
-            v-model="selectedReportGroup"
-            multiple
-            placeholder="请选择报告组"
+        <el-cascader v-model="selectedReportGroup"
+                     placeholder="请选择归属报告组"
+                     v-bind:options="myReportGroupList"
+                     v-bind:props="cascaderProps"
         >
-          <el-option
-              v-for="item in myReportGroup"
-              v-bind:key="item.id"
-              v-bind:label="item.name"
-              v-bind:value="item.id"
-          >
-
-          </el-option>
-
-        </el-select>
+        </el-cascader>
         <div>
           <el-button
               type="primary"
+              v-on:click="handleConfirm"
           >确定
           </el-button>
           <el-button
               type="info"
-              v-on:click="showAddTagSelector = false"
+              v-on:click="handleCancel"
           >取消
           </el-button>
         </div>
@@ -55,7 +47,14 @@ export default {
   data() {
     return {
       popoverVisible: false,
-      selectedReportGroup: [],
+      selectedReportGroup: null,
+      cascaderProps: {
+        checkStrictly: true,      // can select parent nodes
+        emitPath: false,            // return selected node only
+        value: 'id',
+        label: 'name',
+        children: 'member_node',
+      }
     };
   },
   watch: {
@@ -67,8 +66,8 @@ export default {
     }
   },
   computed: {
-    myReportGroup() {
-      return this.$store.state.user.myReportGroup;
+    myReportGroupList() {
+      return this.$store.state.reportGroup.myReportGroupList;
     },
     selectedReportGroupText() {
       // determine the tag display text, according to the length of the report group name
@@ -76,27 +75,38 @@ export default {
       let text = "无";
       let firstReportGroupName = null;
       let maxStrLength = 8;
-      if (this.selectedReportGroup.length > 0) {
+      if (this.selectedReportGroup && this.selectedReportGroup.length > 0) {
         // find the name of the selected report group with the GUID
-        this.myReportGroup.forEach((iterItem, iterIndex, IterArr) => {
+        this.myReportGroupList.forEach((iterItem, iterIndex, IterArr) => {
           if (iterItem.id === this.selectedReportGroup[0]) {
             firstReportGroupName = iterItem.name;
+          } else {
+
           }
         });
         // slice the report group name, if it is too long
-        if (firstReportGroupName.length > maxStrLength) {
+        if (firstReportGroupName && firstReportGroupName.length > maxStrLength) {
           text = firstReportGroupName.slice(0, maxStrLength) + "...";
         } else {
           text = firstReportGroupName;
         }
         // if multiple report groups are selected, display total number
-        if (this.selectedReportGroup.length > 1) {
-          text = text + " 等" + this.selectedReportGroup.length + "个";
-        }
+        // if (this.selectedReportGroup.length > 1) {
+        //   text = text + " 等" + this.selectedReportGroup.length + "个";
+        // }
 
       }
       return text;
     }
+  },
+  methods: {
+    handleConfirm() {
+      console.log(this.selectedReportGroup)
+      this.showAddTagSelector = false
+    },
+    handleCancel() {
+      this.popoverVisible = false
+    },
   }
 };
 </script>

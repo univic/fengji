@@ -12,8 +12,18 @@
                               v-on:closeDialog="dialogVisible = false"
                               v-on:refreshList="handleInitialization"></join-report-group-dialog>
     <div>我创建的报告组</div>
-    <el-card>
-
+    <el-card v-for="item in myReportGroupList">
+      <template #header>
+        <div>
+          <span> {{item.name}} </span>
+          <el-button v-on:click="handleEdit"
+                     icon="el-icon-edit"
+                     circle></el-button>
+          <el-button v-on:click="handleDelete"
+                     icon="el-icon-delete"
+                     circle></el-button>
+        </div>
+      </template>
     </el-card>
     <div>我加入的报告组</div>
   </div>
@@ -39,6 +49,11 @@ export default {
       dialogVisible: false,
       editDialogVisible: false,
     }
+  },
+  computed: {
+    myReportGroupList() {
+      return this.$store.state.reportGroup.myReportGroupList;
+    },
   },
   created() {
     this.handleInitialization();

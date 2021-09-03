@@ -15,8 +15,8 @@
             <el-input v-model="reportGroupForm.name"></el-input>
           </el-form-item>
           <el-form-item label="归属报告组"
-                        prop="tag_group_assignment">
-            <el-cascader v-model="reportGroupForm.tag_group_assignment"
+                        prop="parent_node">
+            <el-cascader v-model="reportGroupForm.parent_node"
                          placeholder="请选择归属报告组"
                          v-bind:options="cascaderOptions"
                          v-bind:props="cascaderProps"
@@ -90,6 +90,7 @@ export default {
         name: null,
         open_join: false,
         color: '#FFFFFF',
+        parent_node: null,
       },
       formRules: {
         name: [

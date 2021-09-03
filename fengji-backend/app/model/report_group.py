@@ -52,10 +52,9 @@ class ReportGroup(db.Document):
         raw_data = self
         # convert mongodb object to dict, replace _id
         output_dict = db_util.dbo_better_json(raw_data)
-
         output_dict = self.convert_refs(output_dict, raw_data)
         if raw_data.member_node != [] and with_descendant:
-            output_dict['member_node'] = [item.to_json() for item in raw_data.member_node]
+            output_dict['member_node'] = [item.to_json(recursive_search, with_descendant) for item in raw_data.member_node]
         else:
             # remove the empty array, otherwise the frontend cascader will have a residual panel.
             output_dict['member_node'] = None
