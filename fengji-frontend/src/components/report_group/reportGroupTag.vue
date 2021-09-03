@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import treeTool from "../../utilities/treeTool";
+
 export default {
   name: "reportGroupTag",
   emits: [
@@ -75,15 +77,14 @@ export default {
       let text = "无";
       let firstReportGroupName = null;
       let maxStrLength = 8;
-      if (this.selectedReportGroup && this.selectedReportGroup.length > 0) {
-        // find the name of the selected report group with the GUID
-        this.myReportGroupList.forEach((iterItem, iterIndex, IterArr) => {
-          if (iterItem.id === this.selectedReportGroup[0]) {
-            firstReportGroupName = iterItem.name;
-          } else {
+      if (this.selectedReportGroup) {
+        // use recursive search to find the name of the selected report group with the GUID
+        let treeSearchResult = treeTool.treeSearch(this.myReportGroupList, 'member_node', 'id', this.selectedReportGroup)
+        console.log(treeSearchResult);
+        if (treeSearchResult && treeSearchResult.name) {
+          firstReportGroupName = treeSearchResult.name;
+        }
 
-          }
-        });
         // slice the report group name, if it is too long
         if (firstReportGroupName && firstReportGroupName.length > maxStrLength) {
           text = firstReportGroupName.slice(0, maxStrLength) + "...";
@@ -94,18 +95,21 @@ export default {
         // if (this.selectedReportGroup.length > 1) {
         //   text = text + " 等" + this.selectedReportGroup.length + "个";
         // }
-
+      } else {
+        text = "无";
       }
       return text;
-    }
-  },
+      }
+
+    },
+
   methods: {
     handleConfirm() {
-      console.log(this.selectedReportGroup)
-      this.showAddTagSelector = false
+      this.popoverVisible = false
     },
     handleCancel() {
       this.popoverVisible = false
+      this.selectedReportGroup = null
     },
   }
 };

@@ -13,7 +13,11 @@ def add_todo_item():
     new_todo_item = TodoItem()
     post_data = request.get_json()
     new_todo_item.title = post_data['title']
-    posted_report_group_list = post_data['report_group_list']
+    posted_report_group_list = []
+    if isinstance(post_data['report_group_list'], list):
+        posted_report_group_list = post_data['report_group_list']
+    else:
+        posted_report_group_list.append(post_data['report_group_list'])
     report_group_list = []
     # query the related ReportGroup item, pass it to the reference field
     for element in posted_report_group_list:
