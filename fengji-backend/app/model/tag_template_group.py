@@ -59,4 +59,3 @@ class TagTemplateGroup(db.Document):
                 'id': str(self['parent_group']),
             }
         return data
-

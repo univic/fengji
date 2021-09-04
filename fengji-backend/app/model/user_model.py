@@ -5,6 +5,7 @@
 import datetime
 from mongoengine import StringField, ListField, ReferenceField, EmailField, DateTimeField, IntField
 from app.lib.database import db
+import app.utilities.db_util as db_util
 
 
 class User(db.Document):
@@ -34,3 +35,13 @@ class User(db.Document):
     current_login_at = DateTimeField()
     current_login_ip = StringField()
     login_count = IntField(default=0)
+
+    def to_json(self):
+        raw_data = self
+        converted_dict = db_util.dbo_better_json(raw_data)
+        output_dict = {
+            'id': converted_dict['id'],
+            'username': converted_dict['username'],
+            'email': converted_dict['email']
+        }
+        return output_dict

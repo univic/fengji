@@ -1,6 +1,6 @@
 import json
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_current_user
+from flask_jwt_extended import jwt_required, get_current_user, current_user
 from app.model.todo_item import TodoItem
 from app.model.report_group import ReportGroup
 
@@ -70,6 +70,16 @@ def get_todo_item():
                 'status': 'error',
                 'messages': [e]
             }
+    elif request.args['type'] == 'my':
+        output_list = []
+        my_todo_list = TodoItem.objects(creator=current_user.id)
+        for item in my_todo_list:
+            output_list.append(item.to_json())
+        response = {
+            'status': 'success',
+            'messages': [''],
+            'todo_item_list': output_list
+        }
     return response
 
 

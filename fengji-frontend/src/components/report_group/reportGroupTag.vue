@@ -5,10 +5,12 @@
   >
     <div>
       <div>
-        <el-cascader v-model="selectedReportGroup"
+        <el-cascader v-model="reportGroupInput"
                      placeholder="请选择归属报告组"
                      v-bind:options="myReportGroupList"
                      v-bind:props="cascaderProps"
+                     ref="cascader"
+                     v-on:change="handleChange"
         >
         </el-cascader>
         <div>
@@ -46,10 +48,14 @@ export default {
   emits: [
     'selectReportGroup'
   ],
+  props: [
+      'predefinedReportGroup'
+  ],
   data() {
     return {
       popoverVisible: false,
-      selectedReportGroup: null,
+      reportGroupInput: null,
+      selectedReportGroupNode: null,
       cascaderProps: {
         checkStrictly: true,      // can select parent nodes
         emitPath: false,            // return selected node only
@@ -60,16 +66,23 @@ export default {
     };
   },
   watch: {
-    selectedReportGroup: {
-      deep: true,
-      handler(newValue, oldValue) {
-        this.$emit('selectReportGroup', this.selectedReportGroup);
-      }
-    }
+    // selectedReportGroup: {
+    //   deep: true,
+    //   handler(newValue, oldValue) {
+    //     this.$emit('selectReportGroup', this.selectedReportGroup);
+    //   }
+    // }
   },
   computed: {
     myReportGroupList() {
       return this.$store.state.reportGroup.myReportGroupList;
+    },
+    selectedReportGroup() {
+      if(this.reportGroupInput === null && this.predefinedReportGroup) {
+        return this.predefinedReportGroup.id
+      } else {
+        return this.reportGroupInput
+      }
     },
     selectedReportGroupText() {
       // determine the tag display text, according to the length of the report group name
@@ -77,13 +90,11 @@ export default {
       let text = "无";
       let firstReportGroupName = null;
       let maxStrLength = 8;
-      if (this.selectedReportGroup) {
+      if (this.selectedReportGroupNode) {
         // use recursive search to find the name of the selected report group with the GUID
-        let treeSearchResult = treeTool.treeSearch(this.myReportGroupList, 'member_node', 'id', this.selectedReportGroup)
-        console.log(treeSearchResult);
-        if (treeSearchResult && treeSearchResult.name) {
-          firstReportGroupName = treeSearchResult.name;
-        }
+        // let treeSearchResult = treeTool.treeSearch(this.myReportGroupList, 'member_node', 'id', this.selectedReportGroup)
+        // console.log(treeSearchResult)
+          firstReportGroupName = this.selectedReportGroupNode.name;
 
         // slice the report group name, if it is too long
         if (firstReportGroupName && firstReportGroupName.length > maxStrLength) {
@@ -109,8 +120,11 @@ export default {
     },
     handleCancel() {
       this.popoverVisible = false
-      this.selectedReportGroup = null
+      this.reportGroupInput = null
     },
+    handleChange() {
+      this.selectedReportGroupNode = this.$refs.cascader.getCheckedNodes()
+    }
   }
 };
 </script>

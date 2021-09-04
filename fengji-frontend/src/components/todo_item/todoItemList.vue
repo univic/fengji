@@ -205,7 +205,7 @@ export default {
     getRecordItems() {
       //TODO: gei all the items when created
       api.todoItem.getTodoItem({
-        type: 'all'
+        type: 'my'
       }).then((response) => {
         console.log(response.data)
         this.recordItemList = response.data.todo_item_list

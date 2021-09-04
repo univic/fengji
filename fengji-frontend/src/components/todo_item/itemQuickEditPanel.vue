@@ -10,6 +10,7 @@
       <div style="width: 70%">
         <report-group-tag
             v-on:selectReportGroup="updateReportGroupList"
+            v-bind:predefined-report-group="this.todoItem.report_group_list"
         ></report-group-tag>
         <el-tag
             v-for="(tagItem, tagItemIndex) in itemTags"
@@ -111,6 +112,9 @@ export default {
     itemAddTagPanel,
     reportGroupTag
   },
+  props: [
+    'todoItem'
+  ],
   emits: [
       'closeQuickEditPanel',
       'saveQuickEditPanel',

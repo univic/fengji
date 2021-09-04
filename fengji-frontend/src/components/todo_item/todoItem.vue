@@ -76,6 +76,7 @@
           v-show="showQuickEditPanel"
           v-on:closeQuickEditPanel="toggleQuickEditPanel"
           v-on:saveQuickEditPanel="handleSaveQuickEditPanel"
+          v-bind:todoItem="item"
       ></item-quick-edit-panel>
     </el-collapse-transition>
 
