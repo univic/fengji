@@ -72,6 +72,16 @@ export default {
     //     this.$emit('selectReportGroup', this.selectedReportGroup);
     //   }
     // }
+    predefinedReportGroup: {
+      deep: true,
+      immediate: true,
+      handler(newValue, oldValue) {
+        if (newValue) {
+          this.reportGroupInput = newValue.id;
+          this.selectedReportGroupNode = newValue;
+        }
+      }
+    }
   },
   computed: {
     myReportGroupList() {
@@ -95,7 +105,6 @@ export default {
         // let treeSearchResult = treeTool.treeSearch(this.myReportGroupList, 'member_node', 'id', this.selectedReportGroup)
         // console.log(treeSearchResult)
           firstReportGroupName = this.selectedReportGroupNode.name;
-
         // slice the report group name, if it is too long
         if (firstReportGroupName && firstReportGroupName.length > maxStrLength) {
           text = firstReportGroupName.slice(0, maxStrLength) + "...";
@@ -111,19 +120,30 @@ export default {
       }
       return text;
       }
-
     },
+  mounted() {
 
+  },
   methods: {
+    handleInitialization() {
+      if(this.reportGroupInput === null && this.predefinedReportGroup) {
+        this.reportGroupInput = this.predefinedReportGroup.id
+      }
+    },
     handleConfirm() {
       this.popoverVisible = false
+      this.$emit('selectReportGroup', this.reportGroupInput)
     },
     handleCancel() {
       this.popoverVisible = false
       this.reportGroupInput = null
     },
     handleChange() {
+      // transfer the cascader node data value to a uniform readable state
       this.selectedReportGroupNode = this.$refs.cascader.getCheckedNodes()
+      this.selectedReportGroupNode = this.selectedReportGroupNode[0]
+      this.selectedReportGroupNode['name'] = this.selectedReportGroupNode.label
+      this.selectedReportGroupNode['id'] = this.selectedReportGroupNode.value
     }
   }
 };

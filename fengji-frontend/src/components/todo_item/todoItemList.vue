@@ -207,7 +207,6 @@ export default {
       api.todoItem.getTodoItem({
         type: 'my'
       }).then((response) => {
-        console.log(response.data)
         this.recordItemList = response.data.todo_item_list
       }
       )

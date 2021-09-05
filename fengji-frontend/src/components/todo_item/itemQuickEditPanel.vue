@@ -10,7 +10,7 @@
       <div style="width: 70%">
         <report-group-tag
             v-on:selectReportGroup="updateReportGroupList"
-            v-bind:predefined-report-group="this.todoItem.report_group_list"
+            v-bind:predefined-report-group="this.todoItem.report_group"
         ></report-group-tag>
         <el-tag
             v-for="(tagItem, tagItemIndex) in itemTags"

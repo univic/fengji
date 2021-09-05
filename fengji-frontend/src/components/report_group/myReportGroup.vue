@@ -12,19 +12,11 @@
                               v-on:closeDialog="dialogVisible = false"
                               v-on:refreshList="handleInitialization"></join-report-group-dialog>
     <div>我创建的报告组</div>
-    <el-card v-for="item in myReportGroupList">
-      <template #header>
-        <div>
-          <span> {{item.name}} </span>
-          <el-button v-on:click="handleEdit"
-                     icon="el-icon-edit"
-                     circle></el-button>
-          <el-button v-on:click="handleDelete"
-                     icon="el-icon-delete"
-                     circle></el-button>
-        </div>
-      </template>
-    </el-card>
+    <report-group-display-card
+        v-for="item in myReportGroupList"
+        v-bind:report-group="item"
+        key="item.id"
+    ></report-group-display-card>
     <div>我加入的报告组</div>
   </div>
 
@@ -35,6 +27,7 @@
 // TODO show all the tag groups joined by the user, exhibit the group name and user's role
 // TODO need to differentiate between ordinary report groups and project-like groups
 
+import reportGroupDisplayCard from "./reportGroupDisplayCard.vue";
 import joinReportGroupDialog from './joinReportGroupDialog.vue';
 import editReportGroup from "./editReportGroup.vue";
 
@@ -43,6 +36,7 @@ export default {
   components: {
     'joinReportGroupDialog': joinReportGroupDialog,
     'editReportGroup': editReportGroup,
+    'reportGroupDisplayCard': reportGroupDisplayCard,
   },
   data () {
     return {
@@ -66,7 +60,7 @@ export default {
     handleCreateReportGroup () {
       // call the handleCreate function in child component, let it prepare the dialog title
       this.$refs.editReportGroup.handleCreate()
-    }
+    },
 
   }
 

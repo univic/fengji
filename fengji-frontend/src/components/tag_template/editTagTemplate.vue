@@ -74,7 +74,6 @@ export default {
     tagGroupDisplayCard: tagGroupDisplayCard,
   },
   created() {
-    //this.getTagTemplateData()
     this.handleInitialization();
   },
   mounted() {

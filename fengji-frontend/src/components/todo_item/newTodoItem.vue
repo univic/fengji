@@ -71,7 +71,7 @@ export default {
       newItem: {
         title: null,
         tag_list: null,
-        report_group_list: null,
+        report_group: null,
       },
     };
   },
@@ -105,7 +105,6 @@ export default {
       this.newItem.title = this.newItemText;
       this.newItem.tag_list = this.tagList;
       this.$emit('addItem', this.newItem);
-      // this.recordItemList.push(this.newItem);
       this.newItemText = null;
     },
     rollBack: function () {
@@ -115,8 +114,8 @@ export default {
       this.tagList[index].tag_value = newTagValue;
     },
     // upon reportGroupTag emit 'selectReportGroup', update report_group_list with the payload
-    updateReportGroupList: function (new_list) {
-      this.newItem.report_group_list = new_list;
+    updateReportGroupList: function (new_item) {
+      this.newItem.report_group = new_item;
     }
   }
 };

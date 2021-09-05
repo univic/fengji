@@ -111,7 +111,7 @@ export default {
         id :null,
         title: null,
         tag_list: null,
-        report_group_list: null,
+        report_group: null,
       }
     }
   },
@@ -131,7 +131,7 @@ export default {
     handleSaveQuickEditPanel (updatedElements) {
       // update the postForm
       this.postForm.tag_list = updatedElements.tag_list
-      this.postForm.report_group_list = updatedElements.report_group_list
+      this.postForm.report_group = updatedElements.report_group
       // validate data
 
       //submit save

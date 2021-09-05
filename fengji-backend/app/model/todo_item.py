@@ -13,7 +13,7 @@ class TodoItem(db.Document):
     create_time = DateTimeField(default=datetime.datetime.now())
     creator = ReferenceField(User, required=True)
     owner = ReferenceField(User)
-    report_group_list = ListField(ReferenceField(ReportGroup, required=True))
+    report_group = ReferenceField(ReportGroup, required=True)
     start_time = DateTimeField()
     planned_finish_time = DateTimeField()
     actual_finish_time = DateTimeField()
@@ -29,8 +29,5 @@ class TodoItem(db.Document):
         report_group_list = []
         # convert the creator reference field to a json readable format
         output_dict['creator'] = self['creator'].to_json()
-        for item in self['report_group_list']:
-            report_group = ReportGroup.objects(id=item.id).first()
-            report_group_list.append(report_group.to_json(recursive_search=True, with_descendant=True))
-        output_dict['report_group_list'] = report_group_list
+        output_dict['report_group'] = self['report_group'].to_json(recursive_search=True, with_descendant=True)
         return output_dict

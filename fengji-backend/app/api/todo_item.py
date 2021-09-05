@@ -13,18 +13,9 @@ def add_todo_item():
     new_todo_item = TodoItem()
     post_data = request.get_json()
     new_todo_item.title = post_data['title']
-    posted_report_group_list = []
-    if isinstance(post_data['report_group_list'], list):
-        posted_report_group_list = post_data['report_group_list']
-    else:
-        posted_report_group_list.append(post_data['report_group_list'])
-    report_group_list = []
-    # query the related ReportGroup item, pass it to the reference field
-    for element in posted_report_group_list:
-        report_group_items = ReportGroup.objects(id=element, creator=get_current_user().id)
-        for item in report_group_items:
-            report_group_list.append(item)
-    new_todo_item.report_group_list = report_group_list
+    report_group = ReportGroup.objects(id=post_data['report_group'], creator=get_current_user().id).first()
+
+    new_todo_item.report_group = report_group
     new_todo_item.creator = get_current_user()
     try:
         new_todo_item.save()
@@ -86,7 +77,7 @@ def get_todo_item():
 @bp.route('/', methods={'DELETE'})
 @jwt_required()
 def delete_todo_item():
-    todo_item = TodoItem.objects(id=request.args['id'])
+    todo_item = TodoItem.objects(id=request.args['id'], creator=current_user.id)
     try:
         todo_item.delete()
         response = {

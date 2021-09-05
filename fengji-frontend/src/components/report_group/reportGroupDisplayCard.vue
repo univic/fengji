@@ -1,9 +1,9 @@
 <template>
   <div>
-    <el-card v-for="item in myReportGroupList">
+    <el-card>
       <template #header>
         <div>
-          <span> {{item.name}} </span>
+          <span> {{reportGroup.name}} </span>
           <el-button v-on:click="handleEdit"
                      icon="el-icon-edit"
                      circle></el-button>
@@ -18,7 +18,18 @@
 
 <script>
 export default {
-  name: "reportGroupCard"
+  name: "reportGroupDisplayCard",
+  props: [
+    'reportGroup'
+  ],
+  methods: {
+    handleEdit() {
+
+    },
+    handleDelete() {
+
+    }
+  }
 };
 </script>
 
