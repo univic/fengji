@@ -127,16 +127,17 @@ export default {
   methods: {
     handleInitialization() {
       if(this.reportGroupInput === null && this.predefinedReportGroup) {
-        this.reportGroupInput = this.predefinedReportGroup.id
+        this.reportGroupInput = this.predefinedReportGroup.id;
       }
     },
     handleConfirm() {
-      this.popoverVisible = false
-      this.$emit('selectReportGroup', this.reportGroupInput)
+      this.popoverVisible = false;
+      this.$emit('selectReportGroup', this.reportGroupInput);
     },
     handleCancel() {
-      this.popoverVisible = false
-      this.reportGroupInput = null
+      this.popoverVisible = false;
+      this.reportGroupInput = null;
+      this.selectedReportGroupNode = null;
     },
     handleChange() {
       // transfer the cascader node data value to a uniform readable state

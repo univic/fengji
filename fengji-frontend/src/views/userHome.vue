@@ -44,18 +44,26 @@
             <i class="el-icon-collection-tag"></i>
             <span>标签管理</span>
           </el-menu-item>
-          <el-menu-item index="/user/manage_report_group">
-            <i class="el-icon-edit"></i>
-            <span>报告组管理</span>
-          </el-menu-item>
+
           <el-menu-item index="/user/my_report_group">
             <i class="el-icon-files"></i>
             <span>我的报告组</span>
           </el-menu-item>
-          <el-menu-item index="/user/manage_group_role">
-            <i class="el-icon-s-custom"></i>
-            <span>管理报告组角色</span>
-          </el-menu-item>
+          <el-submenu>
+            <template #title>
+              <i class="el-icon-location"></i>
+              <span>数据管理</span>
+            </template>
+            <el-menu-item index="/user/manage_group_role">
+              <i class="el-icon-s-custom"></i>
+              <span>报告组角色管理</span>
+            </el-menu-item>
+            <el-menu-item index="/user/manage_report_group">
+              <i class="el-icon-edit"></i>
+              <span>报告组管理</span>
+            </el-menu-item>
+          </el-submenu>
+
           <el-menu-item index="/user/item_list">
             <i class="el-icon-info"></i>
             <span>关于</span>

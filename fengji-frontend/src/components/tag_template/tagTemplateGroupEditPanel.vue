@@ -15,7 +15,7 @@
         </el-form-item>
         <el-form-item label="隶属标签组"
                       prop="parent_group">
-          <el-cascader v-model="postForm.tag_group_assignment"
+          <el-cascader v-model="postForm.parent_group"
                        placeholder="请选择归属标签组"
                        v-bind:options="tagTemplateGroup"
                        v-bind:props="tagGroupCascaderProps"

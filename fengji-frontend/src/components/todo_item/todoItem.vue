@@ -7,6 +7,7 @@
       <div
         v-on:mouseenter="checkboxStatus = 'mouseOver'"
         v-on:mouseleave="checkboxStatus = 'mouseLeave'"
+        v-on:click="handleCompletion"
       >
         <div
           v-if="checkboxStatus === 'mouseOver'"
@@ -146,7 +147,9 @@ export default {
     handleCloseDetailPanel () {
 
     },
-
+    handleCompletion () {
+      console.log('yeaaaaaaaaaah')
+    },
   }
 }
 </script>

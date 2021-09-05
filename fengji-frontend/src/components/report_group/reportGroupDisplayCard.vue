@@ -1,14 +1,11 @@
 <template>
-  <div>
+  <div class="card">
     <el-card>
       <template #header>
         <div>
           <span> {{reportGroup.name}} </span>
           <el-button v-on:click="handleEdit"
                      icon="el-icon-edit"
-                     circle></el-button>
-          <el-button v-on:click="handleDelete"
-                     icon="el-icon-delete"
                      circle></el-button>
         </div>
       </template>
@@ -22,9 +19,12 @@ export default {
   props: [
     'reportGroup'
   ],
+  emits:[
+      'editReportGroup'
+  ],
   methods: {
     handleEdit() {
-
+      this.$emit('editReportGroup')
     },
     handleDelete() {
 
@@ -34,5 +34,10 @@ export default {
 </script>
 
 <style scoped>
+
+.card{
+  height: 200px;
+  width: 260px;
+}
 
 </style>

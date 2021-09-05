@@ -12,6 +12,7 @@ class TodoItem(db.Document):
     tag_list = EmbeddedDocumentListField(ItemTag)
     create_time = DateTimeField(default=datetime.datetime.now())
     creator = ReferenceField(User, required=True)
+    status = StringField()
     owner = ReferenceField(User)
     report_group = ReferenceField(ReportGroup, required=True)
     start_time = DateTimeField()

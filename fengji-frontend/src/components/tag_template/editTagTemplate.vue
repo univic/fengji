@@ -88,7 +88,6 @@ export default {
       this.$store.dispatch('tagTemplateGroup/getTagTemplateGroupList').then(this.loading = false);
     },
     handleNodeClick(data) {
-      console.log(data);
       this.selectedNode = data;
     },
     // // use a promise to send async request
@@ -167,7 +166,7 @@ export default {
     },
     handleListRefresh() {
       this.loading = true;
-      this.getTagTemplateData();
+      this.handleInitialization();
     }
 
   },

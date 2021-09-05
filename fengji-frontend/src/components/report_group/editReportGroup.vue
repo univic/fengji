@@ -38,6 +38,8 @@
           <el-form-item>
             <el-button type="primary"
                        v-on:click="handleSubmit">提交</el-button>
+            <el-button
+                       v-on:click="handleCancel">取消</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -159,7 +161,11 @@ export default {
           });
         }
       })
-    }
+    },
+    handleCancel() {
+      this.dialogVisible = false;
+      this.$refs.reportGroupForm.resetFields();
+    },
   }
 }
 </script>

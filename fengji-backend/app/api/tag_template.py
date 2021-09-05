@@ -2,6 +2,7 @@
 # Author : univic
 # Date: 2021-02-28
 
+import traceback
 from mongoengine.errors import NotUniqueError, ValidationError
 from flask import Blueprint, request, jsonify
 from app.model.tag_template import TagTemplate
@@ -81,6 +82,7 @@ def add_tag_template():
             }
         # if the tag name is not unique, let the frontend know
         except NotUniqueError:
+            print(traceback.print_exc())
             response = {
                 'status': 'error',
                 'messages': ['重复的标签名']
