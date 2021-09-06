@@ -4,6 +4,7 @@
 
 from wtforms import Form, BooleanField, StringField, validators, ValidationError
 from app.config import app_config
+import app.utilities.wtforms_validators as wtforms_validators
 
 
 class RegistrationForm(Form):
@@ -61,11 +62,11 @@ class TagTemplateForm(Form):
 class ReportGroupForm(Form):
     id = StringField('id')
     name = StringField('name',
-                             [validators.input_required('未填写报告组名'),
-                              validators.Length(min=app_config.REPORT_GROUP_SETTINGS['MIN_GROUP_NAME_LENGTH'],
-                                                max=app_config.REPORT_GROUP_SETTINGS['MAX_GROUP_NAME_LENGTH'],
-                                                message=f"报告组名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_GROUP_NAME_LENGTH']}~"
-                                                        f"{app_config.REPORT_GROUP_SETTINGS['MAX_GROUP_NAME_LENGTH']}位")])
+                       [validators.input_required('未填写报告组名'),
+                        validators.Length(min=app_config.REPORT_GROUP_SETTINGS['MIN_GROUP_NAME_LENGTH'],
+                                          max=app_config.REPORT_GROUP_SETTINGS['MAX_GROUP_NAME_LENGTH'],
+                                          message=f"报告组名长度需为{app_config.REPORT_GROUP_SETTINGS['MIN_GROUP_NAME_LENGTH']}~"
+                                                  f"{app_config.REPORT_GROUP_SETTINGS['MAX_GROUP_NAME_LENGTH']}位")])
     open_join = BooleanField('open_join')
     color = StringField('color')
     parent_node = StringField('parent_node')
@@ -94,16 +95,22 @@ class GroupRoleForm(Form):
 
 class TagTemplateGroupForm(Form):
     id = StringField('id')
-    name = StringField('name',
-                                 [validators.input_required('未填写标签组名'),
-                                  validators.Length(min=app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH'],
-                                                    max=app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH'],
-                                                    message=f"标签组长度需为{app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH']}~"
-                                                            f"{app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH']}位")])
+    name = StringField('name', [validators.input_required('未填写标签组名'),
+                                validators.Length(min=app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH'],
+                                                  max=app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH'],
+                                                  message=f"标签组长度需为{app_config.TAG_GROUP_SETTINGS['MIN_TAG_GROUP_NAME_LENGTH']}~"
+                                                          f"{app_config.TAG_GROUP_SETTINGS['MAX_TAG_GROUP_NAME_LENGTH']}位")])
     color = StringField()
     parent_group = StringField()
 
 
 class TodoItem(Form):
-    id = StringField('id')
-    title = StringField('title')
+    id = StringField('id', [validators.Optional, wtforms_validators.check_mongo_oid])
+    title = StringField('title', [validators.input_required('未填写待办文本'),
+                        validators.Length(min=app_config.TAG_GROUP_SETTINGS['MIN_TODO_ITEM_TITLE_LENGTH'],
+                                          max=app_config.TAG_GROUP_SETTINGS['MAX_TODO_ITEM_TITLE_LENGTH'],
+                                          message=f"标签组长度需为{app_config.TAG_GROUP_SETTINGS['MIN_TODO_ITEM_TITLE_LENGTH']}~"
+                                                  f"{app_config.TAG_GROUP_SETTINGS['MAX_TODO_ITEM_TITLE_LENGTH']}位")])
+    report_group = StringField('report_group', [validators.input_required('未填写待办文本'),
+                                                wtforms_validators.check_mongo_oid])
+    

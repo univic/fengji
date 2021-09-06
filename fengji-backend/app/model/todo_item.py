@@ -1,5 +1,6 @@
 import datetime
-from mongoengine import StringField, ReferenceField, DateTimeField, EmbeddedDocumentListField, FileField, ListField
+from mongoengine import StringField, ReferenceField, DateTimeField, EmbeddedDocumentListField, FileField, ListField, \
+    BooleanField
 from app.model.tag_template import ItemTag
 from app.model.report_group import ReportGroup
 from app.model.user_model import User
@@ -12,6 +13,7 @@ class TodoItem(db.Document):
     tag_list = EmbeddedDocumentListField(ItemTag)
     create_time = DateTimeField(default=datetime.datetime.now())
     creator = ReferenceField(User, required=True)
+    completion_flag = BooleanField(default=False, required=True)
     status = StringField()
     owner = ReferenceField(User)
     report_group = ReferenceField(ReportGroup, required=True)

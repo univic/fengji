@@ -43,6 +43,10 @@ class BaseConfig(object):
         'MIN_TAG_GROUP_NAME_LENGTH': 2,
         'MAX_TAG_GROUP_NAME_LENGTH': 10,
     }
+    TODO_ITEM = {
+        'MIN_TODO_ITEM_TITLE_LENGTH': 2,
+        'MAX_TODO_ITEM_TITLE_LENGTH': 30,
+    }
 
 
 def get_config():
