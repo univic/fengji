@@ -7,7 +7,7 @@
       <div
         v-on:mouseenter="checkboxStatus = 'mouseOver'"
         v-on:mouseleave="checkboxStatus = 'mouseLeave'"
-        v-on:click="handleCompletion"
+        v-on:click="handleToggleCompletion"
       >
         <div
           v-if="checkboxStatus === 'mouseOver'"
@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import api from "../../api";
 import itemQuickEditPanel from "./itemQuickEditPanel.vue";
 // TODO: show corresponding tags
 
@@ -147,8 +148,17 @@ export default {
     handleCloseDetailPanel () {
 
     },
-    handleCompletion () {
+    handleToggleCompletion () {
       console.log('yeaaaaaaaaaah')
+      if (this.item.completion_flag === false) {
+        api.todoItem.editTodoItem({
+          completion_flag: true
+        })
+      } else {
+        api.todoItem.editTodoItem({
+          completion_flag: false
+        })
+      }
     },
   }
 }

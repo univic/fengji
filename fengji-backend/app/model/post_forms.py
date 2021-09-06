@@ -113,4 +113,3 @@ class TodoItem(Form):
                                                   f"{app_config.TAG_GROUP_SETTINGS['MAX_TODO_ITEM_TITLE_LENGTH']}位")])
     report_group = StringField('report_group', [validators.input_required('未填写待办文本'),
                                                 wtforms_validators.check_mongo_oid])
-    
