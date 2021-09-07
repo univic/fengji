@@ -30,7 +30,6 @@ export default {
   computed: {
   },
   methods: {
-
     handleInitialization() {
       let p1 = this.$store.dispatch('tagTemplateGroup/getTagTemplateGroupList');
       let p2 = this.$store.dispatch('reportGroup/getMyReportGroupList');
