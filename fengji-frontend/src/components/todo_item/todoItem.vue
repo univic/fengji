@@ -5,12 +5,12 @@
     <div style="display: flex; justify-content: flex-start">
 <!--      the checkbox-->
       <div
-        v-on:mouseenter="checkboxStatus = 'mouseOver'"
-        v-on:mouseleave="checkboxStatus = 'mouseLeave'"
+        v-on:mouseenter="toggleCheckboxStatus"
+        v-on:mouseleave="toggleCheckboxStatus"
         v-on:click="handleToggleCompletion"
       >
         <div
-          v-if="checkboxStatus === 'mouseOver'"
+          v-if="showCheckboxTick === 'True'"
         >
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-yigouxuan"></use>
@@ -106,6 +106,7 @@ export default {
       quickTagList: null,
       showQuickEditPanel: false,
       showDetailPanel: false,
+      showCheckboxTick: false,
       showCommandButtons: false,
       tagDialogVisible: false,
       checkboxStatus: 'mouseLeave',
@@ -119,6 +120,9 @@ export default {
   },
   computed: {
 
+  },
+  created() {
+    this.toggleCheckboxStatus();
   },
   methods: {
     handleSelectReportGroup () {
@@ -152,12 +156,21 @@ export default {
       console.log('yeaaaaaaaaaah')
       if (this.item.completion_flag === false) {
         api.todoItem.editTodoItem({
+          id: this.item.id,
           completion_flag: true
-        })
+        }).then()
       } else {
         api.todoItem.editTodoItem({
+          id: this.item.id,
           completion_flag: false
-        })
+        }).then()
+      }
+    },
+    toggleCheckboxStatus () {
+      if (this.item.completion_flag !== true) {
+        this.showCheckboxTick = !this.showCheckboxTick;
+      } else {
+        this.showCheckboxTick = true
       }
     },
   }

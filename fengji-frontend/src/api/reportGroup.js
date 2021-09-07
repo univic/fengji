@@ -20,12 +20,14 @@ let reportGroup = {
       }
     ).then((response) => {
       if (response.data.status === "success") {
-        return response
+        return response;
       } else {
         message.emitErrorMessage(response.data.messages[0]);
+        return response;
       }
     }).catch((error) => {
       message.emitErrorMessage(error);
+      return error;
     })
   },
   deleteReportGroup(params) {
