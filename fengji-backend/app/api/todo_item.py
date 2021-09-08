@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_current_user, current_user
 from app.model.todo_item import TodoItem
 from app.model.report_group import ReportGroup
+from app.model.post_forms import TodoItemForm
 
 bp = Blueprint('todo_item', __name__, url_prefix='/api/todo_item')
 
@@ -90,4 +91,33 @@ def delete_todo_item():
             'status': 'error',
             'messages': [e]
         }
+    return response
+
+
+@bp.route('/', methods={'PUT'})
+@jwt_required()
+def modify_todo_item():
+    form = TodoItemForm(request.form, meta={'csrf': False})
+    if form.validate():
+        item = TodoItem.objects(id=request.args['id'], creator=current_user.id)
+        try:
+            response = {
+                'status': 'success',
+                'messages': ['条目已删除']
+            }
+        except Exception as e:
+            response = {
+                'status': 'error',
+                'messages': [e]
+            }
+    else:
+        error_status = list(form.errors.values())
+        for i, item in enumerate(error_status):
+            error_status[i] = item[0]
+        # construct the return data
+        response = {
+            'status': 'error',
+            'messages': error_status
+        }
+
     return response

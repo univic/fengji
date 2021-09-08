@@ -104,12 +104,12 @@ class TagTemplateGroupForm(Form):
     parent_group = StringField()
 
 
-class TodoItem(Form):
+class TodoItemForm(Form):
     id = StringField('id', [validators.Optional, wtforms_validators.check_mongo_oid])
     title = StringField('title', [validators.input_required('未填写待办文本'),
-                        validators.Length(min=app_config.TAG_GROUP_SETTINGS['MIN_TODO_ITEM_TITLE_LENGTH'],
-                                          max=app_config.TAG_GROUP_SETTINGS['MAX_TODO_ITEM_TITLE_LENGTH'],
-                                          message=f"标签组长度需为{app_config.TAG_GROUP_SETTINGS['MIN_TODO_ITEM_TITLE_LENGTH']}~"
-                                                  f"{app_config.TAG_GROUP_SETTINGS['MAX_TODO_ITEM_TITLE_LENGTH']}位")])
+                        validators.Length(min=app_config.TODO_ITEM['MIN_TODO_ITEM_TITLE_LENGTH'],
+                                          max=app_config.TODO_ITEM['MAX_TODO_ITEM_TITLE_LENGTH'],
+                                          message=f"标签组长度需为{app_config.TODO_ITEM['MIN_TODO_ITEM_TITLE_LENGTH']}~"
+                                                  f"{app_config.TODO_ITEM['MAX_TODO_ITEM_TITLE_LENGTH']}位")])
     report_group = StringField('report_group', [validators.input_required('未填写待办文本'),
                                                 wtforms_validators.check_mongo_oid])
