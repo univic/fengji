@@ -1,5 +1,7 @@
 <template>
-  <el-card>
+  <el-card
+    v-on:click="handleTagSelect"
+  >
     {{ tagTemplate.name }}
   </el-card>
 </template>
@@ -12,7 +14,12 @@ export default {
   ],
   emits: [
     'selectTag'
-  ]
+  ],
+  methods: {
+    handleTagSelect() {
+      this.$emit('selectTag')
+    }
+  }
 };
 </script>
 

@@ -1,53 +1,42 @@
 <template>
 
-
-  <!--  default tag-->
-  <div>
-    <basic-tag
-        v-for="(tag, index) in tagList"
-        :key="tag.id"
-        v-on:updateTagValue="updateTagValue(index, $event)"
-    >
-      {{ tag.tag_name }} : {{ tag.tag_value }}
-    </basic-tag>
-  </div>
   <!--    main input area-->
   <div
-      v-on:mouseover="newItemHighLighted=true"
-      v-on:mouseout="newItemHighLighted = newItemFocused"
+    v-on:mouseover="newItemHighLighted=true"
+    v-on:mouseout="newItemHighLighted = newItemFocused"
   >
         <span
-            class="el-icon-plus"
-            v-if="!newItemFocused"
-            style="width: 10%"
+          class="el-icon-plus"
+          v-if="!newItemFocused"
+          style="width: 10%"
         >
         </span>
     <span
-        class="el-icon-circle-plus"
-        v-else
-        style="width: 10%"
+      class="el-icon-circle-plus"
+      v-else
+      style="width: 10%"
     ></span>
     <el-input
-        v-model="newItemText"
-        v-on:keypress.enter="addRecordItem"
-        v-on:focus="newItemFocused=true"
-        v-on:blur="newItemFocused=false"
-        style="width: 80%"
-        type="flex"
-        align="right"
+      v-model="newItemText"
+      v-on:keypress.enter="addRecordItem"
+      v-on:focus="newItemFocused=true"
+      v-on:blur="newItemFocused=false"
+      style="width: 80%"
+      type="flex"
+      align="right"
     >
     </el-input>
   </div>
   <report-group-tag
-      v-on:selectReportGroup="updateReportGroupList"
+    v-on:selectReportGroup="updateReportGroupList"
   ></report-group-tag>
   <item-add-tag-panel
-      v-bind:popoverVisible = "addTagPopoverVisible"
-      v-on:closePopover = "handleCloseAddTagPopover"
+    v-bind:popoverVisible="addTagPopoverVisible"
+    v-on:closePopover="handleCloseAddTagPopover"
   >
     <el-button
-        @click="addTagPopoverVisible = true"
-        size="small"
+      @click="addTagPopoverVisible = true"
+      size="small"
     >
       + 新标签
     </el-button>
@@ -110,7 +99,7 @@ export default {
         // use shallow copy, or the newTagItem will point to the same address as requiredTags
         // in that case the tagList will be initialized instantly after value change due to the watcher
         let newTagItem = {...item};
-        newTagItem.tag_value = item.tag_default_value;
+        newTagItem.tag_value = item.default_value;
         this.tagList.push(newTagItem);
       });
     },
@@ -131,7 +120,7 @@ export default {
     updateReportGroupList: function (new_item) {
       this.newItem.report_group = new_item;
     },
-    handleCloseAddTagPopover () {
+    handleCloseAddTagPopover() {
       this.addTagPopoverVisible = false
     },
   }

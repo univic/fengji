@@ -30,6 +30,7 @@
           <el-tag v-for="item in selectedTagTemplateGroup.data.tag_template_list"
                   key="item.id"
           >{{ item.name }}</el-tag>
+
         </el-card>
 
       </div>
@@ -45,6 +46,7 @@
 </template>
 
 <script>
+import selectableTag from "../item_tag/selectableTag.vue";
 
 export default {
   name: "itemAddTagPanel",

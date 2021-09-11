@@ -3,7 +3,7 @@
     <el-popover>
       <template #reference>
         <el-tag>
-          {{ tagTemplateItem.tag_template_name }}
+          {{ tagTemplateItem.name }}
         </el-tag>
       </template>
       <el-button size="mini"
@@ -54,7 +54,7 @@ export default {
         });
     },
     deleteTagTemplate () {
-      api.tag.deleteTagTemplate({
+      api.tagTemplate.deleteTagTemplate({
         id: this.tagTemplateItem.id,
       }).then((response) => {
         if (response.data.status === "success") {

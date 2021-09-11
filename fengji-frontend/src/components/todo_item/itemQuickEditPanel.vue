@@ -12,14 +12,8 @@
             v-on:selectReportGroup="updateReportGroupList"
             v-bind:predefined-report-group="this.todoItem.report_group"
         ></report-group-tag>
-        <el-tag
-            v-for="(tagItem, tagItemIndex) in itemTags"
-            :key="tagItem.tag_id"
-            :closable="tagItem.tag_attr !== 'required'"
-            v-on:click="handleTagSelection(tagItem, tagItemIndex)"
-            v-on:close="handleTagDeletion(tagItem)"
-        >
-          {{ tagItem.tag_name }}
+        <el-tag>
+
         </el-tag>
         <el-input
             v-if="tagInputVisible"
@@ -53,7 +47,7 @@
               v-else
           >
             <!--              tag title -->
-            <div>{{ tagSelected.tag_name }}</div>
+            <div>{{ tagSelected.name }}</div>
             <!--              wrapper of tag value and fields-->
             <div>
               <!--                wrapper of each tag value and field item-->
