@@ -10,14 +10,14 @@
                :rules="tagFormRules"
                ref="tagForm">
         <el-form-item label="标签名称"
-                      prop="tag_template_name">
-          <el-input v-model="tagForm.tag_template_name"
+                      prop="name">
+          <el-input v-model="tagForm.name"
                     maxlength="10"
                     show-word-limit></el-input>
         </el-form-item>
         <el-form-item label="标签类型"
-                      prop="tag_field_type">
-          <el-select v-model="tagForm.tag_field_type"
+                      prop="field_type">
+          <el-select v-model="tagForm.field_type"
                      placeholder="请选择标签类型">
             <el-option v-for="item in tagTypeOptions"
                        :key="item.value"
@@ -35,27 +35,27 @@
           </el-cascader>
         </el-form-item>
         <el-form-item label="标签默认值"
-                      v-if="tagForm.tag_field_type !== 'simple'"
-                      prop="tag_default_value">
-          <el-input v-model="tagForm.tag_default_value"></el-input>
+                      v-if="tagForm.field_type !== 'simple'"
+                      prop="default_value">
+          <el-input v-model="tagForm.default_value"></el-input>
         </el-form-item>
         <el-form-item label="标签预览"
-                      prop="tag_preview">
-          <el-radio-group v-model="tagForm.tag_preview">
+                      prop="preview">
+          <el-radio-group v-model="tagForm.preview">
             <el-radio-button label="true">可预览</el-radio-button>
             <el-radio-button label="false">无预览</el-radio-button>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="必选标签"
-                      prop="tag_required">
-          <el-radio-group v-model="tagForm.tag_required">
+                      prop="required">
+          <el-radio-group v-model="tagForm.required">
             <el-radio-button label="true">是</el-radio-button>
             <el-radio-button label="false">否</el-radio-button>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="标签颜色"
-                      prop="tag_color">
-          <el-color-picker v-model="tagForm.tag_color"></el-color-picker>
+                      prop="color">
+          <el-color-picker v-model="tagForm.color"></el-color-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="primary"
@@ -92,7 +92,7 @@ export default {
         if (this.dialogMode !== 'modify') {
           api.tagTemplate.getTagTemplate({
             type: 'check_existence',
-            tag_template_name: value,
+            name: value,
           }).then((response) => {
             if (response.data.status === 'success') {
               callback();
@@ -103,12 +103,12 @@ export default {
           );
         }
       },
-      // apply different validation rule according to the selected tag_field_type
+      // apply different validation rule according to the selected field_type
       validateDefaultValue: (rule, value, callback) => {
         let singleSelectReg = new RegExp("^(.+)(;.+)");
         let numReg = new RegExp("^([0-9]+)(.[0-9]+)?$");
         if (value !== null) {
-          switch (this.tagForm.tag_field_type) {
+          switch (this.tagForm.field_type) {
             case 'select':
 
               if (singleSelectReg.test(value)) {
@@ -140,14 +140,14 @@ export default {
       loadingAnimation: false,
       tagForm: {
         id: null,
-        tag_template_name: null,
-        tag_field_type: 'simple',
-        tag_default_value: null,
-        tag_required: false,
-        tag_preview: false,
+        name: null,
+        field_type: 'simple',
+        default_value: null,
+        required: false,
+        preview: false,
         tag_priority: null,
         tag_group_assignment: null,
-        tag_color: '#FFFFFF',
+        color: '#FFFFFF',
       },
       tagTypeOptions: [
         {
@@ -171,15 +171,15 @@ export default {
         // },
       ],
       tagFormRules: {
-        tag_template_name: [
+        name: [
           {required: true, message: '请输入标签名', trigger: 'blur'},
           {min: 2, max: 10, message: '标签名的长度应为2~10个字符', trigger: 'blur'},
           {validator: validators.validateTagNameUnique, trigger: 'blur'}
         ],
-        tag_field_type: [
+        field_type: [
           {required: true, message: '必须选择一个标签类型', trigger: 'blur'}
         ],
-        tag_default_value: [{validator: validators.validateDefaultValue, trigger: 'blur'}],
+        default_value: [{validator: validators.validateDefaultValue, trigger: 'blur'}],
         tag_group_assignment: [{required: true, message: '请选择归属标签组', trigger: 'blur'}]
       },
       tagGroupCascaderProps: {
@@ -233,7 +233,7 @@ export default {
           this.tagForm[k] = tagTemplateElement[k];
         }
       }
-      this.dialogTitle = "编辑标签 - " + this.tagForm.tag_template_name;
+      this.dialogTitle = "编辑标签 - " + this.tagForm.name;
       this.dialogMode = 'modify';
     },
     handleCreate() {

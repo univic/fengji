@@ -7,14 +7,14 @@ from mongoengine import StringField, BooleanField, IntField, EmbeddedDocument, D
 
 
 class TagTemplate(db.Document):
-    tag_template_name = StringField(required=True, unique=True)
-    tag_field_type = StringField(required=True)
+    name = StringField(required=True, unique=True)
+    field_type = StringField(required=True)
     tag_group_assignment = ReferenceField(TagTemplateGroup, required=True)
-    tag_default_value = StringField()
-    tag_preview = BooleanField(default=False)
-    tag_required = BooleanField(default=False)
-    tag_priority = IntField(default=1)
-    tag_color = StringField()
+    default_value = StringField()
+    preview = BooleanField(default=False)
+    required = BooleanField(default=False)
+    priority = IntField(default=1)
+    color = StringField()
     create_time = DateTimeField(default=datetime.datetime.now())
     creator = ReferenceField(User, required=True)
 

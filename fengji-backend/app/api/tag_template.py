@@ -39,7 +39,7 @@ def get_tag_templates():
                     'messages': [e.args[0]]
                 }
     elif request.args['type'] == 'check_existence':
-        tag_template = TagTemplate.objects(tag_template_name=request.args['tag_template_name'])
+        tag_template = TagTemplate.objects(name=request.args['name'])
         if not tag_template:
             response = {
                 'status': 'success',
@@ -65,15 +65,15 @@ def add_tag_template():
     form = TagTemplateForm(request.form, meta={'csrf': False})
     if form.validate():
         new_tag = TagTemplate()
-        tag_template_creator = get_current_user()
-        new_tag.tag_template_name = form.tag_template_name.data
-        new_tag.tag_field_type = form.tag_field_type.data
+        creator = get_current_user()
+        new_tag.name = form.name.data
+        new_tag.field_type = form.field_type.data
         tag_template_group = TagTemplateGroup.objects(id=form.tag_group_assignment.data).first()
         new_tag.tag_group_assignment = tag_template_group
-        new_tag.tag_default_value = form.tag_default_value.data
-        new_tag.tag_preview = form.tag_preview.data
-        new_tag.tag_color = form.tag_color.data
-        new_tag.creator = tag_template_creator
+        new_tag.default_value = form.default_value.data
+        new_tag.preview = form.preview.data
+        new_tag.color = form.color.data
+        new_tag.creator = creator
         try:
             new_tag.save()
             response = {
@@ -134,15 +134,15 @@ def delete_tag_template():
 @bp.route('/', methods={'PUT'})
 @jwt_required()
 def modify_tag_template():
-    tag_edit_form = TagTemplateForm(request.form, meta={'csrf': False})
-    if tag_edit_form.validate():
-        tag_template = TagTemplate.objects(id=tag_edit_form.id.data).first()
-        tag_template.tag_template_name = tag_edit_form.tag_template_name.data
-        tag_template.tag_field_type = tag_edit_form.tag_field_type.data
-        tag_template.tag_default_value = tag_edit_form.tag_default_value.data
-        tag_template.tag_preview = tag_edit_form.tag_preview.data
-        tag_template.tag_required = tag_edit_form.tag_required.data
-        tag_template.tag_color = tag_edit_form.tag_color.data
+    form = TagTemplateForm(request.form, meta={'csrf': False})
+    if form.validate():
+        tag_template = TagTemplate.objects(id=form.id.data).first()
+        tag_template.name = form.name.data
+        tag_template.field_type = form.field_type.data
+        tag_template.default_value = form.default_value.data
+        tag_template.preview = form.preview.data
+        tag_template.required = form.required.data
+        tag_template.color = form.color.data
         try:
             tag_template.save()
             response = {
@@ -159,7 +159,7 @@ def modify_tag_template():
         when validate, WTForms will generate a form.errors dict, which contains all the error messages
         for each form fields, here we get error messages from the form.errors dict, and generate an error info list
         """
-        error_status = list(tag_edit_form.errors.values())
+        error_status = list(form.errors.values())
         for i, item in enumerate(error_status):
             error_status[i] = item[0]
         # construct the return data

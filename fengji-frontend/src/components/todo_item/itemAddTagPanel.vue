@@ -1,69 +1,92 @@
 <template>
   <el-popover
-    trigger="manual"
-    v-model:visible="popoverVisible"
+      trigger="manual"
+      v-model:visible="popoverVisible"
   >
     <div>
       <div>
-          <el-cascader
-            v-bind:options="convertedTagTemplateList"
-            v-bind:props="elCascaderProps"
+        <el-cascader
+            ref="cascader"
+            v-bind:options="tagTemplateGroupList"
+            v-bind:props="cascaderProps"
+            v-on:change="handleNodeClick"
             clearable
-          ></el-cascader>
+        ></el-cascader>
+        <div>
+          <el-button
+              type="primary"
+          >确定
+          </el-button>
+          <el-button
+              type="info"
+              v-on:click="handleClosePopover"
+          >取消
+          </el-button>
+        </div>
 
       </div>
-
       <div>
-        <el-button
-            type="primary"
-        >确定</el-button>
-        <el-button
-            type="info"
-            v-on:click="handleClosePopover"
-        >取消</el-button>
+        <el-card v-if="selectedTagTemplateGroup">
+          <el-tag v-for="item in selectedTagTemplateGroup.data.tag_template_list"
+                  key="item.id"
+          >{{ item.name }}</el-tag>
+        </el-card>
+
       </div>
+
+
     </div>
-      <template #reference>
-        <slot></slot>
-      </template>
+    <template #reference>
+      <slot></slot>
+    </template>
 
   </el-popover>
 
 </template>
 
 <script>
+
 export default {
   name: "itemAddTagPanel",
+  components: {},
   props: [
     'popoverVisible'
   ],
   emits: [
-      'closePopover'
+    'closePopover'
   ],
-  data () {
+  data() {
     return {
       showAddTagSelector: false,
+      selectedTagTemplateGroupID: null,
+      selectedTagTemplateGroup: null,
       selectedTags: [],
-      elCascaderProps: {
-        multiple: true,
-      },
-    }
+      cascaderProps: {
+        checkStrictly: true,      // can select parent nodes
+        emitPath: false,            // return selected node only
+        multiple: false,
+        value: 'id',
+        label: 'name',
+        children: 'child_group',
+      }
+    };
   },
   computed: {
-    tagTemplateList () {
-      return this.$store.getters['tagTemplate/getTagTemplateList']
-    },
-    convertedTagTemplateList () {
-      return this.$store.getters['tagTemplate/getConvertedTagTemplateList']
+    tagTemplateGroupList() {
+      return this.$store.getters['tagTemplateGroup/getTagTemplateGroupList'];
     },
   },
   methods: {
-    handleClosePopover () {
-      this.$emit('closePopover')
+    handleClosePopover() {
+      this.$emit('closePopover');
+    },
+    handleNodeClick(data) {
+      this.selectedTagTemplateGroupID = data;
+      this.selectedTagTemplateGroup = this.$refs.cascader.getCheckedNodes()[0];
     },
   }
 
-}
+};
 </script>
 
 <style scoped>

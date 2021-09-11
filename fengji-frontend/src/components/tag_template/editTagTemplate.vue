@@ -90,55 +90,6 @@ export default {
     handleNodeClick(data) {
       this.selectedNode = data;
     },
-    // // use a promise to send async request
-    // getTagTemplateData () {
-    //   let p1 = new Promise(this.getTagGroupList)
-    //   let p2 = new Promise(this.getTagTemplateList)
-    //   Promise.all([p1, p2]).then(
-    //     this.assignTagTemplateToTagGroup,
-    //     this.loading = false
-    //   ).catch((result) => {
-    //     ElMessage({
-    //       message: result,
-    //       type: "error",
-    //     })
-    //   })
-    // },
-    // getTagGroupList (resolve, reject) {
-    //   api.tagTemplateGroup.getTagTemplateGroup({
-    //     type: 'all',
-    //   }).then((response) => {
-    //     if (response.data.status === "success") {
-    //       this.tagGroupList = response.data.tag_group_list;
-    //       resolve('success');
-    //     } else {
-    //       reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
-    //     }
-    //   })
-    // },
-    // getTagTemplateList (resolve, reject) {
-    //   api.tag.getTagTemplate({
-    //     type: "all",
-    //   }).then((response) => {
-    //     if (response.data.status === "success") {
-    //       this.tagTemplateList = response.data.tag_template_list;
-    //       resolve('success');
-    //     } else {
-    //       reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
-    //     }
-    //   });
-    // },
-    // assignTagTemplateToTagGroup () {
-    //   this.tagGroupList.forEach((tagGroupElement, index) => {
-    //     this.tagGroupList[index].tag_template_list = this.filterTagTemplate(tagGroupElement.id, this.tagTemplateList)
-    //   });
-    // },
-    // filterTagTemplate (tagGroupID, tagTemplateList) {
-    //   let filteredList = tagTemplateList.filter((item) => {
-    //     return item.tag_group_assignment.id === tagGroupID
-    //   })
-    //   return filteredList
-    // },
     handleTagTemplateCreate() {
       // call the handleCreate function in child component, let it prepare the dialog title
       this.$refs.editTagTemplatePanel.handleCreate();

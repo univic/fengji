@@ -1,8 +1,6 @@
 <template>
 
-  <report-group-tag
-      v-on:selectReportGroup="updateReportGroupList"
-  ></report-group-tag>
+
   <!--  default tag-->
   <div>
     <basic-tag
@@ -23,7 +21,6 @@
             v-if="!newItemFocused"
             style="width: 10%"
         >
-
         </span>
     <span
         class="el-icon-circle-plus"
@@ -41,12 +38,27 @@
     >
     </el-input>
   </div>
+  <report-group-tag
+      v-on:selectReportGroup="updateReportGroupList"
+  ></report-group-tag>
+  <item-add-tag-panel
+      v-bind:popoverVisible = "addTagPopoverVisible"
+      v-on:closePopover = "handleCloseAddTagPopover"
+  >
+    <el-button
+        @click="addTagPopoverVisible = true"
+        size="small"
+    >
+      + 新标签
+    </el-button>
+  </item-add-tag-panel>
 
 </template>
 
 <script>
 import basicTag from '../item_tag/basicTag.vue';
 import reportGroupTag from "../report_group/reportGroupTag.vue";
+import itemAddTagPanel from "./itemAddTagPanel.vue";
 
 export default {
   name: "newTodoItem",
@@ -56,6 +68,7 @@ export default {
   components: {
     reportGroupTag,
     basicTag,
+    itemAddTagPanel,
   },
   emits: [
     'addItem'
@@ -66,6 +79,7 @@ export default {
       newItemFocused: false,
       newItemText: null,
       rollBackText: null,
+      addTagPopoverVisible: false,
       tagList: [],
       // key name must align with backstage
       newItem: {
@@ -116,7 +130,10 @@ export default {
     // upon reportGroupTag emit 'selectReportGroup', update report_group_list with the payload
     updateReportGroupList: function (new_item) {
       this.newItem.report_group = new_item;
-    }
+    },
+    handleCloseAddTagPopover () {
+      this.addTagPopoverVisible = false
+    },
   }
 };
 </script>
