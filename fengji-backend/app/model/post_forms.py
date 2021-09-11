@@ -43,20 +43,20 @@ class LoginForm(Form):
 
 class TagTemplateForm(Form):
     id = StringField('id')
-    tag_template_name = StringField('tag_template_name',
+    name = StringField('name',
                                     [validators.input_required('未填写标签名'),
                                      validators.Length(min=app_config.TAG_SETTINGS['MIN_TAG_NAME_LENGTH'],
                                                        max=app_config.TAG_SETTINGS['MAX_TAG_NAME_LENGTH'],
                                                        message=f"用户名长度需为{app_config.TAG_SETTINGS['MIN_TAG_NAME_LENGTH']}~"
                                                                f"{app_config.TAG_SETTINGS['MAX_TAG_NAME_LENGTH']}位")])
-    tag_field_type = StringField('tag_field_type',
+    field_type = StringField('field_type',
                                  [validators.input_required('未选择标签类型'),
                                   validators.any_of(app_config.TAG_SETTINGS['ALLOWED_TAG_TYPES'], '不允许的标签类型')])
     tag_group_assignment = StringField('tag_group_assignment')
-    tag_default_value = StringField('tag_default_value')
-    tag_required = BooleanField('tag_required')
-    tag_preview = BooleanField('tag_preview')
-    tag_color = StringField('tag_color')
+    default_value = StringField('default_value')
+    required = BooleanField('required')
+    preview = BooleanField('preview')
+    color = StringField('color')
 
 
 class ReportGroupForm(Form):
