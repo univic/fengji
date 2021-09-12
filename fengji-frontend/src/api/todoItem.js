@@ -1,14 +1,22 @@
 
 import myAxios from "../utilities/request";
 import message from "../utilities/message";
-import {ElMessage} from "element-plus";
 
 const todoItem = {
   addTodoItem(dataObj) {
     return myAxios.post(
       'api/todo_item/',
       dataObj
-    );
+    ).then((response)=> {
+      if (response.data.status === "success") {
+        return response;
+      } else {
+        message.emitErrorMessage(response.data.messages[0]);
+      }
+    }).catch( (error) => {
+      message.emitErrorMessage(error.messages);
+      return error;
+    })
   },
   deleteTodoItem(params) {
     return myAxios.delete(
@@ -16,14 +24,10 @@ const todoItem = {
       {
         params: params
       }
-    ).catch(
-        function (error) {
-            ElMessage({
-                message: '出现了问题（*゜ー゜*）' + error,
-                type: 'error'
-            });
-        }
-    )
+    ).catch( (error) => {
+      message.emitErrorMessage(error.messages);
+      return error;
+    })
   },
   editTodoItem(dataObj) {
     return myAxios.put(
@@ -52,14 +56,10 @@ const todoItem = {
       {
         params: params
       }
-    ).catch(
-        function (error) {
-          ElMessage({
-            message: '出现了问题（*゜ー゜*）' + error,
-            type: 'error'
-          });
-        }
-    )
+    ).catch( (error) => {
+      message.emitErrorMessage(error.messages);
+      return error;
+    })
   },
 }
 

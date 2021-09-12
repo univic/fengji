@@ -19,7 +19,7 @@ let tagTemplateGroup = {
         params: params,
       }).then((response)=> {
         if (response.data.status === "success") {
-          return response
+          return response;
         } else {
           message.emitErrorMessage(response.data.messages[0]);
         }

@@ -5,7 +5,7 @@
   >
     <template #header><slot></slot></template>
     <todo-item
-      v-for="item in recordItemList"
+      v-for="item in myTodoItemList"
       :key="item.id"
       :item="item"
       v-on:removeItem="handleRemoveItem(item)"
@@ -14,8 +14,6 @@
 
     <new-todo-item
       ref="newItemInput"
-      v-on:add-item="addItem"
-      :required-tags="requiredTags"
     ></new-todo-item>
   </el-card>
   <el-dialog
@@ -53,7 +51,6 @@ export default {
   },
   data () {
     return {
-      recordItemList: [],
       showDetailDialog: false,
       selectedTagItem: null,
       tagGroupList: [],
@@ -63,138 +60,147 @@ export default {
   },
 
   created() {
-    this.getRecordItems()
-    this.getTagTemplateData()
+    // this.getRecordItems()
+    // this.getTagTemplateData()
 
   },
   computed: {
     groupedTagTemplateList () {
       return this.$store.getters['tagTemplate/getTagTemplateList']
     },
+    myTodoItemList () {
+      return this.$store.state.todoItem.myTodoItemList
+    }
   },
   methods: {
-    // use a promise to send async request
-    getTagTemplateData () {
-      let p1 = new Promise(this.getTagGroupList)
-      let p2 = new Promise(this.getTagTemplateList)
-      Promise.all([p1, p2]).then(() => {
-        this.assignTagTemplateToTagGroup();
-        this.$store.commit('tagTemplate/setTagTemplateList', this.tagGroupList);
-        this.convertTagTemplateList();
-      }).catch((result) => {
-        ElMessage({
-          message: result,
-          type: "error",
-        })
-      })
-    },
-    getTagGroupList (resolve, reject) {
-      api.tagGroup.getTagGroup({
-        type: 'all',
-      }).then((response) => {
-        if (response.data.status === "success") {
-          this.tagGroupList = response.data.tag_group_list;
-          resolve('success');
-        } else {
-          reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
-        }
-      })
-    },
-    getTagTemplateList (resolve, reject) {
-      api.tag.getTagTemplate({
-        type: "all",
-      }).then((response) => {
-        if (response.data.status === "success") {
-          this.tagTemplateList = response.data.tag_template_list;
-          resolve('success');
-        } else {
-          reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
-        }
-      });
-    },
-    assignTagTemplateToTagGroup () {
-      this.tagGroupList.forEach((tagGroupElement, index) => {
-        this.tagGroupList[index].tag_template_list = this.filterTagTemplate(tagGroupElement.id, this.tagTemplateList)
-      });
-    },
-    filterTagTemplate (tagGroupID, tagTemplateList) {
-      let filteredList = tagTemplateList.filter((item) => {
-        return item.tag_group_assignment.id === tagGroupID
-      })
-      return filteredList
-    },
-    convertTagTemplateList () {
-      let rawList = this.groupedTagTemplateList;
-      let convertedList = [];
-      if (rawList.length > 0 ) {
-        rawList.forEach((element, index) => {
-          let convertedDict = {
-            label: element.tag_group_name,
-            children: [],
-          }
-          if (element.tag_template_list && element.tag_template_list.length > 0) {
-            element.tag_template_list.forEach((item, index) => {
-              let convertedItem = {
-                label: item.tag_template_name,
-                value: item.id
-              }
-              console.log(convertedItem)
-              convertedDict.children.push(convertedItem)
-            })
-          } else {
 
-          }
-          convertedList.push(convertedDict)
-        });
-      } else {
+    handleInitialization() {
 
-      }
-
-      this.$store.commit('tagTemplate/setConvertedTagTemplateList', convertedList);
     },
+
+    // // use a promise to send async request
+    // getTagTemplateData () {
+    //   let p1 = new Promise(this.getTagGroupList)
+    //   let p2 = new Promise(this.getTagTemplateList)
+    //   Promise.all([p1, p2]).then(() => {
+    //     this.assignTagTemplateToTagGroup();
+    //     this.$store.commit('tagTemplate/setTagTemplateList', this.tagGroupList);
+    //     this.convertTagTemplateList();
+    //   }).catch((result) => {
+    //     ElMessage({
+    //       message: result,
+    //       type: "error",
+    //     })
+    //   })
+    // },
+    // getTagGroupList (resolve, reject) {
+    //   api.tagGroup.getTagGroup({
+    //     type: 'all',
+    //   }).then((response) => {
+    //     if (response.data.status === "success") {
+    //       this.tagGroupList = response.data.tag_group_list;
+    //       resolve('success');
+    //     } else {
+    //       reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
+    //     }
+    //   })
+    // },
+    // getTagTemplateList (resolve, reject) {
+    //   api.tag.getTagTemplate({
+    //     type: "all",
+    //   }).then((response) => {
+    //     if (response.data.status === "success") {
+    //       this.tagTemplateList = response.data.tag_template_list;
+    //       resolve('success');
+    //     } else {
+    //       reject("出现了问题（*゜ー゜*）" + response.data.messages[0]);
+    //     }
+    //   });
+    // },
+    // assignTagTemplateToTagGroup () {
+    //   this.tagGroupList.forEach((tagGroupElement, index) => {
+    //     this.tagGroupList[index].tag_template_list = this.filterTagTemplate(tagGroupElement.id, this.tagTemplateList)
+    //   });
+    // },
+    // filterTagTemplate (tagGroupID, tagTemplateList) {
+    //   let filteredList = tagTemplateList.filter((item) => {
+    //     return item.tag_group_assignment.id === tagGroupID
+    //   })
+    //   return filteredList
+    // },
+    // convertTagTemplateList () {
+    //   let rawList = this.groupedTagTemplateList;
+    //   let convertedList = [];
+    //   if (rawList.length > 0 ) {
+    //     rawList.forEach((element, index) => {
+    //       let convertedDict = {
+    //         label: element.tag_group_name,
+    //         children: [],
+    //       }
+    //       if (element.tag_template_list && element.tag_template_list.length > 0) {
+    //         element.tag_template_list.forEach((item, index) => {
+    //           let convertedItem = {
+    //             label: item.tag_template_name,
+    //             value: item.id
+    //           }
+    //           console.log(convertedItem)
+    //           convertedDict.children.push(convertedItem)
+    //         })
+    //       } else {
+    //
+    //       }
+    //       convertedList.push(convertedDict)
+    //     });
+    //   } else {
+    //
+    //   }
+    //
+    //   this.$store.commit('tagTemplate/setConvertedTagTemplateList', convertedList);
+    // },
 
     addItem(newItem) {
       // a simple walk around to solve the "this" pointing problem inside axios
       // binding the right "this" pointer to "that", to avoid "this" pointing all over the place
-      let that = this
-      let dataObj = newItem
-      api.todoItem.addTodoItem(
-          dataObj
-      ).then(
-          (response) => {
-            if (response.data.status === 'success') {
-              // if new item is saved successfully, push it to the item list directly to avoid additional request
-              this.recordItemList.push(
-                  {
-                    // unpack the newItem dict, get titleText and TagList
-                    ...newItem,
-                    id: response.data.id
-                  }
-              )
-            } else if (response.data.status === 'error') {
-              ElMessage({
-                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-                type: 'error'
-              })
-              that.triggerRollback();
-            } else {
-              ElMessage({
-                message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
-                type: 'error'
-              })
-              that.triggerRollback();
-            }
-          }
-      ).catch(
-          function (error) {
-            ElMessage({
-              message: '出现了问题（*゜ー゜*）' + error.message,
-              type: 'error'
-            })
-            that.triggerRollback();
-          }
-      )
+    //   let that = this
+    //   let dataObj = newItem
+    //   api.todoItem.addTodoItem(
+    //       dataObj
+    //   ).then(
+    //       (response) => {
+    //         if (response.data.status === 'success') {
+    //           // if new item is saved successfully, push it to the item list directly to avoid additional request
+    //           this.recordItemList.push(
+    //               {
+    //                 // unpack the newItem dict, get titleText and TagList
+    //                 ...newItem,
+    //                 id: response.data.id
+    //               }
+    //           )
+    //         } else if (response.data.status === 'error') {
+    //           ElMessage({
+    //             message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+    //             type: 'error'
+    //           })
+    //           that.triggerRollback();
+    //         } else {
+    //           ElMessage({
+    //             message: '出现了问题（*゜ー゜*）' + response.data.messages[0],
+    //             type: 'error'
+    //           })
+    //           that.triggerRollback();
+    //         }
+    //       }
+    //   ).catch(
+    //       function (error) {
+    //         ElMessage({
+    //           message: '出现了问题（*゜ー゜*）' + error.message,
+    //           type: 'error'
+    //         })
+    //         that.triggerRollback();
+    //       }
+    //   )
     },
+
     triggerRollback() {
       this.$refs.newItemInput.rollBack();
     },

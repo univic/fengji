@@ -33,7 +33,8 @@ export default {
     handleInitialization() {
       let p1 = this.$store.dispatch('tagTemplateGroup/getTagTemplateGroupList');
       let p2 = this.$store.dispatch('reportGroup/getMyReportGroupList');
-      Promise.all([p1, p2]).then(()=>{
+      let p3 = this.$store.dispatch('todoItem/getMyTodoItemList');
+      Promise.all([p1, p2, p3]).then(()=>{
 
       })
     },

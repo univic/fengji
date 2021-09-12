@@ -6,6 +6,7 @@ import user from "./modules/user"
 import tagTemplate from "./modules/tagTemplate"
 import tagTemplateGroup from "./modules/tagTemplateGroup";
 import reportGroup from "./modules/reportGroup";
+import todoItem from "./modules/todoItem";
 
 const store = createStore({
   state() {
@@ -21,6 +22,7 @@ const store = createStore({
     tagTemplate,
     tagTemplateGroup,
     reportGroup,
+    todoItem,
   }
 })
 

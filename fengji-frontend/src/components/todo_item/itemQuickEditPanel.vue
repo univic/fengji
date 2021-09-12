@@ -9,7 +9,7 @@
       <!--          tag container -->
       <div style="width: 70%">
         <report-group-tag
-            v-on:selectReportGroup="updateReportGroupList"
+            v-on:selectReportGroup="handleReportGroupSelection"
             v-bind:predefined-report-group="this.todoItem.report_group"
         ></report-group-tag>
         <editable-tag
@@ -27,6 +27,7 @@
         <item-add-tag-panel
           v-bind:popoverVisible = "addTagPopoverVisible"
           v-on:closePopover = "handleCloseAddTagPopover"
+          v-on:selectTag="handleTagSelection"
         >
           <el-button
               @click="addTagPopoverVisible = true"
@@ -118,8 +119,10 @@ export default {
     }
   },
   emits: [
-      'closeQuickEditPanel',
-      'saveQuickEditPanel',
+    'closeQuickEditPanel',
+    'saveQuickEditPanel',
+    'selectTag',
+    'selectReportGroup'
   ],
   data () {
     return {
@@ -140,9 +143,17 @@ export default {
 
   },
   methods: {
-    handleTagSelection(tagSelected, indexOfTagSelected) {
-      this.tagSelected = tagSelected
-      this.indexOfTagSelected = indexOfTagSelected
+    handleTagSelection(tagTemplate) {
+      let tagList = this.todoItem.tag_list;
+      let tag = {
+        name: tagTemplate.name,
+        field_value: tagTemplate.default_value
+      }
+      tagList.push(tag)
+      this.$emit('selectTag', tagList)
+    },
+    handleReportGroupSelection (reportGroupID) {
+      this.$emit('selectReportGroup', reportGroupID)
     },
     handleTagDeletion(selectedTag) {
       this.itemTags.forEach(function (item, index, arr) {
@@ -151,27 +162,13 @@ export default {
         }
       })
     },
-    handleSave() {
-      // upon save, emit the postForm to the parent component
-      this.$emit('saveQuickEditPanel', this.postForm)
-    },
-    showTagInput() {
-      this.tagInputValue = true
-    },
-    handleInputConfirm() {
-    },
     handleCloseQuickEditPanel () {
       this.$emit('closeQuickEditPanel')
     },
     handleCloseAddTagPopover () {
       this.addTagPopoverVisible = false
     },
-    handleSubmit() {
 
-    },
-    updateReportGroupList: function (new_list) {
-      this.postForm.report_group_list = new_list;
-    }
   }
 }
 </script>

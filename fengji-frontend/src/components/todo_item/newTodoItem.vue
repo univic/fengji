@@ -28,20 +28,7 @@
     </el-input>
   </div>
   <item-quick-edit-panel></item-quick-edit-panel>
-<!--  <report-group-tag-->
-<!--    v-on:selectReportGroup="updateReportGroupList"-->
-<!--  ></report-group-tag>-->
-<!--  <item-add-tag-panel-->
-<!--    v-bind:popoverVisible="addTagPopoverVisible"-->
-<!--    v-on:closePopover="handleCloseAddTagPopover"-->
-<!--  >-->
-<!--    <el-button-->
-<!--      @click="addTagPopoverVisible = true"-->
-<!--      size="small"-->
-<!--    >-->
-<!--      + 新标签-->
-<!--    </el-button>-->
-<!--  </item-add-tag-panel>-->
+
 
 </template>
 
@@ -54,7 +41,6 @@ import itemAddTagPanel from "./itemAddTagPanel.vue";
 export default {
   name: "newTodoItem",
   props: [
-    'requiredTags'
   ],
   components: {
     reportGroupTag,
@@ -63,7 +49,6 @@ export default {
     itemQuickEditPanel,
   },
   emits: [
-    'addItem'
   ],
   data() {
     return {
@@ -81,6 +66,9 @@ export default {
       },
     };
   },
+  computed: {
+
+  },
   // the prop value of requiredTags is async assigned, so the value is assigned after the component is mounted
   // use deep watch to force the value get updated
   watch: {
@@ -91,21 +79,11 @@ export default {
       }
     }
   },
-  computed: {},
   mounted() {
     this.initializeTagList();
   },
   methods: {
-    initializeTagList() {
-      this.tagList = [];
-      this.requiredTags.forEach((item) => {
-        // use shallow copy, or the newTagItem will point to the same address as requiredTags
-        // in that case the tagList will be initialized instantly after value change due to the watcher
-        let newTagItem = {...item};
-        newTagItem.tag_value = item.default_value;
-        this.tagList.push(newTagItem);
-      });
-    },
+
     addRecordItem() {
       this.rollBackText = this.newItemText;
       this.newItem.title = this.newItemText;

@@ -35,16 +35,9 @@ class TagTemplate(db.Document):
         return item_dict
 
 
-class ItemTag(EmbeddedDocument):
-    tag_field_value = StringField()
-    tag_name = StringField(required=True)
-    tag_field_type = StringField(required=True)
-    tag_default_value = StringField()
-    tag_for_preview = BooleanField(default=False)
-    tag_priority = IntField(default=1)
-    tag_color = StringField()
-    tag_created_at = DateTimeField(default=datetime.datetime.now())
-    creator = ReferenceField(User, required=True)
+class TodoItemTag(EmbeddedDocument):
+    name = StringField(required=True)
+    field_value = StringField()
     ref_tag_template = ReferenceField(TagTemplate, required=True)
 
 
