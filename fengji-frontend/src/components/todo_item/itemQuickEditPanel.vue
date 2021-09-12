@@ -12,9 +12,10 @@
             v-on:selectReportGroup="updateReportGroupList"
             v-bind:predefined-report-group="this.todoItem.report_group"
         ></report-group-tag>
-        <el-tag>
+        <editable-tag
+          v-for="tag in this.todoItem.tag_list">
 
-        </el-tag>
+        </editable-tag>
         <el-input
             v-if="tagInputVisible"
             v-model="tagInputValue"
@@ -70,45 +71,52 @@
       </div>
 
 
-    <!--    button set-->
-    <div>
-      <el-button
-          type="primary"
-          size="small"
-          v-on:click="handleSave"
-      >
-        确定
-      </el-button>
-      <el-button
-          type="primary"
-          size="small"
-          v-on:click="$emit('showDetailDialog')"
-      >
-        更多
-      </el-button>
-      <el-button
-          size="small"
-          v-on:click="handleCloseQuickEditPanel"
-      >
-        取消
-      </el-button>
-    </div>
+<!--    &lt;!&ndash;    button set&ndash;&gt;-->
+<!--    <div>-->
+<!--      <el-button-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          v-on:click="handleSave"-->
+<!--      >-->
+<!--        确定-->
+<!--      </el-button>-->
+<!--      <el-button-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          v-on:click="$emit('showDetailDialog')"-->
+<!--      >-->
+<!--        更多-->
+<!--      </el-button>-->
+<!--      <el-button-->
+<!--          size="small"-->
+<!--          v-on:click="handleCloseQuickEditPanel"-->
+<!--      >-->
+<!--        取消-->
+<!--      </el-button>-->
+<!--    </div>-->
   </div>
 </template>
 
 <script>
 import itemAddTagPanel from "./itemAddTagPanel.vue";
 import reportGroupTag from "../report_group/reportGroupTag.vue";
+import editableTag from "../item_tag/editableTag.vue";
 
 export default {
   name: "tagQuickEditPanel",
   components: {
+    editableTag,
     itemAddTagPanel,
     reportGroupTag
   },
-  props: [
-    'todoItem'
-  ],
+  props: {
+    'todoItem': {
+      type: Object,
+      default: () => {
+        return { id: null }
+      },
+    }
+  },
   emits: [
       'closeQuickEditPanel',
       'saveQuickEditPanel',

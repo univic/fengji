@@ -1,9 +1,9 @@
 <template>
-  <el-card
+  <el-tag
     v-on:click="handleTagSelect"
   >
     {{ tagTemplate.name }}
-  </el-card>
+  </el-tag>
 </template>
 
 <script>

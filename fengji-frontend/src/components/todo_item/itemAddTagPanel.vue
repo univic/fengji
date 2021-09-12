@@ -27,12 +27,13 @@
       </div>
       <div>
         <el-card v-if="selectedTagTemplateGroup">
-          <el-tag v-for="item in selectedTagTemplateGroup.data.tag_template_list"
-                  key="item.id"
-          >{{ item.name }}</el-tag>
-
+          <selectable-tag
+            v-for="item in selectedTagTemplateGroup.data.tag_template_list"
+            v-on:click="handleTagSelection(item)"
+            v-bind:tag-template="item"
+            key="item.id"
+          ></selectable-tag>
         </el-card>
-
       </div>
 
 
@@ -50,7 +51,7 @@ import selectableTag from "../item_tag/selectableTag.vue";
 
 export default {
   name: "itemAddTagPanel",
-  components: {},
+  components: {selectableTag},
   props: [
     'popoverVisible'
   ],
@@ -86,6 +87,9 @@ export default {
       this.selectedTagTemplateGroupID = data;
       this.selectedTagTemplateGroup = this.$refs.cascader.getCheckedNodes()[0];
     },
+    handleTagSelection(tagTemplate) {
+
+    }
   }
 
 };

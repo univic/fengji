@@ -27,26 +27,28 @@
     >
     </el-input>
   </div>
-  <report-group-tag
-    v-on:selectReportGroup="updateReportGroupList"
-  ></report-group-tag>
-  <item-add-tag-panel
-    v-bind:popoverVisible="addTagPopoverVisible"
-    v-on:closePopover="handleCloseAddTagPopover"
-  >
-    <el-button
-      @click="addTagPopoverVisible = true"
-      size="small"
-    >
-      + 新标签
-    </el-button>
-  </item-add-tag-panel>
+  <item-quick-edit-panel></item-quick-edit-panel>
+<!--  <report-group-tag-->
+<!--    v-on:selectReportGroup="updateReportGroupList"-->
+<!--  ></report-group-tag>-->
+<!--  <item-add-tag-panel-->
+<!--    v-bind:popoverVisible="addTagPopoverVisible"-->
+<!--    v-on:closePopover="handleCloseAddTagPopover"-->
+<!--  >-->
+<!--    <el-button-->
+<!--      @click="addTagPopoverVisible = true"-->
+<!--      size="small"-->
+<!--    >-->
+<!--      + 新标签-->
+<!--    </el-button>-->
+<!--  </item-add-tag-panel>-->
 
 </template>
 
 <script>
 import basicTag from '../item_tag/basicTag.vue';
 import reportGroupTag from "../report_group/reportGroupTag.vue";
+import itemQuickEditPanel from "./itemQuickEditPanel.vue";
 import itemAddTagPanel from "./itemAddTagPanel.vue";
 
 export default {
@@ -58,6 +60,7 @@ export default {
     reportGroupTag,
     basicTag,
     itemAddTagPanel,
+    itemQuickEditPanel,
   },
   emits: [
     'addItem'
