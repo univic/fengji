@@ -84,7 +84,7 @@ export default {
   //   }
   },
   mounted() {
-    this.initializeTagList();
+
   },
   methods: {
     handleTagSelection(tagList) {
@@ -94,22 +94,30 @@ export default {
       this.newItem.report_group = reportGroupID
     },
     handleSubmit() {
-      api.todoItem.addTodoItem()
+      this.newItem.title = this.newItemText;
+      api.todoItem.addTodoItem(this.newItem)
+        .then((response) => {
+          //TODO: change the vuex store!
+          this.$emit('addItem', this.newItem);
+          // reset variables
+          this.newItemText = null;
+          this.newItem = {
+            title: null,
+            tag_list: null,
+            report_group: null,
+          }
+      })
     },
     addRecordItem() {
-      this.rollBackText = this.newItemText;
-      this.newItem.title = this.newItemText;
-      this.$emit('addItem', this.newItem);
-      this.newItemText = null;
-      this.newItem = {
-        title: null,
-          tag_list: null,
-          report_group: null,
-      }
+      // this.rollBackText = this.newItemText;
+      // this.newItem.title = this.newItemText;
+
+
+
     },
-    rollBack() {
-      this.newItemText = this.rollBackText;
-    },
+    // rollBack() {
+    //   this.newItemText = this.rollBackText;
+    // },
   }
 };
 </script>
