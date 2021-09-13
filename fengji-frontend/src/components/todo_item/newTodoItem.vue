@@ -27,12 +27,16 @@
     >
     </el-input>
   </div>
-  <item-quick-edit-panel></item-quick-edit-panel>
+  <item-quick-edit-panel
+    v-on:selectTag="handleTagSelection"
+    v-on:selectReportGroup="handleReportGroupSelection"
+  ></item-quick-edit-panel>
 
 
 </template>
 
 <script>
+import api from '../api'
 import basicTag from '../item_tag/basicTag.vue';
 import reportGroupTag from "../report_group/reportGroupTag.vue";
 import itemQuickEditPanel from "./itemQuickEditPanel.vue";
@@ -72,37 +76,39 @@ export default {
   // the prop value of requiredTags is async assigned, so the value is assigned after the component is mounted
   // use deep watch to force the value get updated
   watch: {
-    requiredTags: {
-      deep: true,
-      handler(newValue, oldValue) {
-        this.initializeTagList();
-      }
-    }
+  //   requiredTags: {
+  //     deep: true,
+  //     handler(newValue, oldValue) {
+  //       this.initializeTagList();
+  //     }
+  //   }
   },
   mounted() {
     this.initializeTagList();
   },
   methods: {
-
+    handleTagSelection(tagList) {
+      this.newItem.tag_list = tagList
+    },
+    handleReportGroupSelection(reportGroupID) {
+      this.newItem.report_group = reportGroupID
+    },
+    handleSubmit() {
+      api.todoItem.addTodoItem()
+    },
     addRecordItem() {
       this.rollBackText = this.newItemText;
       this.newItem.title = this.newItemText;
-      this.newItem.tag_list = this.tagList;
       this.$emit('addItem', this.newItem);
       this.newItemText = null;
+      this.newItem = {
+        title: null,
+          tag_list: null,
+          report_group: null,
+      }
     },
-    rollBack: function () {
+    rollBack() {
       this.newItemText = this.rollBackText;
-    },
-    updateTagValue: function (index, newTagValue) {
-      this.tagList[index].tag_value = newTagValue;
-    },
-    // upon reportGroupTag emit 'selectReportGroup', update report_group_list with the payload
-    updateReportGroupList: function (new_item) {
-      this.newItem.report_group = new_item;
-    },
-    handleCloseAddTagPopover() {
-      this.addTagPopoverVisible = false
     },
   }
 };

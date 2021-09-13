@@ -155,20 +155,15 @@ export default {
     handleReportGroupSelection (reportGroupID) {
       this.$emit('selectReportGroup', reportGroupID)
     },
-    handleTagDeletion(selectedTag) {
-      this.itemTags.forEach(function (item, index, arr) {
-        if (item.tag_id === selectedTag.tag_id) {
-          arr.splice(index, 1)
-        }
-      })
-    },
     handleCloseQuickEditPanel () {
       this.$emit('closeQuickEditPanel')
     },
     handleCloseAddTagPopover () {
       this.addTagPopoverVisible = false
     },
-
+    updateTagValue: function (index, newTagValue) {
+      this.tagList[index].tag_value = newTagValue;
+    },
   }
 }
 </script>
