@@ -17,8 +17,8 @@ const mutations = {
   setMyTodoItemList(state, payload) {
     state.todoItemList = payload;
   },
-  setNewTodoItem(state, payload) {
-    state.newTodoItem = payload;
+  appendNewTodoItem(state, payload) {
+    state.todoItemList.push(payload);
   },
 }
 
@@ -34,15 +34,15 @@ const actions = {
       })
     })
   },
-  postNewTodoItem(context) {
-    return new Promise((resolve, reject) => {
-      api.todoItem.addTodoItem(context.state.newTodoItem)
-        .then((response) => {
-        resolve();
-        return response;
-      })
-    })
-  },
+  // postNewTodoItem(context) {
+  //   return new Promise((resolve, reject) => {
+  //     api.todoItem.addTodoItem(context.state.newTodoItem)
+  //       .then((response) => {
+  //       resolve();
+  //       return response;
+  //     })
+  //   })
+  // },
 }
 
 export default {

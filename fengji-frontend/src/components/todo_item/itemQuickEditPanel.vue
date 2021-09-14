@@ -16,6 +16,7 @@
           v-for="tag in this.todoItem.tag_list">
 
         </editable-tag>
+        <el-divider></el-divider>
         <el-input
             v-if="tagInputVisible"
             v-model="tagInputValue"
@@ -72,29 +73,6 @@
       </div>
 
 
-<!--    &lt;!&ndash;    button set&ndash;&gt;-->
-<!--    <div>-->
-<!--      <el-button-->
-<!--          type="primary"-->
-<!--          size="small"-->
-<!--          v-on:click="handleSave"-->
-<!--      >-->
-<!--        确定-->
-<!--      </el-button>-->
-<!--      <el-button-->
-<!--          type="primary"-->
-<!--          size="small"-->
-<!--          v-on:click="$emit('showDetailDialog')"-->
-<!--      >-->
-<!--        更多-->
-<!--      </el-button>-->
-<!--      <el-button-->
-<!--          size="small"-->
-<!--          v-on:click="handleCloseQuickEditPanel"-->
-<!--      >-->
-<!--        取消-->
-<!--      </el-button>-->
-<!--    </div>-->
   </div>
 </template>
 

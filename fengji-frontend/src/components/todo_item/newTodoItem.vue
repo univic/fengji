@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import api from '../api'
+import api from '../../api';
 import basicTag from '../item_tag/basicTag.vue';
 import reportGroupTag from "../report_group/reportGroupTag.vue";
 import itemQuickEditPanel from "./itemQuickEditPanel.vue";
@@ -97,8 +97,7 @@ export default {
       this.newItem.title = this.newItemText;
       api.todoItem.addTodoItem(this.newItem)
         .then((response) => {
-          //TODO: change the vuex store!
-          this.$emit('addItem', this.newItem);
+          this.$store.commit('todoItem/appendNewTodoItem', this.newItem)
           // reset variables
           this.newItemText = null;
           this.newItem = {
@@ -108,16 +107,6 @@ export default {
           }
       })
     },
-    addRecordItem() {
-      // this.rollBackText = this.newItemText;
-      // this.newItem.title = this.newItemText;
-
-
-
-    },
-    // rollBack() {
-    //   this.newItemText = this.rollBackText;
-    // },
   }
 };
 </script>
