@@ -1,7 +1,7 @@
 <template>
   <el-tag
     v-on:click="handleTagSelect"
-    v-bind:disabled="disabled"
+    v-bind:type="disabledType"
   >
     {{ tagTemplate.name }}
   </el-tag>
@@ -23,14 +23,19 @@ export default {
   emits: [
     'selectTag'
   ],
+  computed: {
+    disabledType () {
+      return (this.disabled ? 'info' : '');
+    }
+  },
   methods: {
     handleTagSelect() {
       if (!this.disabled) {
-        this.$emit('selectTag')
+        this.$emit('selectTag');
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

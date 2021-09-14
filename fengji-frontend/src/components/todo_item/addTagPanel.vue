@@ -93,13 +93,20 @@ export default {
     },
     handleTagSelection(tagTemplate) {
       // inject the pathValues here, to help upper components find where this tag template is
-      tagTemplate.pathValues = this.selectedTagTemplateGroup.pathValues
-      this.$emit('selectTag', tagTemplate)
+      tagTemplate.pathValues = this.selectedTagTemplateGroup.pathValues;
+      this.$emit('selectTag', tagTemplate);
     },
     findDisableStatus(tagTemplate) {
-      this.todoItem.tag_list.forEach((tag) => {
-        return (tag.ref_tag_template.id === tagTemplate.id)
-      })
+      let disableStatus = false;
+      if (this.todoItem.tag_list) {
+        this.todoItem.tag_list.forEach((tag) => {
+          if (tag.ref_tag_template.id === tagTemplate.id) {
+            disableStatus = true;
+          }
+        })
+      }
+      return disableStatus;
+
     },
   }
 

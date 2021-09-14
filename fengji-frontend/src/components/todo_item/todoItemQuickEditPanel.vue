@@ -120,10 +120,6 @@ export default {
       selectedTags : [],
       indexOfTagSelected: null,
       tagInputValue: null,
-      // postForm: {
-      //   report_group_list: [],
-      //   tag_list: [],
-      // }
     }
   },
   computed: {
@@ -131,8 +127,6 @@ export default {
   },
   methods: {
     handleTagSelection(tagTemplate) {
-      // maintain a selected tag list
-      // this.selectedTags.push(tagTemplate)
 
       // construct a new tag list here, emit to the parent component and replace the old one
       let tagList = [];
@@ -142,7 +136,7 @@ export default {
       let tag = {
         name: tagTemplate.name,
         field_value: tagTemplate.default_value,
-        ref_tag_template: tagTemplate.id,
+        ref_tag_template: tagTemplate,
       }
       tagList.push(tag)
       this.$emit('selectTag', tagList)
