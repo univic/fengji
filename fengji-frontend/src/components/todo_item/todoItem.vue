@@ -86,7 +86,7 @@
 
 <script>
 import api from "../../api";
-import itemQuickEditPanel from "./itemQuickEditPanel.vue";
+import itemQuickEditPanel from "./todoItemQuickEditPanel.vue";
 // TODO: show corresponding tags
 
 export default {

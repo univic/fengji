@@ -31,7 +31,7 @@
             v-for="item in selectedTagTemplateGroup.data.tag_template_list"
             v-on:selectTag="handleTagSelection(item)"
             v-bind:tag-template="item"
-            v-bind:disabled=""
+            v-bind:disabled="findDisableStatus(item)"
             key="item.id"
           ></selectable-tag>
         </el-card>
@@ -51,7 +51,7 @@
 import selectableTag from "../item_tag/selectableTag.vue";
 
 export default {
-  name: "itemAddTagPanel",
+  name: "addTagPanel",
   components: {
     selectableTag
   },
@@ -95,7 +95,12 @@ export default {
       // inject the pathValues here, to help upper components find where this tag template is
       tagTemplate.pathValues = this.selectedTagTemplateGroup.pathValues
       this.$emit('selectTag', tagTemplate)
-    }
+    },
+    findDisableStatus(tagTemplate) {
+      this.todoItem.tag_list.forEach((tag) => {
+        return (tag.ref_tag_template.id === tagTemplate.id)
+      })
+    },
   }
 
 };

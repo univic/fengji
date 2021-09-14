@@ -18,7 +18,7 @@
     ></span>
     <el-input
       v-model="newItemText"
-      v-on:keypress.enter="addRecordItem"
+      v-on:keypress.enter="handleSubmit"
       v-on:focus="newItemFocused=true"
       v-on:blur="newItemFocused=false"
       style="width: 80%"
@@ -27,11 +27,11 @@
     >
     </el-input>
   </div>
-  <item-quick-edit-panel
+  <todo-item-quick-edit-panel
     v-bind:todo-item="newItem"
     v-on:selectTag="handleTagSelection"
     v-on:selectReportGroup="handleReportGroupSelection"
-  ></item-quick-edit-panel>
+  ></todo-item-quick-edit-panel>
 
 
 </template>
@@ -40,8 +40,8 @@
 import api from '../../api';
 import basicTag from '../item_tag/basicTag.vue';
 import reportGroupTag from "../report_group/reportGroupTag.vue";
-import itemQuickEditPanel from "./itemQuickEditPanel.vue";
-import itemAddTagPanel from "./itemAddTagPanel.vue";
+import todoItemQuickEditPanel from "./todoItemQuickEditPanel.vue";
+import itemAddTagPanel from "./addTagPanel.vue";
 
 export default {
   name: "newTodoItem",
@@ -51,7 +51,7 @@ export default {
     reportGroupTag,
     basicTag,
     itemAddTagPanel,
-    itemQuickEditPanel,
+    todoItemQuickEditPanel,
   },
   emits: [
   ],

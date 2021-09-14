@@ -17,7 +17,7 @@
           v-bind:tag="tag">
 
         </editable-tag>
-        <item-add-tag-panel
+        <add-tag-panel
           v-bind:todoItem="todoItem"
           v-bind:popoverVisible = "addTagPopoverVisible"
           v-on:closePopover = "handleCloseAddTagPopover"
@@ -29,7 +29,10 @@
           >
             + 新标签
           </el-button>
-        </item-add-tag-panel>
+        </add-tag-panel>
+
+
+<!--
         <el-divider></el-divider>
         <el-input
             v-if="tagInputVisible"
@@ -39,6 +42,7 @@
             @blur="handleInputConfirm"
         >
         </el-input>
+-->
 
 
       <!--          edit tag-->
@@ -82,15 +86,15 @@
 </template>
 
 <script>
-import itemAddTagPanel from "./itemAddTagPanel.vue";
+import addTagPanel from "./addTagPanel.vue";
 import reportGroupTag from "../report_group/reportGroupTag.vue";
 import editableTag from "../item_tag/editableTag.vue";
 
 export default {
-  name: "tagQuickEditPanel",
+  name: "todoItemQuickEditPanel",
   components: {
     editableTag,
-    itemAddTagPanel,
+    addTagPanel,
     reportGroupTag
   },
   props: {
