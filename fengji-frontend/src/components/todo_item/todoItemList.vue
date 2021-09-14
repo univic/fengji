@@ -60,8 +60,6 @@ export default {
   },
 
   created() {
-    // this.getRecordItems()
-    // this.getTagTemplateData()
 
   },
   computed: {

@@ -1,9 +1,7 @@
 import api from "../../api";
-import {resolve} from "../../../../../WingtipVortex/WingtipVortex-frontend/build/webpack.base.conf";
 
 const state = {
   myTodoItemList: [],
-  newTodoItem: {},
 }
 
 let getters = {
@@ -15,7 +13,7 @@ let getters = {
 
 const mutations = {
   setMyTodoItemList(state, payload) {
-    state.todoItemList = payload;
+    state.myTodoItemList = payload;
   },
   appendNewTodoItem(state, payload) {
     state.todoItemList.push(payload);

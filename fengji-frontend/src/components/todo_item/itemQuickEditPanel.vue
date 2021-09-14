@@ -16,6 +16,18 @@
           v-for="tag in this.todoItem.tag_list">
 
         </editable-tag>
+        <item-add-tag-panel
+          v-bind:popoverVisible = "addTagPopoverVisible"
+          v-on:closePopover = "handleCloseAddTagPopover"
+          v-on:selectTag="handleTagSelection"
+        >
+          <el-button
+            @click="addTagPopoverVisible = true"
+            size="small"
+          >
+            + 新标签
+          </el-button>
+        </item-add-tag-panel>
         <el-divider></el-divider>
         <el-input
             v-if="tagInputVisible"
@@ -25,18 +37,7 @@
             @blur="handleInputConfirm"
         >
         </el-input>
-        <item-add-tag-panel
-          v-bind:popoverVisible = "addTagPopoverVisible"
-          v-on:closePopover = "handleCloseAddTagPopover"
-          v-on:selectTag="handleTagSelection"
-        >
-          <el-button
-              @click="addTagPopoverVisible = true"
-              size="small"
-          >
-            + 新标签
-          </el-button>
-        </item-add-tag-panel>
+
 
       <!--          edit tag-->
         <div>
@@ -94,6 +95,10 @@ export default {
       default: () => {
         return { id: null }
       },
+      'instantUpdate': {
+        type: Boolean,
+        default: false,
+      }
     }
   },
   emits: [
@@ -122,10 +127,15 @@ export default {
   },
   methods: {
     handleTagSelection(tagTemplate) {
-      let tagList = this.todoItem.tag_list;
+      // construct a new tag list here, replace the old one
+      let tagList = [];
+      if (this.todoItem.tag_list) {
+        tagList = this.todoItem.tag_list;
+      }
       let tag = {
         name: tagTemplate.name,
-        field_value: tagTemplate.default_value
+        field_value: tagTemplate.default_value,
+        ref_tag_template: tagTemplate.id,
       }
       tagList.push(tag)
       this.$emit('selectTag', tagList)

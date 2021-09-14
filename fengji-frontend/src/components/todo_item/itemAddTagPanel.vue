@@ -91,6 +91,8 @@ export default {
       this.selectedTagTemplateGroup = this.$refs.cascader.getCheckedNodes()[0];
     },
     handleTagSelection(tagTemplate) {
+      // inject the pathValues here, to help upper components find where this tag template is
+      tagTemplate.pathValues = this.selectedTagTemplateGroup.pathValues
       this.$emit('selectTag', tagTemplate)
     }
   }
