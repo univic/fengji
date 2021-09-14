@@ -31,6 +31,7 @@
             v-for="item in selectedTagTemplateGroup.data.tag_template_list"
             v-on:selectTag="handleTagSelection(item)"
             v-bind:tag-template="item"
+            v-bind:disabled=""
             key="item.id"
           ></selectable-tag>
         </el-card>
@@ -55,7 +56,8 @@ export default {
     selectableTag
   },
   props: [
-    'popoverVisible'
+    'popoverVisible',
+    'todoItem'
   ],
   emits: [
     'closePopover',
@@ -66,7 +68,6 @@ export default {
       showAddTagSelector: false,
       selectedTagTemplateGroupID: null,
       selectedTagTemplateGroup: null,
-      selectedTags: [],
       cascaderProps: {
         checkStrictly: true,      // can select parent nodes
         emitPath: false,            // return selected node only

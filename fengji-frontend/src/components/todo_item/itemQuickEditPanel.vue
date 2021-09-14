@@ -13,10 +13,12 @@
             v-bind:predefined-report-group="this.todoItem.report_group"
         ></report-group-tag>
         <editable-tag
-          v-for="tag in this.todoItem.tag_list">
+          v-for="tag in this.todoItem.tag_list"
+          v-bind:tag="tag">
 
         </editable-tag>
         <item-add-tag-panel
+          v-bind:todoItem="todoItem"
           v-bind:popoverVisible = "addTagPopoverVisible"
           v-on:closePopover = "handleCloseAddTagPopover"
           v-on:selectTag="handleTagSelection"
@@ -40,21 +42,21 @@
 
 
       <!--          edit tag-->
-        <div>
-          <!--            if no tag is selected...-->
+<!--        <div>
+          &lt;!&ndash;            if no tag is selected...&ndash;&gt;
           <div
               v-if="tagSelected === null"
           >
           </div>
-          <!--            if a tag is selected, show the tag's fields and values-->
+          &lt;!&ndash;            if a tag is selected, show the tag's fields and values&ndash;&gt;
           <div
               v-else
           >
-            <!--              tag title -->
+            &lt;!&ndash;              tag title &ndash;&gt;
             <div>{{ tagSelected.name }}</div>
-            <!--              wrapper of tag value and fields-->
+            &lt;!&ndash;              wrapper of tag value and fields&ndash;&gt;
             <div>
-              <!--                wrapper of each tag value and field item-->
+              &lt;!&ndash;                wrapper of each tag value and field item&ndash;&gt;
               <div
                   v-for="(tagField, tagFieldIndex) in tagSelected.tag_field_list"
               >
@@ -69,7 +71,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
+
+
       </div>
       </div>
 
@@ -95,10 +99,6 @@ export default {
       default: () => {
         return { id: null }
       },
-      'instantUpdate': {
-        type: Boolean,
-        default: false,
-      }
     }
   },
   emits: [
@@ -113,13 +113,13 @@ export default {
       tagInputVisible: false,
       showAddTagSelector: false,
       itemTags: [],
-      tagSelected : null,
+      selectedTags : [],
       indexOfTagSelected: null,
       tagInputValue: null,
-      postForm: {
-        report_group_list: [],
-        tag_list: [],
-      }
+      // postForm: {
+      //   report_group_list: [],
+      //   tag_list: [],
+      // }
     }
   },
   computed: {
@@ -127,7 +127,10 @@ export default {
   },
   methods: {
     handleTagSelection(tagTemplate) {
-      // construct a new tag list here, replace the old one
+      // maintain a selected tag list
+      // this.selectedTags.push(tagTemplate)
+
+      // construct a new tag list here, emit to the parent component and replace the old one
       let tagList = [];
       if (this.todoItem.tag_list) {
         tagList = this.todoItem.tag_list;

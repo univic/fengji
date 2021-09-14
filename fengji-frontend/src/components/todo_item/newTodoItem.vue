@@ -28,6 +28,7 @@
     </el-input>
   </div>
   <item-quick-edit-panel
+    v-bind:todo-item="newItem"
     v-on:selectTag="handleTagSelection"
     v-on:selectReportGroup="handleReportGroupSelection"
   ></item-quick-edit-panel>
