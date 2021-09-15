@@ -146,12 +146,6 @@ export default {
     toggleQuickEditPanel () {
       this.showQuickEditPanel = !this.showQuickEditPanel
     },
-    handleOpenDetailPanel () {
-
-    },
-    handleCloseDetailPanel () {
-
-    },
     handleToggleCompletion () {
       console.log('yeaaaaaaaaaah')
       if (this.item.completion_flag === false) {

@@ -15,8 +15,16 @@ const mutations = {
   setMyTodoItemList(state, payload) {
     state.myTodoItemList = payload;
   },
+  removeTodoItem(state, payload) {
+    state.myTodoItemList.some((item, index) => {
+      if(item.id === payload.id) {
+        state.myTodoItemList.splice(index, 1);
+        return true;
+      }
+    })
+  },
   appendNewTodoItem(state, payload) {
-    state.todoItemList.push(payload);
+    state.myTodoItemList.push(payload);
   },
 }
 

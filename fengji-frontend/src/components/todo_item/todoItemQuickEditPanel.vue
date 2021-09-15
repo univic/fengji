@@ -14,7 +14,9 @@
         ></report-group-tag>
         <editable-tag
           v-for="tag in this.todoItem.tag_list"
-          v-bind:tag="tag">
+          v-bind:tag="tag"
+          v-on:deleteTag="handleDeleteTag(tag)"
+        >
 
         </editable-tag>
         <add-tag-panel
@@ -138,8 +140,8 @@ export default {
         field_value: tagTemplate.default_value,
         ref_tag_template: tagTemplate,
       }
-      tagList.push(tag)
-      this.$emit('selectTag', tagList)
+      tagList.push(tag);
+      this.$emit('selectTag', tagList);
     },
     handleReportGroupSelection (reportGroupID) {
       this.$emit('selectReportGroup', reportGroupID)
@@ -153,6 +155,16 @@ export default {
     updateTagValue: function (index, newTagValue) {
       this.tagList[index].tag_value = newTagValue;
     },
+    handleDeleteTag (tag) {
+      let tagList = this.todoItem.tag_list;
+      this.todoItem.tag_list.some((item, index) => {
+        if(item.id === tag.id) {
+          tagList.splice(index, 1);
+          return true;
+        }
+      })
+      this.$emit('selectTag', tagList);
+    }
   }
 }
 </script>

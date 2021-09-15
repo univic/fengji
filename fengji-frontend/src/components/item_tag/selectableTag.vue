@@ -25,11 +25,13 @@ export default {
   ],
   computed: {
     disabledType () {
+      // if tag is disabled, use info type
       return (this.disabled ? 'info' : '');
     }
   },
   methods: {
     handleTagSelect() {
+      // if tag is disabled, prohibit event emit
       if (!this.disabled) {
         this.$emit('selectTag');
       }

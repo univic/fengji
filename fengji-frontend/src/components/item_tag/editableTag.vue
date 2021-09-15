@@ -2,6 +2,7 @@
   <el-tag
     closable
     v-on:click="handleTagEdit"
+    v-on:close="handleDelete"
   >
     {{ tag.name }}
   </el-tag>
@@ -16,11 +17,15 @@ export default {
     }
   },
   emits: [
-    'editTag'
+    'editTag',
+    'deleteTag'
   ],
   methods: {
     handleTagEdit() {
       this.$emit('editTag')
+    },
+    handleDelete() {
+      this.$emit('deleteTag')
     }
   }
 };

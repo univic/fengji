@@ -1,6 +1,7 @@
 
 import myAxios from "../utilities/request";
 import message from "../utilities/message";
+import {ElMessage} from "element-plus";
 
 const todoItem = {
   addTodoItem(dataObj) {
@@ -24,6 +25,13 @@ const todoItem = {
       'api/todo_item/',
       {
         params: params
+      }
+    ).then(
+      (response) => {
+        if (response.data.status !== 'success') {
+          message.emitErrorMessage(response.data.messages[0]);
+        }
+        return response
       }
     ).catch( (error) => {
       message.emitErrorMessage(error.messages);
