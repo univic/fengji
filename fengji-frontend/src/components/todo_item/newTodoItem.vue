@@ -89,10 +89,10 @@ export default {
   },
   methods: {
     handleTagSelection(tagList) {
-      this.newItem.tag_list = tagList
+      this.newItem.tag_list = tagList;
     },
     handleReportGroupSelection(reportGroupID) {
-      this.newItem.report_group = reportGroupID
+      this.newItem.report_group = reportGroupID;
     },
     handleSubmit() {
       this.newItem.title = this.newItemText;
@@ -105,7 +105,7 @@ export default {
             title: null,
             tag_list: null,
             report_group: null,
-          }
+          };
       })
     },
   }
