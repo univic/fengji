@@ -29,7 +29,6 @@ class TodoItem(db.Document):
         return output_dict
 
     def convert_refs(self,  output_dict):
-        report_group_list = []
         # convert the creator reference field to a json readable format
         output_dict['creator'] = self['creator'].to_json()
         output_dict['report_group'] = self['report_group'].to_json(recursive_search=True, with_descendant=True)

@@ -34,7 +34,6 @@ import todoItem from "./todoItem.vue";
 import newTodoItem from "./newTodoItem.vue";
 import tagDetailedDialog from "../tagDetailedDialog.vue";
 import message from "../../utilities/message";
-import {ElMessage} from "element-plus";
 import api from "../../api";
 
 export default {

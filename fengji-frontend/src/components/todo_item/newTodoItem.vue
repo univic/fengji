@@ -98,19 +98,24 @@ export default {
       this.newItem.title = this.newItemText;
       // post the ID of ref_tag_template only
       let postObj = this.newItem;
-      postObj.tag_list.forEach((item, index)=> {
-        postObj.tag_list[index].ref_tag_template = item.ref_tag_template.id
-      })
+      if (postObj.tag_list) {
+        postObj.tag_list.forEach((item, index)=> {
+          postObj.tag_list[index].ref_tag_template = item.ref_tag_template.id
+        })
+      }
+      console.log(postObj);
       api.todoItem.addTodoItem(postObj)
         .then((response) => {
-          this.$store.commit('todoItem/appendNewTodoItem', this.newItem)
-          // reset variables
-          this.newItemText = null;
-          this.newItem = {
-            title: null,
-            tag_list: null,
-            report_group: null,
-          };
+          if (response.data.status === 'success') {
+            this.$store.commit('todoItem/appendNewTodoItem', this.newItem)
+            // reset variables
+            this.newItemText = null;
+            this.newItem = {
+              title: null,
+              tag_list: null,
+              report_group: null,
+            };
+          }
       })
     },
   }

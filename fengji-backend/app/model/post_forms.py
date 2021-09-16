@@ -4,7 +4,8 @@
 
 from wtforms import Form, BooleanField, StringField, validators, ValidationError, FieldList, FormField
 from app.config import app_config
-import app.utilities.wtforms_validators as wtforms_validators
+import app.utilities.wtforms_util as wtforms_util
+from app.utilities.wtforms_util import ExtendedForm
 
 
 class RegistrationForm(Form):
@@ -105,17 +106,21 @@ class TagTemplateGroupForm(Form):
 
 
 class TodoItemTagForm(Form):
-    field_value = StringField()
-    ref_tag_template = StringField()
+    field_value = StringField('field_value')
+    ref_tag_template = StringField('ref_tag_template')
 
 
-class TodoItemForm(Form):
-    id = StringField('id', [validators.Optional, wtforms_validators.check_mongo_oid])
-    title = StringField('title', [validators.input_required('未填写待办文本'),
+class TodoItemForm(ExtendedForm):
+    """
+    Json conversion will leave the field's raw_data null, which cause the InputRequired validation fails
+    use DataRequired instead
+    """
+    
+    id = StringField('id', [validators.Optional(), wtforms_util.check_mongo_oid])
+    title = StringField('title', [validators.data_required('未填写待办文本'),
                         validators.Length(min=app_config.TODO_ITEM['MIN_TODO_ITEM_TITLE_LENGTH'],
                                           max=app_config.TODO_ITEM['MAX_TODO_ITEM_TITLE_LENGTH'],
                                           message=f"标签组长度需为{app_config.TODO_ITEM['MIN_TODO_ITEM_TITLE_LENGTH']}~"
                                                   f"{app_config.TODO_ITEM['MAX_TODO_ITEM_TITLE_LENGTH']}位")])
-    report_group = StringField('report_group', [validators.input_required('未选择报告组'),
-                                                wtforms_validators.check_mongo_oid])
-    tag_list = FieldList(FormField(TodoItemTagForm), min_entries=0)
+    report_group = StringField('report_group', [validators.data_required('未选择报告组'),
+                                                wtforms_util.check_mongo_oid()])

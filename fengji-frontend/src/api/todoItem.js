@@ -1,13 +1,12 @@
-
+import qs from "qs";
 import myAxios from "../utilities/request";
 import message from "../utilities/message";
-import {ElMessage} from "element-plus";
 
 const todoItem = {
   addTodoItem(dataObj) {
     return myAxios.post(
       'api/todo_item/',
-      dataObj
+      dataObj,
     ).then((response)=> {
       if (response.data.status === "success") {
         return response;

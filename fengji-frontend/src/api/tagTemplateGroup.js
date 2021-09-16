@@ -1,6 +1,5 @@
 import myAxios from '../utilities/request';
 import message from "../utilities/message";
-import { ElMessage } from 'element-plus';
 
 let tagTemplateGroup = {
   addNewTagTemplateGroup(dataObj) {

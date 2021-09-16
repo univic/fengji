@@ -11,14 +11,12 @@ bp = Blueprint('todo_item', __name__, url_prefix='/api/todo_item')
 @bp.route('/', methods={'POST'})
 @jwt_required()
 def add_todo_item():
-
-    form = TodoItemForm(request.form, meta={'csrf': False})
+    form = TodoItemForm(request)
     if form.validate():
+        json_form = request.get_json()
         new_todo_item = TodoItem()
-        post_data = request.get_json()
-        new_todo_item.title = new_todo_item.title.data
-        report_group = ReportGroup.objects(id=new_todo_item.report_group.data, creator=get_current_user().id).first()
-
+        new_todo_item.title = form.title.data
+        report_group = ReportGroup.objects(id=form.report_group.data, creator=get_current_user().id).first()
         new_todo_item.report_group = report_group
         new_todo_item.creator = get_current_user()
         try:
