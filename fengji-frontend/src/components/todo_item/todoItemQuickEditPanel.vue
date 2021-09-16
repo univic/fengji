@@ -33,53 +33,6 @@
           </el-button>
         </add-tag-panel>
 
-
-<!--
-        <el-divider></el-divider>
-        <el-input
-            v-if="tagInputVisible"
-            v-model="tagInputValue"
-            ref="saveTagInput"
-            @keyup.enter.native="handleInputConfirm"
-            @blur="handleInputConfirm"
-        >
-        </el-input>
--->
-
-
-      <!--          edit tag-->
-<!--        <div>
-          &lt;!&ndash;            if no tag is selected...&ndash;&gt;
-          <div
-              v-if="tagSelected === null"
-          >
-          </div>
-          &lt;!&ndash;            if a tag is selected, show the tag's fields and values&ndash;&gt;
-          <div
-              v-else
-          >
-            &lt;!&ndash;              tag title &ndash;&gt;
-            <div>{{ tagSelected.name }}</div>
-            &lt;!&ndash;              wrapper of tag value and fields&ndash;&gt;
-            <div>
-              &lt;!&ndash;                wrapper of each tag value and field item&ndash;&gt;
-              <div
-                  v-for="(tagField, tagFieldIndex) in tagSelected.tag_field_list"
-              >
-                <div>{{ tagField.tag_field_name }}</div>
-                <div>
-                  <el-input
-                      :placeholder="'请输入' + tagSelected.tag_name"
-                      :disabled="!tagField.tag_field_editable"
-                      v-model="itemTags[indexOfTagSelected].tag_field_list[tagFieldIndex].tag_field_value"
-                  ></el-input>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>-->
-
-
       </div>
       </div>
 
@@ -144,7 +97,10 @@ export default {
       this.$emit('selectTag', tagList);
     },
     handleReportGroupSelection (reportGroupID) {
-      this.$emit('selectReportGroup', reportGroupID)
+      this.$emit('selectReportGroup', reportGroupID);
+    },
+    handleTagValueChange(index, newValue) {
+      this.tagList[index].tag_value = newValue;
     },
     handleCloseQuickEditPanel () {
       this.$emit('closeQuickEditPanel')

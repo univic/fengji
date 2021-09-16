@@ -96,7 +96,12 @@ export default {
     },
     handleSubmit() {
       this.newItem.title = this.newItemText;
-      api.todoItem.addTodoItem(this.newItem)
+      // post the ID of ref_tag_template only
+      let postObj = this.newItem;
+      postObj.tag_list.forEach((item, index)=> {
+        postObj.tag_list[index].ref_tag_template = item.ref_tag_template.id
+      })
+      api.todoItem.addTodoItem(postObj)
         .then((response) => {
           this.$store.commit('todoItem/appendNewTodoItem', this.newItem)
           // reset variables

@@ -11,26 +11,42 @@ bp = Blueprint('todo_item', __name__, url_prefix='/api/todo_item')
 @bp.route('/', methods={'POST'})
 @jwt_required()
 def add_todo_item():
-    new_todo_item = TodoItem()
-    post_data = request.get_json()
-    new_todo_item.title = post_data['title']
-    report_group = ReportGroup.objects(id=post_data['report_group'], creator=get_current_user().id).first()
 
-    new_todo_item.report_group = report_group
-    new_todo_item.creator = get_current_user()
-    try:
-        new_todo_item.save()
-        response = jsonify({
-                    'status': 'success',
-                    'messages': ['new item added'],
-                    'id': str(new_todo_item.id)
+    form = TodoItemForm(request.form, meta={'csrf': False})
+    if form.validate():
+        new_todo_item = TodoItem()
+        post_data = request.get_json()
+        new_todo_item.title = new_todo_item.title.data
+        report_group = ReportGroup.objects(id=new_todo_item.report_group.data, creator=get_current_user().id).first()
+
+        new_todo_item.report_group = report_group
+        new_todo_item.creator = get_current_user()
+        try:
+            new_todo_item.save()
+            response = jsonify({
+                        'status': 'success',
+                        'messages': ['new item added'],
+                        'id': str(new_todo_item.id)
+                        })
+        except Exception as e:
+            print(e)
+            response = jsonify({
+                        'status': 'error',
+                        'messages': [e],
                     })
-    except Exception as e:
-        print(e)
-        response = jsonify({
-                    'status': 'error',
-                    'messages': [e],
-                })
+    else:
+        """
+        when validate, WTForms will generate a form.errors dict, which contains all the error messages
+        for each form fields, here we get error messages from the form.errors dict, and generate an error info list
+        """
+        error_status = list(form.errors.values())
+        for i, item in enumerate(error_status):
+            error_status[i] = item[0]
+        # construct the return data
+        response = {
+            'status': 'error',
+            'messages': error_status
+        }
     return response
 
 

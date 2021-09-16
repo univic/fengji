@@ -36,7 +36,7 @@ class TagTemplate(db.Document):
 
 
 class TodoItemTag(EmbeddedDocument):
-    name = StringField(required=True)
+    # name = StringField(required=True)
     field_value = StringField()
     ref_tag_template = ReferenceField(TagTemplate, required=True)
 
