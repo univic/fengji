@@ -13,7 +13,6 @@ bp = Blueprint('todo_item', __name__, url_prefix='/api/todo_item')
 def add_todo_item():
     form = TodoItemForm(request)
     if form.validate():
-        json_form = request.get_json()
         new_todo_item = TodoItem()
         new_todo_item.title = form.title.data
         report_group = ReportGroup.objects(id=form.report_group.data, creator=get_current_user().id).first()
